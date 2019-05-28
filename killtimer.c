@@ -1,30 +1,30 @@
 #include "killtimer.h"
 
-GSourceFunc killfunc, _killfunc;
-int _holds;
+GSourceFunc killfunc, kill_func;
+int holds;
 pthread_mutex_t lock; 
-guint _timeout;
-guint _timer;
+guint timeout;
+guint timer;
 
 void KillTimer(GSourceFunc killfunc)
 {
-	_timeout = 30;
-	_killfunc = killfunc;
-	_holds = 0;
-	_add_timeout();
+	timeout = 30;
+	kill_func = killfunc;
+	holds = 0;
+	add_timeout();
 	pthread_mutex_init(&lock, NULL);
 }
 
-void _add_timeout()
+void add_timeout()
 {
-	_timer = g_timeout_add_seconds(_timeout, (void *)_kill, NULL);
+	timer = g_timeout_add_seconds(timeout, (void *)kil, NULL);
 }
 
-void _kill()
+void kil()
 {
-	fprintf(stderr, "Timeout (%ds), exiting\n", _timeout);
-	if(_killfunc)
-		_killfunc;
+	fprintf(stderr, "Timeout (%ds), exiting\n", timeout);
+	if(kill_func)
+		kill_func;
 	else
 		exit(0);
 }
@@ -32,25 +32,25 @@ void _kill()
 void add_hold()
 {
 	pthread_mutex_lock(&lock);
-	if(_holds == 0)
+	if(holds == 0)
 	{
 		fprintf(stderr, "Kill timer stopped\n");
-		g_source_remove(_timer);
+		g_source_remove(timer);
 	}
-	_holds += 1;
+	holds += 1;
 	pthread_mutex_unlock(&lock);
 }
 
 void remove_hold()
 {
 	pthread_mutex_lock(&lock);
-	if(_holds > 0)
+	if(holds > 0)
 	{
-		_holds -= 1;
-		if(_holds == 0)
+		holds -= 1;
+		if(holds == 0)
 		{
 			fprintf(stderr, "Kill timer started\n");
-			_add_timeout();
+			add_timeout();
 		}
 	}
 	pthread_mutex_unlock(&lock);
@@ -59,10 +59,10 @@ void remove_hold()
 void alive()
 {
 	pthread_mutex_lock(&lock);
-	if(_holds == 0)
+	if(holds == 0)
 	{
-		g_source_remove(_timer);
-		_add_timeout();
+		g_source_remove(timer);
+		add_timeout();
 	}
 	pthread_mutex_unlock(&lock);
 }

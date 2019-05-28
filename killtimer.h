@@ -5,15 +5,15 @@
 #include <glib.h>
 #include <pthread.h>
 
-extern GSourceFunc killfunc, _killfunc;
-extern int _holds;
+extern GSourceFunc killfunc, kill_func;
+extern int holds;
 extern pthread_mutex_t lock; 
-extern guint _timeout;
-extern guint _timer;
+extern guint timeout;
+extern guint timer;
 
 void KillTimer(GSourceFunc killfunc);
-void _add_timeout();
-void _kill();
+void add_timeout();
+void kil();
 void add_hold();
 void remove_hold();
 void alive();
