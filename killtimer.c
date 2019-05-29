@@ -21,10 +21,10 @@ void add_timeout()
 	sets a function (kil) to be called at regular 
 	interval (timeout) until the function returns False
 	*/
-	timer = g_timeout_add_seconds(timeout, (void *)kil, NULL);
+	timer = g_timeout_add_seconds(timeout, kil, NULL);
 }
 
-void kil()
+gboolean kil()
 {
 	fprintf(stderr, "Timeout (%ds), exiting\n", timeout);
 	if(kill_func)

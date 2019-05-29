@@ -16,7 +16,7 @@ extern guint timer;
 
 void KillTimer(GSourceFunc killfunc);
 void add_timeout();
-void kil();
+gboolean kil();
 void add_hold();
 void remove_hold();
 void alive();
