@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     else 
         PyErr_Print();
    
-    //printf("Result is %ld\n",PyLong_AsLong(presult));
+    //printf("Result is %ld\n",PyLong_AsLong(result));
     Py_DECREF(Value);
 
     // Clean up
