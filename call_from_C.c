@@ -1,5 +1,8 @@
-#include <python3.6m/Python.h>
+#include <python2.7/Python.h>
 #include <stdio.h>
+
+/* gcc call_from_C.c -o call -lpython2.7 */
+
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +25,7 @@ int main(int argc, char *argv[])
     Dict = PyModule_GetDict(Module);
 
     // Func is also a borrowed reference 
-    Fun = PyDict_GetItemString(Dict, (char*)"demo"); 
+    Fun = PyDict_GetItemString(Dict, (char*)"test"); 
 
     if (PyCallable_Check(Fun))
     {
