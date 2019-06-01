@@ -6,12 +6,12 @@
 
 int main(int argc, char *argv[])
 {
-	//Set PYTHONPATH to working directory
-	setenv("PYTHONPATH",".",1);
+    //Set PYTHONPATH to working directory
+    setenv("PYTHONPATH",".",1);
 
-	PyObject *Name, *Module, *Dict, *Fun, *Value;
+    PyObject *Name, *Module, *Dict, *Fun, *Value;
 
-	// Initialize the Python Interpreter
+    // Initialize the Python Interpreter
     Py_Initialize();
     PySys_SetArgv(argc, argv);
 
