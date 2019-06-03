@@ -25,6 +25,6 @@ extern const char *host;
 extern int port;
 extern int encryption;
 extern bool connecting;
-
+extern cups
 
 #endif
