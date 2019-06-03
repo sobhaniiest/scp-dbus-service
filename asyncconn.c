@@ -9,7 +9,7 @@ void(*error_data_asyn)();
 void(*auth_data_asyn)();
 bool destroyed_asyn, destroyed_cnn;
 const char *host;
-int port;
+int port, encryption;
 ??? parent
 bool try_as_root;
 bool prompt_allowed;

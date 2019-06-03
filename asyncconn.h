@@ -16,7 +16,7 @@ extern void(*error_data_asyn)();
 extern void(*auth_data_asyn)();
 extern bool destroyed_asyn, destroyed_cnn, try_as_root, prompt_allowed;
 extern const char *host;
-extern int port;
+extern int port, encryption;
 ??? parent
 
 

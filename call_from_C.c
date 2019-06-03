@@ -1,51 +1,68 @@
-#include <python2.7/Python.h>
+#include <python3.6m/Python.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-/* gcc call_from_C.c -o call -lpython2.7 */
+/* gcc call_from_C.c -o call -lpython3.6m */
 
-
-int main(int argc, char *argv[])
+int main()
 {
-	//Set PYTHONPATH to working directory
-	setenv("PYTHONPATH",".",1);
+    PyObject *pName, *pModule, *pFunc;
+    PyObject *pArgs, *pValue;
+    int i;
 
-	PyObject *Name, *Module, *Dict, *Fun, *Value;
+    char *module = "ppdcache"; // module name
+    char *method = "demo"; // method or class name
 
-	// Initialize the Python Interpreter
+    //Set PYTHONPATH to working directory
+    setenv("PYTHONPATH",".",1);
+
+    // Initialize the Python Interpreter
     Py_Initialize();
-    PySys_SetArgv(argc, argv);
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path.append(\".\")");
+    PyRun_SimpleString("sys.argv=['']");
 
     // Build the name object
-    Name = PyString_FromString((char*)"ppdcache");
+    pName = PyUnicode_DecodeFSDefault(module);
+    /* Error checking of pName left out */
 
     // Load the module object
-    Module = PyImport_Import(Name);
+    pModule = PyImport_Import(pName);
 
-    // Dict is a borrowed reference 
-    Dict = PyModule_GetDict(Module);
+    Py_DECREF(pName);
 
-    // Func is also a borrowed reference 
-    Fun = PyDict_GetItemString(Dict, (char*)"test"); 
+    if (pModule == NULL)
+        printf("Cannot find module %s\n", module);
 
-    if (PyCallable_Check(Fun))
+    if (pModule != NULL) 
     {
-        Value=Py_BuildValue("()");
-        PyErr_Print();
-        PyObject_CallObject(Fun,Value);
-        PyErr_Print();
+        pFunc = PyObject_GetAttrString(pModule, method);
+        /* pFunc is a new reference */
+
+        if (pFunc && PyCallable_Check(pFunc)) 
+        {
+            pArgs = Py_BuildValue("()");
+            PyErr_Print();
+            pValue = PyObject_CallObject(pFunc, pArgs);
+            PyErr_Print();
+        }
+        else 
+        {
+            if (PyErr_Occurred())
+                PyErr_Print();
+            printf("Cannot find function %s\n", method);
+        }
+
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
     }
     else 
+    {
         PyErr_Print();
-   
-    //printf("Result is %ld\n",PyLong_AsLong(presult));
-    Py_DECREF(Value);
+        printf("Failed to load %s\n", module);
+        return 1;
+    }
 
-    // Clean up
-    Py_DECREF(Module);
-    Py_DECREF(Name);
-
-    // Finish the Python Interpreter
-    Py_Finalize();
- 
     return 0;
 }
