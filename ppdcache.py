@@ -26,7 +26,9 @@ from gi.repository import Gtk
 import os
 from shutil import copyfileobj
 from tempfile import NamedTemporaryFile
+import sys
 from debug import *
+from gi.repository import GObject
 
 cups.require ("1.9.50")
 
@@ -182,10 +184,7 @@ class PPDCache:
 
         GLib.idle_add (cb_func, callback, name, result, exc)
 
-def test():
-    import sys
-    from debug import *
-    from gi.repository import GObject
+def demo():
     set_debugging (True)
     Gdk.threads_init ()
     loop = GObject.MainLoop ()
