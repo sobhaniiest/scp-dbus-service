@@ -1,7 +1,7 @@
 #include "ppdcache.h"
 
-cups = NULL; ??
-exc = NULL; ??
+cups = NULL; 
+exc = NULL; 
 dict *cache = NULL;
 dict *modtimes = NULL;
 list *queued = NULL;
