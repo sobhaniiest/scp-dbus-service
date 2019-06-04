@@ -12,6 +12,10 @@ int main(int argc, char *argv[])
 {
 	printf("Hello!!!\n");
 	KillTimer((void *)gtk_main_quit);
+
+	add_hold();
+	remove_hold();
+	
 	return 0;
 }
 
