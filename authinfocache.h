@@ -1,11 +1,13 @@
 #ifndef AUTHINFOCACHE_H
 #define AUTHINFOCACHE_H
 
+/* Header Files */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
+/* Structure contains host, port, user and password */ 
 typedef struct _dict
 {
     char *hname;
