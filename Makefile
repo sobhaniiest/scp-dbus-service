@@ -8,7 +8,7 @@ LIBS = $(shell pkg-config --cflags --libs glib-2.0 --libs gtk+-3.0)
 all: demo
 
 demo: main.c killtimer.c
-	$(CC) $(FLAGS) main.c killtimer.c $(LIBS) -o demo
+	$(CC) $(FLAGS) main.c ppdcache.c killtimer.c asyncconn.c authinfocache.c $(LIBS) -lcups -lpython3.6m -o demo
 
 #main: main.o asyncconn.o ppdcache.o killtimer.o 
 #	$(CC) main.o asyncconn.o ppdcache.o killtimer.o -o demo

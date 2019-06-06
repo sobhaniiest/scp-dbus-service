@@ -9,9 +9,9 @@ dict_modtimes *modtimes = NULL;
 list *queued = NULL;
 
 /* default host, port and encryption */
-const char *host = "\0";
-int port = 0;
-int encryption = 0;
+const char *host_p = "\0";
+int port_p = 0;
+int encryption_p = 0;
 
 bool connecting = false;
 bool check_uptodate = true;
@@ -21,9 +21,9 @@ bool check_uptodate = true;
 /* Initializing Function */
 void PPDCache(const char *h, int p, int e)
 {
-    host = h;
-    port = p;
-    encryption = e;
+    host_p = h;
+    port_p = p;
+    encryption_p = e;
 }
 
 
@@ -214,7 +214,7 @@ void connected()
 void self_connect(void(*callback)())
 {
 	connecting = true;
-	//Asyn_Connection((void *)connected, (void *)connected, NULL, host, port, encryption, NULL, true, true);
+	Asyn_Connection((void *)connected, (void *)connected, NULL, host_p, port_p, encryption_p, NULL, true, true);
 }
 
 void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)())

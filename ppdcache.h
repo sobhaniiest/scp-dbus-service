@@ -7,6 +7,7 @@
 #include <string.h>
 #include <cups/cups.h>
 #include <cups/ppd.h>
+#include "asyncconn.h"
 
 typedef struct _list
 {
@@ -36,9 +37,9 @@ extern dict_cache *cache;
 extern dict_modtimes *modtimes;
 extern list *queued;
 
-extern const char *host;
-extern int port;
-extern int encryption;
+extern const char *host_p;
+extern int port_p;
+extern int encryption_p;
 
 extern bool connecting;
 extern bool check_uptodate;

@@ -95,7 +95,7 @@ void remove_auth_info(char *host, int port)
 		port = 631;
 
 	if(!find(&creds, host, port))
-		return NULL;
+		return;
 	else
 		del(&creds, host, port);
 }
