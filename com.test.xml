@@ -1,0 +1,36 @@
+<node>
+    <interface name="com.test.Printing">
+        <method name="NewPrinterFromDevice">
+            <arg name="xid" direction="in" type="u" />
+            <arg name="device_uri" direction="in" type="s" />
+            <arg name="device_id" direction="in" type="s" />
+        </method>
+        <method name="DownloadDriverForDeviceID">
+            <arg name="xid" direction="in" type="u" />
+            <arg name="device_id" direction="in" type="s" />
+        </method>
+        <method name="ChangePPD">
+            <arg name="xid" direction="in" type="u" />
+            <arg name="name" direction="in" type="s" />
+            <arg name="device_id" direction="in" type="s" />
+        </method>
+        <!--
+        <method name="DialogCanceled_method">
+        </method>
+        <signal name="DialogCanceled"/>
+        <method name="PrinterAdded_method">
+        </method>
+        <signal name="PrinterAdded"/>
+        <property name="name" type="s" access="read" />
+        <method name="PrinterModified_method">
+        </method>
+        <signal name="PrinterModified"/>
+        <property name="name" type="s" access="read" />
+        <property name="ppd_has_changed" type="b" access="read" />
+        <method name="DriverDownloadCheked_method">
+        </method>
+        <signal name="DriverDownloadCheked"/>
+        <property name="installed_files" type="a(s)" access="read" />
+        -->
+    </interface>
+</node>
