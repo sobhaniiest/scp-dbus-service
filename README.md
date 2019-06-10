@@ -6,9 +6,9 @@ The project title is - Turn the scp-dbus-service of system-config-printer into C
 
 Steps ::
 
-1. make
-2. sudo cp demo /usr/share/system-config-printer/
-3. cd /usr/share/system-config-printer
-4. ./demo
-5. sudo rm demo
+1. make gen
+2. make
+3. ./main
+4. ./demo (in a new terminal)
+5. make clean
 
