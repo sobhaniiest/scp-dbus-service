@@ -1,29 +1,23 @@
-#variables
+.PHONY: all
 
 CC = gcc
-CFLAGS = -c 
-FLAGS = $(shell pkg-config --cflags gtk+-3.0)
-LIBS = $(shell pkg-config --cflags --libs glib-2.0 --libs gtk+-3.0)
+FLAGS = $(shell pkg-config --libs --cflags gio-2.0 gio-unix-2.0 glib-2.0 gtk+-3.0)
+LIBS = -lcups -lpython3.6m
 
-all: demo
+all: main demo
 
-demo: main.c killtimer.c
-	$(CC) $(FLAGS) main.c ppdcache.c killtimer.c asyncconn.c authinfocache.c $(LIBS) -lcups -lpython3.6m -o demo
+gen:
+	gdbus-codegen --generate-c-code newprinterdialog_dbus --c-namespace NewPrinterDialog_DBus --interface-prefix com.test. com.test.xml
+	$(CC) -o $@ $^ -c $(FLAGS)
 
-#main: main.o asyncconn.o ppdcache.o killtimer.o 
-#	$(CC) main.o asyncconn.o ppdcache.o killtimer.o -o demo
+%.o: %.c
+	$(CC) -o $@ $^ -c $(FLAGS)
 
-#main.o: main.c
-	#$(CC) $(CFLAGS) $(FLAGS) main.c $(LIBS)
+demo: test.o newprinterdialog_dbus.o
+	$(CC) -o $@ $^ $(FLAGS)
 
-#killtimer.o: killtimer.c
-	#$(CC) $(CFLAGS) killtimer.c $(LIBS)
-
-#asyncconn.o: asyncconn.c
-#	$(CC) $(CFLAGS) $(LIBS) asyncconn.c
-
-#ppdcache.o: ppdcache.c
-#	$(CC) $(CFLAGS) $(LIBS) ppdcache.c
+main: ConfigPrintingNewPrinterDialog.o asyncconn.o ppdcache.o killtimer.o authinfocache.o newprinterdialog_dbus.o
+	$(CC) -o $@ $^ $(FLAGS) $(LIBS)
 
 clean:
-	rm -f demo
+	rm -f *.o demo main
