@@ -10,8 +10,8 @@ To generate the .c and .h files of the NewPrinterDialog interface, simply run th
 Here the generated .c and .h files are 
 - newprinterdialog_dbus.c 
 - newprinterdialog_dbus.h
-- Bus_name : com.text
-- Interface : com.text.Printing
+- Bus_name : com.test
+- Interface : com.test.Printing
 
 Testing ::
 
