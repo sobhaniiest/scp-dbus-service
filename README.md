@@ -31,7 +31,7 @@ Steps ::
 
 Testing of scp-dbus-service(original) using dbus-send command ::
 
-inro@inro-Lenovo-ideapad-110-15ISK:~$ dbus-send --session \
+inro@inro-Lenovo-ideapad-110-15ISK:~$                                                                                                     dbus-send --session \
 >           --dest=org.fedoraproject.Config.Printing \
 >           --print-reply=literal \
 >           /org/fedoraproject/Config/Printing \
@@ -43,15 +43,15 @@ inro@inro-Lenovo-ideapad-110-15ISK:~$ dbus-send --session \
    array [
       struct {
          lsb/usr/cupsfilters/Generic-PDF_Printer-PDF.ppd         exact-cmd      }
-   ]
-inro@inro-Lenovo-ideapad-110-15ISK:~$ dbus-send --session \
+   ]                                                                                                                         
+inro@inro-Lenovo-ideapad-110-15ISK:~$                                                                                                     dbus-send --session \
 >           --dest=org.fedoraproject.Config.Printing \
 >           --print-reply=literal \
 >           /org/fedoraproject/Config/Printing/NewPrinterDialog \
 >           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.ChangePPD \
 >           int32:1 \
 >           string:'HP-910' \
->           string:'MFG:HP;MDL:hp 910;DES:hp 910;'
+>           string:'MFG:HP;MDL:hp 910;DES:hp 910;'                                                                           
 Error org.freedesktop.DBus.Error.UnknownMethod: Method "ChangePPD" with signature "iss" on interface "org.fedoraproject.Config.Printing.NewPrinterDialog" doesn't exist
 
 
