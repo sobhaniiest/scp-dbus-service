@@ -1,0 +1,177 @@
+This file contains the commands (dbus-send) to test the methods and signals of the interfaces of scp-dbus-service ::
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ConfigPrintingNewPrinterDialog ::
+
+NewPrinterDialog:
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.NewPrinterDialog
+
+Output : /org/fedoraproject/Config/Printing/NewPrinterDialog/1
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='uss', out_signature='')
+def NewPrinterFromDevice(self, xid, device_uri, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.NewPrinterFromDevice \
+          int32:1 \
+          string:'file:/tmp/printout' \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
+###
+Error org.freedesktop.DBus.Error.UnknownMethod: Method "NewPrinterFromDevice" with signature "iss" on interface "org.fedoraproject.Config.Printing.NewPrinterDialog" doesn't exist
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='us', out_signature='')
+def DownloadDriverForDeviceID(self, xid, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.DownloadDriverForDeviceID \
+          int32:1 \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
+
+###
+Error
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='uss', out_signature='')
+def ChangePPD(self, xid, name, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.ChangePPD \
+          int32:1 \
+          string:'test' \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' 
+
+###
+Error
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ConfigPrintingPrinterPropertiesDialog ::
+
+PrinterPropertiesDialog:
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.PrinterPropertiesDialog \
+          int32:1 \
+          string:'test'
+
+Output : /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1
+
+@dbus.service.method(dbus_interface=CONFIG_PRINTERPROPERTIESDIALOG_IFACE, in_signature='', out_signature='')
+def PrintTestPage (self):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1 \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.PrinterPropertiesDialog.PrintTestPage
+
+Successful 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ConfigPrintingJobapplet ::
+
+JobApplet:
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.JobApplet
+
+Output : /org/fedoraproject/Config/Printing/JobApplet/1
+
+@dbus.service.method(dbus_interface=CONFIG_JOBVIEWER_IFACE, in_signature='', out_signature='')
+def Quit(self):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/JobApplet/1 \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.JobViewer.Quit
+
+Successful
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ConfigPrinting ::
+
+@dbus.service.method(dbus_interface=CONFIG_IFACE, in_signature='', out_signature='s')
+def NewPrinterDialog(self):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.NewPrinterDialog
+
+Output : /org/fedoraproject/Config/Printing/NewPrinterDialog/1
+
+@dbus.service.method(dbus_interface=CONFIG_IFACE, in_signature='us', out_signature='s')
+def PrinterPropertiesDialog(self, xid, name):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.PrinterPropertiesDialog \
+          int32:1 \
+          string:'test'
+
+Output : /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1
+
+@dbus.service.method(dbus_interface=CONFIG_IFACE, in_signature='', out_signature='s')
+def JobApplet(self):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.JobApplet
+
+Output : /org/fedoraproject/Config/Printing/JobApplet/1
+
+@dbus.service.method(dbus_interface=CONFIG_IFACE, in_signature='sss', out_signature='a(ss)', async_callbacks=('reply_handler', 'error_handler'))
+def GetBestDrivers(self, device_id, device_make_and_model, device_uri, reply_handler, error_handler):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.GetBestDrivers \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' \
+          string:'Generic PDF Printer' \
+          string:'file:/tmp/printout'
+
+Output :    array [
+      struct {
+         lsb/usr/cupsfilters/Generic-PDF_Printer-PDF.ppd         exact-cmd      }
+   ]
+
