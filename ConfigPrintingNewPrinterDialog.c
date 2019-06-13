@@ -6,6 +6,7 @@
 #include <cups/cups.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+#include <errno.h>
 #include "killtimer.h"
 #include "ppdcache.h"
 #include "asyncconn.h"
@@ -13,9 +14,16 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
+gulong dialog_canceled = 0,
+	   printer_added = 0,
+	   printer_modified = 0,
+	   drv_dwn_checked = 0;
+
 static void name_acquired_handler(GDBusConnection *connection, 
 	                              const gchar *name, 
 	                              gpointer user_data);
+
+/* Methods */
 
 static gboolean NewPrinterFromDevice(NewPrinterDialogDBusPrinting *interface,
 									 GDBusMethodInvocation *invocation,
@@ -37,23 +45,29 @@ static gboolean ChangePPD(NewPrinterDialogDBusPrinting *interface,
 						  const gchar *device_id,
 						  gpointer user_data);
 
-static gboolean DialogCanceled_method(NewPrinterDialogDBusPrinting *interface,
+/* signals */
+
+static gboolean on_dialog_canceled(NewPrinterDialogDBusPrinting *interface,
 						  			  GDBusMethodInvocation *invocation,
 						              gpointer user_data);
 
-static gboolean PrinterAdded_method(NewPrinterDialogDBusPrinting *interface,
+static gboolean on_printer_added(NewPrinterDialogDBusPrinting *interface,
 						            GDBusMethodInvocation *invocation,
 						            gpointer user_data);
 
-static gboolean PrinterModified_method(NewPrinterDialogDBusPrinting *interface,
+static gboolean on_printer_modified(NewPrinterDialogDBusPrinting *interface,
 						               GDBusMethodInvocation *invocation,
 						               gpointer user_data);
 
-static gboolean DriverDownloadCheked_method(NewPrinterDialogDBusPrinting *interface,
+static gboolean on_driver_download_checked(NewPrinterDialogDBusPrinting *interface,
 						                    GDBusMethodInvocation *invocation,
 						                    gpointer user_data);
 
+/* Internal Functions */
+
 static void change_ppd_got_ppd();
+static void change_ppd_with_dev();
+static void do_change_ppd();
 
 int main()
 {
@@ -93,24 +107,23 @@ static void name_acquired_handler(GDBusConnection *connection,
 		             "handle-change-ppd", 
 		              G_CALLBACK(ChangePPD), 
 		              NULL);
-	/*
-	g_signal_connect(interface, 
-		             "handle-dialog-canceled-method", 
-		              G_CALLBACK(DialogCanceled_method), 
-		              NULL);
-	g_signal_connect(interface, 
-		             "handle-printer-added-method", 
-		              G_CALLBACK(PrinterAdded_method), 
-		              NULL);
-	g_signal_connect(interface, 
-		             "handle-printer-modified-method", 
-		              G_CALLBACK(PrinterModified_method), 
-		              NULL);
-	g_signal_connect(interface, 
-		             "handle-driver-download-cheked-method", 
-		              G_CALLBACK(DriverDownloadCheked_method), 
-		              NULL);
-	*/
+	
+	dialog_canceled = g_signal_connect(interface, 
+		             	 			  "handle-on-dialog-canceled", 
+		              	 			   G_CALLBACK(on_dialog_canceled), 
+		                               NULL);
+	printer_added = g_signal_connect(interface, 
+		                             "handle-on-printer-added", 
+		                              G_CALLBACK(on_printer_added), 
+		                              NULL);
+	printer_modified = g_signal_connect(interface, 
+		                               "handle-on-printer-modified", 
+		                                G_CALLBACK(on_printer_modified), 
+		                                NULL);
+	drv_dwn_checked = g_signal_connect(interface, 
+		                			  "handle-on-driver-download-checked", 
+		                 			   G_CALLBACK(on_driver_download_checked), 
+		                               NULL);
 	error = NULL;
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(interface), 
 									 connection, 
@@ -133,6 +146,7 @@ static gboolean NewPrinterFromDevice(NewPrinterDialogDBusPrinting *interface,
 	self.dialog.init ('printer_with_uri', device_uri=device_uri,
                           devid=device_id, xid=xid)
 	*/
+	newprinterdialog_dbus_printing_complete_new_printer_from_device(interface, invocation);
 	return FALSE;
 }
 
@@ -146,6 +160,7 @@ static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusPrinting *interfac
 	/*
 	self.dialog.init ('download_driver', devid=device_id, xid=xid)
 	*/
+	newprinterdialog_dbus_printing_complete_download_driver_for_device_id(interface, invocation);
 	return FALSE;
 }
 
@@ -167,45 +182,6 @@ static gboolean ChangePPD(NewPrinterDialogDBusPrinting *interface,
 	return FALSE;
 }
 
-/* Signals */
-
-/*
-static gboolean DialogCanceled_method(NewPrinterDialogDBusPrinting *interface,
-						  			  GDBusMethodInvocation *invocation,
-						              gpointer user_data)
-{	
-	newprinterdialog_dbus_printing_emit_dialog_canceled(NEW_PRINTER_DIALOG_DBUS_PRINTING(interface));
-	newprinterdialog_dbus_printing_complete_dialog_canceled_method(interface, invocation);
-	return TRUE;
-}
-
-static gboolean PrinterAdded_method(NewPrinterDialogDBusPrinting *interface,
-						            GDBusMethodInvocation *invocation,
-						            gpointer user_data)
-{
-	newprinterdialog_dbus_printing_emit_printer_added(NEW_PRINTER_DIALOG_DBUS_PRINTING(interface));
-	newprinterdialog_dbus_printing_complete_printer_added_method(interface, invocation);
-	return TRUE;
-}
-
-static gboolean PrinterModified_method(NewPrinterDialogDBusPrinting *interface,
-						               GDBusMethodInvocation *invocation,
-						               gpointer user_data)
-{
-	newprinterdialog_dbus_printing_emit_printer_modified(NEW_PRINTER_DIALOG_DBUS_PRINTING(interface));
-	newprinterdialog_dbus_printing_complete_printer_modified_method(interface, invocation);
-	return TRUE;
-}
-
-static gboolean DriverDownloadCheked_method(NewPrinterDialogDBusPrinting *interface,
-						                    GDBusMethodInvocation *invocation,
-						                    gpointer user_data)
-{
-	newprinterdialog_dbus_printing_emit_driver_download_cheked(NEW_PRINTER_DIALOG_DBUS_PRINTING(interface));
-	newprinterdialog_dbus_printing_complete_driver_download_cheked_method(interface, invocation);
-	return TRUE;
-}
-*/
 /* Internal Functions */
 
 static void change_ppd_got_ppd()
@@ -213,7 +189,7 @@ static void change_ppd_got_ppd()
 
 }
 
-/*
+
 static void change_ppd_with_dev()
 {
 
@@ -223,4 +199,59 @@ static void do_change_ppd()
 {
 
 }
-*/
+
+/* Signals */
+
+
+static gboolean on_dialog_canceled(NewPrinterDialogDBusPrinting *interface,
+						  			  GDBusMethodInvocation *invocation,
+						              gpointer user_data)
+{	
+	remove_hold();
+	newprinterdialog_dbus_printing_emit_dialog_canceled((interface));
+	newprinterdialog_dbus_printing_complete_on_dialog_canceled(interface, invocation);
+	if(dialog_canceled != 0)
+		g_signal_handler_disconnect(interface, dialog_canceled);
+	//remove_from_connection();
+	return TRUE;
+}
+
+static gboolean on_printer_added(NewPrinterDialogDBusPrinting *interface,
+						            GDBusMethodInvocation *invocation,
+						            gpointer user_data)
+{
+	remove_hold();
+	newprinterdialog_dbus_printing_emit_printer_added((interface));
+	newprinterdialog_dbus_printing_complete_on_printer_added(interface, invocation);
+	if(printer_added != 0)
+		g_signal_handler_disconnect(interface, printer_added);
+	//remove_from_connection();
+	return TRUE;
+}
+
+static gboolean on_printer_modified(NewPrinterDialogDBusPrinting *interface,
+						               GDBusMethodInvocation *invocation,
+						               gpointer user_data)
+{
+	remove_hold();
+	newprinterdialog_dbus_printing_emit_printer_modified((interface));
+	newprinterdialog_dbus_printing_complete_on_printer_modified(interface, invocation);
+	if(printer_modified != 0)
+		g_signal_handler_disconnect(interface, printer_modified);
+	//remove_from_connection();
+	return TRUE;
+}
+
+static gboolean on_driver_download_checked(NewPrinterDialogDBusPrinting *interface,
+						                    GDBusMethodInvocation *invocation,
+						                    gpointer user_data)
+{
+	remove_hold();
+	newprinterdialog_dbus_printing_emit_driver_download_cheked((interface));
+	newprinterdialog_dbus_printing_complete_on_driver_download_checked(interface, invocation);
+	if(drv_dwn_checked != 0)
+		g_signal_handler_disconnect(interface, drv_dwn_checked);
+	//remove_from_connection();
+	return TRUE;
+}
+
