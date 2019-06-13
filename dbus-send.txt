@@ -24,7 +24,7 @@ dbus-send --session \
           --print-reply=literal \
           /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.NewPrinterFromDevice \
-          int32:1 \
+          uint32:1 \
           string:'file:/tmp/printout' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
 ###
@@ -58,6 +58,17 @@ dbus-send --session \
 
 ###
 Error
+
+Signal :: 
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=signal org.fedoraproject.Config.Printing.NewPrinterDialog.DialogCanceled
+
+
+Error org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -174,4 +185,3 @@ Output :    array [
       struct {
          lsb/usr/cupsfilters/Generic-PDF_Printer-PDF.ppd         exact-cmd      }
    ]
-
