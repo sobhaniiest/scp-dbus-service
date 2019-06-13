@@ -29,6 +29,7 @@ struct _NewPrinterDialogDBusPrintingIface
 {
   GTypeInterface parent_iface;
 
+
   gboolean (*handle_change_ppd) (
     NewPrinterDialogDBusPrinting *object,
     GDBusMethodInvocation *invocation,
@@ -48,6 +49,38 @@ struct _NewPrinterDialogDBusPrintingIface
     guint arg_xid,
     const gchar *arg_device_uri,
     const gchar *arg_device_id);
+
+  gboolean (*handle_on_dialog_canceled) (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+  gboolean (*handle_on_driver_download_checked) (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation,
+    GVariant *arg_installed_files);
+
+  gboolean (*handle_on_printer_added) (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation,
+    const gchar *arg_name);
+
+  gboolean (*handle_on_printer_modified) (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed);
+
+  void (*dialog_canceled) (
+    NewPrinterDialogDBusPrinting *object);
+
+  void (*driver_download_cheked) (
+    NewPrinterDialogDBusPrinting *object);
+
+  void (*printer_added) (
+    NewPrinterDialogDBusPrinting *object);
+
+  void (*printer_modified) (
+    NewPrinterDialogDBusPrinting *object);
 
 };
 
@@ -69,6 +102,37 @@ void newprinterdialog_dbus_printing_complete_download_driver_for_device_id (
 void newprinterdialog_dbus_printing_complete_change_ppd (
     NewPrinterDialogDBusPrinting *object,
     GDBusMethodInvocation *invocation);
+
+void newprinterdialog_dbus_printing_complete_on_dialog_canceled (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+void newprinterdialog_dbus_printing_complete_on_printer_added (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+void newprinterdialog_dbus_printing_complete_on_printer_modified (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+void newprinterdialog_dbus_printing_complete_on_driver_download_checked (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+
+
+/* D-Bus signal emissions functions: */
+void newprinterdialog_dbus_printing_emit_dialog_canceled (
+    NewPrinterDialogDBusPrinting *object);
+
+void newprinterdialog_dbus_printing_emit_printer_added (
+    NewPrinterDialogDBusPrinting *object);
+
+void newprinterdialog_dbus_printing_emit_printer_modified (
+    NewPrinterDialogDBusPrinting *object);
+
+void newprinterdialog_dbus_printing_emit_driver_download_cheked (
+    NewPrinterDialogDBusPrinting *object);
 
 
 
@@ -134,6 +198,78 @@ gboolean newprinterdialog_dbus_printing_call_change_ppd_sync (
     guint arg_xid,
     const gchar *arg_name,
     const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GError **error);
+
+void newprinterdialog_dbus_printing_call_on_dialog_canceled (
+    NewPrinterDialogDBusPrinting *proxy,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data);
+
+gboolean newprinterdialog_dbus_printing_call_on_dialog_canceled_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error);
+
+gboolean newprinterdialog_dbus_printing_call_on_dialog_canceled_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    GCancellable *cancellable,
+    GError **error);
+
+void newprinterdialog_dbus_printing_call_on_printer_added (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data);
+
+gboolean newprinterdialog_dbus_printing_call_on_printer_added_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error);
+
+gboolean newprinterdialog_dbus_printing_call_on_printer_added_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GError **error);
+
+void newprinterdialog_dbus_printing_call_on_printer_modified (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data);
+
+gboolean newprinterdialog_dbus_printing_call_on_printer_modified_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error);
+
+gboolean newprinterdialog_dbus_printing_call_on_printer_modified_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GError **error);
+
+void newprinterdialog_dbus_printing_call_on_driver_download_checked (
+    NewPrinterDialogDBusPrinting *proxy,
+    GVariant *arg_installed_files,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data);
+
+gboolean newprinterdialog_dbus_printing_call_on_driver_download_checked_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error);
+
+gboolean newprinterdialog_dbus_printing_call_on_driver_download_checked_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    GVariant *arg_installed_files,
     GCancellable *cancellable,
     GError **error);
 
