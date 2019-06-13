@@ -13,7 +13,7 @@ class Calculate(dbus.service.Object):
 
     @dbus.service.method("com.test.CalculatorInterface", in_signature='ii', out_signature='i')  
     def add(self, a, b):
-        s = int(a) + int(b)
+        s = int(a) / int(b)
         print(int(a)," + ", int(b), " = ", s)
         return s
 

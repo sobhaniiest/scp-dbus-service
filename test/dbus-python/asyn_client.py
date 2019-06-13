@@ -52,7 +52,7 @@ def handle_raise_error(e):
 
 def make_calls():
     # To make an async call, use the reply_handler and error_handler kwargs
-    remote_object.add(2, 3,
+    remote_object.add(sys.argv[1], sys.argv[2],
                     dbus_interfac='com.test.CalculatorInterface',
                     reply_handler=handle_add_reply,
                     error_handler=handle_add_error)
