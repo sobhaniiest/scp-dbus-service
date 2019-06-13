@@ -314,11 +314,183 @@ static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_inf
   FALSE
 };
 
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_dialog_canceled =
+{
+  {
+    -1,
+    (gchar *) "on_dialog_canceled",
+    NULL,
+    NULL,
+    NULL
+  },
+  "handle-on-dialog-canceled",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_name =
+{
+  {
+    -1,
+    (gchar *) "name",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_name,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_printer_added =
+{
+  {
+    -1,
+    (gchar *) "on_printer_added",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-printer-added",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_name =
+{
+  {
+    -1,
+    (gchar *) "name",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_ppd_has_changed =
+{
+  {
+    -1,
+    (gchar *) "ppd_has_changed",
+    (gchar *) "b",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_name,
+  &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_ppd_has_changed,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified =
+{
+  {
+    -1,
+    (gchar *) "on_printer_modified",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-printer-modified",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_installed_files =
+{
+  {
+    -1,
+    (gchar *) "installed_files",
+    (gchar *) "a(s)",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_installed_files,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_driver_download_checked =
+{
+  {
+    -1,
+    (gchar *) "on_driver_download_checked",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-driver-download-checked",
+  FALSE
+};
+
 static const _ExtendedGDBusMethodInfo * const _newprinterdialog_dbus_printing_method_info_pointers[] =
 {
   &_newprinterdialog_dbus_printing_method_info_new_printer_from_device,
   &_newprinterdialog_dbus_printing_method_info_download_driver_for_device_id,
   &_newprinterdialog_dbus_printing_method_info_change_ppd,
+  &_newprinterdialog_dbus_printing_method_info_on_dialog_canceled,
+  &_newprinterdialog_dbus_printing_method_info_on_printer_added,
+  &_newprinterdialog_dbus_printing_method_info_on_printer_modified,
+  &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked,
+  NULL
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_dialog_canceled =
+{
+  {
+    -1,
+    (gchar *) "DialogCanceled",
+    NULL,
+    NULL
+  },
+  "dialog-canceled"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_printer_added =
+{
+  {
+    -1,
+    (gchar *) "PrinterAdded",
+    NULL,
+    NULL
+  },
+  "printer-added"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_printer_modified =
+{
+  {
+    -1,
+    (gchar *) "PrinterModified",
+    NULL,
+    NULL
+  },
+  "printer-modified"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_driver_download_cheked =
+{
+  {
+    -1,
+    (gchar *) "DriverDownloadCheked",
+    NULL,
+    NULL
+  },
+  "driver-download-cheked"
+};
+
+static const _ExtendedGDBusSignalInfo * const _newprinterdialog_dbus_printing_signal_info_pointers[] =
+{
+  &_newprinterdialog_dbus_printing_signal_info_dialog_canceled,
+  &_newprinterdialog_dbus_printing_signal_info_printer_added,
+  &_newprinterdialog_dbus_printing_signal_info_printer_modified,
+  &_newprinterdialog_dbus_printing_signal_info_driver_download_cheked,
   NULL
 };
 
@@ -328,7 +500,7 @@ static const _ExtendedGDBusInterfaceInfo _newprinterdialog_dbus_printing_interfa
     -1,
     (gchar *) "com.test.Printing",
     (GDBusMethodInfo **) &_newprinterdialog_dbus_printing_method_info_pointers,
-    NULL,
+    (GDBusSignalInfo **) &_newprinterdialog_dbus_printing_signal_info_pointers,
     NULL,
     NULL
   },
@@ -379,6 +551,14 @@ newprinterdialog_dbus_printing_override_properties (GObjectClass *klass, guint p
  * @handle_change_ppd: Handler for the #NewPrinterDialogDBusPrinting::handle-change-ppd signal.
  * @handle_download_driver_for_device_id: Handler for the #NewPrinterDialogDBusPrinting::handle-download-driver-for-device-id signal.
  * @handle_new_printer_from_device: Handler for the #NewPrinterDialogDBusPrinting::handle-new-printer-from-device signal.
+ * @handle_on_dialog_canceled: Handler for the #NewPrinterDialogDBusPrinting::handle-on-dialog-canceled signal.
+ * @handle_on_driver_download_checked: Handler for the #NewPrinterDialogDBusPrinting::handle-on-driver-download-checked signal.
+ * @handle_on_printer_added: Handler for the #NewPrinterDialogDBusPrinting::handle-on-printer-added signal.
+ * @handle_on_printer_modified: Handler for the #NewPrinterDialogDBusPrinting::handle-on-printer-modified signal.
+ * @dialog_canceled: Handler for the #NewPrinterDialogDBusPrinting::dialog-canceled signal.
+ * @driver_download_cheked: Handler for the #NewPrinterDialogDBusPrinting::driver-download-cheked signal.
+ * @printer_added: Handler for the #NewPrinterDialogDBusPrinting::printer-added signal.
+ * @printer_modified: Handler for the #NewPrinterDialogDBusPrinting::printer-modified signal.
  *
  * Virtual table for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>.
  */
@@ -464,6 +644,223 @@ newprinterdialog_dbus_printing_default_init (NewPrinterDialogDBusPrintingIface *
     4,
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING);
 
+  /**
+   * NewPrinterDialogDBusPrinting::handle-on-dialog-canceled:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   * @invocation: A #GDBusMethodInvocation.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_dialog_canceled() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-dialog-canceled",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_dialog_canceled),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    1,
+    G_TYPE_DBUS_METHOD_INVOCATION);
+
+  /**
+   * NewPrinterDialogDBusPrinting::handle-on-printer-added:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_name: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_printer_added() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-printer-added",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_printer_added),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    2,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
+
+  /**
+   * NewPrinterDialogDBusPrinting::handle-on-printer-modified:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_name: Argument passed by remote caller.
+   * @arg_ppd_has_changed: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_printer_modified() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-printer-modified",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_printer_modified),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    3,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_BOOLEAN);
+
+  /**
+   * NewPrinterDialogDBusPrinting::handle-on-driver-download-checked:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_installed_files: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_driver_download_checked() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-driver-download-checked",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_driver_download_checked),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    2,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
+
+  /* GObject signals for received D-Bus signals: */
+  /**
+   * NewPrinterDialogDBusPrinting::dialog-canceled:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.DialogCanceled">"DialogCanceled"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("dialog-canceled",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, dialog_canceled),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusPrinting::printer-added:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.PrinterAdded">"PrinterAdded"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("printer-added",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, printer_added),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusPrinting::printer-modified:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.PrinterModified">"PrinterModified"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("printer-modified",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, printer_modified),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusPrinting::driver-download-cheked:
+   * @object: A #NewPrinterDialogDBusPrinting.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.DriverDownloadCheked">"DriverDownloadCheked"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("driver-download-cheked",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, driver_download_cheked),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+}
+
+/**
+ * newprinterdialog_dbus_printing_emit_dialog_canceled:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ *
+ * Emits the <link linkend="gdbus-signal-com-test-Printing.DialogCanceled">"DialogCanceled"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_printing_emit_dialog_canceled (
+    NewPrinterDialogDBusPrinting *object)
+{
+  g_signal_emit_by_name (object, "dialog-canceled");
+}
+
+/**
+ * newprinterdialog_dbus_printing_emit_printer_added:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ *
+ * Emits the <link linkend="gdbus-signal-com-test-Printing.PrinterAdded">"PrinterAdded"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_printing_emit_printer_added (
+    NewPrinterDialogDBusPrinting *object)
+{
+  g_signal_emit_by_name (object, "printer-added");
+}
+
+/**
+ * newprinterdialog_dbus_printing_emit_printer_modified:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ *
+ * Emits the <link linkend="gdbus-signal-com-test-Printing.PrinterModified">"PrinterModified"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_printing_emit_printer_modified (
+    NewPrinterDialogDBusPrinting *object)
+{
+  g_signal_emit_by_name (object, "printer-modified");
+}
+
+/**
+ * newprinterdialog_dbus_printing_emit_driver_download_cheked:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ *
+ * Emits the <link linkend="gdbus-signal-com-test-Printing.DriverDownloadCheked">"DriverDownloadCheked"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_printing_emit_driver_download_cheked (
+    NewPrinterDialogDBusPrinting *object)
+{
+  g_signal_emit_by_name (object, "driver-download-cheked");
 }
 
 /**
@@ -791,6 +1188,398 @@ _out:
 }
 
 /**
+ * newprinterdialog_dbus_printing_call_on_dialog_canceled:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_printing_call_on_dialog_canceled_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_printing_call_on_dialog_canceled_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_printing_call_on_dialog_canceled (
+    NewPrinterDialogDBusPrinting *proxy,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_dialog_canceled",
+    g_variant_new ("()"),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_dialog_canceled_finish:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_dialog_canceled().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_printing_call_on_dialog_canceled().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_dialog_canceled_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_dialog_canceled_sync:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_printing_call_on_dialog_canceled() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_dialog_canceled_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_dialog_canceled",
+    g_variant_new ("()"),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_added:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_printing_call_on_printer_added_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_printing_call_on_printer_added_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_printing_call_on_printer_added (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_printer_added",
+    g_variant_new ("(s)",
+                   arg_name),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_added_finish:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_printer_added().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_printing_call_on_printer_added().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_printer_added_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_added_sync:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_printing_call_on_printer_added() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_printer_added_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_printer_added",
+    g_variant_new ("(s)",
+                   arg_name),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_modified:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_ppd_has_changed: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_printing_call_on_printer_modified_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_printing_call_on_printer_modified_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_printing_call_on_printer_modified (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_printer_modified",
+    g_variant_new ("(sb)",
+                   arg_name,
+                   arg_ppd_has_changed),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_modified_finish:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_printer_modified().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_printing_call_on_printer_modified().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_printer_modified_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_printer_modified_sync:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_ppd_has_changed: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_printing_call_on_printer_modified() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_printer_modified_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_printer_modified",
+    g_variant_new ("(sb)",
+                   arg_name,
+                   arg_ppd_has_changed),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_driver_download_checked:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_installed_files: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_printing_call_on_driver_download_checked_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_printing_call_on_driver_download_checked_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_printing_call_on_driver_download_checked (
+    NewPrinterDialogDBusPrinting *proxy,
+    GVariant *arg_installed_files,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_driver_download_checked",
+    g_variant_new ("(@a(s))",
+                   arg_installed_files),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_driver_download_checked_finish:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_driver_download_checked().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_printing_call_on_driver_download_checked().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_driver_download_checked_finish (
+    NewPrinterDialogDBusPrinting *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_printing_call_on_driver_download_checked_sync:
+ * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * @arg_installed_files: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_printing_call_on_driver_download_checked() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_printing_call_on_driver_download_checked_sync (
+    NewPrinterDialogDBusPrinting *proxy,
+    GVariant *arg_installed_files,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_driver_download_checked",
+    g_variant_new ("(@a(s))",
+                   arg_installed_files),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
  * newprinterdialog_dbus_printing_complete_new_printer_from_device:
  * @object: A #NewPrinterDialogDBusPrinting.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
@@ -837,6 +1626,78 @@ newprinterdialog_dbus_printing_complete_download_driver_for_device_id (
  */
 void
 newprinterdialog_dbus_printing_complete_change_ppd (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_printing_complete_on_dialog_canceled:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_printing_complete_on_dialog_canceled (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_printing_complete_on_printer_added:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_printing_complete_on_printer_added (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_printing_complete_on_printer_modified:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_printing_complete_on_printer_modified (
+    NewPrinterDialogDBusPrinting *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_printing_complete_on_driver_download_checked:
+ * @object: A #NewPrinterDialogDBusPrinting.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_printing_complete_on_driver_download_checked (
     NewPrinterDialogDBusPrinting *object,
     GDBusMethodInvocation *invocation)
 {
@@ -1399,6 +2260,94 @@ newprinterdialog_dbus_printing_skeleton_dbus_interface_flush (GDBusInterfaceSkel
 {
 }
 
+static void
+_newprinterdialog_dbus_printing_on_signal_dialog_canceled (
+    NewPrinterDialogDBusPrinting *object)
+{
+  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "DialogCanceled",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_printing_on_signal_printer_added (
+    NewPrinterDialogDBusPrinting *object)
+{
+  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "PrinterAdded",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_printing_on_signal_printer_modified (
+    NewPrinterDialogDBusPrinting *object)
+{
+  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "PrinterModified",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_printing_on_signal_driver_download_cheked (
+    NewPrinterDialogDBusPrinting *object)
+{
+  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "DriverDownloadCheked",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
 static void newprinterdialog_dbus_printing_skeleton_iface_init (NewPrinterDialogDBusPrintingIface *iface);
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
 G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusPrintingSkeleton, newprinterdialog_dbus_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
@@ -1458,6 +2407,10 @@ newprinterdialog_dbus_printing_skeleton_class_init (NewPrinterDialogDBusPrinting
 static void
 newprinterdialog_dbus_printing_skeleton_iface_init (NewPrinterDialogDBusPrintingIface *iface)
 {
+  iface->dialog_canceled = _newprinterdialog_dbus_printing_on_signal_dialog_canceled;
+  iface->printer_added = _newprinterdialog_dbus_printing_on_signal_printer_added;
+  iface->printer_modified = _newprinterdialog_dbus_printing_on_signal_printer_modified;
+  iface->driver_download_cheked = _newprinterdialog_dbus_printing_on_signal_driver_download_cheked;
 }
 
 /**
