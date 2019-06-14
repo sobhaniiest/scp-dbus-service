@@ -20,7 +20,7 @@ Here the programs are able to export the methods of the NewPrinterDialog interfa
 
 First run the commend : $ make to generate the object files, then to export the methods of the interface run the command : $ ./main and to invoke a method (here it is ChangePPD of the NewPrinterDialog interface) run the command : $ ./demo following three command line attributes as the arguments of the ChangePPD method - xid(unsigned int), name(string), device_id(string).
 
-This testing is only for methods exporting and invoking not the signals (working on this) and does not fulfil the functionality of the methods as I have not implemented the C code of the newprinter module.
+This testing is only for methods exporting and invoking and emitting the signals and does not fulfil the functionality of the methods as I have not implemented the C code of the newprinter module.
 
 # Steps ::
 
