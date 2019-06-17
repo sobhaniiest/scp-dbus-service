@@ -4,10 +4,10 @@ CC = gcc
 FLAGS = $(shell pkg-config --libs --cflags gio-2.0 gio-unix-2.0 glib-2.0 gtk+-3.0)
 LIBS = -lcups -lpython3.6m
 
-all: main demo
+all: main
 
 gen:
-	gdbus-codegen --generate-c-code newprinterdialog_dbus --c-namespace NewPrinterDialog_DBus --interface-prefix com.test. com.test.xml
+	gdbus-codegen --generate-c-code newprinterdialog_dbus --c-namespace NewPrinterDialog_DBus --interface-prefix org.fedoraproject.Config.Printing. org.fedoraproject.Config.Printing.xml
 	$(CC) -o $@ $^ -c $(FLAGS)
 
 %.o: %.c
@@ -16,7 +16,7 @@ gen:
 demo: test.o newprinterdialog_dbus.o
 	$(CC) -o $@ $^ $(FLAGS)
 
-main: ConfigPrintingNewPrinterDialog.o asyncconn.o ppdcache.o killtimer.o authinfocache.o newprinterdialog_dbus.o
+main: ConfigPrinting.o ConfigPrintingNewPrinterDialog.o killtimer.o newprinterdialog_dbus.o
 	$(CC) -o $@ $^ $(FLAGS) $(LIBS)
 
 clean:

@@ -150,389 +150,95 @@ _g_value_equal (const GValue *a, const GValue *b)
 }
 
 /* ------------------------------------------------------------------------
- * Code for interface com.test.Printing
+ * Code for interface org.fedoraproject.Config.Printing
  * ------------------------------------------------------------------------
  */
 
 /**
- * SECTION:NewPrinterDialogDBusPrinting
- * @title: NewPrinterDialogDBusPrinting
- * @short_description: Generated C code for the com.test.Printing D-Bus interface
+ * SECTION:NewPrinterDialogDBusOrgFedoraprojectConfigPrinting
+ * @title: NewPrinterDialogDBusOrgFedoraprojectConfigPrinting
+ * @short_description: Generated C code for the org.fedoraproject.Config.Printing D-Bus interface
  *
- * This section contains code for working with the <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link> D-Bus interface in C.
+ * This section contains code for working with the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link> D-Bus interface in C.
  */
 
-/* ---- Introspection data for com.test.Printing ---- */
+/* ---- Introspection data for org.fedoraproject.Config.Printing ---- */
 
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_xid =
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_path =
 {
   {
     -1,
-    (gchar *) "xid",
-    (gchar *) "u",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_device_uri =
-{
-  {
-    -1,
-    (gchar *) "device_uri",
+    (gchar *) "path",
     (gchar *) "s",
     NULL
   },
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_device_id =
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_pointers[] =
 {
-  {
-    -1,
-    (gchar *) "device_id",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_xid,
-  &_newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_device_uri,
-  &_newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_device_id,
+  &_newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_path,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_new_printer_from_device =
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog =
 {
   {
     -1,
-    (gchar *) "NewPrinterFromDevice",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_new_printer_from_device_IN_ARG_pointers,
+    (gchar *) "NewPrinterDialog",
     NULL,
+    (GDBusArgInfo **) &_newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_pointers,
     NULL
   },
-  "handle-new-printer-from-device",
+  "handle-new-printer-dialog",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_xid =
+static const _ExtendedGDBusMethodInfo * const _newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_pointers[] =
 {
-  {
-    -1,
-    (gchar *) "xid",
-    (gchar *) "u",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_device_id =
-{
-  {
-    -1,
-    (gchar *) "device_id",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_xid,
-  &_newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_device_id,
+  &_newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_new_printer_dialog,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_download_driver_for_device_id =
+static const _ExtendedGDBusInterfaceInfo _newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info =
 {
   {
     -1,
-    (gchar *) "DownloadDriverForDeviceID",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_download_driver_for_device_id_IN_ARG_pointers,
-    NULL,
-    NULL
-  },
-  "handle-download-driver-for-device-id",
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_xid =
-{
-  {
-    -1,
-    (gchar *) "xid",
-    (gchar *) "u",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_name =
-{
-  {
-    -1,
-    (gchar *) "name",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_device_id =
-{
-  {
-    -1,
-    (gchar *) "device_id",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_xid,
-  &_newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_name,
-  &_newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_device_id,
-  NULL
-};
-
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_change_ppd =
-{
-  {
-    -1,
-    (gchar *) "ChangePPD",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_change_ppd_IN_ARG_pointers,
-    NULL,
-    NULL
-  },
-  "handle-change-ppd",
-  FALSE
-};
-
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_dialog_canceled =
-{
-  {
-    -1,
-    (gchar *) "on_dialog_canceled",
+    (gchar *) "org.fedoraproject.Config.Printing",
+    (GDBusMethodInfo **) &_newprinterdialog_dbus_org_fedoraproject_config_printing_method_info_pointers,
     NULL,
     NULL,
     NULL
   },
-  "handle-on-dialog-canceled",
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_name =
-{
-  {
-    -1,
-    (gchar *) "name",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_name,
-  NULL
-};
-
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_printer_added =
-{
-  {
-    -1,
-    (gchar *) "on_printer_added",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_printer_added_IN_ARG_pointers,
-    NULL,
-    NULL
-  },
-  "handle-on-printer-added",
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_name =
-{
-  {
-    -1,
-    (gchar *) "name",
-    (gchar *) "s",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_ppd_has_changed =
-{
-  {
-    -1,
-    (gchar *) "ppd_has_changed",
-    (gchar *) "b",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_name,
-  &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_ppd_has_changed,
-  NULL
-};
-
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_printer_modified =
-{
-  {
-    -1,
-    (gchar *) "on_printer_modified",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_printer_modified_IN_ARG_pointers,
-    NULL,
-    NULL
-  },
-  "handle-on-printer-modified",
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_installed_files =
-{
-  {
-    -1,
-    (gchar *) "installed_files",
-    (gchar *) "a(s)",
-    NULL
-  },
-  FALSE
-};
-
-static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_installed_files,
-  NULL
-};
-
-static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_printing_method_info_on_driver_download_checked =
-{
-  {
-    -1,
-    (gchar *) "on_driver_download_checked",
-    (GDBusArgInfo **) &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked_IN_ARG_pointers,
-    NULL,
-    NULL
-  },
-  "handle-on-driver-download-checked",
-  FALSE
-};
-
-static const _ExtendedGDBusMethodInfo * const _newprinterdialog_dbus_printing_method_info_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_method_info_new_printer_from_device,
-  &_newprinterdialog_dbus_printing_method_info_download_driver_for_device_id,
-  &_newprinterdialog_dbus_printing_method_info_change_ppd,
-  &_newprinterdialog_dbus_printing_method_info_on_dialog_canceled,
-  &_newprinterdialog_dbus_printing_method_info_on_printer_added,
-  &_newprinterdialog_dbus_printing_method_info_on_printer_modified,
-  &_newprinterdialog_dbus_printing_method_info_on_driver_download_checked,
-  NULL
-};
-
-static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_dialog_canceled =
-{
-  {
-    -1,
-    (gchar *) "DialogCanceled",
-    NULL,
-    NULL
-  },
-  "dialog-canceled"
-};
-
-static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_printer_added =
-{
-  {
-    -1,
-    (gchar *) "PrinterAdded",
-    NULL,
-    NULL
-  },
-  "printer-added"
-};
-
-static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_printer_modified =
-{
-  {
-    -1,
-    (gchar *) "PrinterModified",
-    NULL,
-    NULL
-  },
-  "printer-modified"
-};
-
-static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_printing_signal_info_driver_download_cheked =
-{
-  {
-    -1,
-    (gchar *) "DriverDownloadCheked",
-    NULL,
-    NULL
-  },
-  "driver-download-cheked"
-};
-
-static const _ExtendedGDBusSignalInfo * const _newprinterdialog_dbus_printing_signal_info_pointers[] =
-{
-  &_newprinterdialog_dbus_printing_signal_info_dialog_canceled,
-  &_newprinterdialog_dbus_printing_signal_info_printer_added,
-  &_newprinterdialog_dbus_printing_signal_info_printer_modified,
-  &_newprinterdialog_dbus_printing_signal_info_driver_download_cheked,
-  NULL
-};
-
-static const _ExtendedGDBusInterfaceInfo _newprinterdialog_dbus_printing_interface_info =
-{
-  {
-    -1,
-    (gchar *) "com.test.Printing",
-    (GDBusMethodInfo **) &_newprinterdialog_dbus_printing_method_info_pointers,
-    (GDBusSignalInfo **) &_newprinterdialog_dbus_printing_signal_info_pointers,
-    NULL,
-    NULL
-  },
-  "printing",
+  "org-fedoraproject-config-printing",
 };
 
 
 /**
- * newprinterdialog_dbus_printing_interface_info:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info:
  *
- * Gets a machine-readable description of the <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link> D-Bus interface.
+ * Gets a machine-readable description of the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link> D-Bus interface.
  *
  * Returns: (transfer none): A #GDBusInterfaceInfo. Do not free.
  */
 GDBusInterfaceInfo *
-newprinterdialog_dbus_printing_interface_info (void)
+newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info (void)
 {
-  return (GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct;
+  return (GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct;
 }
 
 /**
- * newprinterdialog_dbus_printing_override_properties:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_override_properties:
  * @klass: The class structure for a #GObject derived class.
  * @property_id_begin: The property id to assign to the first overridden property.
  *
- * Overrides all #GObject properties in the #NewPrinterDialogDBusPrinting interface for a concrete class.
+ * Overrides all #GObject properties in the #NewPrinterDialogDBusOrgFedoraprojectConfigPrinting interface for a concrete class.
  * The properties are overridden in the order they are defined.
  *
  * Returns: The last property id.
  */
 guint
-newprinterdialog_dbus_printing_override_properties (GObjectClass *klass, guint property_id_begin)
+newprinterdialog_dbus_org_fedoraproject_config_printing_override_properties (GObjectClass *klass, guint property_id_begin)
 {
   return property_id_begin - 1;
 }
@@ -540,125 +246,41 @@ newprinterdialog_dbus_printing_override_properties (GObjectClass *klass, guint p
 
 
 /**
- * NewPrinterDialogDBusPrinting:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrinting:
  *
- * Abstract interface type for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>.
+ * Abstract interface type for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  */
 
 /**
- * NewPrinterDialogDBusPrintingIface:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface:
  * @parent_iface: The parent interface.
- * @handle_change_ppd: Handler for the #NewPrinterDialogDBusPrinting::handle-change-ppd signal.
- * @handle_download_driver_for_device_id: Handler for the #NewPrinterDialogDBusPrinting::handle-download-driver-for-device-id signal.
- * @handle_new_printer_from_device: Handler for the #NewPrinterDialogDBusPrinting::handle-new-printer-from-device signal.
- * @handle_on_dialog_canceled: Handler for the #NewPrinterDialogDBusPrinting::handle-on-dialog-canceled signal.
- * @handle_on_driver_download_checked: Handler for the #NewPrinterDialogDBusPrinting::handle-on-driver-download-checked signal.
- * @handle_on_printer_added: Handler for the #NewPrinterDialogDBusPrinting::handle-on-printer-added signal.
- * @handle_on_printer_modified: Handler for the #NewPrinterDialogDBusPrinting::handle-on-printer-modified signal.
- * @dialog_canceled: Handler for the #NewPrinterDialogDBusPrinting::dialog-canceled signal.
- * @driver_download_cheked: Handler for the #NewPrinterDialogDBusPrinting::driver-download-cheked signal.
- * @printer_added: Handler for the #NewPrinterDialogDBusPrinting::printer-added signal.
- * @printer_modified: Handler for the #NewPrinterDialogDBusPrinting::printer-modified signal.
+ * @handle_new_printer_dialog: Handler for the #NewPrinterDialogDBusOrgFedoraprojectConfigPrinting::handle-new-printer-dialog signal.
  *
- * Virtual table for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>.
+ * Virtual table for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  */
 
-typedef NewPrinterDialogDBusPrintingIface NewPrinterDialogDBusPrintingInterface;
-G_DEFINE_INTERFACE (NewPrinterDialogDBusPrinting, newprinterdialog_dbus_printing, G_TYPE_OBJECT)
+typedef NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface NewPrinterDialogDBusOrgFedoraprojectConfigPrintingInterface;
+G_DEFINE_INTERFACE (NewPrinterDialogDBusOrgFedoraprojectConfigPrinting, newprinterdialog_dbus_org_fedoraproject_config_printing, G_TYPE_OBJECT)
 
 static void
-newprinterdialog_dbus_printing_default_init (NewPrinterDialogDBusPrintingIface *iface)
+newprinterdialog_dbus_org_fedoraproject_config_printing_default_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface *iface)
 {
   /* GObject signals for incoming D-Bus method calls: */
   /**
-   * NewPrinterDialogDBusPrinting::handle-new-printer-from-device:
-   * @object: A #NewPrinterDialogDBusPrinting.
+   * NewPrinterDialogDBusOrgFedoraprojectConfigPrinting::handle-new-printer-dialog:
+   * @object: A #NewPrinterDialogDBusOrgFedoraprojectConfigPrinting.
    * @invocation: A #GDBusMethodInvocation.
-   * @arg_xid: Argument passed by remote caller.
-   * @arg_device_uri: Argument passed by remote caller.
-   * @arg_device_id: Argument passed by remote caller.
    *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method.
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_new_printer_from_device() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_org_fedoraproject_config_printing_complete_new_printer_dialog() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
-  g_signal_new ("handle-new-printer-from-device",
+  g_signal_new ("handle-new-printer-dialog",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_new_printer_from_device),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    4,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING);
-
-  /**
-   * NewPrinterDialogDBusPrinting::handle-download-driver-for-device-id:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   * @arg_xid: Argument passed by remote caller.
-   * @arg_device_id: Argument passed by remote caller.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_download_driver_for_device_id() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-download-driver-for-device-id",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_download_driver_for_device_id),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    3,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING);
-
-  /**
-   * NewPrinterDialogDBusPrinting::handle-change-ppd:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   * @arg_xid: Argument passed by remote caller.
-   * @arg_name: Argument passed by remote caller.
-   * @arg_device_id: Argument passed by remote caller.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.ChangePPD">ChangePPD()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_change_ppd() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-change-ppd",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_change_ppd),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    4,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING);
-
-  /**
-   * NewPrinterDialogDBusPrinting::handle-on-dialog-canceled:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_dialog_canceled() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-on-dialog-canceled",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_dialog_canceled),
+    G_STRUCT_OFFSET (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface, handle_new_printer_dialog),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -666,549 +288,30 @@ newprinterdialog_dbus_printing_default_init (NewPrinterDialogDBusPrintingIface *
     1,
     G_TYPE_DBUS_METHOD_INVOCATION);
 
-  /**
-   * NewPrinterDialogDBusPrinting::handle-on-printer-added:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   * @arg_name: Argument passed by remote caller.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_printer_added() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-on-printer-added",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_printer_added),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    2,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
-
-  /**
-   * NewPrinterDialogDBusPrinting::handle-on-printer-modified:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   * @arg_name: Argument passed by remote caller.
-   * @arg_ppd_has_changed: Argument passed by remote caller.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_printer_modified() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-on-printer-modified",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_printer_modified),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    3,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_BOOLEAN);
-
-  /**
-   * NewPrinterDialogDBusPrinting::handle-on-driver-download-checked:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   * @invocation: A #GDBusMethodInvocation.
-   * @arg_installed_files: Argument passed by remote caller.
-   *
-   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method.
-   *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_printing_complete_on_driver_download_checked() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
-   *
-   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
-   */
-  g_signal_new ("handle-on-driver-download-checked",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, handle_on_driver_download_checked),
-    g_signal_accumulator_true_handled,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_BOOLEAN,
-    2,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
-
-  /* GObject signals for received D-Bus signals: */
-  /**
-   * NewPrinterDialogDBusPrinting::dialog-canceled:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   *
-   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.DialogCanceled">"DialogCanceled"</link> is received.
-   *
-   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
-   */
-  g_signal_new ("dialog-canceled",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, dialog_canceled),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    0);
-
-  /**
-   * NewPrinterDialogDBusPrinting::printer-added:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   *
-   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.PrinterAdded">"PrinterAdded"</link> is received.
-   *
-   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
-   */
-  g_signal_new ("printer-added",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, printer_added),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    0);
-
-  /**
-   * NewPrinterDialogDBusPrinting::printer-modified:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   *
-   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.PrinterModified">"PrinterModified"</link> is received.
-   *
-   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
-   */
-  g_signal_new ("printer-modified",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, printer_modified),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    0);
-
-  /**
-   * NewPrinterDialogDBusPrinting::driver-download-cheked:
-   * @object: A #NewPrinterDialogDBusPrinting.
-   *
-   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-com-test-Printing.DriverDownloadCheked">"DriverDownloadCheked"</link> is received.
-   *
-   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
-   */
-  g_signal_new ("driver-download-cheked",
-    G_TYPE_FROM_INTERFACE (iface),
-    G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (NewPrinterDialogDBusPrintingIface, driver_download_cheked),
-    NULL,
-    NULL,
-    g_cclosure_marshal_generic,
-    G_TYPE_NONE,
-    0);
-
 }
 
 /**
- * newprinterdialog_dbus_printing_emit_dialog_canceled:
- * @object: A #NewPrinterDialogDBusPrinting.
- *
- * Emits the <link linkend="gdbus-signal-com-test-Printing.DialogCanceled">"DialogCanceled"</link> D-Bus signal.
- */
-void
-newprinterdialog_dbus_printing_emit_dialog_canceled (
-    NewPrinterDialogDBusPrinting *object)
-{
-  g_signal_emit_by_name (object, "dialog-canceled");
-}
-
-/**
- * newprinterdialog_dbus_printing_emit_printer_added:
- * @object: A #NewPrinterDialogDBusPrinting.
- *
- * Emits the <link linkend="gdbus-signal-com-test-Printing.PrinterAdded">"PrinterAdded"</link> D-Bus signal.
- */
-void
-newprinterdialog_dbus_printing_emit_printer_added (
-    NewPrinterDialogDBusPrinting *object)
-{
-  g_signal_emit_by_name (object, "printer-added");
-}
-
-/**
- * newprinterdialog_dbus_printing_emit_printer_modified:
- * @object: A #NewPrinterDialogDBusPrinting.
- *
- * Emits the <link linkend="gdbus-signal-com-test-Printing.PrinterModified">"PrinterModified"</link> D-Bus signal.
- */
-void
-newprinterdialog_dbus_printing_emit_printer_modified (
-    NewPrinterDialogDBusPrinting *object)
-{
-  g_signal_emit_by_name (object, "printer-modified");
-}
-
-/**
- * newprinterdialog_dbus_printing_emit_driver_download_cheked:
- * @object: A #NewPrinterDialogDBusPrinting.
- *
- * Emits the <link linkend="gdbus-signal-com-test-Printing.DriverDownloadCheked">"DriverDownloadCheked"</link> D-Bus signal.
- */
-void
-newprinterdialog_dbus_printing_emit_driver_download_cheked (
-    NewPrinterDialogDBusPrinting *object)
-{
-  g_signal_emit_by_name (object, "driver-download-cheked");
-}
-
-/**
- * newprinterdialog_dbus_printing_call_new_printer_from_device:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_device_uri: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog:
+ * @proxy: A #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
  * @user_data: User data to pass to @callback.
  *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method on @proxy.
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_new_printer_from_device_finish() to get the result of the operation.
+ * You can then call newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_finish() to get the result of the operation.
  *
- * See newprinterdialog_dbus_printing_call_new_printer_from_device_sync() for the synchronous, blocking version of this method.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_sync() for the synchronous, blocking version of this method.
  */
 void
-newprinterdialog_dbus_printing_call_new_printer_from_device (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_device_uri,
-    const gchar *arg_device_id,
+newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data)
 {
   g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "NewPrinterFromDevice",
-    g_variant_new ("(uss)",
-                   arg_xid,
-                   arg_device_uri,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_new_printer_from_device_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_new_printer_from_device().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_new_printer_from_device().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_new_printer_from_device_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_new_printer_from_device_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_device_uri: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_new_printer_from_device() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_new_printer_from_device_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_device_uri,
-    const gchar *arg_device_id,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "NewPrinterFromDevice",
-    g_variant_new ("(uss)",
-                   arg_xid,
-                   arg_device_uri,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_download_driver_for_device_id:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
- *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_download_driver_for_device_id_finish() to get the result of the operation.
- *
- * See newprinterdialog_dbus_printing_call_download_driver_for_device_id_sync() for the synchronous, blocking version of this method.
- */
-void
-newprinterdialog_dbus_printing_call_download_driver_for_device_id (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_device_id,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
-{
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "DownloadDriverForDeviceID",
-    g_variant_new ("(us)",
-                   arg_xid,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_download_driver_for_device_id_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_download_driver_for_device_id().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_download_driver_for_device_id().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_download_driver_for_device_id_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_download_driver_for_device_id_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_download_driver_for_device_id() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_download_driver_for_device_id_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_device_id,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "DownloadDriverForDeviceID",
-    g_variant_new ("(us)",
-                   arg_xid,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_change_ppd:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_name: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
- *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.ChangePPD">ChangePPD()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_change_ppd_finish() to get the result of the operation.
- *
- * See newprinterdialog_dbus_printing_call_change_ppd_sync() for the synchronous, blocking version of this method.
- */
-void
-newprinterdialog_dbus_printing_call_change_ppd (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_name,
-    const gchar *arg_device_id,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
-{
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "ChangePPD",
-    g_variant_new ("(uss)",
-                   arg_xid,
-                   arg_name,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_change_ppd_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_change_ppd().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_change_ppd().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_change_ppd_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_change_ppd_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_xid: Argument to pass with the method invocation.
- * @arg_name: Argument to pass with the method invocation.
- * @arg_device_id: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.ChangePPD">ChangePPD()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_change_ppd() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_change_ppd_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    guint arg_xid,
-    const gchar *arg_name,
-    const gchar *arg_device_id,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "ChangePPD",
-    g_variant_new ("(uss)",
-                   arg_xid,
-                   arg_name,
-                   arg_device_id),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_dialog_canceled:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
- *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_on_dialog_canceled_finish() to get the result of the operation.
- *
- * See newprinterdialog_dbus_printing_call_on_dialog_canceled_sync() for the synchronous, blocking version of this method.
- */
-void
-newprinterdialog_dbus_printing_call_on_dialog_canceled (
-    NewPrinterDialogDBusPrinting *proxy,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
-{
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "on_dialog_canceled",
+    "NewPrinterDialog",
     g_variant_new ("()"),
     G_DBUS_CALL_FLAGS_NONE,
     -1,
@@ -1218,18 +321,20 @@ newprinterdialog_dbus_printing_call_on_dialog_canceled (
 }
 
 /**
- * newprinterdialog_dbus_printing_call_on_dialog_canceled_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_dialog_canceled().
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_finish:
+ * @proxy: A #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy.
+ * @out_path: (out): Return location for return parameter or %NULL to ignore.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_on_dialog_canceled().
+ * Finishes an operation started with newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-newprinterdialog_dbus_printing_call_on_dialog_canceled_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_finish (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
+    gchar **out_path,
     GAsyncResult *res,
     GError **error)
 {
@@ -1238,33 +343,36 @@ newprinterdialog_dbus_printing_call_on_dialog_canceled_finish (
   if (_ret == NULL)
     goto _out;
   g_variant_get (_ret,
-                 "()");
+                 "(s)",
+                 out_path);
   g_variant_unref (_ret);
 _out:
   return _ret != NULL;
 }
 
 /**
- * newprinterdialog_dbus_printing_call_on_dialog_canceled_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_sync:
+ * @proxy: A #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy.
+ * @out_path: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL.
  *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See newprinterdialog_dbus_printing_call_on_dialog_canceled() for the asynchronous version of this method.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-newprinterdialog_dbus_printing_call_on_dialog_canceled_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_sync (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
+    gchar **out_path,
     GCancellable *cancellable,
     GError **error)
 {
   GVariant *_ret;
   _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "on_dialog_canceled",
+    "NewPrinterDialog",
     g_variant_new ("()"),
     G_DBUS_CALL_FLAGS_NONE,
     -1,
@@ -1273,480 +381,76 @@ newprinterdialog_dbus_printing_call_on_dialog_canceled_sync (
   if (_ret == NULL)
     goto _out;
   g_variant_get (_ret,
-                 "()");
+                 "(s)",
+                 out_path);
   g_variant_unref (_ret);
 _out:
   return _ret != NULL;
 }
 
 /**
- * newprinterdialog_dbus_printing_call_on_printer_added:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_name: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_complete_new_printer_dialog:
+ * @object: A #NewPrinterDialogDBusOrgFedoraprojectConfigPrinting.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ * @path: Parameter to return.
  *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_on_printer_added_finish() to get the result of the operation.
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
  *
- * See newprinterdialog_dbus_printing_call_on_printer_added_sync() for the synchronous, blocking version of this method.
+ * This method will free @invocation, you cannot use it afterwards.
  */
 void
-newprinterdialog_dbus_printing_call_on_printer_added (
-    NewPrinterDialogDBusPrinting *proxy,
-    const gchar *arg_name,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
+newprinterdialog_dbus_org_fedoraproject_config_printing_complete_new_printer_dialog (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *object,
+    GDBusMethodInvocation *invocation,
+    const gchar *path)
 {
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "on_printer_added",
+  g_dbus_method_invocation_return_value (invocation,
     g_variant_new ("(s)",
-                   arg_name),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_printer_added_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_printer_added().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_on_printer_added().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_printer_added_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_printer_added_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_name: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_on_printer_added() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_printer_added_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    const gchar *arg_name,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "on_printer_added",
-    g_variant_new ("(s)",
-                   arg_name),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_printer_modified:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_name: Argument to pass with the method invocation.
- * @arg_ppd_has_changed: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
- *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_on_printer_modified_finish() to get the result of the operation.
- *
- * See newprinterdialog_dbus_printing_call_on_printer_modified_sync() for the synchronous, blocking version of this method.
- */
-void
-newprinterdialog_dbus_printing_call_on_printer_modified (
-    NewPrinterDialogDBusPrinting *proxy,
-    const gchar *arg_name,
-    gboolean arg_ppd_has_changed,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
-{
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "on_printer_modified",
-    g_variant_new ("(sb)",
-                   arg_name,
-                   arg_ppd_has_changed),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_printer_modified_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_printer_modified().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_on_printer_modified().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_printer_modified_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_printer_modified_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_name: Argument to pass with the method invocation.
- * @arg_ppd_has_changed: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_on_printer_modified() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_printer_modified_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    const gchar *arg_name,
-    gboolean arg_ppd_has_changed,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "on_printer_modified",
-    g_variant_new ("(sb)",
-                   arg_name,
-                   arg_ppd_has_changed),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_driver_download_checked:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_installed_files: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
- * @user_data: User data to pass to @callback.
- *
- * Asynchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy.
- * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_call_on_driver_download_checked_finish() to get the result of the operation.
- *
- * See newprinterdialog_dbus_printing_call_on_driver_download_checked_sync() for the synchronous, blocking version of this method.
- */
-void
-newprinterdialog_dbus_printing_call_on_driver_download_checked (
-    NewPrinterDialogDBusPrinting *proxy,
-    GVariant *arg_installed_files,
-    GCancellable *cancellable,
-    GAsyncReadyCallback callback,
-    gpointer user_data)
-{
-  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
-    "on_driver_download_checked",
-    g_variant_new ("(@a(s))",
-                   arg_installed_files),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    callback,
-    user_data);
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_driver_download_checked_finish:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_call_on_driver_download_checked().
- * @error: Return location for error or %NULL.
- *
- * Finishes an operation started with newprinterdialog_dbus_printing_call_on_driver_download_checked().
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_driver_download_checked_finish (
-    NewPrinterDialogDBusPrinting *proxy,
-    GAsyncResult *res,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_call_on_driver_download_checked_sync:
- * @proxy: A #NewPrinterDialogDBusPrintingProxy.
- * @arg_installed_files: Argument to pass with the method invocation.
- * @cancellable: (nullable): A #GCancellable or %NULL.
- * @error: Return location for error or %NULL.
- *
- * Synchronously invokes the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
- *
- * See newprinterdialog_dbus_printing_call_on_driver_download_checked() for the asynchronous version of this method.
- *
- * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
- */
-gboolean
-newprinterdialog_dbus_printing_call_on_driver_download_checked_sync (
-    NewPrinterDialogDBusPrinting *proxy,
-    GVariant *arg_installed_files,
-    GCancellable *cancellable,
-    GError **error)
-{
-  GVariant *_ret;
-  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
-    "on_driver_download_checked",
-    g_variant_new ("(@a(s))",
-                   arg_installed_files),
-    G_DBUS_CALL_FLAGS_NONE,
-    -1,
-    cancellable,
-    error);
-  if (_ret == NULL)
-    goto _out;
-  g_variant_get (_ret,
-                 "()");
-  g_variant_unref (_ret);
-_out:
-  return _ret != NULL;
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_new_printer_from_device:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_new_printer_from_device (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_download_driver_for_device_id:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_download_driver_for_device_id (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_change_ppd:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.ChangePPD">ChangePPD()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_change_ppd (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_on_dialog_canceled:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_on_dialog_canceled (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_on_printer_added:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_printer_added">on_printer_added()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_on_printer_added (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_on_printer_modified:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_printer_modified">on_printer_modified()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_on_printer_modified (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
-}
-
-/**
- * newprinterdialog_dbus_printing_complete_on_driver_download_checked:
- * @object: A #NewPrinterDialogDBusPrinting.
- * @invocation: (transfer full): A #GDBusMethodInvocation.
- *
- * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-com-test-Printing.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
- *
- * This method will free @invocation, you cannot use it afterwards.
- */
-void
-newprinterdialog_dbus_printing_complete_on_driver_download_checked (
-    NewPrinterDialogDBusPrinting *object,
-    GDBusMethodInvocation *invocation)
-{
-  g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("()"));
+                   path));
 }
 
 /* ------------------------------------------------------------------------ */
 
 /**
- * NewPrinterDialogDBusPrintingProxy:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy:
  *
- * The #NewPrinterDialogDBusPrintingProxy structure contains only private data and should only be accessed using the provided API.
+ * The #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy structure contains only private data and should only be accessed using the provided API.
  */
 
 /**
- * NewPrinterDialogDBusPrintingProxyClass:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass:
  * @parent_class: The parent class.
  *
- * Class structure for #NewPrinterDialogDBusPrintingProxy.
+ * Class structure for #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy.
  */
 
-struct _NewPrinterDialogDBusPrintingProxyPrivate
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate
 {
   GData *qdata;
 };
 
-static void newprinterdialog_dbus_printing_proxy_iface_init (NewPrinterDialogDBusPrintingIface *iface);
+static void newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_iface_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface *iface);
 
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusPrintingProxy, newprinterdialog_dbus_printing_proxy, G_TYPE_DBUS_PROXY,
-                         G_ADD_PRIVATE (NewPrinterDialogDBusPrintingProxy)
-                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, newprinterdialog_dbus_printing_proxy_iface_init))
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy, newprinterdialog_dbus_org_fedoraproject_config_printing_proxy, G_TYPE_DBUS_PROXY,
+                         G_ADD_PRIVATE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy)
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_iface_init))
 
 #else
-G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusPrintingProxy, newprinterdialog_dbus_printing_proxy, G_TYPE_DBUS_PROXY,
-                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, newprinterdialog_dbus_printing_proxy_iface_init))
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy, newprinterdialog_dbus_org_fedoraproject_config_printing_proxy, G_TYPE_DBUS_PROXY,
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_iface_init))
 
 #endif
 static void
-newprinterdialog_dbus_printing_proxy_finalize (GObject *object)
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_finalize (GObject *object)
 {
-  NewPrinterDialogDBusPrintingProxy *proxy = NEWPRINTERDIALOG_DBUS_PRINTING_PROXY (object);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy *proxy = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (object);
   g_datalist_clear (&proxy->priv->qdata);
-  G_OBJECT_CLASS (newprinterdialog_dbus_printing_proxy_parent_class)->finalize (object);
+  G_OBJECT_CLASS (newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_parent_class)->finalize (object);
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_get_property (GObject      *object,
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_get_property (GObject      *object,
   guint         prop_id,
   GValue       *value,
   GParamSpec   *pspec G_GNUC_UNUSED)
@@ -1754,7 +458,7 @@ newprinterdialog_dbus_printing_proxy_get_property (GObject      *object,
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_set_property (GObject      *object,
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_set_property (GObject      *object,
   guint         prop_id,
   const GValue *value,
   GParamSpec   *pspec G_GNUC_UNUSED)
@@ -1762,7 +466,7 @@ newprinterdialog_dbus_printing_proxy_set_property (GObject      *object,
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_g_signal (GDBusProxy *proxy,
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_g_signal (GDBusProxy *proxy,
   const gchar *sender_name G_GNUC_UNUSED,
   const gchar *signal_name,
   GVariant *parameters)
@@ -1774,12 +478,12 @@ newprinterdialog_dbus_printing_proxy_g_signal (GDBusProxy *proxy,
   gsize num_params;
   gsize n;
   guint signal_id;
-  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct, signal_name);
+  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct, signal_name);
   if (info == NULL)
     return;
   num_params = g_variant_n_children (parameters);
   paramv = g_new0 (GValue, num_params + 1);
-  g_value_init (&paramv[0], NEWPRINTERDIALOG_DBUS_TYPE_PRINTING);
+  g_value_init (&paramv[0], NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
   g_value_set_object (&paramv[0], proxy);
   g_variant_iter_init (&iter, parameters);
   n = 1;
@@ -1796,7 +500,7 @@ newprinterdialog_dbus_printing_proxy_g_signal (GDBusProxy *proxy,
         g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
       g_variant_unref (child);
     }
-  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_PRINTING);
+  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
   g_signal_emitv (paramv, signal_id, 0, NULL);
   for (n = 0; n < num_params + 1; n++)
     g_value_unset (&paramv[n]);
@@ -1804,11 +508,11 @@ newprinterdialog_dbus_printing_proxy_g_signal (GDBusProxy *proxy,
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
   GVariant *changed_properties,
   const gchar *const *invalidated_properties)
 {
-  NewPrinterDialogDBusPrintingProxy *proxy = NEWPRINTERDIALOG_DBUS_PRINTING_PROXY (_proxy);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy *proxy = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (_proxy);
   guint n;
   const gchar *key;
   GVariantIter *iter;
@@ -1816,7 +520,7 @@ newprinterdialog_dbus_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
   g_variant_get (changed_properties, "a{sv}", &iter);
   while (g_variant_iter_next (iter, "{&sv}", &key, NULL))
     {
-      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct, key);
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct, key);
       g_datalist_remove_data (&proxy->priv->qdata, key);
       if (info != NULL)
         g_object_notify (G_OBJECT (proxy), info->hyphen_name);
@@ -1824,7 +528,7 @@ newprinterdialog_dbus_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
   g_variant_iter_free (iter);
   for (n = 0; invalidated_properties[n] != NULL; n++)
     {
-      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct, invalidated_properties[n]);
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct, invalidated_properties[n]);
       g_datalist_remove_data (&proxy->priv->qdata, invalidated_properties[n]);
       if (info != NULL)
         g_object_notify (G_OBJECT (proxy), info->hyphen_name);
@@ -1832,44 +536,44 @@ newprinterdialog_dbus_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_init (NewPrinterDialogDBusPrintingProxy *proxy)
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy *proxy)
 {
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-  proxy->priv = newprinterdialog_dbus_printing_proxy_get_instance_private (proxy);
+  proxy->priv = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_get_instance_private (proxy);
 #else
-  proxy->priv = G_TYPE_INSTANCE_GET_PRIVATE (proxy, NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, NewPrinterDialogDBusPrintingProxyPrivate);
+  proxy->priv = G_TYPE_INSTANCE_GET_PRIVATE (proxy, NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate);
 #endif
 
-  g_dbus_proxy_set_interface_info (G_DBUS_PROXY (proxy), newprinterdialog_dbus_printing_interface_info ());
+  g_dbus_proxy_set_interface_info (G_DBUS_PROXY (proxy), newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info ());
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_class_init (NewPrinterDialogDBusPrintingProxyClass *klass)
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_class_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass *klass)
 {
   GObjectClass *gobject_class;
   GDBusProxyClass *proxy_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize     = newprinterdialog_dbus_printing_proxy_finalize;
-  gobject_class->get_property = newprinterdialog_dbus_printing_proxy_get_property;
-  gobject_class->set_property = newprinterdialog_dbus_printing_proxy_set_property;
+  gobject_class->finalize     = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_finalize;
+  gobject_class->get_property = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_get_property;
+  gobject_class->set_property = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_set_property;
 
   proxy_class = G_DBUS_PROXY_CLASS (klass);
-  proxy_class->g_signal = newprinterdialog_dbus_printing_proxy_g_signal;
-  proxy_class->g_properties_changed = newprinterdialog_dbus_printing_proxy_g_properties_changed;
+  proxy_class->g_signal = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_g_signal;
+  proxy_class->g_properties_changed = newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_g_properties_changed;
 
 #if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
-  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusPrintingProxyPrivate));
+  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate));
 #endif
 }
 
 static void
-newprinterdialog_dbus_printing_proxy_iface_init (NewPrinterDialogDBusPrintingIface *iface)
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_iface_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface *iface)
 {
 }
 
 /**
- * newprinterdialog_dbus_printing_proxy_new:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new:
  * @connection: A #GDBusConnection.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
@@ -1878,15 +582,15 @@ newprinterdialog_dbus_printing_proxy_iface_init (NewPrinterDialogDBusPrintingIfa
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied.
  * @user_data: User data to pass to @callback.
  *
- * Asynchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>. See g_dbus_proxy_new() for more details.
+ * Asynchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>. See g_dbus_proxy_new() for more details.
  *
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_proxy_new_finish() to get the result of the operation.
+ * You can then call newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_finish() to get the result of the operation.
  *
- * See newprinterdialog_dbus_printing_proxy_new_sync() for the synchronous, blocking version of this constructor.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_sync() for the synchronous, blocking version of this constructor.
  */
 void
-newprinterdialog_dbus_printing_proxy_new (
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1895,20 +599,20 @@ newprinterdialog_dbus_printing_proxy_new (
     GAsyncReadyCallback  callback,
     gpointer             user_data)
 {
-  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "com.test.Printing", NULL);
+  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
 }
 
 /**
- * newprinterdialog_dbus_printing_proxy_new_finish:
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_proxy_new().
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new().
  * @error: Return location for error or %NULL
  *
- * Finishes an operation started with newprinterdialog_dbus_printing_proxy_new().
+ * Finishes an operation started with newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new().
  *
- * Returns: (transfer full) (type NewPrinterDialogDBusPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
  */
-NewPrinterDialogDBusPrinting *
-newprinterdialog_dbus_printing_proxy_new_finish (
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_finish (
     GAsyncResult        *res,
     GError             **error)
 {
@@ -1918,13 +622,13 @@ newprinterdialog_dbus_printing_proxy_new_finish (
   ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
   g_object_unref (source_object);
   if (ret != NULL)
-    return NEWPRINTERDIALOG_DBUS_PRINTING (ret);
+    return NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
   else
     return NULL;
 }
 
 /**
- * newprinterdialog_dbus_printing_proxy_new_sync:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_sync:
  * @connection: A #GDBusConnection.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
@@ -1932,16 +636,16 @@ newprinterdialog_dbus_printing_proxy_new_finish (
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL
  *
- * Synchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>. See g_dbus_proxy_new_sync() for more details.
+ * Synchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>. See g_dbus_proxy_new_sync() for more details.
  *
  * The calling thread is blocked until a reply is received.
  *
- * See newprinterdialog_dbus_printing_proxy_new() for the asynchronous version of this constructor.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new() for the asynchronous version of this constructor.
  *
- * Returns: (transfer full) (type NewPrinterDialogDBusPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
  */
-NewPrinterDialogDBusPrinting *
-newprinterdialog_dbus_printing_proxy_new_sync (
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_sync (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1950,16 +654,16 @@ newprinterdialog_dbus_printing_proxy_new_sync (
     GError             **error)
 {
   GInitable *ret;
-  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "com.test.Printing", NULL);
+  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
   if (ret != NULL)
-    return NEWPRINTERDIALOG_DBUS_PRINTING (ret);
+    return NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
   else
     return NULL;
 }
 
 
 /**
- * newprinterdialog_dbus_printing_proxy_new_for_bus:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus:
  * @bus_type: A #GBusType.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: A bus name (well-known or unique).
@@ -1968,15 +672,15 @@ newprinterdialog_dbus_printing_proxy_new_sync (
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied.
  * @user_data: User data to pass to @callback.
  *
- * Like newprinterdialog_dbus_printing_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
+ * Like newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
  *
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call newprinterdialog_dbus_printing_proxy_new_for_bus_finish() to get the result of the operation.
+ * You can then call newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_finish() to get the result of the operation.
  *
- * See newprinterdialog_dbus_printing_proxy_new_for_bus_sync() for the synchronous, blocking version of this constructor.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_sync() for the synchronous, blocking version of this constructor.
  */
 void
-newprinterdialog_dbus_printing_proxy_new_for_bus (
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1985,20 +689,20 @@ newprinterdialog_dbus_printing_proxy_new_for_bus (
     GAsyncReadyCallback  callback,
     gpointer             user_data)
 {
-  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "com.test.Printing", NULL);
+  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
 }
 
 /**
- * newprinterdialog_dbus_printing_proxy_new_for_bus_finish:
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_printing_proxy_new_for_bus().
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus().
  * @error: Return location for error or %NULL
  *
- * Finishes an operation started with newprinterdialog_dbus_printing_proxy_new_for_bus().
+ * Finishes an operation started with newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus().
  *
- * Returns: (transfer full) (type NewPrinterDialogDBusPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
  */
-NewPrinterDialogDBusPrinting *
-newprinterdialog_dbus_printing_proxy_new_for_bus_finish (
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
     GAsyncResult        *res,
     GError             **error)
 {
@@ -2008,13 +712,13 @@ newprinterdialog_dbus_printing_proxy_new_for_bus_finish (
   ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
   g_object_unref (source_object);
   if (ret != NULL)
-    return NEWPRINTERDIALOG_DBUS_PRINTING (ret);
+    return NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
   else
     return NULL;
 }
 
 /**
- * newprinterdialog_dbus_printing_proxy_new_for_bus_sync:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_sync:
  * @bus_type: A #GBusType.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: A bus name (well-known or unique).
@@ -2022,16 +726,16 @@ newprinterdialog_dbus_printing_proxy_new_for_bus_finish (
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL
  *
- * Like newprinterdialog_dbus_printing_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
+ * Like newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
  *
  * The calling thread is blocked until a reply is received.
  *
- * See newprinterdialog_dbus_printing_proxy_new_for_bus() for the asynchronous version of this constructor.
+ * See newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus() for the asynchronous version of this constructor.
  *
- * Returns: (transfer full) (type NewPrinterDialogDBusPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
  */
-NewPrinterDialogDBusPrinting *
-newprinterdialog_dbus_printing_proxy_new_for_bus_sync (
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *
+newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -2040,9 +744,9 @@ newprinterdialog_dbus_printing_proxy_new_for_bus_sync (
     GError             **error)
 {
   GInitable *ret;
-  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "com.test.Printing", NULL);
+  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
   if (ret != NULL)
-    return NEWPRINTERDIALOG_DBUS_PRINTING (ret);
+    return NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
   else
     return NULL;
 }
@@ -2051,19 +755,19 @@ newprinterdialog_dbus_printing_proxy_new_for_bus_sync (
 /* ------------------------------------------------------------------------ */
 
 /**
- * NewPrinterDialogDBusPrintingSkeleton:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton:
  *
- * The #NewPrinterDialogDBusPrintingSkeleton structure contains only private data and should only be accessed using the provided API.
+ * The #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton structure contains only private data and should only be accessed using the provided API.
  */
 
 /**
- * NewPrinterDialogDBusPrintingSkeletonClass:
+ * NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass:
  * @parent_class: The parent class.
  *
- * Class structure for #NewPrinterDialogDBusPrintingSkeleton.
+ * Class structure for #NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton.
  */
 
-struct _NewPrinterDialogDBusPrintingSkeletonPrivate
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate
 {
   GValue *properties;
   GList *changed_properties;
@@ -2073,7 +777,7 @@ struct _NewPrinterDialogDBusPrintingSkeletonPrivate
 };
 
 static void
-_newprinterdialog_dbus_printing_skeleton_handle_method_call (
+_newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_method_call (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -2083,7 +787,7 @@ _newprinterdialog_dbus_printing_skeleton_handle_method_call (
   GDBusMethodInvocation *invocation,
   gpointer user_data)
 {
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (user_data);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
   _ExtendedGDBusMethodInfo *info;
   GVariantIter iter;
   GVariant *child;
@@ -2098,7 +802,7 @@ _newprinterdialog_dbus_printing_skeleton_handle_method_call (
   num_params = g_variant_n_children (parameters);
   num_extra = info->pass_fdlist ? 3 : 2;  paramv = g_new0 (GValue, num_params + num_extra);
   n = 0;
-  g_value_init (&paramv[n], NEWPRINTERDIALOG_DBUS_TYPE_PRINTING);
+  g_value_init (&paramv[n], NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
   g_value_set_object (&paramv[n++], skeleton);
   g_value_init (&paramv[n], G_TYPE_DBUS_METHOD_INVOCATION);
   g_value_set_object (&paramv[n++], invocation);
@@ -2125,7 +829,7 @@ _newprinterdialog_dbus_printing_skeleton_handle_method_call (
         g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
       g_variant_unref (child);
     }
-  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_PRINTING);
+  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
   g_value_init (&return_value, G_TYPE_BOOLEAN);
   g_signal_emitv (paramv, signal_id, 0, &return_value);
   if (!g_value_get_boolean (&return_value))
@@ -2137,7 +841,7 @@ _newprinterdialog_dbus_printing_skeleton_handle_method_call (
 }
 
 static GVariant *
-_newprinterdialog_dbus_printing_skeleton_handle_get_property (
+_newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_get_property (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -2146,13 +850,13 @@ _newprinterdialog_dbus_printing_skeleton_handle_get_property (
   GError **error,
   gpointer user_data)
 {
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (user_data);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
   GValue value = G_VALUE_INIT;
   GParamSpec *pspec;
   _ExtendedGDBusPropertyInfo *info;
   GVariant *ret;
   ret = NULL;
-  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct, property_name);
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct, property_name);
   g_assert (info != NULL);
   pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
   if (pspec == NULL)
@@ -2170,7 +874,7 @@ _newprinterdialog_dbus_printing_skeleton_handle_get_property (
 }
 
 static gboolean
-_newprinterdialog_dbus_printing_skeleton_handle_set_property (
+_newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_set_property (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -2180,13 +884,13 @@ _newprinterdialog_dbus_printing_skeleton_handle_set_property (
   GError **error,
   gpointer user_data)
 {
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (user_data);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
   GValue value = G_VALUE_INIT;
   GParamSpec *pspec;
   _ExtendedGDBusPropertyInfo *info;
   gboolean ret;
   ret = FALSE;
-  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_printing_interface_info.parent_struct, property_name);
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct, property_name);
   g_assert (info != NULL);
   pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
   if (pspec == NULL)
@@ -2206,43 +910,43 @@ _newprinterdialog_dbus_printing_skeleton_handle_set_property (
   return ret;
 }
 
-static const GDBusInterfaceVTable _newprinterdialog_dbus_printing_skeleton_vtable =
+static const GDBusInterfaceVTable _newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_vtable =
 {
-  _newprinterdialog_dbus_printing_skeleton_handle_method_call,
-  _newprinterdialog_dbus_printing_skeleton_handle_get_property,
-  _newprinterdialog_dbus_printing_skeleton_handle_set_property,
+  _newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_method_call,
+  _newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_get_property,
+  _newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_set_property,
   {NULL}
 };
 
 static GDBusInterfaceInfo *
-newprinterdialog_dbus_printing_skeleton_dbus_interface_get_info (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_info (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
 {
-  return newprinterdialog_dbus_printing_interface_info ();
+  return newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info ();
 }
 
 static GDBusInterfaceVTable *
-newprinterdialog_dbus_printing_skeleton_dbus_interface_get_vtable (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_vtable (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
 {
-  return (GDBusInterfaceVTable *) &_newprinterdialog_dbus_printing_skeleton_vtable;
+  return (GDBusInterfaceVTable *) &_newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_vtable;
 }
 
 static GVariant *
-newprinterdialog_dbus_printing_skeleton_dbus_interface_get_properties (GDBusInterfaceSkeleton *_skeleton)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_properties (GDBusInterfaceSkeleton *_skeleton)
 {
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (_skeleton);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (_skeleton);
 
   GVariantBuilder builder;
   guint n;
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sv}"));
-  if (_newprinterdialog_dbus_printing_interface_info.parent_struct.properties == NULL)
+  if (_newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct.properties == NULL)
     goto out;
-  for (n = 0; _newprinterdialog_dbus_printing_interface_info.parent_struct.properties[n] != NULL; n++)
+  for (n = 0; _newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct.properties[n] != NULL; n++)
     {
-      GDBusPropertyInfo *info = _newprinterdialog_dbus_printing_interface_info.parent_struct.properties[n];
+      GDBusPropertyInfo *info = _newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info.parent_struct.properties[n];
       if (info->flags & G_DBUS_PROPERTY_INFO_FLAGS_READABLE)
         {
           GVariant *value;
-          value = _newprinterdialog_dbus_printing_skeleton_handle_get_property (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)), NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", info->name, NULL, skeleton);
+          value = _newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_handle_get_property (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)), NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing", info->name, NULL, skeleton);
           if (value != NULL)
             {
               g_variant_take_ref (value);
@@ -2256,128 +960,40 @@ out:
 }
 
 static void
-newprinterdialog_dbus_printing_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
 {
 }
 
-static void
-_newprinterdialog_dbus_printing_on_signal_dialog_canceled (
-    NewPrinterDialogDBusPrinting *object)
-{
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
-
-  GList      *connections, *l;
-  GVariant   *signal_variant;
-  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
-
-  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
-  for (l = connections; l != NULL; l = l->next)
-    {
-      GDBusConnection *connection = l->data;
-      g_dbus_connection_emit_signal (connection,
-        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "DialogCanceled",
-        signal_variant, NULL);
-    }
-  g_variant_unref (signal_variant);
-  g_list_free_full (connections, g_object_unref);
-}
-
-static void
-_newprinterdialog_dbus_printing_on_signal_printer_added (
-    NewPrinterDialogDBusPrinting *object)
-{
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
-
-  GList      *connections, *l;
-  GVariant   *signal_variant;
-  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
-
-  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
-  for (l = connections; l != NULL; l = l->next)
-    {
-      GDBusConnection *connection = l->data;
-      g_dbus_connection_emit_signal (connection,
-        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "PrinterAdded",
-        signal_variant, NULL);
-    }
-  g_variant_unref (signal_variant);
-  g_list_free_full (connections, g_object_unref);
-}
-
-static void
-_newprinterdialog_dbus_printing_on_signal_printer_modified (
-    NewPrinterDialogDBusPrinting *object)
-{
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
-
-  GList      *connections, *l;
-  GVariant   *signal_variant;
-  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
-
-  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
-  for (l = connections; l != NULL; l = l->next)
-    {
-      GDBusConnection *connection = l->data;
-      g_dbus_connection_emit_signal (connection,
-        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "PrinterModified",
-        signal_variant, NULL);
-    }
-  g_variant_unref (signal_variant);
-  g_list_free_full (connections, g_object_unref);
-}
-
-static void
-_newprinterdialog_dbus_printing_on_signal_driver_download_cheked (
-    NewPrinterDialogDBusPrinting *object)
-{
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
-
-  GList      *connections, *l;
-  GVariant   *signal_variant;
-  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
-
-  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
-  for (l = connections; l != NULL; l = l->next)
-    {
-      GDBusConnection *connection = l->data;
-      g_dbus_connection_emit_signal (connection,
-        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "com.test.Printing", "DriverDownloadCheked",
-        signal_variant, NULL);
-    }
-  g_variant_unref (signal_variant);
-  g_list_free_full (connections, g_object_unref);
-}
-
-static void newprinterdialog_dbus_printing_skeleton_iface_init (NewPrinterDialogDBusPrintingIface *iface);
+static void newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_iface_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface *iface);
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusPrintingSkeleton, newprinterdialog_dbus_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
-                         G_ADD_PRIVATE (NewPrinterDialogDBusPrintingSkeleton)
-                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, newprinterdialog_dbus_printing_skeleton_iface_init))
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton, newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_ADD_PRIVATE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton)
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_iface_init))
 
 #else
-G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusPrintingSkeleton, newprinterdialog_dbus_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
-                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, newprinterdialog_dbus_printing_skeleton_iface_init))
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton, newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_iface_init))
 
 #endif
 static void
-newprinterdialog_dbus_printing_skeleton_finalize (GObject *object)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_finalize (GObject *object)
 {
-  NewPrinterDialogDBusPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON (object);
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (object);
   g_list_free_full (skeleton->priv->changed_properties, (GDestroyNotify) _changed_property_free);
   if (skeleton->priv->changed_properties_idle_source != NULL)
     g_source_destroy (skeleton->priv->changed_properties_idle_source);
   g_main_context_unref (skeleton->priv->context);
   g_mutex_clear (&skeleton->priv->lock);
-  G_OBJECT_CLASS (newprinterdialog_dbus_printing_skeleton_parent_class)->finalize (object);
+  G_OBJECT_CLASS (newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_parent_class)->finalize (object);
 }
 
 static void
-newprinterdialog_dbus_printing_skeleton_init (NewPrinterDialogDBusPrintingSkeleton *skeleton)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton *skeleton)
 {
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-  skeleton->priv = newprinterdialog_dbus_printing_skeleton_get_instance_private (skeleton);
+  skeleton->priv = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_get_instance_private (skeleton);
 #else
-  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON, NewPrinterDialogDBusPrintingSkeletonPrivate);
+  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate);
 #endif
 
   g_mutex_init (&skeleton->priv->lock);
@@ -2385,44 +1001,2317 @@ newprinterdialog_dbus_printing_skeleton_init (NewPrinterDialogDBusPrintingSkelet
 }
 
 static void
-newprinterdialog_dbus_printing_skeleton_class_init (NewPrinterDialogDBusPrintingSkeletonClass *klass)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_class_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass *klass)
 {
   GObjectClass *gobject_class;
   GDBusInterfaceSkeletonClass *skeleton_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = newprinterdialog_dbus_printing_skeleton_finalize;
+  gobject_class->finalize = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_finalize;
 
   skeleton_class = G_DBUS_INTERFACE_SKELETON_CLASS (klass);
-  skeleton_class->get_info = newprinterdialog_dbus_printing_skeleton_dbus_interface_get_info;
-  skeleton_class->get_properties = newprinterdialog_dbus_printing_skeleton_dbus_interface_get_properties;
-  skeleton_class->flush = newprinterdialog_dbus_printing_skeleton_dbus_interface_flush;
-  skeleton_class->get_vtable = newprinterdialog_dbus_printing_skeleton_dbus_interface_get_vtable;
+  skeleton_class->get_info = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_info;
+  skeleton_class->get_properties = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_properties;
+  skeleton_class->flush = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_flush;
+  skeleton_class->get_vtable = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_dbus_interface_get_vtable;
 
 #if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
-  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusPrintingSkeletonPrivate));
+  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate));
 #endif
 }
 
 static void
-newprinterdialog_dbus_printing_skeleton_iface_init (NewPrinterDialogDBusPrintingIface *iface)
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_iface_init (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface *iface)
 {
-  iface->dialog_canceled = _newprinterdialog_dbus_printing_on_signal_dialog_canceled;
-  iface->printer_added = _newprinterdialog_dbus_printing_on_signal_printer_added;
-  iface->printer_modified = _newprinterdialog_dbus_printing_on_signal_printer_modified;
-  iface->driver_download_cheked = _newprinterdialog_dbus_printing_on_signal_driver_download_cheked;
 }
 
 /**
- * newprinterdialog_dbus_printing_skeleton_new:
+ * newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_new:
  *
- * Creates a skeleton object for the D-Bus interface <link linkend="gdbus-interface-com-test-Printing.top_of_page">com.test.Printing</link>.
+ * Creates a skeleton object for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  *
- * Returns: (transfer full) (type NewPrinterDialogDBusPrintingSkeleton): The skeleton object.
+ * Returns: (transfer full) (type NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton): The skeleton object.
  */
-NewPrinterDialogDBusPrinting *
-newprinterdialog_dbus_printing_skeleton_new (void)
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *
+newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_new (void)
 {
-  return NEWPRINTERDIALOG_DBUS_PRINTING (g_object_new (NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON, NULL));
+  return NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING (g_object_new (NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NULL));
+}
+
+/* ------------------------------------------------------------------------
+ * Code for interface org.fedoraproject.Config.Printing.NewPrinterDialog
+ * ------------------------------------------------------------------------
+ */
+
+/**
+ * SECTION:NewPrinterDialogDBusNewPrinterDialog
+ * @title: NewPrinterDialogDBusNewPrinterDialog
+ * @short_description: Generated C code for the org.fedoraproject.Config.Printing.NewPrinterDialog D-Bus interface
+ *
+ * This section contains code for working with the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link> D-Bus interface in C.
+ */
+
+/* ---- Introspection data for org.fedoraproject.Config.Printing.NewPrinterDialog ---- */
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_xid =
+{
+  {
+    -1,
+    (gchar *) "xid",
+    (gchar *) "u",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_device_uri =
+{
+  {
+    -1,
+    (gchar *) "device_uri",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_device_id =
+{
+  {
+    -1,
+    (gchar *) "device_id",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_xid,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_device_uri,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_device_id,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device =
+{
+  {
+    -1,
+    (gchar *) "NewPrinterFromDevice",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-new-printer-from-device",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_xid =
+{
+  {
+    -1,
+    (gchar *) "xid",
+    (gchar *) "u",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_device_id =
+{
+  {
+    -1,
+    (gchar *) "device_id",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_xid,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_device_id,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id =
+{
+  {
+    -1,
+    (gchar *) "DownloadDriverForDeviceID",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-download-driver-for-device-id",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_xid =
+{
+  {
+    -1,
+    (gchar *) "xid",
+    (gchar *) "u",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_name =
+{
+  {
+    -1,
+    (gchar *) "name",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_device_id =
+{
+  {
+    -1,
+    (gchar *) "device_id",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_xid,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_name,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_device_id,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd =
+{
+  {
+    -1,
+    (gchar *) "ChangePPD",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-change-ppd",
+  FALSE
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_dialog_canceled =
+{
+  {
+    -1,
+    (gchar *) "on_dialog_canceled",
+    NULL,
+    NULL,
+    NULL
+  },
+  "handle-on-dialog-canceled",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added_IN_ARG_name =
+{
+  {
+    -1,
+    (gchar *) "name",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added_IN_ARG_name,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added =
+{
+  {
+    -1,
+    (gchar *) "on_printer_added",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-printer-added",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_name =
+{
+  {
+    -1,
+    (gchar *) "name",
+    (gchar *) "s",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_ppd_has_changed =
+{
+  {
+    -1,
+    (gchar *) "ppd_has_changed",
+    (gchar *) "b",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_name,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_ppd_has_changed,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified =
+{
+  {
+    -1,
+    (gchar *) "on_printer_modified",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-printer-modified",
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked_IN_ARG_installed_files =
+{
+  {
+    -1,
+    (gchar *) "installed_files",
+    (gchar *) "a(s)",
+    NULL
+  },
+  FALSE
+};
+
+static const _ExtendedGDBusArgInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked_IN_ARG_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked_IN_ARG_installed_files,
+  NULL
+};
+
+static const _ExtendedGDBusMethodInfo _newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked =
+{
+  {
+    -1,
+    (gchar *) "on_driver_download_checked",
+    (GDBusArgInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked_IN_ARG_pointers,
+    NULL,
+    NULL
+  },
+  "handle-on-driver-download-checked",
+  FALSE
+};
+
+static const _ExtendedGDBusMethodInfo * const _newprinterdialog_dbus_new_printer_dialog_method_info_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_new_printer_from_device,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_download_driver_for_device_id,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_change_ppd,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_dialog_canceled,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_added,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_printer_modified,
+  &_newprinterdialog_dbus_new_printer_dialog_method_info_on_driver_download_checked,
+  NULL
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_new_printer_dialog_signal_info_dialog_canceled =
+{
+  {
+    -1,
+    (gchar *) "DialogCanceled",
+    NULL,
+    NULL
+  },
+  "dialog-canceled"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_new_printer_dialog_signal_info_printer_added =
+{
+  {
+    -1,
+    (gchar *) "PrinterAdded",
+    NULL,
+    NULL
+  },
+  "printer-added"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_new_printer_dialog_signal_info_printer_modified =
+{
+  {
+    -1,
+    (gchar *) "PrinterModified",
+    NULL,
+    NULL
+  },
+  "printer-modified"
+};
+
+static const _ExtendedGDBusSignalInfo _newprinterdialog_dbus_new_printer_dialog_signal_info_driver_download_cheked =
+{
+  {
+    -1,
+    (gchar *) "DriverDownloadCheked",
+    NULL,
+    NULL
+  },
+  "driver-download-cheked"
+};
+
+static const _ExtendedGDBusSignalInfo * const _newprinterdialog_dbus_new_printer_dialog_signal_info_pointers[] =
+{
+  &_newprinterdialog_dbus_new_printer_dialog_signal_info_dialog_canceled,
+  &_newprinterdialog_dbus_new_printer_dialog_signal_info_printer_added,
+  &_newprinterdialog_dbus_new_printer_dialog_signal_info_printer_modified,
+  &_newprinterdialog_dbus_new_printer_dialog_signal_info_driver_download_cheked,
+  NULL
+};
+
+static const _ExtendedGDBusInterfaceInfo _newprinterdialog_dbus_new_printer_dialog_interface_info =
+{
+  {
+    -1,
+    (gchar *) "org.fedoraproject.Config.Printing.NewPrinterDialog",
+    (GDBusMethodInfo **) &_newprinterdialog_dbus_new_printer_dialog_method_info_pointers,
+    (GDBusSignalInfo **) &_newprinterdialog_dbus_new_printer_dialog_signal_info_pointers,
+    NULL,
+    NULL
+  },
+  "new-printer-dialog",
+};
+
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_interface_info:
+ *
+ * Gets a machine-readable description of the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link> D-Bus interface.
+ *
+ * Returns: (transfer none): A #GDBusInterfaceInfo. Do not free.
+ */
+GDBusInterfaceInfo *
+newprinterdialog_dbus_new_printer_dialog_interface_info (void)
+{
+  return (GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_override_properties:
+ * @klass: The class structure for a #GObject derived class.
+ * @property_id_begin: The property id to assign to the first overridden property.
+ *
+ * Overrides all #GObject properties in the #NewPrinterDialogDBusNewPrinterDialog interface for a concrete class.
+ * The properties are overridden in the order they are defined.
+ *
+ * Returns: The last property id.
+ */
+guint
+newprinterdialog_dbus_new_printer_dialog_override_properties (GObjectClass *klass, guint property_id_begin)
+{
+  return property_id_begin - 1;
+}
+
+
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialog:
+ *
+ * Abstract interface type for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link>.
+ */
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialogIface:
+ * @parent_iface: The parent interface.
+ * @handle_change_ppd: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-change-ppd signal.
+ * @handle_download_driver_for_device_id: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-download-driver-for-device-id signal.
+ * @handle_new_printer_from_device: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-new-printer-from-device signal.
+ * @handle_on_dialog_canceled: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-on-dialog-canceled signal.
+ * @handle_on_driver_download_checked: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-on-driver-download-checked signal.
+ * @handle_on_printer_added: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-on-printer-added signal.
+ * @handle_on_printer_modified: Handler for the #NewPrinterDialogDBusNewPrinterDialog::handle-on-printer-modified signal.
+ * @dialog_canceled: Handler for the #NewPrinterDialogDBusNewPrinterDialog::dialog-canceled signal.
+ * @driver_download_cheked: Handler for the #NewPrinterDialogDBusNewPrinterDialog::driver-download-cheked signal.
+ * @printer_added: Handler for the #NewPrinterDialogDBusNewPrinterDialog::printer-added signal.
+ * @printer_modified: Handler for the #NewPrinterDialogDBusNewPrinterDialog::printer-modified signal.
+ *
+ * Virtual table for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link>.
+ */
+
+typedef NewPrinterDialogDBusNewPrinterDialogIface NewPrinterDialogDBusNewPrinterDialogInterface;
+G_DEFINE_INTERFACE (NewPrinterDialogDBusNewPrinterDialog, newprinterdialog_dbus_new_printer_dialog, G_TYPE_OBJECT)
+
+static void
+newprinterdialog_dbus_new_printer_dialog_default_init (NewPrinterDialogDBusNewPrinterDialogIface *iface)
+{
+  /* GObject signals for incoming D-Bus method calls: */
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-new-printer-from-device:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_xid: Argument passed by remote caller.
+   * @arg_device_uri: Argument passed by remote caller.
+   * @arg_device_id: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-new-printer-from-device",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_new_printer_from_device),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    4,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-download-driver-for-device-id:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_xid: Argument passed by remote caller.
+   * @arg_device_id: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-download-driver-for-device-id",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_download_driver_for_device_id),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    3,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-change-ppd:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_xid: Argument passed by remote caller.
+   * @arg_name: Argument passed by remote caller.
+   * @arg_device_id: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.ChangePPD">ChangePPD()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_change_ppd() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-change-ppd",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_change_ppd),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    4,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-on-dialog-canceled:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-dialog-canceled",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_on_dialog_canceled),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    1,
+    G_TYPE_DBUS_METHOD_INVOCATION);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-on-printer-added:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_name: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_added">on_printer_added()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-printer-added",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_on_printer_added),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    2,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-on-printer-modified:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_name: Argument passed by remote caller.
+   * @arg_ppd_has_changed: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_modified">on_printer_modified()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-printer-modified",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_on_printer_modified),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    3,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_BOOLEAN);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::handle-on-driver-download-checked:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   * @invocation: A #GDBusMethodInvocation.
+   * @arg_installed_files: Argument passed by remote caller.
+   *
+   * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method.
+   *
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   *
+   * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
+   */
+  g_signal_new ("handle-on-driver-download-checked",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, handle_on_driver_download_checked),
+    g_signal_accumulator_true_handled,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_BOOLEAN,
+    2,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_VARIANT);
+
+  /* GObject signals for received D-Bus signals: */
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::dialog-canceled:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.DialogCanceled">"DialogCanceled"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("dialog-canceled",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, dialog_canceled),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::printer-added:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.PrinterAdded">"PrinterAdded"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("printer-added",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, printer_added),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::printer-modified:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.PrinterModified">"PrinterModified"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("printer-modified",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, printer_modified),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+  /**
+   * NewPrinterDialogDBusNewPrinterDialog::driver-download-cheked:
+   * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+   *
+   * On the client-side, this signal is emitted whenever the D-Bus signal <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.DriverDownloadCheked">"DriverDownloadCheked"</link> is received.
+   *
+   * On the service-side, this signal can be used with e.g. g_signal_emit_by_name() to make the object emit the D-Bus signal.
+   */
+  g_signal_new ("driver-download-cheked",
+    G_TYPE_FROM_INTERFACE (iface),
+    G_SIGNAL_RUN_LAST,
+    G_STRUCT_OFFSET (NewPrinterDialogDBusNewPrinterDialogIface, driver_download_cheked),
+    NULL,
+    NULL,
+    g_cclosure_marshal_generic,
+    G_TYPE_NONE,
+    0);
+
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ *
+ * Emits the <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.DialogCanceled">"DialogCanceled"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  g_signal_emit_by_name (object, "dialog-canceled");
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_emit_printer_added:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ *
+ * Emits the <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.PrinterAdded">"PrinterAdded"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_emit_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  g_signal_emit_by_name (object, "printer-added");
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_emit_printer_modified:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ *
+ * Emits the <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.PrinterModified">"PrinterModified"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_emit_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  g_signal_emit_by_name (object, "printer-modified");
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ *
+ * Emits the <link linkend="gdbus-signal-org-fedoraproject-Config-Printing-NewPrinterDialog.DriverDownloadCheked">"DriverDownloadCheked"</link> D-Bus signal.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  g_signal_emit_by_name (object, "driver-download-cheked");
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_device_uri: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_device_uri,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "NewPrinterFromDevice",
+    g_variant_new ("(uss)",
+                   arg_xid,
+                   arg_device_uri,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_device_uri: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_device_uri,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "NewPrinterFromDevice",
+    g_variant_new ("(uss)",
+                   arg_xid,
+                   arg_device_uri,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "DownloadDriverForDeviceID",
+    g_variant_new ("(us)",
+                   arg_xid,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "DownloadDriverForDeviceID",
+    g_variant_new ("(us)",
+                   arg_xid,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_change_ppd:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.ChangePPD">ChangePPD()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_change_ppd_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_change_ppd_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_change_ppd (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_name,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "ChangePPD",
+    g_variant_new ("(uss)",
+                   arg_xid,
+                   arg_name,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_change_ppd_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_change_ppd().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_change_ppd().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_change_ppd_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_change_ppd_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_xid: Argument to pass with the method invocation.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_device_id: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.ChangePPD">ChangePPD()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_change_ppd() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_change_ppd_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    guint arg_xid,
+    const gchar *arg_name,
+    const gchar *arg_device_id,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "ChangePPD",
+    g_variant_new ("(uss)",
+                   arg_xid,
+                   arg_name,
+                   arg_device_id),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_dialog_canceled",
+    g_variant_new ("()"),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_dialog_canceled",
+    g_variant_new ("()"),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_added:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_added">on_printer_added()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_printer_added",
+    g_variant_new ("(s)",
+                   arg_name),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_on_printer_added().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_on_printer_added().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_added">on_printer_added()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_printer_added() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    const gchar *arg_name,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_printer_added",
+    g_variant_new ("(s)",
+                   arg_name),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_ppd_has_changed: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_printer_modified",
+    g_variant_new ("(sb)",
+                   arg_name,
+                   arg_ppd_has_changed),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_name: Argument to pass with the method invocation.
+ * @arg_ppd_has_changed: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_modified">on_printer_modified()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    const gchar *arg_name,
+    gboolean arg_ppd_has_changed,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_printer_modified",
+    g_variant_new ("(sb)",
+                   arg_name,
+                   arg_ppd_has_changed),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_installed_files: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy.
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_sync() for the synchronous, blocking version of this method.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GVariant *arg_installed_files,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data)
+{
+  g_dbus_proxy_call (G_DBUS_PROXY (proxy),
+    "on_driver_download_checked",
+    g_variant_new ("(@a(s))",
+                   arg_installed_files),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    callback,
+    user_data);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_finish:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked().
+ * @error: Return location for error or %NULL.
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked().
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GAsyncResult *res,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_sync:
+ * @proxy: A #NewPrinterDialogDBusNewPrinterDialogProxy.
+ * @arg_installed_files: Argument to pass with the method invocation.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL.
+ *
+ * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked() for the asynchronous version of this method.
+ *
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
+ */
+gboolean
+newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
+    GVariant *arg_installed_files,
+    GCancellable *cancellable,
+    GError **error)
+{
+  GVariant *_ret;
+  _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
+    "on_driver_download_checked",
+    g_variant_new ("(@a(s))",
+                   arg_installed_files),
+    G_DBUS_CALL_FLAGS_NONE,
+    -1,
+    cancellable,
+    error);
+  if (_ret == NULL)
+    goto _out;
+  g_variant_get (_ret,
+                 "()");
+  g_variant_unref (_ret);
+_out:
+  return _ret != NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.NewPrinterFromDevice">NewPrinterFromDevice()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.DownloadDriverForDeviceID">DownloadDriverForDeviceID()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_change_ppd:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.ChangePPD">ChangePPD()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_change_ppd (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_dialog_canceled">on_dialog_canceled()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_added">on_printer_added()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_printer_modified">on_printer_modified()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked:
+ * @object: A #NewPrinterDialogDBusNewPrinterDialog.
+ * @invocation: (transfer full): A #GDBusMethodInvocation.
+ *
+ * Helper function used in service implementations to finish handling invocations of the <link linkend="gdbus-method-org-fedoraproject-Config-Printing-NewPrinterDialog.on_driver_download_checked">on_driver_download_checked()</link> D-Bus method. If you instead want to finish handling an invocation by returning an error, use g_dbus_method_invocation_return_error() or similar.
+ *
+ * This method will free @invocation, you cannot use it afterwards.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked (
+    NewPrinterDialogDBusNewPrinterDialog *object,
+    GDBusMethodInvocation *invocation)
+{
+  g_dbus_method_invocation_return_value (invocation,
+    g_variant_new ("()"));
+}
+
+/* ------------------------------------------------------------------------ */
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialogProxy:
+ *
+ * The #NewPrinterDialogDBusNewPrinterDialogProxy structure contains only private data and should only be accessed using the provided API.
+ */
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialogProxyClass:
+ * @parent_class: The parent class.
+ *
+ * Class structure for #NewPrinterDialogDBusNewPrinterDialogProxy.
+ */
+
+struct _NewPrinterDialogDBusNewPrinterDialogProxyPrivate
+{
+  GData *qdata;
+};
+
+static void newprinterdialog_dbus_new_printer_dialog_proxy_iface_init (NewPrinterDialogDBusNewPrinterDialogIface *iface);
+
+#if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusNewPrinterDialogProxy, newprinterdialog_dbus_new_printer_dialog_proxy, G_TYPE_DBUS_PROXY,
+                         G_ADD_PRIVATE (NewPrinterDialogDBusNewPrinterDialogProxy)
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, newprinterdialog_dbus_new_printer_dialog_proxy_iface_init))
+
+#else
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusNewPrinterDialogProxy, newprinterdialog_dbus_new_printer_dialog_proxy, G_TYPE_DBUS_PROXY,
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, newprinterdialog_dbus_new_printer_dialog_proxy_iface_init))
+
+#endif
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_finalize (GObject *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogProxy *proxy = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_PROXY (object);
+  g_datalist_clear (&proxy->priv->qdata);
+  G_OBJECT_CLASS (newprinterdialog_dbus_new_printer_dialog_proxy_parent_class)->finalize (object);
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_get_property (GObject      *object,
+  guint         prop_id,
+  GValue       *value,
+  GParamSpec   *pspec G_GNUC_UNUSED)
+{
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_set_property (GObject      *object,
+  guint         prop_id,
+  const GValue *value,
+  GParamSpec   *pspec G_GNUC_UNUSED)
+{
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_g_signal (GDBusProxy *proxy,
+  const gchar *sender_name G_GNUC_UNUSED,
+  const gchar *signal_name,
+  GVariant *parameters)
+{
+  _ExtendedGDBusSignalInfo *info;
+  GVariantIter iter;
+  GVariant *child;
+  GValue *paramv;
+  gsize num_params;
+  gsize n;
+  guint signal_id;
+  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct, signal_name);
+  if (info == NULL)
+    return;
+  num_params = g_variant_n_children (parameters);
+  paramv = g_new0 (GValue, num_params + 1);
+  g_value_init (&paramv[0], NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG);
+  g_value_set_object (&paramv[0], proxy);
+  g_variant_iter_init (&iter, parameters);
+  n = 1;
+  while ((child = g_variant_iter_next_value (&iter)) != NULL)
+    {
+      _ExtendedGDBusArgInfo *arg_info = (_ExtendedGDBusArgInfo *) info->parent_struct.args[n - 1];
+      if (arg_info->use_gvariant)
+        {
+          g_value_init (&paramv[n], G_TYPE_VARIANT);
+          g_value_set_variant (&paramv[n], child);
+          n++;
+        }
+      else
+        g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
+      g_variant_unref (child);
+    }
+  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG);
+  g_signal_emitv (paramv, signal_id, 0, NULL);
+  for (n = 0; n < num_params + 1; n++)
+    g_value_unset (&paramv[n]);
+  g_free (paramv);
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_g_properties_changed (GDBusProxy *_proxy,
+  GVariant *changed_properties,
+  const gchar *const *invalidated_properties)
+{
+  NewPrinterDialogDBusNewPrinterDialogProxy *proxy = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_PROXY (_proxy);
+  guint n;
+  const gchar *key;
+  GVariantIter *iter;
+  _ExtendedGDBusPropertyInfo *info;
+  g_variant_get (changed_properties, "a{sv}", &iter);
+  while (g_variant_iter_next (iter, "{&sv}", &key, NULL))
+    {
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct, key);
+      g_datalist_remove_data (&proxy->priv->qdata, key);
+      if (info != NULL)
+        g_object_notify (G_OBJECT (proxy), info->hyphen_name);
+    }
+  g_variant_iter_free (iter);
+  for (n = 0; invalidated_properties[n] != NULL; n++)
+    {
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct, invalidated_properties[n]);
+      g_datalist_remove_data (&proxy->priv->qdata, invalidated_properties[n]);
+      if (info != NULL)
+        g_object_notify (G_OBJECT (proxy), info->hyphen_name);
+    }
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_init (NewPrinterDialogDBusNewPrinterDialogProxy *proxy)
+{
+#if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
+  proxy->priv = newprinterdialog_dbus_new_printer_dialog_proxy_get_instance_private (proxy);
+#else
+  proxy->priv = G_TYPE_INSTANCE_GET_PRIVATE (proxy, NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, NewPrinterDialogDBusNewPrinterDialogProxyPrivate);
+#endif
+
+  g_dbus_proxy_set_interface_info (G_DBUS_PROXY (proxy), newprinterdialog_dbus_new_printer_dialog_interface_info ());
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_class_init (NewPrinterDialogDBusNewPrinterDialogProxyClass *klass)
+{
+  GObjectClass *gobject_class;
+  GDBusProxyClass *proxy_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize     = newprinterdialog_dbus_new_printer_dialog_proxy_finalize;
+  gobject_class->get_property = newprinterdialog_dbus_new_printer_dialog_proxy_get_property;
+  gobject_class->set_property = newprinterdialog_dbus_new_printer_dialog_proxy_set_property;
+
+  proxy_class = G_DBUS_PROXY_CLASS (klass);
+  proxy_class->g_signal = newprinterdialog_dbus_new_printer_dialog_proxy_g_signal;
+  proxy_class->g_properties_changed = newprinterdialog_dbus_new_printer_dialog_proxy_g_properties_changed;
+
+#if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
+  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusNewPrinterDialogProxyPrivate));
+#endif
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_proxy_iface_init (NewPrinterDialogDBusNewPrinterDialogIface *iface)
+{
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new:
+ * @connection: A #GDBusConnection.
+ * @flags: Flags from the #GDBusProxyFlags enumeration.
+ * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
+ * @object_path: An object path.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied.
+ * @user_data: User data to pass to @callback.
+ *
+ * Asynchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link>. See g_dbus_proxy_new() for more details.
+ *
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_proxy_new_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_proxy_new_sync() for the synchronous, blocking version of this constructor.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_proxy_new (
+    GDBusConnection     *connection,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GAsyncReadyCallback  callback,
+    gpointer             user_data)
+{
+  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing.NewPrinterDialog", NULL);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_proxy_new().
+ * @error: Return location for error or %NULL
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_proxy_new().
+ *
+ * Returns: (transfer full) (type NewPrinterDialogDBusNewPrinterDialogProxy): The constructed proxy object or %NULL if @error is set.
+ */
+NewPrinterDialogDBusNewPrinterDialog *
+newprinterdialog_dbus_new_printer_dialog_proxy_new_finish (
+    GAsyncResult        *res,
+    GError             **error)
+{
+  GObject *ret;
+  GObject *source_object;
+  source_object = g_async_result_get_source_object (res);
+  ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
+  g_object_unref (source_object);
+  if (ret != NULL)
+    return NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG (ret);
+  else
+    return NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new_sync:
+ * @connection: A #GDBusConnection.
+ * @flags: Flags from the #GDBusProxyFlags enumeration.
+ * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
+ * @object_path: An object path.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL
+ *
+ * Synchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link>. See g_dbus_proxy_new_sync() for more details.
+ *
+ * The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_proxy_new() for the asynchronous version of this constructor.
+ *
+ * Returns: (transfer full) (type NewPrinterDialogDBusNewPrinterDialogProxy): The constructed proxy object or %NULL if @error is set.
+ */
+NewPrinterDialogDBusNewPrinterDialog *
+newprinterdialog_dbus_new_printer_dialog_proxy_new_sync (
+    GDBusConnection     *connection,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GError             **error)
+{
+  GInitable *ret;
+  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing.NewPrinterDialog", NULL);
+  if (ret != NULL)
+    return NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG (ret);
+  else
+    return NULL;
+}
+
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus:
+ * @bus_type: A #GBusType.
+ * @flags: Flags from the #GDBusProxyFlags enumeration.
+ * @name: A bus name (well-known or unique).
+ * @object_path: An object path.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @callback: A #GAsyncReadyCallback to call when the request is satisfied.
+ * @user_data: User data to pass to @callback.
+ *
+ * Like newprinterdialog_dbus_new_printer_dialog_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
+ *
+ * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
+ * You can then call newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_finish() to get the result of the operation.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_sync() for the synchronous, blocking version of this constructor.
+ */
+void
+newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus (
+    GBusType             bus_type,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GAsyncReadyCallback  callback,
+    gpointer             user_data)
+{
+  g_async_initable_new_async (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing.NewPrinterDialog", NULL);
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus().
+ * @error: Return location for error or %NULL
+ *
+ * Finishes an operation started with newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus().
+ *
+ * Returns: (transfer full) (type NewPrinterDialogDBusNewPrinterDialogProxy): The constructed proxy object or %NULL if @error is set.
+ */
+NewPrinterDialogDBusNewPrinterDialog *
+newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_finish (
+    GAsyncResult        *res,
+    GError             **error)
+{
+  GObject *ret;
+  GObject *source_object;
+  source_object = g_async_result_get_source_object (res);
+  ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
+  g_object_unref (source_object);
+  if (ret != NULL)
+    return NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG (ret);
+  else
+    return NULL;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_sync:
+ * @bus_type: A #GBusType.
+ * @flags: Flags from the #GDBusProxyFlags enumeration.
+ * @name: A bus name (well-known or unique).
+ * @object_path: An object path.
+ * @cancellable: (nullable): A #GCancellable or %NULL.
+ * @error: Return location for error or %NULL
+ *
+ * Like newprinterdialog_dbus_new_printer_dialog_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
+ *
+ * The calling thread is blocked until a reply is received.
+ *
+ * See newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus() for the asynchronous version of this constructor.
+ *
+ * Returns: (transfer full) (type NewPrinterDialogDBusNewPrinterDialogProxy): The constructed proxy object or %NULL if @error is set.
+ */
+NewPrinterDialogDBusNewPrinterDialog *
+newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_sync (
+    GBusType             bus_type,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GError             **error)
+{
+  GInitable *ret;
+  ret = g_initable_new (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing.NewPrinterDialog", NULL);
+  if (ret != NULL)
+    return NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG (ret);
+  else
+    return NULL;
+}
+
+
+/* ------------------------------------------------------------------------ */
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialogSkeleton:
+ *
+ * The #NewPrinterDialogDBusNewPrinterDialogSkeleton structure contains only private data and should only be accessed using the provided API.
+ */
+
+/**
+ * NewPrinterDialogDBusNewPrinterDialogSkeletonClass:
+ * @parent_class: The parent class.
+ *
+ * Class structure for #NewPrinterDialogDBusNewPrinterDialogSkeleton.
+ */
+
+struct _NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate
+{
+  GValue *properties;
+  GList *changed_properties;
+  GSource *changed_properties_idle_source;
+  GMainContext *context;
+  GMutex lock;
+};
+
+static void
+_newprinterdialog_dbus_new_printer_dialog_skeleton_handle_method_call (
+  GDBusConnection *connection G_GNUC_UNUSED,
+  const gchar *sender G_GNUC_UNUSED,
+  const gchar *object_path G_GNUC_UNUSED,
+  const gchar *interface_name,
+  const gchar *method_name,
+  GVariant *parameters,
+  GDBusMethodInvocation *invocation,
+  gpointer user_data)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (user_data);
+  _ExtendedGDBusMethodInfo *info;
+  GVariantIter iter;
+  GVariant *child;
+  GValue *paramv;
+  gsize num_params;
+  guint num_extra;
+  gsize n;
+  guint signal_id;
+  GValue return_value = G_VALUE_INIT;
+  info = (_ExtendedGDBusMethodInfo *) g_dbus_method_invocation_get_method_info (invocation);
+  g_assert (info != NULL);
+  num_params = g_variant_n_children (parameters);
+  num_extra = info->pass_fdlist ? 3 : 2;  paramv = g_new0 (GValue, num_params + num_extra);
+  n = 0;
+  g_value_init (&paramv[n], NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG);
+  g_value_set_object (&paramv[n++], skeleton);
+  g_value_init (&paramv[n], G_TYPE_DBUS_METHOD_INVOCATION);
+  g_value_set_object (&paramv[n++], invocation);
+  if (info->pass_fdlist)
+    {
+#ifdef G_OS_UNIX
+      g_value_init (&paramv[n], G_TYPE_UNIX_FD_LIST);
+      g_value_set_object (&paramv[n++], g_dbus_message_get_unix_fd_list (g_dbus_method_invocation_get_message (invocation)));
+#else
+      g_assert_not_reached ();
+#endif
+    }
+  g_variant_iter_init (&iter, parameters);
+  while ((child = g_variant_iter_next_value (&iter)) != NULL)
+    {
+      _ExtendedGDBusArgInfo *arg_info = (_ExtendedGDBusArgInfo *) info->parent_struct.in_args[n - num_extra];
+      if (arg_info->use_gvariant)
+        {
+          g_value_init (&paramv[n], G_TYPE_VARIANT);
+          g_value_set_variant (&paramv[n], child);
+          n++;
+        }
+      else
+        g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
+      g_variant_unref (child);
+    }
+  signal_id = g_signal_lookup (info->signal_name, NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG);
+  g_value_init (&return_value, G_TYPE_BOOLEAN);
+  g_signal_emitv (paramv, signal_id, 0, &return_value);
+  if (!g_value_get_boolean (&return_value))
+    g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD, "Method %s is not implemented on interface %s", method_name, interface_name);
+  g_value_unset (&return_value);
+  for (n = 0; n < num_params + num_extra; n++)
+    g_value_unset (&paramv[n]);
+  g_free (paramv);
+}
+
+static GVariant *
+_newprinterdialog_dbus_new_printer_dialog_skeleton_handle_get_property (
+  GDBusConnection *connection G_GNUC_UNUSED,
+  const gchar *sender G_GNUC_UNUSED,
+  const gchar *object_path G_GNUC_UNUSED,
+  const gchar *interface_name G_GNUC_UNUSED,
+  const gchar *property_name,
+  GError **error,
+  gpointer user_data)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (user_data);
+  GValue value = G_VALUE_INIT;
+  GParamSpec *pspec;
+  _ExtendedGDBusPropertyInfo *info;
+  GVariant *ret;
+  ret = NULL;
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct, property_name);
+  g_assert (info != NULL);
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
+  if (pspec == NULL)
+    {
+      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS, "No property with name %s", property_name);
+    }
+  else
+    {
+      g_value_init (&value, pspec->value_type);
+      g_object_get_property (G_OBJECT (skeleton), info->hyphen_name, &value);
+      ret = g_dbus_gvalue_to_gvariant (&value, G_VARIANT_TYPE (info->parent_struct.signature));
+      g_value_unset (&value);
+    }
+  return ret;
+}
+
+static gboolean
+_newprinterdialog_dbus_new_printer_dialog_skeleton_handle_set_property (
+  GDBusConnection *connection G_GNUC_UNUSED,
+  const gchar *sender G_GNUC_UNUSED,
+  const gchar *object_path G_GNUC_UNUSED,
+  const gchar *interface_name G_GNUC_UNUSED,
+  const gchar *property_name,
+  GVariant *variant,
+  GError **error,
+  gpointer user_data)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (user_data);
+  GValue value = G_VALUE_INIT;
+  GParamSpec *pspec;
+  _ExtendedGDBusPropertyInfo *info;
+  gboolean ret;
+  ret = FALSE;
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct, property_name);
+  g_assert (info != NULL);
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
+  if (pspec == NULL)
+    {
+      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS, "No property with name %s", property_name);
+    }
+  else
+    {
+      if (info->use_gvariant)
+        g_value_set_variant (&value, variant);
+      else
+        g_dbus_gvariant_to_gvalue (variant, &value);
+      g_object_set_property (G_OBJECT (skeleton), info->hyphen_name, &value);
+      g_value_unset (&value);
+      ret = TRUE;
+    }
+  return ret;
+}
+
+static const GDBusInterfaceVTable _newprinterdialog_dbus_new_printer_dialog_skeleton_vtable =
+{
+  _newprinterdialog_dbus_new_printer_dialog_skeleton_handle_method_call,
+  _newprinterdialog_dbus_new_printer_dialog_skeleton_handle_get_property,
+  _newprinterdialog_dbus_new_printer_dialog_skeleton_handle_set_property,
+  {NULL}
+};
+
+static GDBusInterfaceInfo *
+newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_info (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+{
+  return newprinterdialog_dbus_new_printer_dialog_interface_info ();
+}
+
+static GDBusInterfaceVTable *
+newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_vtable (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+{
+  return (GDBusInterfaceVTable *) &_newprinterdialog_dbus_new_printer_dialog_skeleton_vtable;
+}
+
+static GVariant *
+newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_properties (GDBusInterfaceSkeleton *_skeleton)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (_skeleton);
+
+  GVariantBuilder builder;
+  guint n;
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sv}"));
+  if (_newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct.properties == NULL)
+    goto out;
+  for (n = 0; _newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct.properties[n] != NULL; n++)
+    {
+      GDBusPropertyInfo *info = _newprinterdialog_dbus_new_printer_dialog_interface_info.parent_struct.properties[n];
+      if (info->flags & G_DBUS_PROPERTY_INFO_FLAGS_READABLE)
+        {
+          GVariant *value;
+          value = _newprinterdialog_dbus_new_printer_dialog_skeleton_handle_get_property (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)), NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing.NewPrinterDialog", info->name, NULL, skeleton);
+          if (value != NULL)
+            {
+              g_variant_take_ref (value);
+              g_variant_builder_add (&builder, "{sv}", info->name, value);
+              g_variant_unref (value);
+            }
+        }
+    }
+out:
+  return g_variant_builder_end (&builder);
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+{
+}
+
+static void
+_newprinterdialog_dbus_new_printer_dialog_on_signal_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing.NewPrinterDialog", "DialogCanceled",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_new_printer_dialog_on_signal_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing.NewPrinterDialog", "PrinterAdded",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_new_printer_dialog_on_signal_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing.NewPrinterDialog", "PrinterModified",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void
+_newprinterdialog_dbus_new_printer_dialog_on_signal_driver_download_cheked (
+    NewPrinterDialogDBusNewPrinterDialog *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (object);
+
+  GList      *connections, *l;
+  GVariant   *signal_variant;
+  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));
+
+  signal_variant = g_variant_ref_sink (g_variant_new ("()"));
+  for (l = connections; l != NULL; l = l->next)
+    {
+      GDBusConnection *connection = l->data;
+      g_dbus_connection_emit_signal (connection,
+        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing.NewPrinterDialog", "DriverDownloadCheked",
+        signal_variant, NULL);
+    }
+  g_variant_unref (signal_variant);
+  g_list_free_full (connections, g_object_unref);
+}
+
+static void newprinterdialog_dbus_new_printer_dialog_skeleton_iface_init (NewPrinterDialogDBusNewPrinterDialogIface *iface);
+#if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusNewPrinterDialogSkeleton, newprinterdialog_dbus_new_printer_dialog_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_ADD_PRIVATE (NewPrinterDialogDBusNewPrinterDialogSkeleton)
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, newprinterdialog_dbus_new_printer_dialog_skeleton_iface_init))
+
+#else
+G_DEFINE_TYPE_WITH_CODE (NewPrinterDialogDBusNewPrinterDialogSkeleton, newprinterdialog_dbus_new_printer_dialog_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_IMPLEMENT_INTERFACE (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, newprinterdialog_dbus_new_printer_dialog_skeleton_iface_init))
+
+#endif
+static void
+newprinterdialog_dbus_new_printer_dialog_skeleton_finalize (GObject *object)
+{
+  NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton = NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON (object);
+  g_list_free_full (skeleton->priv->changed_properties, (GDestroyNotify) _changed_property_free);
+  if (skeleton->priv->changed_properties_idle_source != NULL)
+    g_source_destroy (skeleton->priv->changed_properties_idle_source);
+  g_main_context_unref (skeleton->priv->context);
+  g_mutex_clear (&skeleton->priv->lock);
+  G_OBJECT_CLASS (newprinterdialog_dbus_new_printer_dialog_skeleton_parent_class)->finalize (object);
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_skeleton_init (NewPrinterDialogDBusNewPrinterDialogSkeleton *skeleton)
+{
+#if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
+  skeleton->priv = newprinterdialog_dbus_new_printer_dialog_skeleton_get_instance_private (skeleton);
+#else
+  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON, NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate);
+#endif
+
+  g_mutex_init (&skeleton->priv->lock);
+  skeleton->priv->context = g_main_context_ref_thread_default ();
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_skeleton_class_init (NewPrinterDialogDBusNewPrinterDialogSkeletonClass *klass)
+{
+  GObjectClass *gobject_class;
+  GDBusInterfaceSkeletonClass *skeleton_class;
+
+  gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->finalize = newprinterdialog_dbus_new_printer_dialog_skeleton_finalize;
+
+  skeleton_class = G_DBUS_INTERFACE_SKELETON_CLASS (klass);
+  skeleton_class->get_info = newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_info;
+  skeleton_class->get_properties = newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_properties;
+  skeleton_class->flush = newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_flush;
+  skeleton_class->get_vtable = newprinterdialog_dbus_new_printer_dialog_skeleton_dbus_interface_get_vtable;
+
+#if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
+  g_type_class_add_private (klass, sizeof (NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate));
+#endif
+}
+
+static void
+newprinterdialog_dbus_new_printer_dialog_skeleton_iface_init (NewPrinterDialogDBusNewPrinterDialogIface *iface)
+{
+  iface->dialog_canceled = _newprinterdialog_dbus_new_printer_dialog_on_signal_dialog_canceled;
+  iface->printer_added = _newprinterdialog_dbus_new_printer_dialog_on_signal_printer_added;
+  iface->printer_modified = _newprinterdialog_dbus_new_printer_dialog_on_signal_printer_modified;
+  iface->driver_download_cheked = _newprinterdialog_dbus_new_printer_dialog_on_signal_driver_download_cheked;
+}
+
+/**
+ * newprinterdialog_dbus_new_printer_dialog_skeleton_new:
+ *
+ * Creates a skeleton object for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing-NewPrinterDialog.top_of_page">org.fedoraproject.Config.Printing.NewPrinterDialog</link>.
+ *
+ * Returns: (transfer full) (type NewPrinterDialogDBusNewPrinterDialogSkeleton): The skeleton object.
+ */
+NewPrinterDialogDBusNewPrinterDialog *
+newprinterdialog_dbus_new_printer_dialog_skeleton_new (void)
+{
+  return NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG (g_object_new (NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON, NULL));
 }
 

@@ -14,131 +14,292 @@ G_BEGIN_DECLS
 
 
 /* ------------------------------------------------------------------------ */
-/* Declarations for com.test.Printing */
+/* Declarations for org.fedoraproject.Config.Printing */
 
-#define NEWPRINTERDIALOG_DBUS_TYPE_PRINTING (newprinterdialog_dbus_printing_get_type ())
-#define NEWPRINTERDIALOG_DBUS_PRINTING(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, NewPrinterDialogDBusPrinting))
-#define NEWPRINTERDIALOG_DBUS_IS_PRINTING(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING))
-#define NEWPRINTERDIALOG_DBUS_PRINTING_GET_IFACE(o) (G_TYPE_INSTANCE_GET_INTERFACE ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING, NewPrinterDialogDBusPrintingIface))
+#define NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING (newprinterdialog_dbus_org_fedoraproject_config_printing_get_type ())
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, NewPrinterDialogDBusOrgFedoraprojectConfigPrinting))
+#define NEWPRINTERDIALOG_DBUS_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING))
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_GET_IFACE(o) (G_TYPE_INSTANCE_GET_INTERFACE ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface))
 
-struct _NewPrinterDialogDBusPrinting;
-typedef struct _NewPrinterDialogDBusPrinting NewPrinterDialogDBusPrinting;
-typedef struct _NewPrinterDialogDBusPrintingIface NewPrinterDialogDBusPrintingIface;
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrinting;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrinting NewPrinterDialogDBusOrgFedoraprojectConfigPrinting;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface;
 
-struct _NewPrinterDialogDBusPrintingIface
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingIface
+{
+  GTypeInterface parent_iface;
+
+  gboolean (*handle_new_printer_dialog) (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *object,
+    GDBusMethodInvocation *invocation);
+
+};
+
+GType newprinterdialog_dbus_org_fedoraproject_config_printing_get_type (void) G_GNUC_CONST;
+
+GDBusInterfaceInfo *newprinterdialog_dbus_org_fedoraproject_config_printing_interface_info (void);
+guint newprinterdialog_dbus_org_fedoraproject_config_printing_override_properties (GObjectClass *klass, guint property_id_begin);
+
+
+/* D-Bus method call completion functions: */
+void newprinterdialog_dbus_org_fedoraproject_config_printing_complete_new_printer_dialog (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *object,
+    GDBusMethodInvocation *invocation,
+    const gchar *path);
+
+
+
+/* D-Bus method calls: */
+void newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
+    GCancellable *cancellable,
+    GAsyncReadyCallback callback,
+    gpointer user_data);
+
+gboolean newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_finish (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
+    gchar **out_path,
+    GAsyncResult *res,
+    GError **error);
+
+gboolean newprinterdialog_dbus_org_fedoraproject_config_printing_call_new_printer_dialog_sync (
+    NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *proxy,
+    gchar **out_path,
+    GCancellable *cancellable,
+    GError **error);
+
+
+
+/* ---- */
+
+#define NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_get_type ())
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy))
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass))
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass))
+#define NEWPRINTERDIALOG_DBUS_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY))
+#define NEWPRINTERDIALOG_DBUS_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY))
+
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate;
+
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy
+{
+  /*< private >*/
+  GDBusProxy parent_instance;
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyPrivate *priv;
+};
+
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxyClass
+{
+  GDBusProxyClass parent_class;
+};
+
+GType newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_get_type (void) G_GNUC_CONST;
+
+#if GLIB_CHECK_VERSION(2, 44, 0)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingProxy, g_object_unref)
+#endif
+
+void newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new (
+    GDBusConnection     *connection,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GAsyncReadyCallback  callback,
+    gpointer             user_data);
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_finish (
+    GAsyncResult        *res,
+    GError             **error);
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_sync (
+    GDBusConnection     *connection,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GError             **error);
+
+void newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus (
+    GBusType             bus_type,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GAsyncReadyCallback  callback,
+    gpointer             user_data);
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
+    GAsyncResult        *res,
+    GError             **error);
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *newprinterdialog_dbus_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
+    GBusType             bus_type,
+    GDBusProxyFlags      flags,
+    const gchar         *name,
+    const gchar         *object_path,
+    GCancellable        *cancellable,
+    GError             **error);
+
+
+/* ---- */
+
+#define NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_get_type ())
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton))
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass))
+#define NEWPRINTERDIALOG_DBUS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass))
+#define NEWPRINTERDIALOG_DBUS_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON))
+#define NEWPRINTERDIALOG_DBUS_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON))
+
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass;
+typedef struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate;
+
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton
+{
+  /*< private >*/
+  GDBusInterfaceSkeleton parent_instance;
+  NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonPrivate *priv;
+};
+
+struct _NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeletonClass
+{
+  GDBusInterfaceSkeletonClass parent_class;
+};
+
+GType newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_get_type (void) G_GNUC_CONST;
+
+#if GLIB_CHECK_VERSION(2, 44, 0)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusOrgFedoraprojectConfigPrintingSkeleton, g_object_unref)
+#endif
+
+NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_new (void);
+
+
+/* ------------------------------------------------------------------------ */
+/* Declarations for org.fedoraproject.Config.Printing.NewPrinterDialog */
+
+#define NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG (newprinterdialog_dbus_new_printer_dialog_get_type ())
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, NewPrinterDialogDBusNewPrinterDialog))
+#define NEWPRINTERDIALOG_DBUS_IS_NEW_PRINTER_DIALOG(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG))
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_GET_IFACE(o) (G_TYPE_INSTANCE_GET_INTERFACE ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG, NewPrinterDialogDBusNewPrinterDialogIface))
+
+struct _NewPrinterDialogDBusNewPrinterDialog;
+typedef struct _NewPrinterDialogDBusNewPrinterDialog NewPrinterDialogDBusNewPrinterDialog;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogIface NewPrinterDialogDBusNewPrinterDialogIface;
+
+struct _NewPrinterDialogDBusNewPrinterDialogIface
 {
   GTypeInterface parent_iface;
 
 
   gboolean (*handle_change_ppd) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     guint arg_xid,
     const gchar *arg_name,
     const gchar *arg_device_id);
 
   gboolean (*handle_download_driver_for_device_id) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     guint arg_xid,
     const gchar *arg_device_id);
 
   gboolean (*handle_new_printer_from_device) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     guint arg_xid,
     const gchar *arg_device_uri,
     const gchar *arg_device_id);
 
   gboolean (*handle_on_dialog_canceled) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
   gboolean (*handle_on_driver_download_checked) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     GVariant *arg_installed_files);
 
   gboolean (*handle_on_printer_added) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     const gchar *arg_name);
 
   gboolean (*handle_on_printer_modified) (
-    NewPrinterDialogDBusPrinting *object,
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation,
     const gchar *arg_name,
     gboolean arg_ppd_has_changed);
 
   void (*dialog_canceled) (
-    NewPrinterDialogDBusPrinting *object);
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
   void (*driver_download_cheked) (
-    NewPrinterDialogDBusPrinting *object);
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
   void (*printer_added) (
-    NewPrinterDialogDBusPrinting *object);
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
   void (*printer_modified) (
-    NewPrinterDialogDBusPrinting *object);
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
 };
 
-GType newprinterdialog_dbus_printing_get_type (void) G_GNUC_CONST;
+GType newprinterdialog_dbus_new_printer_dialog_get_type (void) G_GNUC_CONST;
 
-GDBusInterfaceInfo *newprinterdialog_dbus_printing_interface_info (void);
-guint newprinterdialog_dbus_printing_override_properties (GObjectClass *klass, guint property_id_begin);
+GDBusInterfaceInfo *newprinterdialog_dbus_new_printer_dialog_interface_info (void);
+guint newprinterdialog_dbus_new_printer_dialog_override_properties (GObjectClass *klass, guint property_id_begin);
 
 
 /* D-Bus method call completion functions: */
-void newprinterdialog_dbus_printing_complete_new_printer_from_device (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_download_driver_for_device_id (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_change_ppd (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_change_ppd (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_on_dialog_canceled (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_on_printer_added (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_on_printer_modified (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
-void newprinterdialog_dbus_printing_complete_on_driver_download_checked (
-    NewPrinterDialogDBusPrinting *object,
+void newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked (
+    NewPrinterDialogDBusNewPrinterDialog *object,
     GDBusMethodInvocation *invocation);
 
 
 
 /* D-Bus signal emissions functions: */
-void newprinterdialog_dbus_printing_emit_dialog_canceled (
-    NewPrinterDialogDBusPrinting *object);
+void newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
-void newprinterdialog_dbus_printing_emit_printer_added (
-    NewPrinterDialogDBusPrinting *object);
+void newprinterdialog_dbus_new_printer_dialog_emit_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
-void newprinterdialog_dbus_printing_emit_printer_modified (
-    NewPrinterDialogDBusPrinting *object);
+void newprinterdialog_dbus_new_printer_dialog_emit_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
-void newprinterdialog_dbus_printing_emit_driver_download_cheked (
-    NewPrinterDialogDBusPrinting *object);
+void newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked (
+    NewPrinterDialogDBusNewPrinterDialog *object);
 
 
 
 /* D-Bus method calls: */
-void newprinterdialog_dbus_printing_call_new_printer_from_device (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_device_uri,
     const gchar *arg_device_id,
@@ -146,41 +307,41 @@ void newprinterdialog_dbus_printing_call_new_printer_from_device (
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_new_printer_from_device_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_new_printer_from_device_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_new_printer_from_device_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_device_uri,
     const gchar *arg_device_id,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_download_driver_for_device_id (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_device_id,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_download_driver_for_device_id_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_download_driver_for_device_id_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_download_driver_for_device_id_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_device_id,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_change_ppd (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_change_ppd (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_name,
     const gchar *arg_device_id,
@@ -188,87 +349,87 @@ void newprinterdialog_dbus_printing_call_change_ppd (
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_change_ppd_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_change_ppd_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_change_ppd_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_change_ppd_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     guint arg_xid,
     const gchar *arg_name,
     const gchar *arg_device_id,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_on_dialog_canceled (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_on_dialog_canceled_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_on_dialog_canceled_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_dialog_canceled_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_on_printer_added (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_on_printer_added (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     const gchar *arg_name,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_on_printer_added_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_on_printer_added_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_printer_added_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     const gchar *arg_name,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_on_printer_modified (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     const gchar *arg_name,
     gboolean arg_ppd_has_changed,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_on_printer_modified_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_on_printer_modified_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_printer_modified_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     const gchar *arg_name,
     gboolean arg_ppd_has_changed,
     GCancellable *cancellable,
     GError **error);
 
-void newprinterdialog_dbus_printing_call_on_driver_download_checked (
-    NewPrinterDialogDBusPrinting *proxy,
+void newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GVariant *arg_installed_files,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean newprinterdialog_dbus_printing_call_on_driver_download_checked_finish (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_finish (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GAsyncResult *res,
     GError **error);
 
-gboolean newprinterdialog_dbus_printing_call_on_driver_download_checked_sync (
-    NewPrinterDialogDBusPrinting *proxy,
+gboolean newprinterdialog_dbus_new_printer_dialog_call_on_driver_download_checked_sync (
+    NewPrinterDialogDBusNewPrinterDialog *proxy,
     GVariant *arg_installed_files,
     GCancellable *cancellable,
     GError **error);
@@ -277,36 +438,36 @@ gboolean newprinterdialog_dbus_printing_call_on_driver_download_checked_sync (
 
 /* ---- */
 
-#define NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY (newprinterdialog_dbus_printing_proxy_get_type ())
-#define NEWPRINTERDIALOG_DBUS_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, NewPrinterDialogDBusPrintingProxy))
-#define NEWPRINTERDIALOG_DBUS_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, NewPrinterDialogDBusPrintingProxyClass))
-#define NEWPRINTERDIALOG_DBUS_PRINTING_PROXY_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY, NewPrinterDialogDBusPrintingProxyClass))
-#define NEWPRINTERDIALOG_DBUS_IS_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY))
-#define NEWPRINTERDIALOG_DBUS_IS_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_PROXY))
+#define NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY (newprinterdialog_dbus_new_printer_dialog_proxy_get_type ())
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_PROXY(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, NewPrinterDialogDBusNewPrinterDialogProxy))
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, NewPrinterDialogDBusNewPrinterDialogProxyClass))
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_PROXY_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY, NewPrinterDialogDBusNewPrinterDialogProxyClass))
+#define NEWPRINTERDIALOG_DBUS_IS_NEW_PRINTER_DIALOG_PROXY(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY))
+#define NEWPRINTERDIALOG_DBUS_IS_NEW_PRINTER_DIALOG_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_PROXY))
 
-typedef struct _NewPrinterDialogDBusPrintingProxy NewPrinterDialogDBusPrintingProxy;
-typedef struct _NewPrinterDialogDBusPrintingProxyClass NewPrinterDialogDBusPrintingProxyClass;
-typedef struct _NewPrinterDialogDBusPrintingProxyPrivate NewPrinterDialogDBusPrintingProxyPrivate;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogProxy NewPrinterDialogDBusNewPrinterDialogProxy;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogProxyClass NewPrinterDialogDBusNewPrinterDialogProxyClass;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogProxyPrivate NewPrinterDialogDBusNewPrinterDialogProxyPrivate;
 
-struct _NewPrinterDialogDBusPrintingProxy
+struct _NewPrinterDialogDBusNewPrinterDialogProxy
 {
   /*< private >*/
   GDBusProxy parent_instance;
-  NewPrinterDialogDBusPrintingProxyPrivate *priv;
+  NewPrinterDialogDBusNewPrinterDialogProxyPrivate *priv;
 };
 
-struct _NewPrinterDialogDBusPrintingProxyClass
+struct _NewPrinterDialogDBusNewPrinterDialogProxyClass
 {
   GDBusProxyClass parent_class;
 };
 
-GType newprinterdialog_dbus_printing_proxy_get_type (void) G_GNUC_CONST;
+GType newprinterdialog_dbus_new_printer_dialog_proxy_get_type (void) G_GNUC_CONST;
 
 #if GLIB_CHECK_VERSION(2, 44, 0)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusPrintingProxy, g_object_unref)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusNewPrinterDialogProxy, g_object_unref)
 #endif
 
-void newprinterdialog_dbus_printing_proxy_new (
+void newprinterdialog_dbus_new_printer_dialog_proxy_new (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -314,10 +475,10 @@ void newprinterdialog_dbus_printing_proxy_new (
     GCancellable        *cancellable,
     GAsyncReadyCallback  callback,
     gpointer             user_data);
-NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_finish (
+NewPrinterDialogDBusNewPrinterDialog *newprinterdialog_dbus_new_printer_dialog_proxy_new_finish (
     GAsyncResult        *res,
     GError             **error);
-NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_sync (
+NewPrinterDialogDBusNewPrinterDialog *newprinterdialog_dbus_new_printer_dialog_proxy_new_sync (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -325,7 +486,7 @@ NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_sync (
     GCancellable        *cancellable,
     GError             **error);
 
-void newprinterdialog_dbus_printing_proxy_new_for_bus (
+void newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -333,10 +494,10 @@ void newprinterdialog_dbus_printing_proxy_new_for_bus (
     GCancellable        *cancellable,
     GAsyncReadyCallback  callback,
     gpointer             user_data);
-NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_for_bus_finish (
+NewPrinterDialogDBusNewPrinterDialog *newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_finish (
     GAsyncResult        *res,
     GError             **error);
-NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_for_bus_sync (
+NewPrinterDialogDBusNewPrinterDialog *newprinterdialog_dbus_new_printer_dialog_proxy_new_for_bus_sync (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -347,36 +508,36 @@ NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_proxy_new_for_bus_s
 
 /* ---- */
 
-#define NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON (newprinterdialog_dbus_printing_skeleton_get_type ())
-#define NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON, NewPrinterDialogDBusPrintingSkeleton))
-#define NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON, NewPrinterDialogDBusPrintingSkeletonClass))
-#define NEWPRINTERDIALOG_DBUS_PRINTING_SKELETON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON, NewPrinterDialogDBusPrintingSkeletonClass))
-#define NEWPRINTERDIALOG_DBUS_IS_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON))
-#define NEWPRINTERDIALOG_DBUS_IS_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_PRINTING_SKELETON))
+#define NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON (newprinterdialog_dbus_new_printer_dialog_skeleton_get_type ())
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON, NewPrinterDialogDBusNewPrinterDialogSkeleton))
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON, NewPrinterDialogDBusNewPrinterDialogSkeletonClass))
+#define NEWPRINTERDIALOG_DBUS_NEW_PRINTER_DIALOG_SKELETON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON, NewPrinterDialogDBusNewPrinterDialogSkeletonClass))
+#define NEWPRINTERDIALOG_DBUS_IS_NEW_PRINTER_DIALOG_SKELETON(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON))
+#define NEWPRINTERDIALOG_DBUS_IS_NEW_PRINTER_DIALOG_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), NEWPRINTERDIALOG_DBUS_TYPE_NEW_PRINTER_DIALOG_SKELETON))
 
-typedef struct _NewPrinterDialogDBusPrintingSkeleton NewPrinterDialogDBusPrintingSkeleton;
-typedef struct _NewPrinterDialogDBusPrintingSkeletonClass NewPrinterDialogDBusPrintingSkeletonClass;
-typedef struct _NewPrinterDialogDBusPrintingSkeletonPrivate NewPrinterDialogDBusPrintingSkeletonPrivate;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogSkeleton NewPrinterDialogDBusNewPrinterDialogSkeleton;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogSkeletonClass NewPrinterDialogDBusNewPrinterDialogSkeletonClass;
+typedef struct _NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate;
 
-struct _NewPrinterDialogDBusPrintingSkeleton
+struct _NewPrinterDialogDBusNewPrinterDialogSkeleton
 {
   /*< private >*/
   GDBusInterfaceSkeleton parent_instance;
-  NewPrinterDialogDBusPrintingSkeletonPrivate *priv;
+  NewPrinterDialogDBusNewPrinterDialogSkeletonPrivate *priv;
 };
 
-struct _NewPrinterDialogDBusPrintingSkeletonClass
+struct _NewPrinterDialogDBusNewPrinterDialogSkeletonClass
 {
   GDBusInterfaceSkeletonClass parent_class;
 };
 
-GType newprinterdialog_dbus_printing_skeleton_get_type (void) G_GNUC_CONST;
+GType newprinterdialog_dbus_new_printer_dialog_skeleton_get_type (void) G_GNUC_CONST;
 
 #if GLIB_CHECK_VERSION(2, 44, 0)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusPrintingSkeleton, g_object_unref)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (NewPrinterDialogDBusNewPrinterDialogSkeleton, g_object_unref)
 #endif
 
-NewPrinterDialogDBusPrinting *newprinterdialog_dbus_printing_skeleton_new (void);
+NewPrinterDialogDBusNewPrinterDialog *newprinterdialog_dbus_new_printer_dialog_skeleton_new (void);
 
 
 G_END_DECLS
