@@ -1,31 +1,10 @@
 #include "ppdcache.h"
 
-void(*cups)();
-
-/* Global variables */
-
 dict_cache *cache = NULL;
 dict_modtimes *modtimes = NULL;
 list *queued = NULL;
 
-/* default host, port and encryption */
-const char *host_p = "\0";
-int port_p = 0;
-int encryption_p = 0;
-
-bool connecting = false;
-bool check_uptodate = true;
-
 /* Function definations */
-
-/* Initializing Function */
-void PPDCache(const char *h, int p, int e)
-{
-    host_p = h;
-    port_p = p;
-    encryption_p = e;
-}
-
 
 void insert_cache(dict_cache **head, char *str, FILE *fpname)
 {
@@ -144,7 +123,13 @@ FILE *find_file(dict_cache **head, char *str)
         return NULL;
 }
 
-void fetch_ppd(char *name, void(*callback)())
+void fetch_ppd(char *name, 
+               void(*callback)(),
+               bool check_uptodate
+               const char *host,
+               int port,
+               http_encryption_t encryption,
+               int connecting)
 {
 	http_status_t http_status;
 	char filename[1024] = "\0";
@@ -159,11 +144,12 @@ void fetch_ppd(char *name, void(*callback)())
 
 	if(!find_cache(&cache, name))
 	{
+        //KeyError
 		if(cups == NULL)
 		{
 			insert_list(&queued, name, callback);
 			if(!connecting)
-				self_connect(callback);
+				self_connect(NULL, host, port, encryption, connecting);
 			return;
 		}
 		http_status = cupsGetPPD3(CUPS_HTTP_DEFAULT, modtimes->qname, &(modtimes->time), filename, sizeof(filename));
@@ -172,9 +158,10 @@ void fetch_ppd(char *name, void(*callback)())
 	}
 	else
 	{
+        //RuntimeError
 		f = find_file(&cache, name);
 		if(f == NULL)
-			schedule_callback(callback, name);
+			schedule_callback(callback, name, "\0");
 		return;
 	}
 
@@ -195,6 +182,7 @@ void fetch_ppd(char *name, void(*callback)())
 void connected()
 {
 	connecting = false;
+    
     /*
 
     if isinstance (exc, Exception):
@@ -211,13 +199,28 @@ void connected()
     */
 }
 
-void self_connect(void(*callback)())
+void self_connect(void(*callback)(),
+                  const char *host,
+                  int port,
+                  http_encryption_t encryption,
+                  int connecting)
 {
 	connecting = true;
-	Asyn_Connection((void *)connected, (void *)connected, NULL, host_p, port_p, encryption_p, NULL, true, true);
+	Async_Connection(connected, 
+                     connected, 
+                     NULL, 
+                     host, 
+                     port, 
+                     encryption,  
+                     true, 
+                     true);
 }
 
-void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)())
+void got_ppd3(char *name, 
+              http_status_t status, 
+              time_t time, 
+              char *fname, 
+              void(*callback)())
 {
 	if(status == HTTP_STATUS_NOT_MODIFIED)
 		remove(fname);
@@ -227,7 +230,7 @@ void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*
 		fn = fopen(fname,"rb");
 		if(fn == NULL)
 		{
-			schedule_callback(callback, name);
+			schedule_callback(callback, name, "\0");
 			return;
 		}
 		insert_cache(&cache, name, fn);
@@ -235,26 +238,18 @@ void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*
 		insert_modtimes(&modtimes, name, time);
 
 		check_uptodate = false;
-		fetch_ppd(name, callback);
+		fetch_ppd(name, callback, false);
 	}
 	else
-		schedule_callback(callback, name);
+		schedule_callback(callback, name, "\0");
 }
 
 
-void schedule_callback(void(*callback)(), char *name)
+void schedule_callback(void(*callback)(), char *name, char *ppd)
 {
-    /*
-
-	g_idle_add()
-
-    def _schedule_callback (self, callback, name, result, exc):
-        def cb_func (callback, name, result, exc):
-            Gdk.threads_enter ()
-            callback (name, result, exc)
-            Gdk.threads_leave ()
-            return False
-
-        GLib.idle_add (cb_func, callback, name, result, exc)
-    */
+    pthread_mutex_t lock;
+    pthread_mutex_init(&lock, NULL);
+    pthread_mutex_lock(&lock);
+    callback(name, ppd);
+    pthread_mutex_unlock(&lock);
 }

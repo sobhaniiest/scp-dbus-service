@@ -30,24 +30,12 @@ typedef struct _dict_cache
     struct _dict_cache *next;
 }dict_cache;
 
-extern void(*cups)();
 
-/* Global variables */
 extern dict_cache *cache;
 extern dict_modtimes *modtimes;
 extern list *queued;
 
-extern const char *host_p;
-extern int port_p;
-extern int encryption_p;
-
-extern bool connecting;
-extern bool check_uptodate;
-
 /* Function declaration */
-
-/* Initializing Function */
-void PPDCache(const char *h, int p, int e);
 
 /* Inserting cache data - printer queue name and PPD file descriptor */
 void insert_cache(dict_cache **head, char *str, FILE *fpname);
@@ -66,13 +54,22 @@ bool find_cache(dict_cache **head, char *str);
 FILE *find_file(dict_cache **head, char *str);
 
 /* Fetch the PPD file and check whether the PPD is up to date */
-void fetch_ppd(char *name, void(*callback)());
-
+void fetch_ppd(char *name, 
+               void(*callback)(),
+               bool check_uptodate
+               const char *host,
+               int port,
+               http_encryption_t encryption,
+               int connecting);
 /* */
 void connected();
 
 /* Connecting to asyncconn : Asyn_Connection*/
-void self_connect(void(*callback)());
+void self_connect(void(*callback)(),
+                  const char *host,
+                  int port,
+                  http_encryption_t encryption,
+                  int connecting);
 
 /* If the file is older, Cache the new version */
 void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)());

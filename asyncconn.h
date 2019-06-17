@@ -7,21 +7,19 @@
 #include <cups/cups.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "asyncconn.h"
+#include "asyncipp.h"
+#include "asyncpk1.h"
 
 
-extern void(*fn_asyn)();
-extern void(*reply_handler_asyn)();
-extern void(*error_handler_asyn)();
-extern void(*auth_handler_asyn)();
-extern void(*reply_data_asyn)();
-extern void(*error_data_asyn)();
-extern void(*auth_data_asyn)();
-extern bool destroyed_asyn, destroyed_cnn, try_as_root, prompt_allowed;
-extern const char *host_asyn;
-extern int port_asyn, encryption_asyn;
-//extern ??? parent
-
-void Asyn_Connection();
+void Async_Connection(void(*reply_handler)(), 
+					 void(*error_handler)(), 
+					 void(*auth_handler)(), 
+					 char *host, 
+					 int port, 
+					 int encryption, 
+					 bool try_as_root, 
+					 bool prompt_allowed);
 
 
 #endif
