@@ -23,7 +23,7 @@ Here the programs are able to export the methods of the NewPrinterDialog and Con
 1. make gen
 2. make
 3. ./main
-4. in another terminal window :
+4. in another terminal window :                                                                                               
 dbus-send --session \                                                                                                         
           --dest=org.fedoraproject.Config.Printing \                                                                         
           --print-reply=literal \                                                                                             
