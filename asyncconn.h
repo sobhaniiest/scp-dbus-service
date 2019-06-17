@@ -7,9 +7,10 @@
 #include <cups/cups.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include "asyncconn.h"
 #include "asyncipp.h"
 #include "asyncpk1.h"
+#include "authinfocache.h"
+#include "asyncconn.h"
 
 
 void Async_Connection(void(*reply_handler)(), 
@@ -17,7 +18,7 @@ void Async_Connection(void(*reply_handler)(),
 					 void(*auth_handler)(), 
 					 char *host, 
 					 int port, 
-					 int encryption, 
+					 http_encryption_t encryption, 
 					 bool try_as_root, 
 					 bool prompt_allowed);
 

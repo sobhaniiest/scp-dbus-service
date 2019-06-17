@@ -23,17 +23,17 @@ void Async_Connection(void(*reply_handler)(),
 
 	if(use_pk && try_as_root)
 	{
-		PK1Connection(subst_reply_handler,
-					  subst_error_handler,
+		PK1Connection(reply_handler,
+					  error_handler,
 					  host,
 					  port,
 					  encryption);
 	}
 	else
 	{
-		IPPAuthConnection(subst_reply_handler,
-						  subst_error_handler,
-						  subst_auth_handler,
+		IPPAuthConnection(reply_handler,
+						  error_handler,
+						  auth_handler,
 						  host,
 						  port,
 						  encryption,

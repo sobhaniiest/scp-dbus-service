@@ -14,9 +14,6 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 
 	/* main initialization */
 
-	//PPDCache((char *)"\0", 
-	//	     0, 
-	//	     0);
 
     /*
     PyObject *pName, *pModule, *pFunc;
@@ -101,12 +98,12 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 
 /* Methods */
 
-static gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
-									 GDBusMethodInvocation *invocation,
-									 const guint xid, 
-									 const gchar *device_uri,
-									 const gchar *device_id,
-									 gpointer user_data)
+gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
+                              GDBusMethodInvocation *invocation,
+                              const guint xid, 
+                              const gchar *device_uri,
+                              const gchar *device_id,
+                              gpointer user_data)
 {
 
 	add_hold();
@@ -190,11 +187,11 @@ static gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *inter
 	return FALSE;
 }
 
-static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
-									      GDBusMethodInvocation *invocation,
-									      const guint xid, 
-								          const gchar *device_id,
-									      gpointer user_data)
+gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
+                                   GDBusMethodInvocation *invocation,
+                                   const guint xid, 
+                                   const gchar *device_id,
+                                   gpointer user_data)
 {
 	add_hold();
 	/*
@@ -204,19 +201,16 @@ static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *
 	return FALSE;
 }
 
-static gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
-						  GDBusMethodInvocation *invocation,
-						  const guint xid, 
-						  const gchar *name,
-						  const gchar *device_id,
-						  gpointer user_data)
+gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
+                   GDBusMethodInvocation *invocation,
+                   const guint xid, 
+                   const gchar *name,
+                   const gchar *device_id,
+                   gpointer user_data)
 {
 	add_hold();
 	g_print("Called!!!\n");
-	//guint self_xid = xid;
-	//gchar *self_name = name; 
-	//gchar *self_device_id = device_id;
-	//fetch_ppd(name, change_ppd_got_ppd, true);
+	fetch_ppd(name, change_ppd_got_ppd, true, "\0", 0, 0);
 	newprinterdialog_dbus_new_printer_dialog_complete_change_ppd(interface, invocation);
 
 	return FALSE;
@@ -243,9 +237,9 @@ static void do_change_ppd()
 /* Signals */
 
 
-static gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
-						  		   GDBusMethodInvocation *invocation,
-						           gpointer user_data)
+gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
+                            GDBusMethodInvocation *invocation,
+                            gpointer user_data)
 {	
 	remove_hold();
 	newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled((interface));
@@ -256,9 +250,9 @@ static gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interfa
 	return TRUE;
 }
 
-static gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
-						         GDBusMethodInvocation *invocation,
-						         gpointer user_data)
+gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
+                          GDBusMethodInvocation *invocation,
+                          gpointer user_data)
 {
 	remove_hold();
 	newprinterdialog_dbus_new_printer_dialog_emit_printer_added((interface));
@@ -269,9 +263,9 @@ static gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface
 	return TRUE;
 }
 
-static gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
-						            GDBusMethodInvocation *invocation,
-						            gpointer user_data)
+gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+                             GDBusMethodInvocation *invocation,
+                             gpointer user_data)
 {
 	remove_hold();
 	newprinterdialog_dbus_new_printer_dialog_emit_printer_modified((interface));
@@ -282,9 +276,9 @@ static gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interf
 	return TRUE;
 }
 
-static gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
-						                   GDBusMethodInvocation *invocation,
-						                   gpointer user_data)
+gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
+                                    GDBusMethodInvocation *invocation,
+                                    gpointer user_data)
 {
 	remove_hold();
 	newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked((interface));

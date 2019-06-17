@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "authinfocache.h"
 
 /* Structure contains host, port, user and password */ 
 typedef struct _dict

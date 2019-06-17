@@ -8,16 +8,16 @@ all: main
 
 gen:
 	gdbus-codegen --generate-c-code newprinterdialog_dbus --c-namespace NewPrinterDialog_DBus --interface-prefix org.fedoraproject.Config.Printing. org.fedoraproject.Config.Printing.xml
-	$(CC) -o $@ $^ -c $(FLAGS)
+	$(CC) -g -o $@ $^ -c $(FLAGS)
 
 %.o: %.c
-	$(CC) -o $@ $^ -c $(FLAGS)
+	$(CC) -g -o $@ $^ -c $(FLAGS)
 
 demo: test.o newprinterdialog_dbus.o
 	$(CC) -o $@ $^ $(FLAGS)
 
-main: ConfigPrinting.o ConfigPrintingNewPrinterDialog.o killtimer.o newprinterdialog_dbus.o
-	$(CC) -o $@ $^ $(FLAGS) $(LIBS)
+main: ConfigPrinting.o ConfigPrintingNewPrinterDialog.o killtimer.o newprinterdialog_dbus.o ppdcache.o asyncconn.o asyncpk1.o asyncipp.o
+	$(CC) -g -o $@ $^ $(FLAGS) $(LIBS)
 
 clean:
 	rm -f *.o demo main

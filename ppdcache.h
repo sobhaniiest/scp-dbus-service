@@ -7,6 +7,7 @@
 #include <string.h>
 #include <cups/cups.h>
 #include <cups/ppd.h>
+#include <pthread.h>
 #include "asyncconn.h"
 
 typedef struct _list
@@ -34,6 +35,8 @@ typedef struct _dict_cache
 extern dict_cache *cache;
 extern dict_modtimes *modtimes;
 extern list *queued;
+extern bool connecting;
+extern void(*cups)();
 
 /* Function declaration */
 
@@ -56,11 +59,10 @@ FILE *find_file(dict_cache **head, char *str);
 /* Fetch the PPD file and check whether the PPD is up to date */
 void fetch_ppd(char *name, 
                void(*callback)(),
-               bool check_uptodate
+               bool check_uptodate,
                const char *host,
                int port,
-               http_encryption_t encryption,
-               int connecting);
+               http_encryption_t encryption);
 /* */
 void connected();
 
@@ -68,13 +70,12 @@ void connected();
 void self_connect(void(*callback)(),
                   const char *host,
                   int port,
-                  http_encryption_t encryption,
-                  int connecting);
+                  http_encryption_t encryption);
 
 /* If the file is older, Cache the new version */
-void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)());
+void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)(), bool check_uptodate);
 
 /* */
-void schedule_callback(void(*callback)(), char *name);
+void schedule_callback(void(*callback)(), char *name, FILE *ppd);
 
 #endif

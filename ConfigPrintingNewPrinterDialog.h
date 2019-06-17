@@ -11,9 +11,9 @@
 #include <gtk/gtk.h>
 #include <errno.h>
 #include "killtimer.h"
-//#include "ppdcache.h"
-//#include "asyncconn.h"
-//#include "authinfocache.h"
+#include "ppdcache.h"
+#include "asyncconn.h"
+#include "authinfocache.h"
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
@@ -28,43 +28,43 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 
 /* Methods */
 
-static gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
-									 GDBusMethodInvocation *invocation,
-									 const guint xid, 
-									 const gchar *device_uri,
-									 const gchar *device_id,
-									 gpointer user_data);
+gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
+							  GDBusMethodInvocation *invocation,
+							  const guint xid, 
+							  const gchar *device_uri,
+							  const gchar *device_id,
+							  gpointer user_data);
 
-static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
-									      GDBusMethodInvocation *invocation,
-									      const guint xid, 
-								          const gchar *device_id,
-									      gpointer user_data);
+gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
+								   GDBusMethodInvocation *invocation,
+								   const guint xid, 
+								   const gchar *device_id,
+								   gpointer user_data);
 
-static gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
-						  GDBusMethodInvocation *invocation,
-						  const guint xid, 
-						  const gchar *name,
-						  const gchar *device_id,
-						  gpointer user_data);
+gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
+				   GDBusMethodInvocation *invocation,
+				   const guint xid, 
+				   const gchar *name,
+				   const gchar *device_id,
+				   gpointer user_data);
 
 /* signals */
 
-static gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
-						  		   GDBusMethodInvocation *invocation,
-						           gpointer user_data);
+gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
+						  	GDBusMethodInvocation *invocation,
+						    gpointer user_data);
 
-static gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
-						         GDBusMethodInvocation *invocation,
-						         gpointer user_data);
+gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
+				          GDBusMethodInvocation *invocation,
+			   	          gpointer user_data);
 
-static gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+						     GDBusMethodInvocation *invocation,
+						     gpointer user_data);
+
+gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
 						            GDBusMethodInvocation *invocation,
 						            gpointer user_data);
-
-static gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
-						                   GDBusMethodInvocation *invocation,
-						                   gpointer user_data);
 
 /* Internal Functions */
 

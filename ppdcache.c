@@ -3,6 +3,9 @@
 dict_cache *cache = NULL;
 dict_modtimes *modtimes = NULL;
 list *queued = NULL;
+bool connecting = false;
+void(*cups)() = NULL;
+
 
 /* Function definations */
 
@@ -125,11 +128,10 @@ FILE *find_file(dict_cache **head, char *str)
 
 void fetch_ppd(char *name, 
                void(*callback)(),
-               bool check_uptodate
+               bool check_uptodate,
                const char *host,
                int port,
-               http_encryption_t encryption,
-               int connecting)
+               http_encryption_t encryption)
 {
 	http_status_t http_status;
 	char filename[1024] = "\0";
@@ -138,7 +140,7 @@ void fetch_ppd(char *name,
 	if(check_uptodate & find_modtimes(&modtimes, name))
 	{
 		http_status = cupsGetPPD3(CUPS_HTTP_DEFAULT, modtimes->qname, &(modtimes->time), filename, sizeof(filename));
-		got_ppd3(name, http_status, modtimes->time, filename, callback);
+		got_ppd3(name, http_status, modtimes->time, filename, callback, check_uptodate);
 		return;
 	}
 
@@ -149,11 +151,11 @@ void fetch_ppd(char *name,
 		{
 			insert_list(&queued, name, callback);
 			if(!connecting)
-				self_connect(NULL, host, port, encryption, connecting);
+				self_connect(NULL, host, port, encryption);
 			return;
 		}
 		http_status = cupsGetPPD3(CUPS_HTTP_DEFAULT, modtimes->qname, &(modtimes->time), filename, sizeof(filename));
-		got_ppd3(name, http_status, modtimes->time, filename, callback);
+		got_ppd3(name, http_status, modtimes->time, filename, callback, check_uptodate);
 		return;
 	}
 	else
@@ -161,8 +163,12 @@ void fetch_ppd(char *name,
         //RuntimeError
 		f = find_file(&cache, name);
 		if(f == NULL)
-			schedule_callback(callback, name, "\0");
-		return;
+		{
+            schedule_callback(callback, name, NULL);
+            return;
+        }
+        fseek(f, 0, SEEK_SET);
+        schedule_callback(callback, name, f);
 	}
 
 	/* fseek(f, 0, SEEK_SET); 
@@ -182,28 +188,19 @@ void fetch_ppd(char *name,
 void connected()
 {
 	connecting = false;
-    
-    /*
-
-    if isinstance (exc, Exception):
-        self._cups = None
-        self._exc = exc
-    else:
-        self._cups = connection
-
-    queued = self._queued
-    self._queued = list()
-    for name, callback in queued:
-        self.fetch_ppd (name, callback)
-	
-    */
+    list *c = queued;
+    while(c != NULL)
+    {
+        fetch_ppd(c->qname, c->method, true, "\0", 0, 0);
+        c = c->next;
+    }
+    queued = NULL;
 }
 
 void self_connect(void(*callback)(),
                   const char *host,
                   int port,
-                  http_encryption_t encryption,
-                  int connecting)
+                  http_encryption_t encryption)
 {
 	connecting = true;
 	Async_Connection(connected, 
@@ -220,7 +217,8 @@ void got_ppd3(char *name,
               http_status_t status, 
               time_t time, 
               char *fname, 
-              void(*callback)())
+              void(*callback)(),
+              bool check_uptodate)
 {
 	if(status == HTTP_STATUS_NOT_MODIFIED)
 		remove(fname);
@@ -230,7 +228,7 @@ void got_ppd3(char *name,
 		fn = fopen(fname,"rb");
 		if(fn == NULL)
 		{
-			schedule_callback(callback, name, "\0");
+			schedule_callback(callback, name, NULL);
 			return;
 		}
 		insert_cache(&cache, name, fn);
@@ -238,14 +236,14 @@ void got_ppd3(char *name,
 		insert_modtimes(&modtimes, name, time);
 
 		check_uptodate = false;
-		fetch_ppd(name, callback, false);
+		fetch_ppd(name, callback, false, "\0", 0, 0);
 	}
 	else
-		schedule_callback(callback, name, "\0");
+		schedule_callback(callback, name, NULL);
 }
 
 
-void schedule_callback(void(*callback)(), char *name, char *ppd)
+void schedule_callback(void(*callback)(), char *name, FILE *ppd)
 {
     pthread_mutex_t lock;
     pthread_mutex_init(&lock, NULL);

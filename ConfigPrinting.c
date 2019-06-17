@@ -8,9 +8,9 @@
 #include <gtk/gtk.h>
 #include <errno.h>
 #include "killtimer.h"
-//#include "ppdcache.h"
-//#include "asyncconn.h"
-//#include "authinfocache.h"
+#include "ppdcache.h"
+#include "asyncconn.h"
+#include "authinfocache.h"
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
@@ -54,7 +54,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 
 	/* main initialization */
 	KillTimer((void *)gtk_main_quit);
-    /*
+    
 	Async_Connection(NULL, 
 					 NULL, 
 					 NULL, 
@@ -63,7 +63,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 					 0, 
 					 true, 
 					 true);
-    */
+    
 	/**********************/
 
 	interface = newprinterdialog_dbus_org_fedoraproject_config_printing_skeleton_new();

@@ -36,10 +36,10 @@ def DownloadDriverForDeviceID(self, xid, device_id):
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
-          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/2 \
           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.DownloadDriverForDeviceID \
-          int32:1 \
-          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
+          uint32:1 \
+          string:'MFG:HP;MDL:hp 910;DES:hp 910;'
 
 ###
 Error
@@ -52,7 +52,7 @@ dbus-send --session \
           --print-reply=literal \
           /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.ChangePPD \
-          int32:1 \
+          uint32:1 \
           string:'test' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' 
 
@@ -65,7 +65,7 @@ dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
           /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
-          --type=signal org.fedoraproject.Config.Printing.NewPrinterDialog.DialogCanceled
+          --type=signal org.fedoraproject.Config.Printing.NewPrinterDialog.PrinterModified string:'test' boolean:false
 
 
 Error org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
