@@ -1,100 +1,68 @@
-#include <python3.6m/Python.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <glib.h>
-#include <string.h>
-#include <cups/cups.h>
-#include <pthread.h>
-#include <gtk/gtk.h>
-#include <errno.h>
-#include "killtimer.h"
-#include "ppdcache.h"
-#include "asyncconn.h"
-#include "authinfocache.h"
 #include "ConfigPrintingNewPrinterDialog.h"
-#include "newprinterdialog_dbus.h"
 
 gulong dialog_canceled = 0,
 	   printer_added = 0,
 	   printer_modified = 0,
 	   drv_dwn_checked = 0;
 
-static void name_acquired_handler(GDBusConnection *connection, 
-	                              const gchar *name, 
-	                              gpointer user_data);
-
-/* Methods */
-
-static gboolean NewPrinterFromDevice(NewPrinterDialogDBusPrinting *interface,
-									 GDBusMethodInvocation *invocation,
-									 const guint xid, 
-									 const gchar *device_uri,
-									 const gchar *device_id,
-									 gpointer user_data);
-
-static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusPrinting *interface,
-									      GDBusMethodInvocation *invocation,
-									      const guint xid, 
-								          const gchar *device_id,
-									      gpointer user_data);
-
-static gboolean ChangePPD(NewPrinterDialogDBusPrinting *interface,
-						  GDBusMethodInvocation *invocation,
-						  const guint xid, 
-						  const gchar *name,
-						  const gchar *device_id,
-						  gpointer user_data);
-
-/* signals */
-
-static gboolean on_dialog_canceled(NewPrinterDialogDBusPrinting *interface,
-						  			  GDBusMethodInvocation *invocation,
-						              gpointer user_data);
-
-static gboolean on_printer_added(NewPrinterDialogDBusPrinting *interface,
-						            GDBusMethodInvocation *invocation,
-						            gpointer user_data);
-
-static gboolean on_printer_modified(NewPrinterDialogDBusPrinting *interface,
-						               GDBusMethodInvocation *invocation,
-						               gpointer user_data);
-
-static gboolean on_driver_download_checked(NewPrinterDialogDBusPrinting *interface,
-						                    GDBusMethodInvocation *invocation,
-						                    gpointer user_data);
-
-/* Internal Functions */
-
-static void change_ppd_got_ppd();
-static void change_ppd_with_dev();
-static void do_change_ppd();
-
-int main()
+void CPNewPrinterDialog(GDBusConnection *connection, 
+	                    const gchar *name, 
+	                    const gchar *path)
 {
-	GMainLoop *loop;
-	loop = g_main_loop_new(NULL, FALSE);
-
-	g_bus_own_name(G_BUS_TYPE_SESSION, 
-		           "com.test", 
-		           0, 
-		           NULL, 
-		           name_acquired_handler, 
-		           NULL, 
-		           NULL, 
-		           NULL);
-
-	g_main_loop_run(loop);
-}
-
-static void name_acquired_handler(GDBusConnection *connection, 
-	                              const gchar *name, 
-	                              gpointer user_data)
-{
-	NewPrinterDialogDBusPrinting *interface;
+	NewPrinterDialogDBusNewPrinterDialog *interface;
 	GError *error;
 
-	interface = newprinterdialog_dbus_printing_skeleton_new();
+	/* main initialization */
 
+	//PPDCache((char *)"\0", 
+	//	     0, 
+	//	     0);
+
+    /*
+    PyObject *pName, *pModule, *pFunc;
+    PyObject *pArgs, *pValue;
+
+    char *module = "asyncconn"; // module name
+    char *object = "Connection"; // class name
+
+    //Set PYTHONPATH to working directory
+    setenv("PYTHONPATH",".",1);
+
+    // Initialize the Python Interpreter
+    Py_Initialize();
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path.append(\".\")");
+    PyRun_SimpleString("sys.argv=['']");
+
+    // Build the name object
+    pName = PyUnicode_DecodeFSDefault(module);
+    // Error checking of pName left out 
+
+    // Load the module object
+    pModule = PyImport_Import(pName);
+
+    Py_DECREF(pName);
+
+    if (pModule != NULL) 
+    {
+        pFunc = PyObject_GetAttrString(pModule, object);
+
+        if (pFunc && PyCallable_Check(pFunc)) 
+        {
+            pArgs = Py_BuildValue("()");
+            PyErr_Print();
+            pValue = PyObject_CallObject(pFunc, pArgs);
+            PyErr_Print();
+        }
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
+    }
+    */
+	/**********************/
+
+	interface = newprinterdialog_dbus_new_printer_dialog_skeleton_new();
+
+	/* Methods */
 	g_signal_connect(interface, 
 					 "handle-new-printer-from-device", 
 					 G_CALLBACK(NewPrinterFromDevice), 
@@ -107,7 +75,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 		             "handle-change-ppd", 
 		              G_CALLBACK(ChangePPD), 
 		              NULL);
-	
+	/* Signals */
 	dialog_canceled = g_signal_connect(interface, 
 		             	 			  "handle-on-dialog-canceled", 
 		              	 			   G_CALLBACK(on_dialog_canceled), 
@@ -127,13 +95,13 @@ static void name_acquired_handler(GDBusConnection *connection,
 	error = NULL;
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(interface), 
 									 connection, 
-									 "/", 
+									 path, 
 									 &error);
 }
 
 /* Methods */
 
-static gboolean NewPrinterFromDevice(NewPrinterDialogDBusPrinting *interface,
+static gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
 									 GDBusMethodInvocation *invocation,
 									 const guint xid, 
 									 const gchar *device_uri,
@@ -146,11 +114,83 @@ static gboolean NewPrinterFromDevice(NewPrinterDialogDBusPrinting *interface,
 	self.dialog.init ('printer_with_uri', device_uri=device_uri,
                           devid=device_id, xid=xid)
 	*/
-	newprinterdialog_dbus_printing_complete_new_printer_from_device(interface, invocation);
+    /*
+	PyObject *pName, *pModule, *pObj, *pFunc;
+    PyObject *pArgs, *pValue;
+
+    char *module = "newprinter"; // module name
+    char *object = "NewPrinterGUI"; // class name
+    char *method = "init"; // method name
+
+    //Set PYTHONPATH to working directory
+    setenv("PYTHONPATH",".",1);
+
+    // Initialize the Python Interpreter
+    Py_Initialize();
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path.append(\".\")");
+    PyRun_SimpleString("sys.argv=['']");
+
+    // Build the name object
+    pName = PyUnicode_DecodeFSDefault(module);
+    // Error checking of pName left out 
+
+    // Load the module object
+    pModule = PyImport_Import(pName);
+
+    Py_DECREF(pName);
+
+    if (pModule != NULL) 
+    {
+        pObj = PyObject_GetAttrString(pModule, object);
+        pFunc = PyObject_GetAttrString(pObj, method); 
+
+        if (pFunc && PyCallable_Check(pFunc)) 
+        {
+            pArgs = Py_BuildValue("()");
+            PyErr_Print();
+            pValue = PyObject_CallObject(pObj, pArgs);
+
+            pArgs = PyTuple_New(10);
+            PyErr_Print();
+
+            PyTuple_SetItem(pArgs, 0, pValue);
+            PyErr_Print();
+
+            pValue = PyUnicode_FromString((char *)"printer_with_uri");
+            PyTuple_SetItem(pArgs, 1, pValue);
+            pValue = PyUnicode_FromString(device_uri);
+            PyTuple_SetItem(pArgs, 2, pValue);
+            pValue = PyUnicode_FromString((char *)"None");
+            PyTuple_SetItem(pArgs, 3, pValue);
+            pValue = PyUnicode_FromString((char *)"None");
+            PyTuple_SetItem(pArgs, 4, pValue);
+            pValue = PyUnicode_FromString(device_id);
+            PyTuple_SetItem(pArgs, 5, pValue);
+            pValue = PyUnicode_FromString((char *)"None");
+            PyTuple_SetItem(pArgs, 6, pValue);
+            pValue = PyLong_FromLong(0);
+            PyTuple_SetItem(pArgs, 7, pValue);
+            pValue = PyUnicode_FromString((char *)"None");
+            PyTuple_SetItem(pArgs, 8, pValue);
+            pValue = PyLong_FromUnsignedLong(xid);
+            PyTuple_SetItem(pArgs, 9, pValue);
+
+
+            pValue = PyObject_CallObject(pFunc, pArgs);
+            PyErr_Print();
+        }
+        
+        Py_XDECREF(pObj);
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
+    }
+    */
+	newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
 	return FALSE;
 }
 
-static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusPrinting *interface,
+static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
 									      GDBusMethodInvocation *invocation,
 									      const guint xid, 
 								          const gchar *device_id,
@@ -160,11 +200,11 @@ static gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusPrinting *interfac
 	/*
 	self.dialog.init ('download_driver', devid=device_id, xid=xid)
 	*/
-	newprinterdialog_dbus_printing_complete_download_driver_for_device_id(interface, invocation);
+	newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id(interface, invocation);
 	return FALSE;
 }
 
-static gboolean ChangePPD(NewPrinterDialogDBusPrinting *interface,
+static gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
 						  GDBusMethodInvocation *invocation,
 						  const guint xid, 
 						  const gchar *name,
@@ -176,8 +216,8 @@ static gboolean ChangePPD(NewPrinterDialogDBusPrinting *interface,
 	//guint self_xid = xid;
 	//gchar *self_name = name; 
 	//gchar *self_device_id = device_id;
-	fetch_ppd(name, change_ppd_got_ppd);
-	newprinterdialog_dbus_printing_complete_change_ppd(interface, invocation);
+	//fetch_ppd(name, change_ppd_got_ppd, true);
+	newprinterdialog_dbus_new_printer_dialog_complete_change_ppd(interface, invocation);
 
 	return FALSE;
 }
@@ -203,52 +243,52 @@ static void do_change_ppd()
 /* Signals */
 
 
-static gboolean on_dialog_canceled(NewPrinterDialogDBusPrinting *interface,
-						  			  GDBusMethodInvocation *invocation,
-						              gpointer user_data)
+static gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
+						  		   GDBusMethodInvocation *invocation,
+						           gpointer user_data)
 {	
 	remove_hold();
-	newprinterdialog_dbus_printing_emit_dialog_canceled((interface));
-	newprinterdialog_dbus_printing_complete_on_dialog_canceled(interface, invocation);
+	newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled((interface));
+	newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled(interface, invocation);
 	if(dialog_canceled != 0)
 		g_signal_handler_disconnect(interface, dialog_canceled);
 	//remove_from_connection();
 	return TRUE;
 }
 
-static gboolean on_printer_added(NewPrinterDialogDBusPrinting *interface,
-						            GDBusMethodInvocation *invocation,
-						            gpointer user_data)
+static gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
+						         GDBusMethodInvocation *invocation,
+						         gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_printing_emit_printer_added((interface));
-	newprinterdialog_dbus_printing_complete_on_printer_added(interface, invocation);
+	newprinterdialog_dbus_new_printer_dialog_emit_printer_added((interface));
+	newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added(interface, invocation);
 	if(printer_added != 0)
 		g_signal_handler_disconnect(interface, printer_added);
 	//remove_from_connection();
 	return TRUE;
 }
 
-static gboolean on_printer_modified(NewPrinterDialogDBusPrinting *interface,
-						               GDBusMethodInvocation *invocation,
-						               gpointer user_data)
+static gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+						            GDBusMethodInvocation *invocation,
+						            gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_printing_emit_printer_modified((interface));
-	newprinterdialog_dbus_printing_complete_on_printer_modified(interface, invocation);
+	newprinterdialog_dbus_new_printer_dialog_emit_printer_modified((interface));
+	newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified(interface, invocation);
 	if(printer_modified != 0)
 		g_signal_handler_disconnect(interface, printer_modified);
 	//remove_from_connection();
 	return TRUE;
 }
 
-static gboolean on_driver_download_checked(NewPrinterDialogDBusPrinting *interface,
-						                    GDBusMethodInvocation *invocation,
-						                    gpointer user_data)
+static gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
+						                   GDBusMethodInvocation *invocation,
+						                   gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_printing_emit_driver_download_cheked((interface));
-	newprinterdialog_dbus_printing_complete_on_driver_download_checked(interface, invocation);
+	newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked((interface));
+	newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked(interface, invocation);
 	if(drv_dwn_checked != 0)
 		g_signal_handler_disconnect(interface, drv_dwn_checked);
 	//remove_from_connection();
