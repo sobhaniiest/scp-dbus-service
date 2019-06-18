@@ -17,6 +17,10 @@ void Async_Connection(void(*reply_handler)(),
 
 	if(!(strcmp(host,"\0")))
 		host = cupsServer();
+	if(port == 0)
+		port = ippPort();
+	if(encryption == 0)
+		encryption = cupsEncryption();
 
 	use_pk = (((host[0] == '/') | !(strcmp(host,"localhost"))) & getuid() != 0);
 	

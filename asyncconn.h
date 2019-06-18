@@ -1,7 +1,6 @@
 #ifndef ASYNCCONN_H
 #define ASYNCCONN_H
 
-#include <python3.6m/Python.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <cups/cups.h>

@@ -1,4 +1,3 @@
-#include <python3.6m/Python.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib.h>
