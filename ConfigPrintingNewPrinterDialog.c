@@ -15,46 +15,7 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 	/* main initialization */
 
 
-    /*
-    PyObject *pName, *pModule, *pFunc;
-    PyObject *pArgs, *pValue;
-
-    char *module = "asyncconn"; // module name
-    char *object = "Connection"; // class name
-
-    //Set PYTHONPATH to working directory
-    setenv("PYTHONPATH",".",1);
-
-    // Initialize the Python Interpreter
-    Py_Initialize();
-    PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append(\".\")");
-    PyRun_SimpleString("sys.argv=['']");
-
-    // Build the name object
-    pName = PyUnicode_DecodeFSDefault(module);
-    // Error checking of pName left out 
-
-    // Load the module object
-    pModule = PyImport_Import(pName);
-
-    Py_DECREF(pName);
-
-    if (pModule != NULL) 
-    {
-        pFunc = PyObject_GetAttrString(pModule, object);
-
-        if (pFunc && PyCallable_Check(pFunc)) 
-        {
-            pArgs = Py_BuildValue("()");
-            PyErr_Print();
-            pValue = PyObject_CallObject(pFunc, pArgs);
-            PyErr_Print();
-        }
-        Py_XDECREF(pFunc);
-        Py_DECREF(pModule);
-    }
-    */
+    
 	/**********************/
 
 	interface = newprinterdialog_dbus_new_printer_dialog_skeleton_new();
@@ -111,78 +72,7 @@ gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
 	self.dialog.init ('printer_with_uri', device_uri=device_uri,
                           devid=device_id, xid=xid)
 	*/
-    /*
-	PyObject *pName, *pModule, *pObj, *pFunc;
-    PyObject *pArgs, *pValue;
-
-    char *module = "newprinter"; // module name
-    char *object = "NewPrinterGUI"; // class name
-    char *method = "init"; // method name
-
-    //Set PYTHONPATH to working directory
-    setenv("PYTHONPATH",".",1);
-
-    // Initialize the Python Interpreter
-    Py_Initialize();
-    PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append(\".\")");
-    PyRun_SimpleString("sys.argv=['']");
-
-    // Build the name object
-    pName = PyUnicode_DecodeFSDefault(module);
-    // Error checking of pName left out 
-
-    // Load the module object
-    pModule = PyImport_Import(pName);
-
-    Py_DECREF(pName);
-
-    if (pModule != NULL) 
-    {
-        pObj = PyObject_GetAttrString(pModule, object);
-        pFunc = PyObject_GetAttrString(pObj, method); 
-
-        if (pFunc && PyCallable_Check(pFunc)) 
-        {
-            pArgs = Py_BuildValue("()");
-            PyErr_Print();
-            pValue = PyObject_CallObject(pObj, pArgs);
-
-            pArgs = PyTuple_New(10);
-            PyErr_Print();
-
-            PyTuple_SetItem(pArgs, 0, pValue);
-            PyErr_Print();
-
-            pValue = PyUnicode_FromString((char *)"printer_with_uri");
-            PyTuple_SetItem(pArgs, 1, pValue);
-            pValue = PyUnicode_FromString(device_uri);
-            PyTuple_SetItem(pArgs, 2, pValue);
-            pValue = PyUnicode_FromString((char *)"None");
-            PyTuple_SetItem(pArgs, 3, pValue);
-            pValue = PyUnicode_FromString((char *)"None");
-            PyTuple_SetItem(pArgs, 4, pValue);
-            pValue = PyUnicode_FromString(device_id);
-            PyTuple_SetItem(pArgs, 5, pValue);
-            pValue = PyUnicode_FromString((char *)"None");
-            PyTuple_SetItem(pArgs, 6, pValue);
-            pValue = PyLong_FromLong(0);
-            PyTuple_SetItem(pArgs, 7, pValue);
-            pValue = PyUnicode_FromString((char *)"None");
-            PyTuple_SetItem(pArgs, 8, pValue);
-            pValue = PyLong_FromUnsignedLong(xid);
-            PyTuple_SetItem(pArgs, 9, pValue);
-
-
-            pValue = PyObject_CallObject(pFunc, pArgs);
-            PyErr_Print();
-        }
-        
-        Py_XDECREF(pObj);
-        Py_XDECREF(pFunc);
-        Py_DECREF(pModule);
-    }
-    */
+    
 	newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
 	return FALSE;
 }
