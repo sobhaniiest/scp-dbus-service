@@ -13,6 +13,19 @@
 #include "asyncipp.h"
 #include "authinfocache.h"
 
+typedef struct _printer_uri
+{
+	char *name;
+	char *uri;
+	struct _printer_uri *next;
+}printer_uri;
+
+extern printer_uri *puri;
+
+void insert_uri(printer_uri **head, char *n, char *u);
+void set_ipp_error (ipp_status_t status, const char *message);
+printer_uri *getURI(http_t *new);
+
 void IPPAuthConnection(void(*reply_handler)(), 
 					   void(*error_handler)(), 
 					   void(*auth_handler)(), 
