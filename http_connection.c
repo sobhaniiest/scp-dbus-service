@@ -61,7 +61,7 @@ int test(http_t *n)
     //fprintf(stderr, "#####\n");
         
 
-    if ((attr = ippFindAttribute(answer, "device-uri", IPP_TAG_TEXT)) != NULL)
+    if ((attr = ippFindAttribute(answer, "device-uri", IPP_TAG_URI)) != NULL)
     {
         printf("device-uri = \"%s\"\n", ippGetString(attr, 0, NULL));
     }
