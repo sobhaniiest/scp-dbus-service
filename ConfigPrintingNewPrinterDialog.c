@@ -73,6 +73,16 @@ gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
                           devid=device_id, xid=xid)
 	*/
     
+    init("printer_with_uri", 
+         device_uri, 
+         "\0", 
+         "\0", 
+         device_id, 
+         "\0", 
+         0, 
+         0);
+
+
 	newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
 	return FALSE;
 }
@@ -87,6 +97,16 @@ gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interfa
 	/*
 	self.dialog.init ('download_driver', devid=device_id, xid=xid)
 	*/
+
+    init("download_driver", 
+         "\0", 
+         "\0", 
+         "\0", 
+         device_id, 
+         "\0", 
+         0, 
+         0);
+
 	newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id(interface, invocation);
 	return FALSE;
 }

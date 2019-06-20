@@ -10,6 +10,7 @@
 #include "ppdcache.h"
 #include "asyncconn.h"
 #include "authinfocache.h"
+#include "newprinter.h"
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
