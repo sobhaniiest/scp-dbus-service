@@ -32,6 +32,32 @@ dbus-send --session \
           org.fedoraproject.Config.Printing.NewPrinterDialog                                                                 
 5. make clean
 
+# Testing the methods of NewPrinterDialog Interface :
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='uss', out_signature='')
+def NewPrinterFromDevice(self, xid, device_uri, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.NewPrinterFromDevice \
+          uint32:1 \
+          string:'file:/tmp/printout' \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='us', out_signature='')
+def DownloadDriverForDeviceID(self, xid, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.DownloadDriverForDeviceID \
+          uint32:1 \
+          string:'MFG:HP;MDL:hp 910;DES:hp 910;'
+
+
 # Testing of scp-dbus-service(original) using dbus-send command ::
 https://github.com/sobhaniiest/scp-dbus-service/blob/master/dbus-send.txt
 
