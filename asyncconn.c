@@ -1,6 +1,5 @@
 #include "asyncconn.h"
 
-
 void Async_Connection(void(*reply_handler)(), 
 					 void(*error_handler)(), 
 					 void(*auth_handler)(), 
@@ -44,6 +43,7 @@ void Async_Connection(void(*reply_handler)(),
 						  try_as_root,
 						  prompt_allowed);
 	}
+
 
 }
 

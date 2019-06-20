@@ -10,6 +10,7 @@
 
 
 void NewPrinter();
+static void s_c_p(GtkWidget *widget, gpointer data);
 bool init(char *dialog_mode,
 		  char *device_uri,
 		  char *name,

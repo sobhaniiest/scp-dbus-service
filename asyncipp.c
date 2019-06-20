@@ -107,25 +107,24 @@ void IPPAuthConnection(void(*reply_handler)(),
 					   bool try_as_root, 
 					   bool prompt_allowed)
 {
-	char *user = "\0";
-	dict *creds = NULL;
-	//lookup_auth_info(host, port);
-	if(creds != NULL)
-	{
-		if(strcmp(creds->hname, "root") || try_as_root)
-			user = creds->hname;
-		free(creds);
-	}
+  	char *user = "\0";
+  	dict *creds = NULL;//lookup_auth_info(host, port);
+  	if(creds != NULL)
+  	{
+  		if(strcmp(creds->hname, "root") || try_as_root)
+  			user = creds->hname;
+  		free(creds);
+  	}
 
-	//IPPAuthOperation();
+  	//IPPAuthOperation();
 
-	IPPConnection(reply_handler, 
-				  error_handler, 
-				  auth_handler,
-				  user, 
-				  host, 
-				  port,
-				  encryption);
+  	IPPConnection(reply_handler, 
+  				  error_handler, 
+  				  auth_handler,
+  				  user, 
+  				  host, 
+  				  port,
+  				  encryption);
 }
 
 void IPPConnection(void(*reply_handler)(), 
@@ -136,7 +135,7 @@ void IPPConnection(void(*reply_handler)(),
 				   int port, 
 				   http_encryption_t encryption)
 {
-	char *uri;
+	  char *uri;
     fprintf(stderr, "host: %s\nport: %d\nencryption: %d\n",host,port,encryption);
   
     http_t *http = httpConnectEncrypt (host, port, (http_encryption_t) encryption);
