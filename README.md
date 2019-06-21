@@ -18,18 +18,21 @@ Here the generated .c and .h files are
 
 Here the programs are able to export the methods of the NewPrinterDialog and ConfigPrinting and able to emit the signals of NewPrinterDialog. 
 
+To prevent the functionality of the old scp-dbus-service.py, go to the directory "/usr/bin/" and open the bash file "scp-dbus-service", comment on the lines and restart the system.
+
+
 # Steps ::
 
 1. make gen
 2. make
 3. ./main
-4. in another terminal window :                                                                                               
-dbus-send --session \                                                                                                         
-          --dest=org.fedoraproject.Config.Printing \                                                                         
-          --print-reply=literal \                                                                                             
-          /org/fedoraproject/Config/Printing \                                                                               
-          --type=method_call \                                                                                               
-          org.fedoraproject.Config.Printing.NewPrinterDialog                                                                 
+4. in another terminal window :
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.NewPrinterDialog
 5. make clean
 
 # Testing the methods of NewPrinterDialog Interface :
