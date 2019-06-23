@@ -37,6 +37,8 @@ dbus-send --session \
 
 # Testing the methods of NewPrinterDialog Interface :
 
+# NewPrinterFromDevice
+
 @dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='uss', out_signature='')
 def NewPrinterFromDevice(self, xid, device_uri, device_id):
 
@@ -49,6 +51,8 @@ dbus-send --session \
           string:'file:/tmp/printout' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
 
+# DownloadDriverForDeviceID
+
 @dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='us', out_signature='')
 def DownloadDriverForDeviceID(self, xid, device_id):
 
@@ -60,7 +64,20 @@ dbus-send --session \
           uint32:1 \
           string:'MFG:HP;MDL:hp 910;DES:hp 910;'
 
+# ChangePPD
+
+@dbus.service.method(dbus_interface=CONFIG_NEWPRINTERDIALOG_IFACE, in_signature='uss', out_signature='')
+def ChangePPD(self, xid, name, device_id):
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.ChangePPD \
+          uint32:1 \
+          string:'test' \
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' 
+
 
 # Testing of scp-dbus-service(original) using dbus-send command ::
 https://github.com/sobhaniiest/scp-dbus-service/blob/master/dbus-send.txt
-

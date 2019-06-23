@@ -14,7 +14,7 @@ static void s_c_p(GtkWidget *widget, gpointer data);
 bool init(char *dialog_mode,
 		  char *device_uri,
 		  char *name,
-		  char *ppd,
+		  FILE *ppd,
 		  char *device_id,
 		  char *host,
 		  http_encryption_t encryption,
@@ -25,7 +25,9 @@ static void activate(GtkApplication *app,
 static int activate_NewPrinterFromDevice(char *dev_uri, 
                                          char *devid);
 static int activate_DownloadDriverForDeviceID(char *devid);
-
-
+static int activate_ChangePPD(char *dev_uri, 
+                              char *devid, 
+                              char *name, 
+                              FILE *ppd);
 
 #endif

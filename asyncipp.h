@@ -20,28 +20,27 @@ typedef struct _printer_uri
 	struct _printer_uri *next;
 }printer_uri;
 
-extern printer_uri *puri;
-
-void insert_uri(printer_uri **head, char *n, char *u);
-void set_ipp_error (ipp_status_t status, const char *message);
+static void insert_uri(printer_uri **head, char *n, char *u);
+static void set_ipp_error (ipp_status_t status, const char *message);
 printer_uri *getURI(http_t *new);
 
-void IPPAuthConnection(void(*reply_handler)(), 
-					   void(*error_handler)(), 
-					   void(*auth_handler)(), 
-					   char *host, 
-					   int port, 
-					   http_encryption_t encryption, 
-					   bool try_as_root, 
-					   bool prompt_allowed);
+printer_uri *IPPAuthConnection(void(*reply_handler)(), 
+                  			   void(*error_handler)(), 
+                  			   void(*auth_handler)(), 
+                  			   const char *host, 
+                  			   int port, 
+                  			   http_encryption_t encryption, 
+                  			   bool try_as_root, 
+                  			   bool prompt_allowed);
 
-void IPPConnection(void(*reply_handler)(), 
-				   void(*error_handler)(), 
-				   void(*auth_handler)(),
-				   char *user, 
-				   char *host, 
-				   int port, 
-				   http_encryption_t encryption);
+printer_uri *IPPConnection(void(*reply_handler)(), 
+                		   void(*error_handler)(), 
+                		   void(*auth_handler)(),
+                		   const char *user, 
+                		   const char *host, 
+                		   int port, 
+                		   http_encryption_t encryption);  	
 
+static void op_error_handler();	    
 
 #endif

@@ -17,6 +17,15 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
+typedef struct _memory
+{
+	guint mxid;
+    gchar *mname;
+    gchar *mdevice_id;
+}memory;
+
+extern memory reference;
+
 extern gulong dialog_canceled,
 	   printer_added,
 	   printer_modified,
@@ -68,9 +77,8 @@ gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interf
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd();
-static void change_ppd_with_dev();
-static void do_change_ppd();
-
+static void change_ppd_got_ppd(char *name, FILE *ppd);
+static void change_ppd_with_dev(printer_uri **head, char *name, FILE *ppd);
+static void do_change_ppd(char *device_uri, char *name, FILE *ppd);
 
 #endif

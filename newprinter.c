@@ -42,7 +42,7 @@ static void activate(GtkApplication *app, char *user_data)
 bool init(char *dialog_mode,
 		  char *device_uri,
 		  char *name,
-		  char *ppd,
+		  FILE *ppd,
 		  char *device_id,
 		  char *host,
 		  http_encryption_t encryption,
@@ -58,8 +58,8 @@ bool init(char *dialog_mode,
 
 	if(!(strcmp(dialog_mode, "printer_with_uri")))
 		activate_NewPrinterFromDevice(device_uri, device_id);
-	//else if(!(strcmp(dialog_mode, "ppd")))
-		//initialisePPDMode();
+	else if(!(strcmp(dialog_mode, "ppd")))
+		activate_ChangePPD(device_uri, device_id, name, ppd);
 	else if(!(strcmp(dialog_mode, "download_driver")))
 		activate_DownloadDriverForDeviceID(device_id);
 
@@ -71,7 +71,7 @@ static int activate_NewPrinterFromDevice(char *dev_uri, char *devid)
 	GtkApplication *app;
 	int status;
 	const char buffer[1024];
-	snprintf(buffer, 1024, "\tWant to add New Printer from device\t\n\n\tDevice URI : %s\t\n\n\tDevice ID : %s.\t\n",dev_uri, devid);
+	snprintf(buffer, 1024, "\tWant to add New Printer from device\t\n\n\tDevice URI : %s\t\n\n\tDevice ID : %s\t\n",dev_uri, devid);
   	app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
   	g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
   	status = g_application_run (G_APPLICATION (app), 0, NULL);
@@ -84,10 +84,23 @@ static int activate_DownloadDriverForDeviceID(char *devid)
 	GtkApplication *app;
 	int status;
 	char buffer[1024];
-	snprintf(buffer, 1024, "\tWant to download Driver for the given Device ID\t\n\n\tDevice ID : %s.\t\n", devid);
+	snprintf(buffer, 1024, "\tWant to download Driver for the given Device ID\t\n\n\tDevice ID : %s\t\n", devid);
   	app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
   	g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
   	status = g_application_run (G_APPLICATION (app), 0, NULL);
   	g_object_unref (app);
   	return status;
+}
+
+static int activate_ChangePPD(char *dev_uri, char *devid, char *name, FILE *ppd)
+{
+    GtkApplication *app;
+    int status;
+    char buffer[1024];
+    snprintf(buffer, 1024, "\tWant to Change PPD for the given\t\n\n\tDevice URI : %s\t\n\n\tDevice ID : %s\t\n\n\tPrinter/Queue Name : %s\t\n\n\t", dev_uri, devid, name);
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
+    status = g_application_run (G_APPLICATION (app), 0, NULL);
+    g_object_unref (app);
+    return status;
 }

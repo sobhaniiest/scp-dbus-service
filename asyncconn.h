@@ -11,15 +11,17 @@
 #include "authinfocache.h"
 #include "asyncconn.h"
 
+printer_uri *Async_Connection(void(*reply_handler)(), 
+                              void(*error_handler)(), 
+                              void(*auth_handler)(), 
+                              const char *host, 
+                              int port, 
+                              http_encryption_t encryption, 
+                              bool try_as_root, 
+                              bool prompt_allowed);
 
-void Async_Connection(void(*reply_handler)(), 
-					 void(*error_handler)(), 
-					 void(*auth_handler)(), 
-					 char *host, 
-					 int port, 
-					 http_encryption_t encryption, 
-					 bool try_as_root, 
-					 bool prompt_allowed);
-
+static void subset_reply_handler();
+static void subset_error_handler();
+static void subset_auth_handler();
 
 #endif

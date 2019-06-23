@@ -1,5 +1,7 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 
+memory reference;
+
 gulong dialog_canceled = 0,
 	   printer_added = 0,
 	   printer_modified = 0,
@@ -119,7 +121,9 @@ gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
                    gpointer user_data)
 {
 	add_hold();
-	g_print("Called!!!\n");
+	reference.mxid = xid;
+    reference.mname = name;
+    reference.mdevice_id = device_id;
 	fetch_ppd(name, change_ppd_got_ppd, true, "\0", 0, 0);
 	newprinterdialog_dbus_new_printer_dialog_complete_change_ppd(interface, invocation);
 
@@ -128,20 +132,53 @@ gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd()
+static void change_ppd_got_ppd(char *name, FILE *ppd)
 {
-
+    printer_uri *status = Async_Connection(change_ppd_with_dev,
+                                           do_change_ppd,
+                                           NULL,
+                                           "\0",
+                                           0,
+                                           0,
+                                           true,
+                                           true);
+    if(!status)
+      do_change_ppd("\0", name, ppd);
+    else
+      change_ppd_with_dev(&status, name, ppd);
 }
 
 
-static void change_ppd_with_dev()
+static void change_ppd_with_dev(printer_uri **head, char *name, FILE *ppd)
 {
-
+    bool found = false;
+    printer_uri *c = (*head);
+    while(c != NULL)
+    {
+        if(!strcmp(c->name, name))
+        {
+            found = true;
+            break;
+        }
+        c = c->next;
+    }
+    if(found)
+        do_change_ppd(c->uri, name, ppd);
+    else
+        do_change_ppd("\0", name, ppd);
 }
 
-static void do_change_ppd()
-{
-
+static void do_change_ppd(char *device_uri, char *name, FILE *ppd)
+{  
+    //char *device_id = "MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;";
+    init("ppd",
+         device_uri,
+         name,
+         ppd,
+         reference.mdevice_id,
+         "\0",
+         0,
+         reference.mxid);
 }
 
 /* Signals */

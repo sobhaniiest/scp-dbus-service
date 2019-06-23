@@ -36,46 +36,46 @@ extern dict_cache *cache;
 extern dict_modtimes *modtimes;
 extern list *queued;
 extern bool connecting;
-extern void(*cups)();
+extern printer_uri *cups;
 
 /* Function declaration */
 
 /* Inserting cache data - printer queue name and PPD file descriptor */
-void insert_cache(dict_cache **head, char *str, FILE *fpname);
+static void insert_cache(dict_cache **head, char *str, FILE *fpname);
 
 /* Inserting cache data - printer queue name and modification time */
-void insert_modtimes(dict_modtimes **head, char *str, time_t value);
+static void insert_modtimes(dict_modtimes **head, char *str, time_t value);
 
 /* Inserting cache data - printer queue name and callback functions */
-void insert_list(list **head, char *str, void(*func)());
+static void insert_list(list **head, char *str, void(*func)());
 
 /* Finding the printer queue name is in cache data or not */
-bool find_modtimes(dict_modtimes **head, char *str);
-bool find_cache(dict_cache **head, char *str);
+static dict_modtimes *find_modtimes(dict_modtimes **head, char *str);
+static bool find_cache(dict_cache **head, char *str);
 
 /* Return the file descriptor of the corresponding printer queue if avaliable else return NULL */
-FILE *find_file(dict_cache **head, char *str);
+static FILE *find_file(dict_cache **head, char *str);
 
 /* Fetch the PPD file and check whether the PPD is up to date */
 void fetch_ppd(char *name, 
                void(*callback)(),
                bool check_uptodate,
-               const char *host,
+               char *host,
                int port,
                http_encryption_t encryption);
 /* */
 void connected();
 
 /* Connecting to asyncconn : Asyn_Connection*/
-void self_connect(void(*callback)(),
-                  const char *host,
-                  int port,
-                  http_encryption_t encryption);
+static void self_connect(void(*callback)(),
+                         char *host,
+                         int port,
+                         http_encryption_t encryption);
 
 /* If the file is older, Cache the new version */
-void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)(), bool check_uptodate);
+static void got_ppd3(char *name, http_status_t status, time_t time, char *fname, void(*callback)(), bool check_uptodate);
 
 /* */
-void schedule_callback(void(*callback)(), char *name, FILE *ppd);
+static void schedule_callback(void(*callback)(), char *name, FILE *ppd);
 
 #endif
