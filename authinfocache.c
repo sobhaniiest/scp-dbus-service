@@ -6,7 +6,7 @@ dict *creds = NULL;
 /* Function Definations */
 
 /* Internal Functions */
-void insert(dict **head, char *host, int port, char *user, char *password)
+void insert(dict **head, const char *host, int port, const char *user, char *password)
 {
     dict *c = (*head);
   
@@ -32,7 +32,7 @@ void insert(dict **head, char *host, int port, char *user, char *password)
     }
 }
 
-dict *find(dict **head, char *host, int port)
+dict *find(dict **head, const char *host, int port)
 {
     bool found = false;
     dict *c = (*head);
@@ -51,7 +51,7 @@ dict *find(dict **head, char *host, int port)
         return NULL;
 }
 
-void del(dict **head, char *host, int port)
+void del(dict **head, const char *host, int port)
 {
     dict *c,*p;
     c = (*head);
@@ -70,7 +70,7 @@ void del(dict **head, char *host, int port)
 
 /* External Functions */
 
-void cache_auth_info(char *user, char *password, char *host, int port)
+void cache_auth_info(const char *user, char *password, const char *host, int port)
 {
 	if(port == 0)
 		port = 631;
@@ -78,7 +78,7 @@ void cache_auth_info(char *user, char *password, char *host, int port)
 	insert(&creds, host, port, user, password);
 }
 
-dict *lookup_auth_info(char *host, int port)
+dict *lookup_auth_info(const char *host, int port)
 {
 	if(port == 0)
 		port = 631;
@@ -89,7 +89,7 @@ dict *lookup_auth_info(char *host, int port)
 		return find(&creds, host, port);
 }
 
-void remove_auth_info(char *host, int port)
+void remove_auth_info(const char *host, int port)
 {
 	if(port == 0)
 		port = 631;

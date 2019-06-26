@@ -17,11 +17,13 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
+#define NPDinterface NewPrinterDialogDBusNewPrinterDialog
+
 typedef struct _memory
 {
 	guint mxid;
-    gchar *mname;
-    gchar *mdevice_id;
+    const gchar *mname;
+    const gchar *mdevice_id;
 }memory;
 
 extern memory reference;
@@ -33,52 +35,52 @@ extern gulong dialog_canceled,
 
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    const gchar *name, 
-	                    const gchar *path);
+	                    gchar *path);
 
 /* Methods */
 
-gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean NewPrinterFromDevice(NPDinterface *interface,
 							  GDBusMethodInvocation *invocation,
-							  const guint xid, 
+							  guint xid, 
 							  const gchar *device_uri,
 							  const gchar *device_id,
 							  gpointer user_data);
 
-gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean DownloadDriverForDeviceID(NPDinterface *interface,
 								   GDBusMethodInvocation *invocation,
-								   const guint xid, 
+								   guint xid, 
 								   const gchar *device_id,
 								   gpointer user_data);
 
-gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean ChangePPD(NPDinterface *interface,
 				   GDBusMethodInvocation *invocation,
-				   const guint xid, 
+				   guint xid, 
 				   const gchar *name,
 				   const gchar *device_id,
 				   gpointer user_data);
 
 /* signals */
 
-gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_dialog_canceled(NPDinterface *interface,
 						  	GDBusMethodInvocation *invocation,
 						    gpointer user_data);
 
-gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_printer_added(NPDinterface *interface,
 				          GDBusMethodInvocation *invocation,
 			   	          gpointer user_data);
 
-gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_printer_modified(NPDinterface *interface,
 						     GDBusMethodInvocation *invocation,
 						     gpointer user_data);
 
-gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_driver_download_checked(NPDinterface *interface,
 						            GDBusMethodInvocation *invocation,
 						            gpointer user_data);
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd(char *name, FILE *ppd);
-static void change_ppd_with_dev(printer_uri **head, char *name, FILE *ppd);
-static void do_change_ppd(char *device_uri, char *name, FILE *ppd);
+static void change_ppd_got_ppd(const char *name, FILE *ppd);
+static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
+static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
 
 #endif

@@ -14,6 +14,8 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
+#define NPD NewPrinterDialogDBusOrgFedoraprojectConfigPrinting
+
 GDBusConnection *conn;
 const gchar *name = "org.fedoraproject.Config.Printing";
 char path[1024];
@@ -23,7 +25,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 	                              const gchar *name, 
 	                              gpointer user_data);
 
-static gboolean NewPrinterDialog(NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *interface,
+static gboolean NewPrinterDialog(NPD *interface,
 								 GDBusMethodInvocation *invocation,
 								 gpointer user_data);
 
@@ -49,7 +51,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 	                              gpointer user_data)
 {
 	conn = connection;
-	NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *interface;
+	NPD *interface;
 	GError *error;
 
 	/* main initialization */
@@ -71,7 +73,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 									 &error);
 }
 
-static gboolean NewPrinterDialog(NewPrinterDialogDBusOrgFedoraprojectConfigPrinting *interface,
+static gboolean NewPrinterDialog(NPD *interface,
 								 GDBusMethodInvocation *invocation,
 								 gpointer user_data)
 {

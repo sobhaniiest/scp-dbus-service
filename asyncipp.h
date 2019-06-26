@@ -15,12 +15,12 @@
 
 typedef struct _printer_uri
 {
-	char *name;
-	char *uri;
+	const char *name;
+	const char *uri;
 	struct _printer_uri *next;
 }printer_uri;
 
-static void insert_uri(printer_uri **head, char *n, char *u);
+static void insert_uri(printer_uri **head, const char *n, const char *u);
 static void set_ipp_error (ipp_status_t status, const char *message);
 printer_uri *getURI(http_t *new);
 

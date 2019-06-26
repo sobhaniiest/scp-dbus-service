@@ -1,7 +1,7 @@
 #include "asyncipp.h"
 #include "authinfocache.h"
 
-static void insert_uri(printer_uri **head, char *n, char *u)
+static void insert_uri(printer_uri **head, const char *n, const char *u)
 {
     printer_uri *c = (*head);
   
@@ -36,8 +36,8 @@ printer_uri *getURI(http_t *new)
     printer_uri *puri = NULL;
 	  ipp_t *request = ippNewRequest(CUPS_GET_PRINTERS), *answer;
   	ipp_attribute_t *attr;
-    const int check = 0;
-  	const char *attributes[] = { "printer-name", "device-uri" };
+    int check = 0;
+    const char *attributes[] = { "printer-name", "device-uri" };
 
   	ippAddStrings(request, 
   		            IPP_TAG_OPERATION, 
@@ -67,8 +67,8 @@ printer_uri *getURI(http_t *new)
 
     for(ippFirstAttribute (answer); attr; attr = ippNextAttribute (answer))
     {
-      	char *printer = NULL;
-      	char *duri = NULL;
+      	const char *printer = NULL;
+      	const char *duri = NULL;
       	while (attr && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
         		attr = ippNextAttribute (answer);
 
@@ -113,7 +113,7 @@ printer_uri *IPPAuthConnection(void(*reply_handler)(),
                   					   bool prompt_allowed)
 {
     bool status;
-  	char *user = "\0";
+  	const char *user = "\0";
   	dict *creds = lookup_auth_info(host, port);
   	if(creds != NULL)
   	{

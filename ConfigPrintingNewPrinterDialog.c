@@ -9,9 +9,9 @@ gulong dialog_canceled = 0,
 
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    const gchar *name, 
-	                    const gchar *path)
+	                    gchar *path)
 {
-	NewPrinterDialogDBusNewPrinterDialog *interface;
+	NPDinterface *interface;
 	GError *error;
 
 	/* main initialization */
@@ -61,9 +61,9 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 
 /* Methods */
 
-gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean NewPrinterFromDevice(NPDinterface *interface,
                               GDBusMethodInvocation *invocation,
-                              const guint xid, 
+                              guint xid, 
                               const gchar *device_uri,
                               const gchar *device_id,
                               gpointer user_data)
@@ -89,9 +89,9 @@ gboolean NewPrinterFromDevice(NewPrinterDialogDBusNewPrinterDialog *interface,
 	return FALSE;
 }
 
-gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean DownloadDriverForDeviceID(NPDinterface *interface,
                                    GDBusMethodInvocation *invocation,
-                                   const guint xid, 
+                                   guint xid, 
                                    const gchar *device_id,
                                    gpointer user_data)
 {
@@ -113,9 +113,9 @@ gboolean DownloadDriverForDeviceID(NewPrinterDialogDBusNewPrinterDialog *interfa
 	return FALSE;
 }
 
-gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean ChangePPD(NPDinterface *interface,
                    GDBusMethodInvocation *invocation,
-                   const guint xid, 
+                   guint xid, 
                    const gchar *name,
                    const gchar *device_id,
                    gpointer user_data)
@@ -132,7 +132,7 @@ gboolean ChangePPD(NewPrinterDialogDBusNewPrinterDialog *interface,
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd(char *name, FILE *ppd)
+static void change_ppd_got_ppd(const char *name, FILE *ppd)
 {
     printer_uri *status = Async_Connection(change_ppd_with_dev,
                                            do_change_ppd,
@@ -149,7 +149,7 @@ static void change_ppd_got_ppd(char *name, FILE *ppd)
 }
 
 
-static void change_ppd_with_dev(printer_uri **head, char *name, FILE *ppd)
+static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
 {
     bool found = false;
     printer_uri *c = (*head);
@@ -168,7 +168,7 @@ static void change_ppd_with_dev(printer_uri **head, char *name, FILE *ppd)
         do_change_ppd("\0", name, ppd);
 }
 
-static void do_change_ppd(char *device_uri, char *name, FILE *ppd)
+static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
 {  
     //char *device_id = "MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;";
     init("ppd",
@@ -184,7 +184,7 @@ static void do_change_ppd(char *device_uri, char *name, FILE *ppd)
 /* Signals */
 
 
-gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_dialog_canceled(NPDinterface *interface,
                             GDBusMethodInvocation *invocation,
                             gpointer user_data)
 {	
@@ -197,7 +197,7 @@ gboolean on_dialog_canceled(NewPrinterDialogDBusNewPrinterDialog *interface,
 	return TRUE;
 }
 
-gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_printer_added(NPDinterface *interface,
                           GDBusMethodInvocation *invocation,
                           gpointer user_data)
 {
@@ -210,7 +210,7 @@ gboolean on_printer_added(NewPrinterDialogDBusNewPrinterDialog *interface,
 	return TRUE;
 }
 
-gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_printer_modified(NPDinterface *interface,
                              GDBusMethodInvocation *invocation,
                              gpointer user_data)
 {
@@ -223,7 +223,7 @@ gboolean on_printer_modified(NewPrinterDialogDBusNewPrinterDialog *interface,
 	return TRUE;
 }
 
-gboolean on_driver_download_checked(NewPrinterDialogDBusNewPrinterDialog *interface,
+gboolean on_driver_download_checked(NPDinterface *interface,
                                     GDBusMethodInvocation *invocation,
                                     gpointer user_data)
 {

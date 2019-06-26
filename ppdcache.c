@@ -9,7 +9,7 @@ printer_uri *cups = NULL;
 
 /* Function definations */
 
-static void insert_cache(dict_cache **head, char *str, FILE *fpname)
+static void insert_cache(dict_cache **head, const char *str, FILE *fpname)
 {
     dict_cache *c = (*head);
   
@@ -31,7 +31,7 @@ static void insert_cache(dict_cache **head, char *str, FILE *fpname)
     }
 }
 
-static void insert_modtimes(dict_modtimes **head, char *str, time_t value)
+static void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
 {
     dict_modtimes *c = (*head);
   
@@ -53,7 +53,7 @@ static void insert_modtimes(dict_modtimes **head, char *str, time_t value)
     }
 }
 
-static void insert_list(list **head, char *str, void(*func)())
+static void insert_list(list **head, const char *str, void(*func)())
 {
     list *c = (*head);
   
@@ -75,7 +75,7 @@ static void insert_list(list **head, char *str, void(*func)())
     }
 }
 
-static bool find_cache(dict_cache **head, char *str)
+static bool find_cache(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -91,7 +91,7 @@ static bool find_cache(dict_cache **head, char *str)
     return found;
 }
 
-static dict_modtimes *find_modtimes(dict_modtimes **head, char *str)
+static dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
 {
     bool found = false;
     dict_modtimes *c = (*head);
@@ -110,7 +110,7 @@ static dict_modtimes *find_modtimes(dict_modtimes **head, char *str)
         return NULL;
 }
 
-static FILE *find_file(dict_cache **head, char *str)
+static FILE *find_file(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -129,10 +129,10 @@ static FILE *find_file(dict_cache **head, char *str)
         return NULL;
 }
 
-void fetch_ppd(char *name, 
+void fetch_ppd(const char *name, 
                void(*callback)(),
                bool check_uptodate,
-               char *host,
+               const char *host,
                int port,
                http_encryption_t encryption)
 {
@@ -203,7 +203,7 @@ void connected()
 }
 
 static void self_connect(void(*callback)(),
-                         char *host,
+                         const char *host,
                          int port,
                          http_encryption_t encryption)
 {
@@ -219,7 +219,7 @@ static void self_connect(void(*callback)(),
     connected();
 }
 
-static void got_ppd3(char *name, 
+static void got_ppd3(const char *name, 
                      http_status_t status, 
                      time_t time, 
                      char *fname, 
@@ -248,7 +248,7 @@ static void got_ppd3(char *name,
 }
 
 
-static void schedule_callback(void(*callback)(), char *name, FILE *ppd)
+static void schedule_callback(void(*callback)(), const char *name, FILE *ppd)
 {
     pthread_mutex_t lock;
     pthread_mutex_init(&lock, NULL);

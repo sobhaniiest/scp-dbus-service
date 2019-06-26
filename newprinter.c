@@ -12,12 +12,12 @@ static void s_c_p(GtkWidget *widget, gpointer data)
 
 static void activate(GtkApplication *app, char *user_data)
 {
-	GtkWidget *window,
-	          *grid,
-	          *label,
-	          *button;
+	  GtkWidget *window,
+	            *grid,
+	            *label,
+	            *button;
 
-	window = gtk_application_window_new (app);
+	  window = gtk_application_window_new (app);
   	gtk_window_set_title (GTK_WINDOW (window), "Message");
   	gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
@@ -40,59 +40,59 @@ static void activate(GtkApplication *app, char *user_data)
 
 
 bool init(char *dialog_mode,
-		  char *device_uri,
-		  char *name,
-		  FILE *ppd,
-		  char *device_id,
-		  char *host,
-		  http_encryption_t encryption,
-		  unsigned int xid)
+    		  const char *device_uri,
+    		  const char *name,
+    		  FILE *ppd,
+    		  const char *device_id,
+    		  const char *host,
+    		  http_encryption_t encryption,
+    		  unsigned int xid)
 {
-	if(!(strcmp(host,"\0")))
-		host = cupsServer();
+  	if(!(strcmp(host,"\0")))
+  		  host = cupsServer();
 
-	if(encryption == 0)
-		encryption = cupsEncryption();
+  	if(encryption == 0)
+  		  encryption = cupsEncryption();
 
-	//Auth_Connection();
+  	//Auth_Connection();
 
-	if(!(strcmp(dialog_mode, "printer_with_uri")))
-		activate_NewPrinterFromDevice(device_uri, device_id);
-	else if(!(strcmp(dialog_mode, "ppd")))
-		activate_ChangePPD(device_uri, device_id, name, ppd);
-	else if(!(strcmp(dialog_mode, "download_driver")))
-		activate_DownloadDriverForDeviceID(device_id);
+  	if(!(strcmp(dialog_mode, "printer_with_uri")))
+  		  activate_NewPrinterFromDevice(device_uri, device_id);
+  	else if(!(strcmp(dialog_mode, "ppd")))
+  		  activate_ChangePPD(device_uri, device_id, name, ppd);
+  	else if(!(strcmp(dialog_mode, "download_driver")))
+  		  activate_DownloadDriverForDeviceID(device_id);
 
-	return true;
+  	return true;
 }
 
-static int activate_NewPrinterFromDevice(char *dev_uri, char *devid)
+static int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid)
 {
-	GtkApplication *app;
-	int status;
-	const char buffer[1024];
-	snprintf(buffer, 1024, "\tWant to add New Printer from device\t\n\n\tDevice URI : %s\t\n\n\tDevice ID : %s\t\n",dev_uri, devid);
-  	app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+  	GtkApplication *app;
+  	int status;
+    char buffer[1024];
+  	snprintf(buffer, 1024, "\tWant to add New Printer from device\t\n\n\tDevice URI : %s\t\n\n\tDevice ID : %s\t\n",dev_uri, devid);
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
+    status = g_application_run (G_APPLICATION (app), 0, NULL);
+    g_object_unref (app);
+    return status;
+}
+
+static int activate_DownloadDriverForDeviceID(const char *devid)
+{
+  	GtkApplication *app;
+  	int status;
+  	char buffer[1024];
+  	snprintf(buffer, 1024, "\tWant to download Driver for the given Device ID\t\n\n\tDevice ID : %s\t\n", devid);
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
   	g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
   	status = g_application_run (G_APPLICATION (app), 0, NULL);
   	g_object_unref (app);
   	return status;
 }
 
-static int activate_DownloadDriverForDeviceID(char *devid)
-{
-	GtkApplication *app;
-	int status;
-	char buffer[1024];
-	snprintf(buffer, 1024, "\tWant to download Driver for the given Device ID\t\n\n\tDevice ID : %s\t\n", devid);
-  	app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
-  	g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
-  	status = g_application_run (G_APPLICATION (app), 0, NULL);
-  	g_object_unref (app);
-  	return status;
-}
-
-static int activate_ChangePPD(char *dev_uri, char *devid, char *name, FILE *ppd)
+static int activate_ChangePPD(const char *dev_uri, const char *devid, const char *name, FILE *ppd)
 {
     GtkApplication *app;
     int status;
