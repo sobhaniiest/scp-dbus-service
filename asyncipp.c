@@ -1,15 +1,15 @@
 #include "asyncipp.h"
 #include "authinfocache.h"
 
-static void insert_uri(printer_uri **head, const char *n, const char *u)
+static void insert_uri(printer_uri **head, const char *name, const char *uri)
 {
     printer_uri *c = (*head);
   
     if(*head == NULL)
     {
         (*head) = (printer_uri *)malloc(sizeof(printer_uri));
-        (*head)->name = n;
-        (*head)->uri = u;
+        (*head)->name = name;
+        (*head)->uri = uri;
         (*head)->next = NULL;
     }
     else
@@ -17,8 +17,8 @@ static void insert_uri(printer_uri **head, const char *n, const char *u)
         while(c->next != NULL)
             c = c->next;
         c->next = (printer_uri *)malloc(sizeof(printer_uri));
-        c->next->name = n;
-        c->next->uri = u;
+        c->next->name = name;
+        c->next->uri = uri;
         c->next->next = NULL;
     }
 }
@@ -103,6 +103,55 @@ printer_uri *getURI(http_t *new)
     return puri;
 }
 
+printer_uri *getPPDs(http_t *new, int all_lists)
+{
+    printer_uri *list = NULL;
+    ipp_t *request, *answer;
+    ipp_attribute_t *attr;
+
+    request = ippNewRequest(CUPS_GET_PPDS);
+
+    answer = cupsDoRequest (new, request, "/");
+
+    if (!answer || ippGetStatusCode (answer) > IPP_OK_CONFLICT) 
+    {
+        set_ipp_error (answer ? ippGetStatusCode (answer) : cupsLastError (),
+                       answer ? NULL : cupsLastErrorString ());
+        if (answer)
+            ippDelete (answer);
+        fprintf(stderr, "getPPDs(): error\n");
+        return NULL;
+    }
+
+    for (attr = ippFirstAttribute (answer); attr; attr = ippNextAttribute (answer)) 
+    {
+        const char *ppdname = NULL;
+
+        while (attr && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
+            attr = ippNextAttribute (answer);
+
+        if (!attr)
+            break;
+
+        for (; attr && ippGetGroupTag (attr) == IPP_TAG_PRINTER; attr = ippNextAttribute (answer)) 
+        {
+            //fprintf(stderr, "Attribute: %s\n", ippGetName (attr));
+            if (!strcmp (ippGetName (attr), "ppd-name") && ippGetValueTag (attr) == IPP_TAG_NAME)
+            {
+                ppdname = (char *) ippGetString (attr, 0, NULL);
+                insert_uri(&list, ppdname, "\0");
+                //fprintf(stderr, "PPD_Name : %s\n",ppdname);
+            }
+        }
+
+        if (!attr)
+            break;
+    }
+
+    //ippDelete (answer);
+    return list;
+}
+
 printer_uri *IPPAuthConnection(void(*reply_handler)(), 
                   					   void(*error_handler)(), 
                   					   void(*auth_handler)(), 
@@ -110,7 +159,8 @@ printer_uri *IPPAuthConnection(void(*reply_handler)(),
                   					   int port, 
                   					   http_encryption_t encryption, 
                   					   bool try_as_root, 
-                  					   bool prompt_allowed)
+                  					   bool prompt_allowed,
+                               char *result)
 {
     bool status;
   	const char *user = "\0";
@@ -128,7 +178,8 @@ printer_uri *IPPAuthConnection(void(*reply_handler)(),
                             				 user, 
                             				 host, 
                             				 port,
-                            				 encryption);
+                            				 encryption,
+                                     result);
 
     if(new == NULL)
       op_error_handler();
@@ -144,7 +195,8 @@ printer_uri *IPPConnection(void(*reply_handler)(),
                 				   const char *user, 
                 				   const char *host, 
                 				   int port, 
-                				   http_encryption_t encryption)
+                				   http_encryption_t encryption,
+                           char *result)
 {
 	  char *uri;
 
@@ -156,14 +208,16 @@ printer_uri *IPPConnection(void(*reply_handler)(),
         return NULL;
     }
 
-    printer_uri *new = getURI(http);
-    
+    printer_uri *new;
+
+    if(!(strcmp(result, "getURI")))
+        new = getURI(http);
+    else if(!(strcmp(result, "getPPDs")))
+        new = getPPDs(http, 1);
+
     httpClose(http);
     
-    if(!new)
-      return NULL;
-    else
-      return new;
+    return new;
 }
 
 static void op_error_handler()

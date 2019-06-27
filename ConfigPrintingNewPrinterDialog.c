@@ -141,7 +141,8 @@ static void change_ppd_got_ppd(const char *name, FILE *ppd)
                                            0,
                                            0,
                                            true,
-                                           true);
+                                           true,
+                                           "getURI");
     if(!status)
       do_change_ppd("\0", name, ppd);
     else

@@ -18,7 +18,8 @@ printer_uri *Async_Connection(void(*reply_handler)(),
                               int port, 
                               http_encryption_t encryption, 
                               bool try_as_root, 
-                              bool prompt_allowed);
+                              bool prompt_allowed,
+                              char *result);
 
 static void subset_reply_handler();
 static void subset_error_handler();

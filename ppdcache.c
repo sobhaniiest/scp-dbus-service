@@ -215,7 +215,8 @@ static void self_connect(void(*callback)(),
                             port, 
                             encryption,  
                             true, 
-                            true);
+                            true,
+                            "getURI");
     connected();
 }
 

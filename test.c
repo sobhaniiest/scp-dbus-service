@@ -1,72 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <glib.h>
+#include <string.h>
+#include <cups/cups.h>
+#include <pthread.h>
+#include <gtk/gtk.h>
+#include <errno.h>
+#include "killtimer.h"
+#include "ppdcache.h"
+#include "asyncconn.h"
+#include "authinfocache.h"
+#include "newprinter.h"
+#include "ConfigPrintingNewPrinterDialog.h"
 #include "newprinterdialog_dbus.h"
 
-static void
-callback_async(GObject *proxy,
-                   GAsyncResult *res,
-                   gpointer user_data);
-
-int main(int argc, char *argv[])
+int main()
 {
-    if (argc < 4)
+    
+    const char *host = cupsServer();
+    int port = ippPort();
+    http_encryption_t encryption = cupsEncryption();
+
+    printer_uri *status = Async_Connection(NULL,
+                                           NULL,
+                                           NULL,
+                                           "\0",
+                                           0,
+                                           0,
+                                           true,
+                                           true,
+                                           "getPPDs");
+
+/*
+    while(status != NULL)
     {
-        printf("Usage: ./demo xid name device_id\n");
-        return 0;
+        fprintf(stderr, "%s %s\n", status->name, status->uri);
+        status = status->next;
+    }
+*/
+    while(status != NULL)
+    {
+        fprintf(stderr, "%s\n", status->name);
+        status = status->next;
     }
 
-    NewPrinterDialogDBusPrinting *proxy;
-    GError *error;
-    gint retval;
-
-    error = NULL;
-    proxy = newprinterdialog_dbus_printing_proxy_new_for_bus_sync(G_BUS_TYPE_SESSION, 
-                                                                  0, 
-                                                                  "com.test", 
-                                                                  "/", 
-                                                                  NULL, 
-                                                                  &error);
-
-    gint id;
-    id = atoi(argv[1]);
-
-    error = NULL;
-    newprinterdialog_dbus_printing_call_change_ppd(proxy, 
-                                                   id, 
-                                                   argv[2], 
-                                                   argv[3], 
-                                                   NULL, 
-                                                   callback_async, 
-                                                   &error);
-
-    GMainLoop *loop;
-    loop = g_main_loop_new(NULL, FALSE);
-    g_main_loop_run(loop);
-
-    g_object_unref(proxy);
-
-    return 0;
-}
-
-static void
-callback_async(GObject *proxy,
-                   GAsyncResult *res,
-                   gpointer user_data)
-{
-    g_print("callback_async called!\n");
-    gint retval;
-    GError *error;
-    error = NULL;
-    newprinterdialog_dbus_printing_call_change_ppd_finish(proxy,  
-                                                          res, 
-                                                          &error);
-
-    if (error == NULL)
-    {
-        g_print("Method is called!!!\n");
-        exit(0);
-    }
-    else
-        g_print("ERROR!!\n");
 }

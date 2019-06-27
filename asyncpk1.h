@@ -12,6 +12,7 @@ printer_uri *PK1Connection(void(*reply_handler)(),
                            void(*error_handler)(), 
                            const char *host, 
                            int port, 
-                           http_encryption_t encryption);
+                           http_encryption_t encryption,
+                           char *result);
 
 #endif

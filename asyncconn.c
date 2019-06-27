@@ -7,7 +7,8 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 							  int port, 
 							  http_encryption_t encryption, 
 							  bool try_as_root, 
-							  bool prompt_allowed)
+							  bool prompt_allowed,
+							  char *result)
 {
 	bool use_pk;
     printer_uri *status;
@@ -30,7 +31,8 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 							   subset_error_handler,
 							   host,
 							   port,
-							   encryption);
+							   encryption,
+							   result);
 		if(status && subset_reply_handler != NULL)
 			subset_reply_handler();
 		else if(error_handler != NULL)
@@ -47,7 +49,8 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 								   port,
 								   encryption,
 								   try_as_root,
-								   prompt_allowed);
+								   prompt_allowed,
+								   result);
 		if(status && subset_reply_handler != NULL)
 			subset_reply_handler();
 		else if(error_handler != NULL)
