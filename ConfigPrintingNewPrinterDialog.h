@@ -79,8 +79,8 @@ gboolean on_driver_download_checked(NPDinterface *interface,
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd(const char *name, FILE *ppd);
-static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
-static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
+void change_ppd_got_ppd(const char *name, FILE *ppd);
+void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
+void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
 
 #endif

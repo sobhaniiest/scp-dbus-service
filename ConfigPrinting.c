@@ -55,7 +55,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 	GError *error;
 
 	/* main initialization */
-	KillTimer((void *)gtk_main_quit);
+	KillTimer(gtk_main_quit);
     
 	/**********************/
 

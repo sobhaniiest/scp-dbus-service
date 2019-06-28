@@ -20,8 +20,8 @@ typedef struct _printer_uri
   	struct _printer_uri *next;
 }printer_uri;
 
-static void insert_uri(printer_uri **head, const char *name, const char *uri);
-static void set_ipp_error (ipp_status_t status, const char *message);
+void insert_uri(printer_uri **head, const char *name, const char *uri);
+void set_ipp_error (ipp_status_t status, const char *message);
 printer_uri *getURI(http_t *new);
 printer_uri *getPPDs(http_t *new, int all_lists);
 
@@ -44,6 +44,6 @@ printer_uri *IPPConnection(void(*reply_handler)(),
                     		   http_encryption_t encryption,
                            char *result);  	
 
-static void op_error_handler();	    
+void op_error_handler();	    
 
 #endif

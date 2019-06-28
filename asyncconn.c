@@ -22,7 +22,7 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 	if(encryption == 0)
 		encryption = cupsEncryption();
 
-	use_pk = (((host[0] == '/') | !(strcmp(host,"localhost"))) & getuid() != 0);
+	use_pk = (((host[0] == '/') | !(strcmp(host,"localhost"))) & (getuid() != 0));
 	
 
 	if(use_pk && try_as_root)
@@ -33,9 +33,9 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 							   port,
 							   encryption,
 							   result);
-		if(status && subset_reply_handler != NULL)
+		if(status != NULL)
 			subset_reply_handler();
-		else if(error_handler != NULL)
+		else
 			subset_error_handler();
 
 		return status;
@@ -51,26 +51,26 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 								   try_as_root,
 								   prompt_allowed,
 								   result);
-		if(status && subset_reply_handler != NULL)
+		if(status != NULL)
 			subset_reply_handler();
-		else if(error_handler != NULL)
+		else
 			subset_error_handler();
 
 		return status;
 	}
 }
 
-static void subset_reply_handler()
+void subset_reply_handler()
 {
 
 }
 
-static void subset_error_handler()
+void subset_error_handler()
 {
 
 }
 
-static void subset_auth_handler()
+void subset_auth_handler()
 {
 	
 }

@@ -5,12 +5,12 @@ void NewPrinter()
 
 }
 
-static void s_c_p(GtkWidget *widget, gpointer data)
+void s_c_p(GtkWidget *widget, gpointer data)
 {
     popen("system-config-printer","r");
 }
 
-static void activate(GtkApplication *app, char *user_data)
+void activate(GtkApplication *app, char *user_data)
 {
 	  GtkWidget *window,
 	            *grid,
@@ -66,7 +66,7 @@ bool init(char *dialog_mode,
   	return true;
 }
 
-static int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid)
+int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid)
 {
   	GtkApplication *app;
   	int status;
@@ -79,7 +79,7 @@ static int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid)
     return status;
 }
 
-static int activate_DownloadDriverForDeviceID(const char *devid)
+int activate_DownloadDriverForDeviceID(const char *devid)
 {
   	GtkApplication *app;
   	int status;
@@ -92,7 +92,7 @@ static int activate_DownloadDriverForDeviceID(const char *devid)
   	return status;
 }
 
-static int activate_ChangePPD(const char *dev_uri, const char *devid, const char *name, FILE *ppd)
+int activate_ChangePPD(const char *dev_uri, const char *devid, const char *name, FILE *ppd)
 {
     GtkApplication *app;
     int status;

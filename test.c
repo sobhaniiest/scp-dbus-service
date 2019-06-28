@@ -16,11 +16,11 @@
 
 int main()
 {
-    
+    /*
     const char *host = cupsServer();
     int port = ippPort();
     http_encryption_t encryption = cupsEncryption();
-
+    */
     printer_uri *status = Async_Connection(NULL,
                                            NULL,
                                            NULL,

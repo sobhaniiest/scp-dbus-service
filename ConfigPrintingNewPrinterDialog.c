@@ -132,7 +132,7 @@ gboolean ChangePPD(NPDinterface *interface,
 
 /* Internal Functions */
 
-static void change_ppd_got_ppd(const char *name, FILE *ppd)
+void change_ppd_got_ppd(const char *name, FILE *ppd)
 {
     printer_uri *status = Async_Connection(change_ppd_with_dev,
                                            do_change_ppd,
@@ -150,7 +150,7 @@ static void change_ppd_got_ppd(const char *name, FILE *ppd)
 }
 
 
-static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
+void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
 {
     bool found = false;
     printer_uri *c = (*head);
@@ -169,7 +169,7 @@ static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
         do_change_ppd("\0", name, ppd);
 }
 
-static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
+void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
 {  
     //char *device_id = "MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;";
     init("ppd",

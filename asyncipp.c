@@ -1,7 +1,7 @@
 #include "asyncipp.h"
 #include "authinfocache.h"
 
-static void insert_uri(printer_uri **head, const char *name, const char *uri)
+void insert_uri(printer_uri **head, const char *name, const char *uri)
 {
     printer_uri *c = (*head);
   
@@ -23,7 +23,7 @@ static void insert_uri(printer_uri **head, const char *name, const char *uri)
     }
 }
 
-static void set_ipp_error (ipp_status_t status, const char *message)
+void set_ipp_error (ipp_status_t status, const char *message)
 {
     if (!message)
         message = ippErrorString (status);
@@ -34,9 +34,8 @@ static void set_ipp_error (ipp_status_t status, const char *message)
 printer_uri *getURI(http_t *new)
 {
     printer_uri *puri = NULL;
-	  ipp_t *request = ippNewRequest(CUPS_GET_PRINTERS), *answer;
+	ipp_t *request = ippNewRequest(CUPS_GET_PRINTERS), *answer;
   	ipp_attribute_t *attr;
-    int check = 0;
     const char *attributes[] = { "printer-name", "device-uri" };
 
   	ippAddStrings(request, 
@@ -162,7 +161,6 @@ printer_uri *IPPAuthConnection(void(*reply_handler)(),
                   					   bool prompt_allowed,
                                char *result)
 {
-    bool status;
   	const char *user = "\0";
   	dict *creds = lookup_auth_info(host, port);
   	if(creds != NULL)
@@ -198,8 +196,6 @@ printer_uri *IPPConnection(void(*reply_handler)(),
                 				   http_encryption_t encryption,
                            char *result)
 {
-	  char *uri;
-
     http_t *http = httpConnectEncrypt (host, port, (http_encryption_t) encryption);
 
     if(http == NULL)
@@ -220,7 +216,7 @@ printer_uri *IPPConnection(void(*reply_handler)(),
     return new;
 }
 
-static void op_error_handler()
+void op_error_handler()
 {
 
 }

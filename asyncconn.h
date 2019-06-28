@@ -21,8 +21,8 @@ printer_uri *Async_Connection(void(*reply_handler)(),
                               bool prompt_allowed,
                               char *result);
 
-static void subset_reply_handler();
-static void subset_error_handler();
-static void subset_auth_handler();
+void subset_reply_handler();
+void subset_error_handler();
+void subset_auth_handler();
 
 #endif

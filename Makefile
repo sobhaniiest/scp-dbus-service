@@ -11,7 +11,7 @@ gen:
 	$(CC) -g -Wall -pedantic -std=c11 -Werror -o $@ $^ -c $(FLAGS)
 
 %.o: %.c
-	$(CC) -g -o $@ $^ -c $(FLAGS)
+	$(CC) -g -Wall -pedantic -std=c11 -Werror -o $@ $^ -c $(FLAGS)
 
 demo: test.o asyncipp.o authinfocache.o asyncconn.o asyncpk1.o
 	$(CC) -Wall -pedantic -std=c11 -Werror -o $@ $^ $(FLAGS) $(LIBS)

@@ -1,12 +1,13 @@
 #include "killtimer.h"
 
-GSourceFunc killfunc, kill_func;
+void(*killfunc)();
+void(*kill_func)();
 int holds;
 pthread_mutex_t lock; 
 guint timeout;
 guint timer;
 
-void KillTimer(GSourceFunc killfunc)
+void KillTimer(void(*killfunc)())
 {
 	timeout = 30; /* default value */
 	kill_func = killfunc;
@@ -28,7 +29,7 @@ gboolean kil()
 {
 	fprintf(stderr, "Timeout (%ds), exiting\n", timeout);
 	if(kill_func)
-		kill_func;
+		return TRUE;
 	else
 		exit(0);
 }

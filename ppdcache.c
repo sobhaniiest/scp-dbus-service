@@ -9,7 +9,7 @@ printer_uri *cups = NULL;
 
 /* Function definations */
 
-static void insert_cache(dict_cache **head, const char *str, FILE *fpname)
+void insert_cache(dict_cache **head, const char *str, FILE *fpname)
 {
     dict_cache *c = (*head);
   
@@ -31,7 +31,7 @@ static void insert_cache(dict_cache **head, const char *str, FILE *fpname)
     }
 }
 
-static void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
+void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
 {
     dict_modtimes *c = (*head);
   
@@ -53,7 +53,7 @@ static void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
     }
 }
 
-static void insert_list(list **head, const char *str, void(*func)())
+void insert_list(list **head, const char *str, void(*func)())
 {
     list *c = (*head);
   
@@ -75,7 +75,7 @@ static void insert_list(list **head, const char *str, void(*func)())
     }
 }
 
-static bool find_cache(dict_cache **head, const char *str)
+bool find_cache(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -91,7 +91,7 @@ static bool find_cache(dict_cache **head, const char *str)
     return found;
 }
 
-static dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
+dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
 {
     bool found = false;
     dict_modtimes *c = (*head);
@@ -110,7 +110,7 @@ static dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
         return NULL;
 }
 
-static FILE *find_file(dict_cache **head, const char *str)
+FILE *find_file(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -202,7 +202,7 @@ void connected()
     queued = NULL;
 }
 
-static void self_connect(void(*callback)(),
+void self_connect(void(*callback)(),
                          const char *host,
                          int port,
                          http_encryption_t encryption)
@@ -220,7 +220,7 @@ static void self_connect(void(*callback)(),
     connected();
 }
 
-static void got_ppd3(const char *name, 
+void got_ppd3(const char *name, 
                      http_status_t status, 
                      time_t time, 
                      char *fname, 
@@ -249,7 +249,7 @@ static void got_ppd3(const char *name,
 }
 
 
-static void schedule_callback(void(*callback)(), const char *name, FILE *ppd)
+void schedule_callback(void(*callback)(), const char *name, FILE *ppd)
 {
     pthread_mutex_t lock;
     pthread_mutex_init(&lock, NULL);

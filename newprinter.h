@@ -10,7 +10,7 @@
 
 
 void NewPrinter();
-static void s_c_p(GtkWidget *widget, gpointer data);
+void s_c_p(GtkWidget *widget, gpointer data);
 bool init(char *dialog_mode,
 		  const char *device_uri,
 		  const char *name,
@@ -20,12 +20,12 @@ bool init(char *dialog_mode,
 		  http_encryption_t encryption,
 		  unsigned int xid);
 
-static void activate(GtkApplication *app, 
+void activate(GtkApplication *app, 
                      char *user_data);
-static int activate_NewPrinterFromDevice(const char *dev_uri, 
+int activate_NewPrinterFromDevice(const char *dev_uri, 
                                          const char *devid);
-static int activate_DownloadDriverForDeviceID(const char *devid);
-static int activate_ChangePPD(const char *dev_uri, 
+int activate_DownloadDriverForDeviceID(const char *devid);
+int activate_ChangePPD(const char *dev_uri, 
                               const char *devid, 
                               const char *name, 
                               FILE *ppd);
