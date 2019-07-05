@@ -7,16 +7,16 @@ LIBS = -lcups
 all: main demo
 
 gen:
-	gdbus-codegen --generate-c-code newprinterdialog_dbus --c-namespace NewPrinterDialog_DBus --interface-prefix org.fedoraproject.Config.Printing. org.fedoraproject.Config.Printing.xml
+	gdbus-codegen --generate-c-code scp_interface --c-namespace scp_interface --interface-prefix org.fedoraproject.Config.Printing. org.fedoraproject.Config.Printing.xml
 	$(CC) -g -Wall -pedantic -std=c11 -Werror -o $@ $^ -c $(FLAGS)
 
 %.o: %.c
 	$(CC) -g -Wall -pedantic -std=c11 -Werror -o $@ $^ -c $(FLAGS)
 
-demo: test.o asyncipp.o authinfocache.o asyncconn.o asyncpk1.o
+demo: test.o MissingExecutables.o
 	$(CC) -Wall -pedantic -std=c11 -Werror -o $@ $^ $(FLAGS) $(LIBS)
 
-main: ConfigPrinting.o ConfigPrintingNewPrinterDialog.o killtimer.o newprinterdialog_dbus.o ppdcache.o asyncconn.o asyncpk1.o asyncipp.o newprinter.o authinfocache.o
+main: ConfigPrinting.o ConfigPrintingNewPrinterDialog.o killtimer.o scp_interface.o ppdcache.o asyncconn.o asyncpk1.o asyncipp.o newprinter.o authinfocache.o MissingExecutables.o
 	$(CC) -g -Wall -pedantic -std=c11 -Werror -o $@ $^ $(FLAGS) $(LIBS)
 
 clean:
