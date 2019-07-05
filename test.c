@@ -25,7 +25,7 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 */
 #include "MissingExecutables.h"
-#include "newprinterdialog_dbus.h"
+#include "scp_interface.h"
 
 int main()
 {
