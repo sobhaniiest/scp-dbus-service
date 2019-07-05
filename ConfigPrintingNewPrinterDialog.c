@@ -20,7 +20,7 @@ void CPNewPrinterDialog(GDBusConnection *connection,
     
 	/**********************/
 
-	interface = newprinterdialog_dbus_new_printer_dialog_skeleton_new();
+	interface = scp_interface_new_printer_dialog_skeleton_new();
 
 	/* Methods */
 	g_signal_connect(interface, 
@@ -85,8 +85,8 @@ gboolean NewPrinterFromDevice(NPDinterface *interface,
          0);
 
 
-	newprinterdialog_dbus_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
-	return FALSE;
+	scp_interface_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
+	return TRUE;
 }
 
 gboolean DownloadDriverForDeviceID(NPDinterface *interface,
@@ -109,8 +109,8 @@ gboolean DownloadDriverForDeviceID(NPDinterface *interface,
          0, 
          0);
 
-	newprinterdialog_dbus_new_printer_dialog_complete_download_driver_for_device_id(interface, invocation);
-	return FALSE;
+	scp_interface_new_printer_dialog_complete_download_driver_for_device_id(interface, invocation);
+	return TRUE;
 }
 
 gboolean ChangePPD(NPDinterface *interface,
@@ -125,9 +125,9 @@ gboolean ChangePPD(NPDinterface *interface,
     reference.mname = name;
     reference.mdevice_id = device_id;
 	fetch_ppd(name, change_ppd_got_ppd, true, "\0", 0, 0);
-	newprinterdialog_dbus_new_printer_dialog_complete_change_ppd(interface, invocation);
+	scp_interface_new_printer_dialog_complete_change_ppd(interface, invocation);
 
-	return FALSE;
+	return TRUE;
 }
 
 /* Internal Functions */
@@ -190,8 +190,8 @@ gboolean on_dialog_canceled(NPDinterface *interface,
                             gpointer user_data)
 {	
 	remove_hold();
-	newprinterdialog_dbus_new_printer_dialog_emit_dialog_canceled((interface));
-	newprinterdialog_dbus_new_printer_dialog_complete_on_dialog_canceled(interface, invocation);
+	scp_interface_new_printer_dialog_emit_dialog_canceled((interface));
+	scp_interface_new_printer_dialog_complete_on_dialog_canceled(interface, invocation);
 	if(dialog_canceled != 0)
 		g_signal_handler_disconnect(interface, dialog_canceled);
 	//remove_from_connection();
@@ -203,8 +203,8 @@ gboolean on_printer_added(NPDinterface *interface,
                           gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_new_printer_dialog_emit_printer_added((interface));
-	newprinterdialog_dbus_new_printer_dialog_complete_on_printer_added(interface, invocation);
+	scp_interface_new_printer_dialog_emit_printer_added((interface));
+	scp_interface_new_printer_dialog_complete_on_printer_added(interface, invocation);
 	if(printer_added != 0)
 		g_signal_handler_disconnect(interface, printer_added);
 	//remove_from_connection();
@@ -216,8 +216,8 @@ gboolean on_printer_modified(NPDinterface *interface,
                              gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_new_printer_dialog_emit_printer_modified((interface));
-	newprinterdialog_dbus_new_printer_dialog_complete_on_printer_modified(interface, invocation);
+	scp_interface_new_printer_dialog_emit_printer_modified((interface));
+	scp_interface_new_printer_dialog_complete_on_printer_modified(interface, invocation);
 	if(printer_modified != 0)
 		g_signal_handler_disconnect(interface, printer_modified);
 	//remove_from_connection();
@@ -229,8 +229,8 @@ gboolean on_driver_download_checked(NPDinterface *interface,
                                     gpointer user_data)
 {
 	remove_hold();
-	newprinterdialog_dbus_new_printer_dialog_emit_driver_download_cheked((interface));
-	newprinterdialog_dbus_new_printer_dialog_complete_on_driver_download_checked(interface, invocation);
+	scp_interface_new_printer_dialog_emit_driver_download_cheked((interface));
+	scp_interface_new_printer_dialog_complete_on_driver_download_checked(interface, invocation);
 	if(drv_dwn_checked != 0)
 		g_signal_handler_disconnect(interface, drv_dwn_checked);
 	//remove_from_connection();

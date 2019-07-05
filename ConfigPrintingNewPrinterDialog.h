@@ -15,9 +15,9 @@
 #include "authinfocache.h"
 #include "newprinter.h"
 #include "ConfigPrintingNewPrinterDialog.h"
-#include "newprinterdialog_dbus.h"
+#include "scp_interface.h"
 
-#define NPDinterface NewPrinterDialogDBusNewPrinterDialog
+#define NPDinterface scpinterfaceNewPrinterDialog
 
 typedef struct _memory
 {
@@ -84,3 +84,4 @@ void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
 void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
 
 #endif
+
