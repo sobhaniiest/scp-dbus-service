@@ -78,6 +78,15 @@ dbus-send --session \
           string:'test' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' 
 
+# MissingExecutables
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.MissingExecutables \
+          string:'Generic-PDF_Printer-PDF.ppd'
 
 # Testing of scp-dbus-service(original) using dbus-send command ::
 https://github.com/sobhaniiest/scp-dbus-service/blob/master/dbus-send.txt
