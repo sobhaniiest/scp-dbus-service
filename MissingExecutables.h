@@ -12,7 +12,6 @@
 #include <sys/types.h>
 #include <cups/cups.h>
 #include <cups/ppd.h>
-#include <ctype.h>
 #include <iconv.h>
 #include <stdbool.h>
 #include "MissingExecutables.h"
