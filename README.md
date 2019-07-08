@@ -25,7 +25,7 @@ To prevent the functionality of the old scp-dbus-service.py, cd to the directory
 
 # ConfigPrinting :
 
-- method : NewPrinterDialog
+- method : NewPrinterDialog                                       
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -33,7 +33,7 @@ dbus-send --session \
           --type=method_call \
           org.fedoraproject.Config.Printing.NewPrinterDialog
 
--method : MissingExecutables(ppd_filename)
+- method : MissingExecutables(ppd_filename)                       
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -44,7 +44,7 @@ dbus-send --session \
 
 # NewPrinterDialog
 
-- method : NewPrinterFromDevice (xid, device_uri, device_id)
+- method : NewPrinterFromDevice (xid, device_uri, device_id)      
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -54,7 +54,7 @@ dbus-send --session \
           string:'file:/tmp/printout' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;'
 
--method : DownloadDriverForDeviceID (xid, device_id)
+- method : DownloadDriverForDeviceID (xid, device_id)             
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -63,7 +63,7 @@ dbus-send --session \
           uint32:1 \
           string:'MFG:HP;MDL:hp 910;DES:hp 910;'
 
--method : ChangePPD(xid, name, device_id)
+- method : ChangePPD(xid, name, device_id)                        
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
