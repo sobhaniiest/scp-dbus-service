@@ -16,8 +16,12 @@
 #include <stdbool.h>
 #include "MissingExecutables.h"
 
-extern char *exes_to_install;
+typedef struct _exes_to_install
+{
+    char *exes;
+    struct _exes_to_install *next;
+}exes_to_install;
 
-char *missingexecutables(const char *ppd_filename);
+exes_to_install *missingexecutables(const char *ppd_filename);
 
 #endif

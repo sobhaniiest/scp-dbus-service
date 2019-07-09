@@ -147,7 +147,7 @@
                 </doc:summary>
             </doc:doc>
         </arg>
-        <arg name="missing_executables" type="s" direction="out">
+        <arg name="missing_executables" type="as" direction="out">
             <doc:doc>
                 <doc:summary>
                     <doc:para>

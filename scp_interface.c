@@ -155,8 +155,8 @@ _g_value_equal (const GValue *a, const GValue *b)
  */
 
 /**
- * SECTION:scpinterfaceOrgFedoraprojectConfigPrinting
- * @title: scpinterfaceOrgFedoraprojectConfigPrinting
+ * SECTION:scpinterface
+ * @title: scpinterface
  * @short_description: Generated C code for the org.fedoraproject.Config.Printing D-Bus interface
  *
  * This section contains code for working with the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link> D-Bus interface in C.
@@ -164,7 +164,7 @@ _g_value_equal (const GValue *a, const GValue *b)
 
 /* ---- Introspection data for org.fedoraproject.Config.Printing ---- */
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_path =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_new_printer_dialog_OUT_ARG_path =
 {
   {
     -1,
@@ -175,26 +175,26 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_new_printer_dialog_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_path,
+  &_scp_interface__method_info_new_printer_dialog_OUT_ARG_path,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_new_printer_dialog =
 {
   {
     -1,
     (gchar *) "NewPrinterDialog",
     NULL,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_new_printer_dialog_OUT_ARG_pointers,
     NULL
   },
   "handle-new-printer-dialog",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_IN_ARG_name =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_printer_properties_dialog_IN_ARG_name =
 {
   {
     -1,
@@ -205,13 +205,13 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_IN_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_printer_properties_dialog_IN_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_IN_ARG_name,
+  &_scp_interface__method_info_printer_properties_dialog_IN_ARG_name,
   NULL
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_OUT_ARG_path =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_printer_properties_dialog_OUT_ARG_path =
 {
   {
     -1,
@@ -222,26 +222,26 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_printer_properties_dialog_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_OUT_ARG_path,
+  &_scp_interface__method_info_printer_properties_dialog_OUT_ARG_path,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_printer_properties_dialog =
 {
   {
     -1,
     (gchar *) "PrinterPropertiesDialog",
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_IN_ARG_pointers,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_printer_properties_dialog_IN_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_printer_properties_dialog_OUT_ARG_pointers,
     NULL
   },
   "handle-printer-properties-dialog",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_job_applet_OUT_ARG_path =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_job_applet_OUT_ARG_path =
 {
   {
     -1,
@@ -252,26 +252,26 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_job_applet_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_job_applet_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_job_applet_OUT_ARG_path,
+  &_scp_interface__method_info_job_applet_OUT_ARG_path,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_job_applet =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_job_applet =
 {
   {
     -1,
     (gchar *) "JobApplet",
     NULL,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_job_applet_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_job_applet_OUT_ARG_pointers,
     NULL
   },
   "handle-job-applet",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_id =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_get_best_drivers_IN_ARG_device_id =
 {
   {
     -1,
@@ -282,7 +282,7 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_make_and_model =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_get_best_drivers_IN_ARG_device_make_and_model =
 {
   {
     -1,
@@ -293,7 +293,7 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_uri =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_get_best_drivers_IN_ARG_device_uri =
 {
   {
     -1,
@@ -304,15 +304,15 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_get_best_drivers_IN_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_id,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_make_and_model,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_device_uri,
+  &_scp_interface__method_info_get_best_drivers_IN_ARG_device_id,
+  &_scp_interface__method_info_get_best_drivers_IN_ARG_device_make_and_model,
+  &_scp_interface__method_info_get_best_drivers_IN_ARG_device_uri,
   NULL
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_OUT_ARG_drivers =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_get_best_drivers_OUT_ARG_drivers =
 {
   {
     -1,
@@ -323,26 +323,26 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_get_best_drivers_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_OUT_ARG_drivers,
+  &_scp_interface__method_info_get_best_drivers_OUT_ARG_drivers,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_get_best_drivers =
 {
   {
     -1,
     (gchar *) "GetBestDrivers",
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_IN_ARG_pointers,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_get_best_drivers_IN_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_get_best_drivers_OUT_ARG_pointers,
     NULL
   },
   "handle-get-best-drivers",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_IN_ARG_ppd_filename =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_missing_executables_IN_ARG_ppd_filename =
 {
   {
     -1,
@@ -353,43 +353,43 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_IN_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_missing_executables_IN_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_IN_ARG_ppd_filename,
+  &_scp_interface__method_info_missing_executables_IN_ARG_ppd_filename,
   NULL
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_OUT_ARG_missing_executables =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_missing_executables_OUT_ARG_missing_executables =
 {
   {
     -1,
     (gchar *) "missing_executables",
-    (gchar *) "s",
+    (gchar *) "as",
     NULL
   },
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_missing_executables_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_OUT_ARG_missing_executables,
+  &_scp_interface__method_info_missing_executables_OUT_ARG_missing_executables,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_missing_executables =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_missing_executables =
 {
   {
     -1,
     (gchar *) "MissingExecutables",
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_IN_ARG_pointers,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_missing_executables_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_missing_executables_IN_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_missing_executables_OUT_ARG_pointers,
     NULL
   },
   "handle-missing-executables",
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_IN_ARG_devices =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_group_physical_devices_IN_ARG_devices =
 {
   {
     -1,
@@ -400,13 +400,13 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_IN_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_group_physical_devices_IN_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_IN_ARG_devices,
+  &_scp_interface__method_info_group_physical_devices_IN_ARG_devices,
   NULL
 };
 
-static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_OUT_ARG_grouped_devices =
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_group_physical_devices_OUT_ARG_grouped_devices =
 {
   {
     -1,
@@ -417,75 +417,75 @@ static const _ExtendedGDBusArgInfo _scp_interface_org_fedoraproject_config_print
   FALSE
 };
 
-static const _ExtendedGDBusArgInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_OUT_ARG_pointers[] =
+static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_group_physical_devices_OUT_ARG_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_OUT_ARG_grouped_devices,
+  &_scp_interface__method_info_group_physical_devices_OUT_ARG_grouped_devices,
   NULL
 };
 
-static const _ExtendedGDBusMethodInfo _scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices =
+static const _ExtendedGDBusMethodInfo _scp_interface__method_info_group_physical_devices =
 {
   {
     -1,
     (gchar *) "GroupPhysicalDevices",
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_IN_ARG_pointers,
-    (GDBusArgInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices_OUT_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_group_physical_devices_IN_ARG_pointers,
+    (GDBusArgInfo **) &_scp_interface__method_info_group_physical_devices_OUT_ARG_pointers,
     NULL
   },
   "handle-group-physical-devices",
   FALSE
 };
 
-static const _ExtendedGDBusMethodInfo * const _scp_interface_org_fedoraproject_config_printing_method_info_pointers[] =
+static const _ExtendedGDBusMethodInfo * const _scp_interface__method_info_pointers[] =
 {
-  &_scp_interface_org_fedoraproject_config_printing_method_info_new_printer_dialog,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_printer_properties_dialog,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_job_applet,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_get_best_drivers,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_missing_executables,
-  &_scp_interface_org_fedoraproject_config_printing_method_info_group_physical_devices,
+  &_scp_interface__method_info_new_printer_dialog,
+  &_scp_interface__method_info_printer_properties_dialog,
+  &_scp_interface__method_info_job_applet,
+  &_scp_interface__method_info_get_best_drivers,
+  &_scp_interface__method_info_missing_executables,
+  &_scp_interface__method_info_group_physical_devices,
   NULL
 };
 
-static const _ExtendedGDBusInterfaceInfo _scp_interface_org_fedoraproject_config_printing_interface_info =
+static const _ExtendedGDBusInterfaceInfo _scp_interface__interface_info =
 {
   {
     -1,
     (gchar *) "org.fedoraproject.Config.Printing",
-    (GDBusMethodInfo **) &_scp_interface_org_fedoraproject_config_printing_method_info_pointers,
+    (GDBusMethodInfo **) &_scp_interface__method_info_pointers,
     NULL,
     NULL,
     NULL
   },
-  "org-fedoraproject-config-printing",
+  "",
 };
 
 
 /**
- * scp_interface_org_fedoraproject_config_printing_interface_info:
+ * scp_interface__interface_info:
  *
  * Gets a machine-readable description of the <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link> D-Bus interface.
  *
  * Returns: (transfer none): A #GDBusInterfaceInfo. Do not free.
  */
 GDBusInterfaceInfo *
-scp_interface_org_fedoraproject_config_printing_interface_info (void)
+scp_interface__interface_info (void)
 {
-  return (GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct;
+  return (GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct;
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_override_properties:
+ * scp_interface__override_properties:
  * @klass: The class structure for a #GObject derived class.
  * @property_id_begin: The property id to assign to the first overridden property.
  *
- * Overrides all #GObject properties in the #scpinterfaceOrgFedoraprojectConfigPrinting interface for a concrete class.
+ * Overrides all #GObject properties in the #scpinterface interface for a concrete class.
  * The properties are overridden in the order they are defined.
  *
  * Returns: The last property id.
  */
 guint
-scp_interface_org_fedoraproject_config_printing_override_properties (GObjectClass *klass, guint property_id_begin)
+scp_interface__override_properties (GObjectClass *klass, guint property_id_begin)
 {
   return property_id_begin - 1;
 }
@@ -493,46 +493,46 @@ scp_interface_org_fedoraproject_config_printing_override_properties (GObjectClas
 
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrinting:
+ * scpinterface:
  *
  * Abstract interface type for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  */
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrintingIface:
+ * scpinterfaceIface:
  * @parent_iface: The parent interface.
- * @handle_get_best_drivers: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-get-best-drivers signal.
- * @handle_group_physical_devices: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-group-physical-devices signal.
- * @handle_job_applet: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-job-applet signal.
- * @handle_missing_executables: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-missing-executables signal.
- * @handle_new_printer_dialog: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-new-printer-dialog signal.
- * @handle_printer_properties_dialog: Handler for the #scpinterfaceOrgFedoraprojectConfigPrinting::handle-printer-properties-dialog signal.
+ * @handle_get_best_drivers: Handler for the #scpinterface::handle-get-best-drivers signal.
+ * @handle_group_physical_devices: Handler for the #scpinterface::handle-group-physical-devices signal.
+ * @handle_job_applet: Handler for the #scpinterface::handle-job-applet signal.
+ * @handle_missing_executables: Handler for the #scpinterface::handle-missing-executables signal.
+ * @handle_new_printer_dialog: Handler for the #scpinterface::handle-new-printer-dialog signal.
+ * @handle_printer_properties_dialog: Handler for the #scpinterface::handle-printer-properties-dialog signal.
  *
  * Virtual table for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  */
 
-typedef scpinterfaceOrgFedoraprojectConfigPrintingIface scpinterfaceOrgFedoraprojectConfigPrintingInterface;
-G_DEFINE_INTERFACE (scpinterfaceOrgFedoraprojectConfigPrinting, scp_interface_org_fedoraproject_config_printing, G_TYPE_OBJECT)
+typedef scpinterfaceIface scpinterfaceInterface;
+G_DEFINE_INTERFACE (scpinterface, scp_interface_, G_TYPE_OBJECT)
 
 static void
-scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFedoraprojectConfigPrintingIface *iface)
+scp_interface__default_init (scpinterfaceIface *iface)
 {
   /* GObject signals for incoming D-Bus method calls: */
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-new-printer-dialog:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-new-printer-dialog:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_new_printer_dialog() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-new-printer-dialog",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_new_printer_dialog),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_new_printer_dialog),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -541,21 +541,21 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
     G_TYPE_DBUS_METHOD_INVOCATION);
 
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-printer-properties-dialog:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-printer-properties-dialog:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    * @arg_name: Argument passed by remote caller.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.PrinterPropertiesDialog">PrinterPropertiesDialog()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dialog() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_printer_properties_dialog() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-printer-properties-dialog",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_printer_properties_dialog),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_printer_properties_dialog),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -564,20 +564,20 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
 
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-job-applet:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-job-applet:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.JobApplet">JobApplet()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_job_applet() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_job_applet() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-job-applet",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_job_applet),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_job_applet),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -586,8 +586,8 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
     G_TYPE_DBUS_METHOD_INVOCATION);
 
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-get-best-drivers:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-get-best-drivers:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    * @arg_device_id: Argument passed by remote caller.
    * @arg_device_make_and_model: Argument passed by remote caller.
@@ -595,14 +595,14 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GetBestDrivers">GetBestDrivers()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_get_best_drivers() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-get-best-drivers",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_get_best_drivers),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_get_best_drivers),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -611,21 +611,21 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-missing-executables:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-missing-executables:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    * @arg_ppd_filename: Argument passed by remote caller.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.MissingExecutables">MissingExecutables()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_missing_executables() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_missing_executables() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-missing-executables",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_missing_executables),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_missing_executables),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -634,21 +634,21 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
     G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
 
   /**
-   * scpinterfaceOrgFedoraprojectConfigPrinting::handle-group-physical-devices:
-   * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+   * scpinterface::handle-group-physical-devices:
+   * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
    * @arg_devices: Argument passed by remote caller.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GroupPhysicalDevices">GroupPhysicalDevices()</link> D-Bus method.
    *
-   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
+   * If a signal handler returns %TRUE, it means the signal handler will handle the invocation (e.g. take a reference to @invocation and eventually call scp_interface__complete_group_physical_devices() or e.g. g_dbus_method_invocation_return_error() on it) and no order signal handlers will run. If no signal handler handles the invocation, the %G_DBUS_ERROR_UNKNOWN_METHOD error is returned.
    *
    * Returns: %TRUE if the invocation was handled, %FALSE to let other signal handlers run.
    */
   g_signal_new ("handle-group-physical-devices",
     G_TYPE_FROM_INTERFACE (iface),
     G_SIGNAL_RUN_LAST,
-    G_STRUCT_OFFSET (scpinterfaceOrgFedoraprojectConfigPrintingIface, handle_group_physical_devices),
+    G_STRUCT_OFFSET (scpinterfaceIface, handle_group_physical_devices),
     g_signal_accumulator_true_handled,
     NULL,
     g_cclosure_marshal_generic,
@@ -659,21 +659,21 @@ scp_interface_org_fedoraproject_config_printing_default_init (scpinterfaceOrgFed
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_new_printer_dialog:
+ * @proxy: A #scpinterfaceProxy.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
  * @user_data: User data to pass to @callback.
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_finish() to get the result of the operation.
+ * You can then call scp_interface__call_new_printer_dialog_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_new_printer_dialog_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_new_printer_dialog (
+    scpinterface *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data)
@@ -689,19 +689,19 @@ scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_new_printer_dialog_finish:
+ * @proxy: A #scpinterfaceProxy.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog().
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_new_printer_dialog().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog().
+ * Finishes an operation started with scp_interface__call_new_printer_dialog().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_new_printer_dialog_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error)
@@ -719,21 +719,21 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_new_printer_dialog_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL.
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.NewPrinterDialog">NewPrinterDialog()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog() for the asynchronous version of this method.
+ * See scp_interface__call_new_printer_dialog() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_new_printer_dialog_sync (
+    scpinterface *proxy,
     gchar **out_path,
     GCancellable *cancellable,
     GError **error)
@@ -757,8 +757,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_printer_properties_dialog:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_name: Argument to pass with the method invocation.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
@@ -766,13 +766,13 @@ _out:
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.PrinterPropertiesDialog">PrinterPropertiesDialog()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_finish() to get the result of the operation.
+ * You can then call scp_interface__call_printer_properties_dialog_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_printer_properties_dialog_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_printer_properties_dialog (
+    scpinterface *proxy,
     const gchar *arg_name,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
@@ -790,19 +790,19 @@ scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_printer_properties_dialog_finish:
+ * @proxy: A #scpinterfaceProxy.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog().
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_printer_properties_dialog().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog().
+ * Finishes an operation started with scp_interface__call_printer_properties_dialog().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_printer_properties_dialog_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error)
@@ -820,8 +820,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_printer_properties_dialog_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_name: Argument to pass with the method invocation.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
@@ -829,13 +829,13 @@ _out:
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.PrinterPropertiesDialog">PrinterPropertiesDialog()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog() for the asynchronous version of this method.
+ * See scp_interface__call_printer_properties_dialog() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_printer_properties_dialog_sync (
+    scpinterface *proxy,
     const gchar *arg_name,
     gchar **out_path,
     GCancellable *cancellable,
@@ -861,21 +861,21 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_job_applet:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_job_applet:
+ * @proxy: A #scpinterfaceProxy.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
  * @user_data: User data to pass to @callback.
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.JobApplet">JobApplet()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_job_applet_finish() to get the result of the operation.
+ * You can then call scp_interface__call_job_applet_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_job_applet_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_job_applet_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_job_applet (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_job_applet (
+    scpinterface *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data)
@@ -891,19 +891,19 @@ scp_interface_org_fedoraproject_config_printing_call_job_applet (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_job_applet_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_job_applet_finish:
+ * @proxy: A #scpinterfaceProxy.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_job_applet().
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_job_applet().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_job_applet().
+ * Finishes an operation started with scp_interface__call_job_applet().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_job_applet_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_job_applet_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error)
@@ -921,21 +921,21 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_job_applet_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_job_applet_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL.
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.JobApplet">JobApplet()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_job_applet() for the asynchronous version of this method.
+ * See scp_interface__call_job_applet() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_job_applet_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_job_applet_sync (
+    scpinterface *proxy,
     gchar **out_path,
     GCancellable *cancellable,
     GError **error)
@@ -959,8 +959,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_get_best_drivers:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_get_best_drivers:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_device_id: Argument to pass with the method invocation.
  * @arg_device_make_and_model: Argument to pass with the method invocation.
  * @arg_device_uri: Argument to pass with the method invocation.
@@ -970,13 +970,13 @@ _out:
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GetBestDrivers">GetBestDrivers()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_finish() to get the result of the operation.
+ * You can then call scp_interface__call_get_best_drivers_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_get_best_drivers_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_get_best_drivers (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_get_best_drivers (
+    scpinterface *proxy,
     const gchar *arg_device_id,
     const gchar *arg_device_make_and_model,
     const gchar *arg_device_uri,
@@ -998,19 +998,19 @@ scp_interface_org_fedoraproject_config_printing_call_get_best_drivers (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_get_best_drivers_finish:
+ * @proxy: A #scpinterfaceProxy.
  * @out_drivers: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_get_best_drivers().
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_get_best_drivers().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_get_best_drivers().
+ * Finishes an operation started with scp_interface__call_get_best_drivers().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_get_best_drivers_finish (
+    scpinterface *proxy,
     GVariant **out_drivers,
     GAsyncResult *res,
     GError **error)
@@ -1028,8 +1028,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_get_best_drivers_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_device_id: Argument to pass with the method invocation.
  * @arg_device_make_and_model: Argument to pass with the method invocation.
  * @arg_device_uri: Argument to pass with the method invocation.
@@ -1039,13 +1039,13 @@ _out:
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GetBestDrivers">GetBestDrivers()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_get_best_drivers() for the asynchronous version of this method.
+ * See scp_interface__call_get_best_drivers() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_get_best_drivers_sync (
+    scpinterface *proxy,
     const gchar *arg_device_id,
     const gchar *arg_device_make_and_model,
     const gchar *arg_device_uri,
@@ -1075,8 +1075,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_missing_executables:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_missing_executables:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_ppd_filename: Argument to pass with the method invocation.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
@@ -1084,13 +1084,13 @@ _out:
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.MissingExecutables">MissingExecutables()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_missing_executables_finish() to get the result of the operation.
+ * You can then call scp_interface__call_missing_executables_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_missing_executables_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_missing_executables_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_missing_executables (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_missing_executables (
+    scpinterface *proxy,
     const gchar *arg_ppd_filename,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
@@ -1108,20 +1108,20 @@ scp_interface_org_fedoraproject_config_printing_call_missing_executables (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_missing_executables_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
- * @out_missing_executables: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_missing_executables().
+ * scp_interface__call_missing_executables_finish:
+ * @proxy: A #scpinterfaceProxy.
+ * @out_missing_executables: (out) (array zero-terminated=1): Return location for return parameter or %NULL to ignore.
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_missing_executables().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_missing_executables().
+ * Finishes an operation started with scp_interface__call_missing_executables().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_missing_executables_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
-    gchar **out_missing_executables,
+scp_interface__call_missing_executables_finish (
+    scpinterface *proxy,
+    gchar ***out_missing_executables,
     GAsyncResult *res,
     GError **error)
 {
@@ -1130,7 +1130,7 @@ scp_interface_org_fedoraproject_config_printing_call_missing_executables_finish 
   if (_ret == NULL)
     goto _out;
   g_variant_get (_ret,
-                 "(s)",
+                 "(^as)",
                  out_missing_executables);
   g_variant_unref (_ret);
 _out:
@@ -1138,24 +1138,24 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_missing_executables_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_missing_executables_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_ppd_filename: Argument to pass with the method invocation.
- * @out_missing_executables: (out): Return location for return parameter or %NULL to ignore.
+ * @out_missing_executables: (out) (array zero-terminated=1): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL.
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.MissingExecutables">MissingExecutables()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_missing_executables() for the asynchronous version of this method.
+ * See scp_interface__call_missing_executables() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_missing_executables_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_missing_executables_sync (
+    scpinterface *proxy,
     const gchar *arg_ppd_filename,
-    gchar **out_missing_executables,
+    gchar ***out_missing_executables,
     GCancellable *cancellable,
     GError **error)
 {
@@ -1171,7 +1171,7 @@ scp_interface_org_fedoraproject_config_printing_call_missing_executables_sync (
   if (_ret == NULL)
     goto _out;
   g_variant_get (_ret,
-                 "(s)",
+                 "(^as)",
                  out_missing_executables);
   g_variant_unref (_ret);
 _out:
@@ -1179,8 +1179,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_group_physical_devices:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_group_physical_devices:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_devices: Argument to pass with the method invocation.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
@@ -1188,13 +1188,13 @@ _out:
  *
  * Asynchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GroupPhysicalDevices">GroupPhysicalDevices()</link> D-Bus method on @proxy.
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_finish() to get the result of the operation.
+ * You can then call scp_interface__call_group_physical_devices_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_sync() for the synchronous, blocking version of this method.
+ * See scp_interface__call_group_physical_devices_sync() for the synchronous, blocking version of this method.
  */
 void
-scp_interface_org_fedoraproject_config_printing_call_group_physical_devices (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_group_physical_devices (
+    scpinterface *proxy,
     GVariant *arg_devices,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
@@ -1212,19 +1212,19 @@ scp_interface_org_fedoraproject_config_printing_call_group_physical_devices (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_finish:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_group_physical_devices_finish:
+ * @proxy: A #scpinterfaceProxy.
  * @out_grouped_devices: (out): Return location for return parameter or %NULL to ignore.
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_call_group_physical_devices().
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__call_group_physical_devices().
  * @error: Return location for error or %NULL.
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_call_group_physical_devices().
+ * Finishes an operation started with scp_interface__call_group_physical_devices().
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_group_physical_devices_finish (
+    scpinterface *proxy,
     GVariant **out_grouped_devices,
     GAsyncResult *res,
     GError **error)
@@ -1242,8 +1242,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_sync:
- * @proxy: A #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * scp_interface__call_group_physical_devices_sync:
+ * @proxy: A #scpinterfaceProxy.
  * @arg_devices: Argument to pass with the method invocation.
  * @out_grouped_devices: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
@@ -1251,13 +1251,13 @@ _out:
  *
  * Synchronously invokes the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.GroupPhysicalDevices">GroupPhysicalDevices()</link> D-Bus method on @proxy. The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_call_group_physical_devices() for the asynchronous version of this method.
+ * See scp_interface__call_group_physical_devices() for the asynchronous version of this method.
  *
  * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
-scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+scp_interface__call_group_physical_devices_sync (
+    scpinterface *proxy,
     GVariant *arg_devices,
     GVariant **out_grouped_devices,
     GCancellable *cancellable,
@@ -1283,8 +1283,8 @@ _out:
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_new_printer_dialog:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @path: Parameter to return.
  *
@@ -1293,8 +1293,8 @@ _out:
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_new_printer_dialog (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path)
 {
@@ -1304,8 +1304,8 @@ scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dialog:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_printer_properties_dialog:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @path: Parameter to return.
  *
@@ -1314,8 +1314,8 @@ scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog (
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_printer_properties_dialog (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path)
 {
@@ -1325,8 +1325,8 @@ scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dial
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_job_applet:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_job_applet:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @path: Parameter to return.
  *
@@ -1335,8 +1335,8 @@ scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dial
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_job_applet (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_job_applet (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path)
 {
@@ -1346,8 +1346,8 @@ scp_interface_org_fedoraproject_config_printing_complete_job_applet (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_get_best_drivers:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @drivers: Parameter to return.
  *
@@ -1356,8 +1356,8 @@ scp_interface_org_fedoraproject_config_printing_complete_job_applet (
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_get_best_drivers (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     GVariant *drivers)
 {
@@ -1367,8 +1367,8 @@ scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers (
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_missing_executables:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_missing_executables:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @missing_executables: Parameter to return.
  *
@@ -1377,19 +1377,19 @@ scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers (
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_missing_executables (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_missing_executables (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
-    const gchar *missing_executables)
+    const gchar *const *missing_executables)
 {
   g_dbus_method_invocation_return_value (invocation,
-    g_variant_new ("(s)",
+    g_variant_new ("(^as)",
                    missing_executables));
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices:
- * @object: A #scpinterfaceOrgFedoraprojectConfigPrinting.
+ * scp_interface__complete_group_physical_devices:
+ * @object: A #scpinterface.
  * @invocation: (transfer full): A #GDBusMethodInvocation.
  * @grouped_devices: Parameter to return.
  *
@@ -1398,8 +1398,8 @@ scp_interface_org_fedoraproject_config_printing_complete_missing_executables (
  * This method will free @invocation, you cannot use it afterwards.
  */
 void
-scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+scp_interface__complete_group_physical_devices (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     GVariant *grouped_devices)
 {
@@ -1411,45 +1411,45 @@ scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices 
 /* ------------------------------------------------------------------------ */
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrintingProxy:
+ * scpinterfaceProxy:
  *
- * The #scpinterfaceOrgFedoraprojectConfigPrintingProxy structure contains only private data and should only be accessed using the provided API.
+ * The #scpinterfaceProxy structure contains only private data and should only be accessed using the provided API.
  */
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrintingProxyClass:
+ * scpinterfaceProxyClass:
  * @parent_class: The parent class.
  *
- * Class structure for #scpinterfaceOrgFedoraprojectConfigPrintingProxy.
+ * Class structure for #scpinterfaceProxy.
  */
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate
+struct _scpinterfaceProxyPrivate
 {
   GData *qdata;
 };
 
-static void scp_interface_org_fedoraproject_config_printing_proxy_iface_init (scpinterfaceOrgFedoraprojectConfigPrintingIface *iface);
+static void scp_interface__proxy_iface_init (scpinterfaceIface *iface);
 
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-G_DEFINE_TYPE_WITH_CODE (scpinterfaceOrgFedoraprojectConfigPrintingProxy, scp_interface_org_fedoraproject_config_printing_proxy, G_TYPE_DBUS_PROXY,
-                         G_ADD_PRIVATE (scpinterfaceOrgFedoraprojectConfigPrintingProxy)
-                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scp_interface_org_fedoraproject_config_printing_proxy_iface_init))
+G_DEFINE_TYPE_WITH_CODE (scpinterfaceProxy, scp_interface__proxy, G_TYPE_DBUS_PROXY,
+                         G_ADD_PRIVATE (scpinterfaceProxy)
+                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_, scp_interface__proxy_iface_init))
 
 #else
-G_DEFINE_TYPE_WITH_CODE (scpinterfaceOrgFedoraprojectConfigPrintingProxy, scp_interface_org_fedoraproject_config_printing_proxy, G_TYPE_DBUS_PROXY,
-                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scp_interface_org_fedoraproject_config_printing_proxy_iface_init))
+G_DEFINE_TYPE_WITH_CODE (scpinterfaceProxy, scp_interface__proxy, G_TYPE_DBUS_PROXY,
+                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_, scp_interface__proxy_iface_init))
 
 #endif
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_finalize (GObject *object)
+scp_interface__proxy_finalize (GObject *object)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingProxy *proxy = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (object);
+  scpinterfaceProxy *proxy = SCP_INTERFACE__PROXY (object);
   g_datalist_clear (&proxy->priv->qdata);
-  G_OBJECT_CLASS (scp_interface_org_fedoraproject_config_printing_proxy_parent_class)->finalize (object);
+  G_OBJECT_CLASS (scp_interface__proxy_parent_class)->finalize (object);
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_get_property (GObject      *object,
+scp_interface__proxy_get_property (GObject      *object,
   guint         prop_id,
   GValue       *value,
   GParamSpec   *pspec G_GNUC_UNUSED)
@@ -1457,7 +1457,7 @@ scp_interface_org_fedoraproject_config_printing_proxy_get_property (GObject     
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_set_property (GObject      *object,
+scp_interface__proxy_set_property (GObject      *object,
   guint         prop_id,
   const GValue *value,
   GParamSpec   *pspec G_GNUC_UNUSED)
@@ -1465,7 +1465,7 @@ scp_interface_org_fedoraproject_config_printing_proxy_set_property (GObject     
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_g_signal (GDBusProxy *proxy,
+scp_interface__proxy_g_signal (GDBusProxy *proxy,
   const gchar *sender_name G_GNUC_UNUSED,
   const gchar *signal_name,
   GVariant *parameters)
@@ -1477,12 +1477,12 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_signal (GDBusProxy *prox
   gsize num_params;
   gsize n;
   guint signal_id;
-  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct, signal_name);
+  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct, signal_name);
   if (info == NULL)
     return;
   num_params = g_variant_n_children (parameters);
   paramv = g_new0 (GValue, num_params + 1);
-  g_value_init (&paramv[0], SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
+  g_value_init (&paramv[0], SCP_INTERFACE_TYPE_);
   g_value_set_object (&paramv[0], proxy);
   g_variant_iter_init (&iter, parameters);
   n = 1;
@@ -1499,7 +1499,7 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_signal (GDBusProxy *prox
         g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
       g_variant_unref (child);
     }
-  signal_id = g_signal_lookup (info->signal_name, SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
+  signal_id = g_signal_lookup (info->signal_name, SCP_INTERFACE_TYPE_);
   g_signal_emitv (paramv, signal_id, 0, NULL);
   for (n = 0; n < num_params + 1; n++)
     g_value_unset (&paramv[n]);
@@ -1507,11 +1507,11 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_signal (GDBusProxy *prox
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_g_properties_changed (GDBusProxy *_proxy,
+scp_interface__proxy_g_properties_changed (GDBusProxy *_proxy,
   GVariant *changed_properties,
   const gchar *const *invalidated_properties)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingProxy *proxy = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (_proxy);
+  scpinterfaceProxy *proxy = SCP_INTERFACE__PROXY (_proxy);
   guint n;
   const gchar *key;
   GVariantIter *iter;
@@ -1519,7 +1519,7 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_properties_changed (GDBu
   g_variant_get (changed_properties, "a{sv}", &iter);
   while (g_variant_iter_next (iter, "{&sv}", &key, NULL))
     {
-      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct, key);
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct, key);
       g_datalist_remove_data (&proxy->priv->qdata, key);
       if (info != NULL)
         g_object_notify (G_OBJECT (proxy), info->hyphen_name);
@@ -1527,7 +1527,7 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_properties_changed (GDBu
   g_variant_iter_free (iter);
   for (n = 0; invalidated_properties[n] != NULL; n++)
     {
-      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct, invalidated_properties[n]);
+      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct, invalidated_properties[n]);
       g_datalist_remove_data (&proxy->priv->qdata, invalidated_properties[n]);
       if (info != NULL)
         g_object_notify (G_OBJECT (proxy), info->hyphen_name);
@@ -1535,44 +1535,44 @@ scp_interface_org_fedoraproject_config_printing_proxy_g_properties_changed (GDBu
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_init (scpinterfaceOrgFedoraprojectConfigPrintingProxy *proxy)
+scp_interface__proxy_init (scpinterfaceProxy *proxy)
 {
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-  proxy->priv = scp_interface_org_fedoraproject_config_printing_proxy_get_instance_private (proxy);
+  proxy->priv = scp_interface__proxy_get_instance_private (proxy);
 #else
-  proxy->priv = G_TYPE_INSTANCE_GET_PRIVATE (proxy, SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate);
+  proxy->priv = G_TYPE_INSTANCE_GET_PRIVATE (proxy, SCP_INTERFACE_TYPE__PROXY, scpinterfaceProxyPrivate);
 #endif
 
-  g_dbus_proxy_set_interface_info (G_DBUS_PROXY (proxy), scp_interface_org_fedoraproject_config_printing_interface_info ());
+  g_dbus_proxy_set_interface_info (G_DBUS_PROXY (proxy), scp_interface__interface_info ());
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_class_init (scpinterfaceOrgFedoraprojectConfigPrintingProxyClass *klass)
+scp_interface__proxy_class_init (scpinterfaceProxyClass *klass)
 {
   GObjectClass *gobject_class;
   GDBusProxyClass *proxy_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize     = scp_interface_org_fedoraproject_config_printing_proxy_finalize;
-  gobject_class->get_property = scp_interface_org_fedoraproject_config_printing_proxy_get_property;
-  gobject_class->set_property = scp_interface_org_fedoraproject_config_printing_proxy_set_property;
+  gobject_class->finalize     = scp_interface__proxy_finalize;
+  gobject_class->get_property = scp_interface__proxy_get_property;
+  gobject_class->set_property = scp_interface__proxy_set_property;
 
   proxy_class = G_DBUS_PROXY_CLASS (klass);
-  proxy_class->g_signal = scp_interface_org_fedoraproject_config_printing_proxy_g_signal;
-  proxy_class->g_properties_changed = scp_interface_org_fedoraproject_config_printing_proxy_g_properties_changed;
+  proxy_class->g_signal = scp_interface__proxy_g_signal;
+  proxy_class->g_properties_changed = scp_interface__proxy_g_properties_changed;
 
 #if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
-  g_type_class_add_private (klass, sizeof (scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate));
+  g_type_class_add_private (klass, sizeof (scpinterfaceProxyPrivate));
 #endif
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_proxy_iface_init (scpinterfaceOrgFedoraprojectConfigPrintingIface *iface)
+scp_interface__proxy_iface_init (scpinterfaceIface *iface)
 {
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new:
+ * scp_interface__proxy_new:
  * @connection: A #GDBusConnection.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
@@ -1584,12 +1584,12 @@ scp_interface_org_fedoraproject_config_printing_proxy_iface_init (scpinterfaceOr
  * Asynchronously creates a proxy for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>. See g_dbus_proxy_new() for more details.
  *
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_proxy_new_finish() to get the result of the operation.
+ * You can then call scp_interface__proxy_new_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_proxy_new_sync() for the synchronous, blocking version of this constructor.
+ * See scp_interface__proxy_new_sync() for the synchronous, blocking version of this constructor.
  */
 void
-scp_interface_org_fedoraproject_config_printing_proxy_new (
+scp_interface__proxy_new (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1598,20 +1598,20 @@ scp_interface_org_fedoraproject_config_printing_proxy_new (
     GAsyncReadyCallback  callback,
     gpointer             user_data)
 {
-  g_async_initable_new_async (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
+  g_async_initable_new_async (SCP_INTERFACE_TYPE__PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new_finish:
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_proxy_new().
+ * scp_interface__proxy_new_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__proxy_new().
  * @error: Return location for error or %NULL
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_proxy_new().
+ * Finishes an operation started with scp_interface__proxy_new().
  *
- * Returns: (transfer full) (type scpinterfaceOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type scpinterfaceProxy): The constructed proxy object or %NULL if @error is set.
  */
-scpinterfaceOrgFedoraprojectConfigPrinting *
-scp_interface_org_fedoraproject_config_printing_proxy_new_finish (
+scpinterface *
+scp_interface__proxy_new_finish (
     GAsyncResult        *res,
     GError             **error)
 {
@@ -1621,13 +1621,13 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_finish (
   ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
   g_object_unref (source_object);
   if (ret != NULL)
-    return SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
+    return SCP_INTERFACE_ (ret);
   else
     return NULL;
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new_sync:
+ * scp_interface__proxy_new_sync:
  * @connection: A #GDBusConnection.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: (nullable): A bus name (well-known or unique) or %NULL if @connection is not a message bus connection.
@@ -1639,12 +1639,12 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_finish (
  *
  * The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_proxy_new() for the asynchronous version of this constructor.
+ * See scp_interface__proxy_new() for the asynchronous version of this constructor.
  *
- * Returns: (transfer full) (type scpinterfaceOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type scpinterfaceProxy): The constructed proxy object or %NULL if @error is set.
  */
-scpinterfaceOrgFedoraprojectConfigPrinting *
-scp_interface_org_fedoraproject_config_printing_proxy_new_sync (
+scpinterface *
+scp_interface__proxy_new_sync (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1653,16 +1653,16 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_sync (
     GError             **error)
 {
   GInitable *ret;
-  ret = g_initable_new (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
+  ret = g_initable_new (SCP_INTERFACE_TYPE__PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-connection", connection, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
   if (ret != NULL)
-    return SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
+    return SCP_INTERFACE_ (ret);
   else
     return NULL;
 }
 
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus:
+ * scp_interface__proxy_new_for_bus:
  * @bus_type: A #GBusType.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: A bus name (well-known or unique).
@@ -1671,15 +1671,15 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_sync (
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied.
  * @user_data: User data to pass to @callback.
  *
- * Like scp_interface_org_fedoraproject_config_printing_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
+ * Like scp_interface__proxy_new() but takes a #GBusType instead of a #GDBusConnection.
  *
  * When the operation is finished, @callback will be invoked in the <link linkend="g-main-context-push-thread-default">thread-default main loop</link> of the thread you are calling this method from.
- * You can then call scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish() to get the result of the operation.
+ * You can then call scp_interface__proxy_new_for_bus_finish() to get the result of the operation.
  *
- * See scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync() for the synchronous, blocking version of this constructor.
+ * See scp_interface__proxy_new_for_bus_sync() for the synchronous, blocking version of this constructor.
  */
 void
-scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus (
+scp_interface__proxy_new_for_bus (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1688,20 +1688,20 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus (
     GAsyncReadyCallback  callback,
     gpointer             user_data)
 {
-  g_async_initable_new_async (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
+  g_async_initable_new_async (SCP_INTERFACE_TYPE__PROXY, G_PRIORITY_DEFAULT, cancellable, callback, user_data, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish:
- * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus().
+ * scp_interface__proxy_new_for_bus_finish:
+ * @res: The #GAsyncResult obtained from the #GAsyncReadyCallback passed to scp_interface__proxy_new_for_bus().
  * @error: Return location for error or %NULL
  *
- * Finishes an operation started with scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus().
+ * Finishes an operation started with scp_interface__proxy_new_for_bus().
  *
- * Returns: (transfer full) (type scpinterfaceOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type scpinterfaceProxy): The constructed proxy object or %NULL if @error is set.
  */
-scpinterfaceOrgFedoraprojectConfigPrinting *
-scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
+scpinterface *
+scp_interface__proxy_new_for_bus_finish (
     GAsyncResult        *res,
     GError             **error)
 {
@@ -1711,13 +1711,13 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
   ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), res, error);
   g_object_unref (source_object);
   if (ret != NULL)
-    return SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
+    return SCP_INTERFACE_ (ret);
   else
     return NULL;
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync:
+ * scp_interface__proxy_new_for_bus_sync:
  * @bus_type: A #GBusType.
  * @flags: Flags from the #GDBusProxyFlags enumeration.
  * @name: A bus name (well-known or unique).
@@ -1725,16 +1725,16 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @error: Return location for error or %NULL
  *
- * Like scp_interface_org_fedoraproject_config_printing_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
+ * Like scp_interface__proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
  *
  * The calling thread is blocked until a reply is received.
  *
- * See scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus() for the asynchronous version of this constructor.
+ * See scp_interface__proxy_new_for_bus() for the asynchronous version of this constructor.
  *
- * Returns: (transfer full) (type scpinterfaceOrgFedoraprojectConfigPrintingProxy): The constructed proxy object or %NULL if @error is set.
+ * Returns: (transfer full) (type scpinterfaceProxy): The constructed proxy object or %NULL if @error is set.
  */
-scpinterfaceOrgFedoraprojectConfigPrinting *
-scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
+scpinterface *
+scp_interface__proxy_new_for_bus_sync (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -1743,9 +1743,9 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
     GError             **error)
 {
   GInitable *ret;
-  ret = g_initable_new (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
+  ret = g_initable_new (SCP_INTERFACE_TYPE__PROXY, cancellable, error, "g-flags", flags, "g-name", name, "g-bus-type", bus_type, "g-object-path", object_path, "g-interface-name", "org.fedoraproject.Config.Printing", NULL);
   if (ret != NULL)
-    return SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING (ret);
+    return SCP_INTERFACE_ (ret);
   else
     return NULL;
 }
@@ -1754,19 +1754,19 @@ scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
 /* ------------------------------------------------------------------------ */
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrintingSkeleton:
+ * scpinterfaceSkeleton:
  *
- * The #scpinterfaceOrgFedoraprojectConfigPrintingSkeleton structure contains only private data and should only be accessed using the provided API.
+ * The #scpinterfaceSkeleton structure contains only private data and should only be accessed using the provided API.
  */
 
 /**
- * scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass:
+ * scpinterfaceSkeletonClass:
  * @parent_class: The parent class.
  *
- * Class structure for #scpinterfaceOrgFedoraprojectConfigPrintingSkeleton.
+ * Class structure for #scpinterfaceSkeleton.
  */
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate
+struct _scpinterfaceSkeletonPrivate
 {
   GValue *properties;
   GList *changed_properties;
@@ -1776,7 +1776,7 @@ struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate
 };
 
 static void
-_scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call (
+_scp_interface__skeleton_handle_method_call (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -1786,7 +1786,7 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call (
   GDBusMethodInvocation *invocation,
   gpointer user_data)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
+  scpinterfaceSkeleton *skeleton = SCP_INTERFACE__SKELETON (user_data);
   _ExtendedGDBusMethodInfo *info;
   GVariantIter iter;
   GVariant *child;
@@ -1801,7 +1801,7 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call (
   num_params = g_variant_n_children (parameters);
   num_extra = info->pass_fdlist ? 3 : 2;  paramv = g_new0 (GValue, num_params + num_extra);
   n = 0;
-  g_value_init (&paramv[n], SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
+  g_value_init (&paramv[n], SCP_INTERFACE_TYPE_);
   g_value_set_object (&paramv[n++], skeleton);
   g_value_init (&paramv[n], G_TYPE_DBUS_METHOD_INVOCATION);
   g_value_set_object (&paramv[n++], invocation);
@@ -1828,7 +1828,7 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call (
         g_dbus_gvariant_to_gvalue (child, &paramv[n++]);
       g_variant_unref (child);
     }
-  signal_id = g_signal_lookup (info->signal_name, SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING);
+  signal_id = g_signal_lookup (info->signal_name, SCP_INTERFACE_TYPE_);
   g_value_init (&return_value, G_TYPE_BOOLEAN);
   g_signal_emitv (paramv, signal_id, 0, &return_value);
   if (!g_value_get_boolean (&return_value))
@@ -1840,7 +1840,7 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call (
 }
 
 static GVariant *
-_scp_interface_org_fedoraproject_config_printing_skeleton_handle_get_property (
+_scp_interface__skeleton_handle_get_property (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -1849,13 +1849,13 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_get_property (
   GError **error,
   gpointer user_data)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
+  scpinterfaceSkeleton *skeleton = SCP_INTERFACE__SKELETON (user_data);
   GValue value = G_VALUE_INIT;
   GParamSpec *pspec;
   _ExtendedGDBusPropertyInfo *info;
   GVariant *ret;
   ret = NULL;
-  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct, property_name);
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct, property_name);
   g_assert (info != NULL);
   pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
   if (pspec == NULL)
@@ -1873,7 +1873,7 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_get_property (
 }
 
 static gboolean
-_scp_interface_org_fedoraproject_config_printing_skeleton_handle_set_property (
+_scp_interface__skeleton_handle_set_property (
   GDBusConnection *connection G_GNUC_UNUSED,
   const gchar *sender G_GNUC_UNUSED,
   const gchar *object_path G_GNUC_UNUSED,
@@ -1883,13 +1883,13 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_set_property (
   GError **error,
   gpointer user_data)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (user_data);
+  scpinterfaceSkeleton *skeleton = SCP_INTERFACE__SKELETON (user_data);
   GValue value = G_VALUE_INIT;
   GParamSpec *pspec;
   _ExtendedGDBusPropertyInfo *info;
   gboolean ret;
   ret = FALSE;
-  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct, property_name);
+  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_scp_interface__interface_info.parent_struct, property_name);
   g_assert (info != NULL);
   pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);
   if (pspec == NULL)
@@ -1909,43 +1909,43 @@ _scp_interface_org_fedoraproject_config_printing_skeleton_handle_set_property (
   return ret;
 }
 
-static const GDBusInterfaceVTable _scp_interface_org_fedoraproject_config_printing_skeleton_vtable =
+static const GDBusInterfaceVTable _scp_interface__skeleton_vtable =
 {
-  _scp_interface_org_fedoraproject_config_printing_skeleton_handle_method_call,
-  _scp_interface_org_fedoraproject_config_printing_skeleton_handle_get_property,
-  _scp_interface_org_fedoraproject_config_printing_skeleton_handle_set_property,
+  _scp_interface__skeleton_handle_method_call,
+  _scp_interface__skeleton_handle_get_property,
+  _scp_interface__skeleton_handle_set_property,
   {NULL}
 };
 
 static GDBusInterfaceInfo *
-scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_info (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+scp_interface__skeleton_dbus_interface_get_info (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
 {
-  return scp_interface_org_fedoraproject_config_printing_interface_info ();
+  return scp_interface__interface_info ();
 }
 
 static GDBusInterfaceVTable *
-scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_vtable (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
+scp_interface__skeleton_dbus_interface_get_vtable (GDBusInterfaceSkeleton *skeleton G_GNUC_UNUSED)
 {
-  return (GDBusInterfaceVTable *) &_scp_interface_org_fedoraproject_config_printing_skeleton_vtable;
+  return (GDBusInterfaceVTable *) &_scp_interface__skeleton_vtable;
 }
 
 static GVariant *
-scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_properties (GDBusInterfaceSkeleton *_skeleton)
+scp_interface__skeleton_dbus_interface_get_properties (GDBusInterfaceSkeleton *_skeleton)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (_skeleton);
+  scpinterfaceSkeleton *skeleton = SCP_INTERFACE__SKELETON (_skeleton);
 
   GVariantBuilder builder;
   guint n;
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sv}"));
-  if (_scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct.properties == NULL)
+  if (_scp_interface__interface_info.parent_struct.properties == NULL)
     goto out;
-  for (n = 0; _scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct.properties[n] != NULL; n++)
+  for (n = 0; _scp_interface__interface_info.parent_struct.properties[n] != NULL; n++)
     {
-      GDBusPropertyInfo *info = _scp_interface_org_fedoraproject_config_printing_interface_info.parent_struct.properties[n];
+      GDBusPropertyInfo *info = _scp_interface__interface_info.parent_struct.properties[n];
       if (info->flags & G_DBUS_PROPERTY_INFO_FLAGS_READABLE)
         {
           GVariant *value;
-          value = _scp_interface_org_fedoraproject_config_printing_skeleton_handle_get_property (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)), NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing", info->name, NULL, skeleton);
+          value = _scp_interface__skeleton_handle_get_property (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)), NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "org.fedoraproject.Config.Printing", info->name, NULL, skeleton);
           if (value != NULL)
             {
               g_variant_take_ref (value);
@@ -1959,40 +1959,40 @@ out:
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
+scp_interface__skeleton_dbus_interface_flush (GDBusInterfaceSkeleton *_skeleton)
 {
 }
 
-static void scp_interface_org_fedoraproject_config_printing_skeleton_iface_init (scpinterfaceOrgFedoraprojectConfigPrintingIface *iface);
+static void scp_interface__skeleton_iface_init (scpinterfaceIface *iface);
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-G_DEFINE_TYPE_WITH_CODE (scpinterfaceOrgFedoraprojectConfigPrintingSkeleton, scp_interface_org_fedoraproject_config_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
-                         G_ADD_PRIVATE (scpinterfaceOrgFedoraprojectConfigPrintingSkeleton)
-                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scp_interface_org_fedoraproject_config_printing_skeleton_iface_init))
+G_DEFINE_TYPE_WITH_CODE (scpinterfaceSkeleton, scp_interface__skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_ADD_PRIVATE (scpinterfaceSkeleton)
+                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_, scp_interface__skeleton_iface_init))
 
 #else
-G_DEFINE_TYPE_WITH_CODE (scpinterfaceOrgFedoraprojectConfigPrintingSkeleton, scp_interface_org_fedoraproject_config_printing_skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
-                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scp_interface_org_fedoraproject_config_printing_skeleton_iface_init))
+G_DEFINE_TYPE_WITH_CODE (scpinterfaceSkeleton, scp_interface__skeleton, G_TYPE_DBUS_INTERFACE_SKELETON,
+                         G_IMPLEMENT_INTERFACE (SCP_INTERFACE_TYPE_, scp_interface__skeleton_iface_init))
 
 #endif
 static void
-scp_interface_org_fedoraproject_config_printing_skeleton_finalize (GObject *object)
+scp_interface__skeleton_finalize (GObject *object)
 {
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton = SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (object);
+  scpinterfaceSkeleton *skeleton = SCP_INTERFACE__SKELETON (object);
   g_list_free_full (skeleton->priv->changed_properties, (GDestroyNotify) _changed_property_free);
   if (skeleton->priv->changed_properties_idle_source != NULL)
     g_source_destroy (skeleton->priv->changed_properties_idle_source);
   g_main_context_unref (skeleton->priv->context);
   g_mutex_clear (&skeleton->priv->lock);
-  G_OBJECT_CLASS (scp_interface_org_fedoraproject_config_printing_skeleton_parent_class)->finalize (object);
+  G_OBJECT_CLASS (scp_interface__skeleton_parent_class)->finalize (object);
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_skeleton_init (scpinterfaceOrgFedoraprojectConfigPrintingSkeleton *skeleton)
+scp_interface__skeleton_init (scpinterfaceSkeleton *skeleton)
 {
 #if GLIB_VERSION_MAX_ALLOWED >= GLIB_VERSION_2_38
-  skeleton->priv = scp_interface_org_fedoraproject_config_printing_skeleton_get_instance_private (skeleton);
+  skeleton->priv = scp_interface__skeleton_get_instance_private (skeleton);
 #else
-  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate);
+  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, SCP_INTERFACE_TYPE__SKELETON, scpinterfaceSkeletonPrivate);
 #endif
 
   g_mutex_init (&skeleton->priv->lock);
@@ -2000,41 +2000,41 @@ scp_interface_org_fedoraproject_config_printing_skeleton_init (scpinterfaceOrgFe
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_skeleton_class_init (scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass *klass)
+scp_interface__skeleton_class_init (scpinterfaceSkeletonClass *klass)
 {
   GObjectClass *gobject_class;
   GDBusInterfaceSkeletonClass *skeleton_class;
 
   gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = scp_interface_org_fedoraproject_config_printing_skeleton_finalize;
+  gobject_class->finalize = scp_interface__skeleton_finalize;
 
   skeleton_class = G_DBUS_INTERFACE_SKELETON_CLASS (klass);
-  skeleton_class->get_info = scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_info;
-  skeleton_class->get_properties = scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_properties;
-  skeleton_class->flush = scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_flush;
-  skeleton_class->get_vtable = scp_interface_org_fedoraproject_config_printing_skeleton_dbus_interface_get_vtable;
+  skeleton_class->get_info = scp_interface__skeleton_dbus_interface_get_info;
+  skeleton_class->get_properties = scp_interface__skeleton_dbus_interface_get_properties;
+  skeleton_class->flush = scp_interface__skeleton_dbus_interface_flush;
+  skeleton_class->get_vtable = scp_interface__skeleton_dbus_interface_get_vtable;
 
 #if GLIB_VERSION_MAX_ALLOWED < GLIB_VERSION_2_38
-  g_type_class_add_private (klass, sizeof (scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate));
+  g_type_class_add_private (klass, sizeof (scpinterfaceSkeletonPrivate));
 #endif
 }
 
 static void
-scp_interface_org_fedoraproject_config_printing_skeleton_iface_init (scpinterfaceOrgFedoraprojectConfigPrintingIface *iface)
+scp_interface__skeleton_iface_init (scpinterfaceIface *iface)
 {
 }
 
 /**
- * scp_interface_org_fedoraproject_config_printing_skeleton_new:
+ * scp_interface__skeleton_new:
  *
  * Creates a skeleton object for the D-Bus interface <link linkend="gdbus-interface-org-fedoraproject-Config-Printing.top_of_page">org.fedoraproject.Config.Printing</link>.
  *
- * Returns: (transfer full) (type scpinterfaceOrgFedoraprojectConfigPrintingSkeleton): The skeleton object.
+ * Returns: (transfer full) (type scpinterfaceSkeleton): The skeleton object.
  */
-scpinterfaceOrgFedoraprojectConfigPrinting *
-scp_interface_org_fedoraproject_config_printing_skeleton_new (void)
+scpinterface *
+scp_interface__skeleton_new (void)
 {
-  return SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING (g_object_new (SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, NULL));
+  return SCP_INTERFACE_ (g_object_new (SCP_INTERFACE_TYPE__SKELETON, NULL));
 }
 
 /* ------------------------------------------------------------------------

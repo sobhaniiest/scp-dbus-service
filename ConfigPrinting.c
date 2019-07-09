@@ -8,8 +8,6 @@
 #include "MissingExecutables.h"
 #include "scp_interface.h"
 
-#define scpinterface scpinterfaceOrgFedoraprojectConfigPrinting
-
 GDBusConnection *conn;
 const gchar *name = "org.fedoraproject.Config.Printing";
 char path[1024];
@@ -79,7 +77,7 @@ static void name_acquired_handler(GDBusConnection *connection,
     
 	/**********************/
 
-	interface = scp_interface_org_fedoraproject_config_printing_skeleton_new();
+	interface = scp_interface__skeleton_new();
 
 	g_signal_connect(interface, 
 					 "handle-new-printer-dialog", 
@@ -126,7 +124,7 @@ static gboolean NewPrinterDialog(scpinterface *interface,
 	snprintf(path, 1024, "/org/fedoraproject/Config/Printing/NewPrinterDialog/%d", pathn);
 	CPNewPrinterDialog(conn, name, path);
 	alive();
-	scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog(interface, invocation, path);
+	scp_interface__complete_new_printer_dialog(interface, invocation, path);
 	return TRUE;
 }
 /*
@@ -173,8 +171,8 @@ static gboolean MissingExecutables(scpinterface *interface,
 								   const gchar *ppd_filename,
 								   gpointer user_data)
 {
-	const gchar *missing_executables = missingexecutables(ppd_filename);
-	scp_interface_org_fedoraproject_config_printing_complete_missing_executables(interface, 
+	exes_to_install *missing_executables = missingexecutables(ppd_filename);
+	scp_interface__complete_missing_executables(interface, 
 																				 invocation, 
 																				 missing_executables);
 	return TRUE;

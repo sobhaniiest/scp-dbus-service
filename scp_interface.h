@@ -16,149 +16,149 @@ G_BEGIN_DECLS
 /* ------------------------------------------------------------------------ */
 /* Declarations for org.fedoraproject.Config.Printing */
 
-#define SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING (scp_interface_org_fedoraproject_config_printing_get_type ())
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scpinterfaceOrgFedoraprojectConfigPrinting))
-#define SCP_INTERFACE_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING))
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_GET_IFACE(o) (G_TYPE_INSTANCE_GET_INTERFACE ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING, scpinterfaceOrgFedoraprojectConfigPrintingIface))
+#define SCP_INTERFACE_TYPE_ (scp_interface__get_type ())
+#define SCP_INTERFACE_(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE_, scpinterface))
+#define SCP_INTERFACE_IS_(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE_))
+#define SCP_INTERFACE__GET_IFACE(o) (G_TYPE_INSTANCE_GET_INTERFACE ((o), SCP_INTERFACE_TYPE_, scpinterfaceIface))
 
-struct _scpinterfaceOrgFedoraprojectConfigPrinting;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrinting scpinterfaceOrgFedoraprojectConfigPrinting;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingIface scpinterfaceOrgFedoraprojectConfigPrintingIface;
+struct _scpinterface;
+typedef struct _scpinterface scpinterface;
+typedef struct _scpinterfaceIface scpinterfaceIface;
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingIface
+struct _scpinterfaceIface
 {
   GTypeInterface parent_iface;
 
   gboolean (*handle_get_best_drivers) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *arg_device_id,
     const gchar *arg_device_make_and_model,
     const gchar *arg_device_uri);
 
   gboolean (*handle_group_physical_devices) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     GVariant *arg_devices);
 
   gboolean (*handle_job_applet) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation);
 
   gboolean (*handle_missing_executables) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *arg_ppd_filename);
 
   gboolean (*handle_new_printer_dialog) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation);
 
   gboolean (*handle_printer_properties_dialog) (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *arg_name);
 
 };
 
-GType scp_interface_org_fedoraproject_config_printing_get_type (void) G_GNUC_CONST;
+GType scp_interface__get_type (void) G_GNUC_CONST;
 
-GDBusInterfaceInfo *scp_interface_org_fedoraproject_config_printing_interface_info (void);
-guint scp_interface_org_fedoraproject_config_printing_override_properties (GObjectClass *klass, guint property_id_begin);
+GDBusInterfaceInfo *scp_interface__interface_info (void);
+guint scp_interface__override_properties (GObjectClass *klass, guint property_id_begin);
 
 
 /* D-Bus method call completion functions: */
-void scp_interface_org_fedoraproject_config_printing_complete_new_printer_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_new_printer_dialog (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path);
 
-void scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_printer_properties_dialog (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path);
 
-void scp_interface_org_fedoraproject_config_printing_complete_job_applet (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_job_applet (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     const gchar *path);
 
-void scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_get_best_drivers (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     GVariant *drivers);
 
-void scp_interface_org_fedoraproject_config_printing_complete_missing_executables (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_missing_executables (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
-    const gchar *missing_executables);
+    const gchar *const *missing_executables);
 
-void scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices (
-    scpinterfaceOrgFedoraprojectConfigPrinting *object,
+void scp_interface__complete_group_physical_devices (
+    scpinterface *object,
     GDBusMethodInvocation *invocation,
     GVariant *grouped_devices);
 
 
 
 /* D-Bus method calls: */
-void scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_new_printer_dialog (
+    scpinterface *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_new_printer_dialog_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_new_printer_dialog_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_new_printer_dialog_sync (
+    scpinterface *proxy,
     gchar **out_path,
     GCancellable *cancellable,
     GError **error);
 
-void scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_printer_properties_dialog (
+    scpinterface *proxy,
     const gchar *arg_name,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_printer_properties_dialog_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_printer_properties_dialog_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_printer_properties_dialog_sync (
+    scpinterface *proxy,
     const gchar *arg_name,
     gchar **out_path,
     GCancellable *cancellable,
     GError **error);
 
-void scp_interface_org_fedoraproject_config_printing_call_job_applet (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_job_applet (
+    scpinterface *proxy,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_job_applet_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_job_applet_finish (
+    scpinterface *proxy,
     gchar **out_path,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_job_applet_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_job_applet_sync (
+    scpinterface *proxy,
     gchar **out_path,
     GCancellable *cancellable,
     GError **error);
 
-void scp_interface_org_fedoraproject_config_printing_call_get_best_drivers (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_get_best_drivers (
+    scpinterface *proxy,
     const gchar *arg_device_id,
     const gchar *arg_device_make_and_model,
     const gchar *arg_device_uri,
@@ -166,14 +166,14 @@ void scp_interface_org_fedoraproject_config_printing_call_get_best_drivers (
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_get_best_drivers_finish (
+    scpinterface *proxy,
     GVariant **out_drivers,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_get_best_drivers_sync (
+    scpinterface *proxy,
     const gchar *arg_device_id,
     const gchar *arg_device_make_and_model,
     const gchar *arg_device_uri,
@@ -181,41 +181,41 @@ gboolean scp_interface_org_fedoraproject_config_printing_call_get_best_drivers_s
     GCancellable *cancellable,
     GError **error);
 
-void scp_interface_org_fedoraproject_config_printing_call_missing_executables (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_missing_executables (
+    scpinterface *proxy,
     const gchar *arg_ppd_filename,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_missing_executables_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
-    gchar **out_missing_executables,
+gboolean scp_interface__call_missing_executables_finish (
+    scpinterface *proxy,
+    gchar ***out_missing_executables,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_missing_executables_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_missing_executables_sync (
+    scpinterface *proxy,
     const gchar *arg_ppd_filename,
-    gchar **out_missing_executables,
+    gchar ***out_missing_executables,
     GCancellable *cancellable,
     GError **error);
 
-void scp_interface_org_fedoraproject_config_printing_call_group_physical_devices (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+void scp_interface__call_group_physical_devices (
+    scpinterface *proxy,
     GVariant *arg_devices,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
     gpointer user_data);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_finish (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_group_physical_devices_finish (
+    scpinterface *proxy,
     GVariant **out_grouped_devices,
     GAsyncResult *res,
     GError **error);
 
-gboolean scp_interface_org_fedoraproject_config_printing_call_group_physical_devices_sync (
-    scpinterfaceOrgFedoraprojectConfigPrinting *proxy,
+gboolean scp_interface__call_group_physical_devices_sync (
+    scpinterface *proxy,
     GVariant *arg_devices,
     GVariant **out_grouped_devices,
     GCancellable *cancellable,
@@ -225,36 +225,36 @@ gboolean scp_interface_org_fedoraproject_config_printing_call_group_physical_dev
 
 /* ---- */
 
-#define SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY (scp_interface_org_fedoraproject_config_printing_proxy_get_type ())
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, scpinterfaceOrgFedoraprojectConfigPrintingProxy))
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, scpinterfaceOrgFedoraprojectConfigPrintingProxyClass))
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY, scpinterfaceOrgFedoraprojectConfigPrintingProxyClass))
-#define SCP_INTERFACE_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY))
-#define SCP_INTERFACE_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_PROXY))
+#define SCP_INTERFACE_TYPE__PROXY (scp_interface__proxy_get_type ())
+#define SCP_INTERFACE__PROXY(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE__PROXY, scpinterfaceProxy))
+#define SCP_INTERFACE__PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), SCP_INTERFACE_TYPE__PROXY, scpinterfaceProxyClass))
+#define SCP_INTERFACE__PROXY_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), SCP_INTERFACE_TYPE__PROXY, scpinterfaceProxyClass))
+#define SCP_INTERFACE_IS__PROXY(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE__PROXY))
+#define SCP_INTERFACE_IS__PROXY_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), SCP_INTERFACE_TYPE__PROXY))
 
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingProxy scpinterfaceOrgFedoraprojectConfigPrintingProxy;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingProxyClass scpinterfaceOrgFedoraprojectConfigPrintingProxyClass;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate;
+typedef struct _scpinterfaceProxy scpinterfaceProxy;
+typedef struct _scpinterfaceProxyClass scpinterfaceProxyClass;
+typedef struct _scpinterfaceProxyPrivate scpinterfaceProxyPrivate;
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingProxy
+struct _scpinterfaceProxy
 {
   /*< private >*/
   GDBusProxy parent_instance;
-  scpinterfaceOrgFedoraprojectConfigPrintingProxyPrivate *priv;
+  scpinterfaceProxyPrivate *priv;
 };
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingProxyClass
+struct _scpinterfaceProxyClass
 {
   GDBusProxyClass parent_class;
 };
 
-GType scp_interface_org_fedoraproject_config_printing_proxy_get_type (void) G_GNUC_CONST;
+GType scp_interface__proxy_get_type (void) G_GNUC_CONST;
 
 #if GLIB_CHECK_VERSION(2, 44, 0)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (scpinterfaceOrgFedoraprojectConfigPrintingProxy, g_object_unref)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (scpinterfaceProxy, g_object_unref)
 #endif
 
-void scp_interface_org_fedoraproject_config_printing_proxy_new (
+void scp_interface__proxy_new (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -262,10 +262,10 @@ void scp_interface_org_fedoraproject_config_printing_proxy_new (
     GCancellable        *cancellable,
     GAsyncReadyCallback  callback,
     gpointer             user_data);
-scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_config_printing_proxy_new_finish (
+scpinterface *scp_interface__proxy_new_finish (
     GAsyncResult        *res,
     GError             **error);
-scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_config_printing_proxy_new_sync (
+scpinterface *scp_interface__proxy_new_sync (
     GDBusConnection     *connection,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -273,7 +273,7 @@ scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_conf
     GCancellable        *cancellable,
     GError             **error);
 
-void scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus (
+void scp_interface__proxy_new_for_bus (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -281,10 +281,10 @@ void scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus (
     GCancellable        *cancellable,
     GAsyncReadyCallback  callback,
     gpointer             user_data);
-scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_finish (
+scpinterface *scp_interface__proxy_new_for_bus_finish (
     GAsyncResult        *res,
     GError             **error);
-scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_config_printing_proxy_new_for_bus_sync (
+scpinterface *scp_interface__proxy_new_for_bus_sync (
     GBusType             bus_type,
     GDBusProxyFlags      flags,
     const gchar         *name,
@@ -295,36 +295,36 @@ scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_conf
 
 /* ---- */
 
-#define SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON (scp_interface_org_fedoraproject_config_printing_skeleton_get_type ())
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, scpinterfaceOrgFedoraprojectConfigPrintingSkeleton))
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass))
-#define SCP_INTERFACE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON, scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass))
-#define SCP_INTERFACE_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON))
-#define SCP_INTERFACE_IS_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), SCP_INTERFACE_TYPE_ORG_FEDORAPROJECT_CONFIG_PRINTING_SKELETON))
+#define SCP_INTERFACE_TYPE__SKELETON (scp_interface__skeleton_get_type ())
+#define SCP_INTERFACE__SKELETON(o) (G_TYPE_CHECK_INSTANCE_CAST ((o), SCP_INTERFACE_TYPE__SKELETON, scpinterfaceSkeleton))
+#define SCP_INTERFACE__SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_CAST ((k), SCP_INTERFACE_TYPE__SKELETON, scpinterfaceSkeletonClass))
+#define SCP_INTERFACE__SKELETON_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), SCP_INTERFACE_TYPE__SKELETON, scpinterfaceSkeletonClass))
+#define SCP_INTERFACE_IS__SKELETON(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), SCP_INTERFACE_TYPE__SKELETON))
+#define SCP_INTERFACE_IS__SKELETON_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), SCP_INTERFACE_TYPE__SKELETON))
 
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeleton scpinterfaceOrgFedoraprojectConfigPrintingSkeleton;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass;
-typedef struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate;
+typedef struct _scpinterfaceSkeleton scpinterfaceSkeleton;
+typedef struct _scpinterfaceSkeletonClass scpinterfaceSkeletonClass;
+typedef struct _scpinterfaceSkeletonPrivate scpinterfaceSkeletonPrivate;
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeleton
+struct _scpinterfaceSkeleton
 {
   /*< private >*/
   GDBusInterfaceSkeleton parent_instance;
-  scpinterfaceOrgFedoraprojectConfigPrintingSkeletonPrivate *priv;
+  scpinterfaceSkeletonPrivate *priv;
 };
 
-struct _scpinterfaceOrgFedoraprojectConfigPrintingSkeletonClass
+struct _scpinterfaceSkeletonClass
 {
   GDBusInterfaceSkeletonClass parent_class;
 };
 
-GType scp_interface_org_fedoraproject_config_printing_skeleton_get_type (void) G_GNUC_CONST;
+GType scp_interface__skeleton_get_type (void) G_GNUC_CONST;
 
 #if GLIB_CHECK_VERSION(2, 44, 0)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (scpinterfaceOrgFedoraprojectConfigPrintingSkeleton, g_object_unref)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (scpinterfaceSkeleton, g_object_unref)
 #endif
 
-scpinterfaceOrgFedoraprojectConfigPrinting *scp_interface_org_fedoraproject_config_printing_skeleton_new (void);
+scpinterface *scp_interface__skeleton_new (void);
 
 
 /* ------------------------------------------------------------------------ */
