@@ -171,10 +171,8 @@ static gboolean MissingExecutables(scpinterface *interface,
 								   const gchar *ppd_filename,
 								   gpointer user_data)
 {
-	exes_to_install *missing_executables = missingexecutables(ppd_filename);
-	scp_interface__complete_missing_executables(interface, 
-																				 invocation, 
-																				 missing_executables);
+	char **missing_executables = missingexecutables(ppd_filename);
+	scp_interface__complete_missing_executables(interface, invocation, missing_executables);
 	return TRUE;
 }
 /*

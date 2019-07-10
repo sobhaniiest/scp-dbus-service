@@ -2,26 +2,8 @@
 
 #define PATH_MAX 4096 
 
-exes_to_install *list = NULL;
-
-static void insert_exes_to_install(exes_to_install **head, char *exe)
-{
-    exes_to_install *c = (*head);
-    if(*head == NULL)
-    {
-        (*head) = (exes_to_install *)malloc(sizeof(exes_to_install));
-        (*head)->exes = exe;
-        (*head)->next = NULL;
-    }
-    else
-    {
-        while(c->next != NULL)
-            c = c->next;
-        c->next = (exes_to_install *)malloc(sizeof(exes_to_install));
-        c->next->exes = exe;
-        c->next->next = NULL;
-    }
-}
+char *exes_to_install[1024];
+int exes_index = 0;
 
 static char *replace(char *str, char *old, char *new)
 {
@@ -254,10 +236,12 @@ static void add_missing(char *exe)
     char *p = strstr(exe, "%");
     if(p)
         strcpy(p, "");
-    insert_exes_to_install(&list, exe);
+    exes_to_install[exes_index] = (char *)malloc(strlen(exe));
+    strcpy(exes_to_install[exes_index], exe);
+    exes_index++;
 }
 
-exes_to_install *missingexecutables(const char *ppd_filename)
+char **missingexecutables(const char *ppd_filename)
 {
     FILE *file = fopen (ppd_filename, "r");
     if(!file)
@@ -391,6 +375,6 @@ exes_to_install *missingexecutables(const char *ppd_filename)
 
     }
     
-    return list;
+    return exes_to_install;
 }
 
