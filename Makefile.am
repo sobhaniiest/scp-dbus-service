@@ -9,6 +9,7 @@ scp_SOURCES = ConfigPrinting.c ConfigPrinting.h \
 	asyncipp.c asyncipp.h \
 	newprinter.c newprinter.h \
 	authinfocache.c authinfocache.h \
+	nstring.c nstring.h \
 	MissingExecutables.c MissingExecutables.h
 
 scp_CPPFLAGS  = $(GLIB_CFLAGS)

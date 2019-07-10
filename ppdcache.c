@@ -4,12 +4,42 @@ dict_cache *cache = NULL;
 dict_modtimes *modtimes = NULL;
 list *queued = NULL;
 bool connecting = false;
-printer_uri *cups = NULL;
+http_t *cups = NULL;
 
+/* Inserting cache data - printer queue name and PPD file descriptor */
+static void insert_cache(dict_cache **head, const char *str, FILE *fpname);
+
+/* Inserting cache data - printer queue name and modification time */
+static void insert_modtimes(dict_modtimes **head, const char *str, time_t value);
+
+/* Inserting cache data - printer queue name and callback functions */
+static void insert_list(list **head, const char *str, void(*func)());
+
+/* Finding the printer queue name is in cache data or not */
+static dict_modtimes *find_modtimes(dict_modtimes **head, const char *str);
+static bool find_cache(dict_cache **head, const char *str);
+
+/* Return the file descriptor of the corresponding printer queue if avaliable else return NULL */
+static FILE *find_file(dict_cache **head, const char *str);
+
+/* */
+static void connected();
+
+/* Connecting to asyncconn : Asyn_Connection*/
+static void self_connect(void(*callback)(),
+                         const char *host,
+                         int port,
+                         http_encryption_t encryption);
+
+/* If the file is older, Cache the new version */
+static void got_ppd3(const char *name, http_status_t status, time_t time, char *fname, void(*callback)(), bool check_uptodate);
+
+/* */
+static void schedule_callback(void(*callback)(), const char *name, FILE *ppd);
 
 /* Function definations */
 
-void insert_cache(dict_cache **head, const char *str, FILE *fpname)
+static void insert_cache(dict_cache **head, const char *str, FILE *fpname)
 {
     dict_cache *c = (*head);
   
@@ -31,7 +61,7 @@ void insert_cache(dict_cache **head, const char *str, FILE *fpname)
     }
 }
 
-void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
+static void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
 {
     dict_modtimes *c = (*head);
   
@@ -53,7 +83,7 @@ void insert_modtimes(dict_modtimes **head, const char *str, time_t value)
     }
 }
 
-void insert_list(list **head, const char *str, void(*func)())
+static void insert_list(list **head, const char *str, void(*func)())
 {
     list *c = (*head);
   
@@ -75,7 +105,7 @@ void insert_list(list **head, const char *str, void(*func)())
     }
 }
 
-bool find_cache(dict_cache **head, const char *str)
+static bool find_cache(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -91,7 +121,7 @@ bool find_cache(dict_cache **head, const char *str)
     return found;
 }
 
-dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
+static dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
 {
     bool found = false;
     dict_modtimes *c = (*head);
@@ -110,7 +140,7 @@ dict_modtimes *find_modtimes(dict_modtimes **head, const char *str)
         return NULL;
 }
 
-FILE *find_file(dict_cache **head, const char *str)
+static FILE *find_file(dict_cache **head, const char *str)
 {
     bool found = false;
     dict_cache *c = (*head);
@@ -190,19 +220,19 @@ void fetch_ppd(const char *name,
     */
 }
 
-void connected()
+static void connected()
 {
 	connecting = false;
     list *c = queued;
     while(c != NULL)
     {
-        fetch_ppd(c->qname, c->method, true, "\0", 0, 0);
+        fetch_ppd(c->qname, c->method, true, NULL, 0, 0);
         c = c->next;
     }
     queued = NULL;
 }
 
-void self_connect(void(*callback)(),
+static void self_connect(void(*callback)(),
                          const char *host,
                          int port,
                          http_encryption_t encryption)
@@ -215,12 +245,11 @@ void self_connect(void(*callback)(),
                             port, 
                             encryption,  
                             true, 
-                            true,
-                            "getURI");
+                            true);
     connected();
 }
 
-void got_ppd3(const char *name, 
+static void got_ppd3(const char *name, 
                      http_status_t status, 
                      time_t time, 
                      char *fname, 
@@ -242,14 +271,14 @@ void got_ppd3(const char *name,
 		remove(fname);
 		insert_modtimes(&modtimes, name, time);
 
-		fetch_ppd(name, callback, false, "\0", 0, 0);
+		fetch_ppd(name, callback, false, NULL, 0, 0);
 	}
 	else
 		schedule_callback(callback, name, NULL);
 }
 
 
-void schedule_callback(void(*callback)(), const char *name, FILE *ppd)
+static void schedule_callback(void(*callback)(), const char *name, FILE *ppd)
 {
     pthread_mutex_t lock;
     pthread_mutex_init(&lock, NULL);

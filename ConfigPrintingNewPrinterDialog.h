@@ -1,21 +1,36 @@
 #ifndef CONFIGPRINTINGNEWPRINTERDIALOG_H
 #define CONFIGPRINTINGNEWPRINTERDIALOG_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h> /*fprintf*/
 #include <glib.h>
-#include <string.h>
-#include <cups/cups.h>
-#include <pthread.h>
-#include <gtk/gtk.h>
-#include <errno.h>
-#include "killtimer.h"
-#include "ppdcache.h"
-#include "asyncconn.h"
-#include "authinfocache.h"
-#include "newprinter.h"
-#include "ConfigPrintingNewPrinterDialog.h"
+/*
+	g_signal_connect
+	g_dbus_interface_skeleton_export
+	g_signal_handler_disconnect
+*/
+#include <string.h> /*strcmp*/
+#include <cups/cups.h> /*http_t*/
+#include <stdbool.h> /*bool*/
+#include "killtimer.h" /*add_hold remove_hold*/
+#include "ppdcache.h" /*fetch_ppd*/
+#include "asyncipp.h" /*getURI*/
+#include "newprinter.h" /*init*/
 #include "scp_interface.h"
+/*
+	scp_interface_new_printer_dialog_skeleton_new
+	scp_interface_new_printer_dialog_complete_new_printer_from_device
+	scp_interface_new_printer_dialog_complete_download_driver_for_device_id
+	scp_interface_new_printer_dialog_complete_change_ppd
+	scp_interface_new_printer_dialog_emit_dialog_canceled
+	scp_interface_new_printer_dialog_complete_on_dialog_canceled
+	scp_interface_new_printer_dialog_emit_printer_added
+	scp_interface_new_printer_dialog_complete_on_printer_added
+	scp_interface_new_printer_dialog_emit_printer_modified
+	scp_interface_new_printer_dialog_complete_on_printer_modified
+	scp_interface_new_printer_dialog_emit_driver_download_cheked
+	scp_interface_new_printer_dialog_complete_on_driver_download_checked
+*/
+#include "ConfigPrintingNewPrinterDialog.h"
 
 #define NPDinterface scpinterfaceNewPrinterDialog
 
@@ -29,13 +44,16 @@ typedef struct _memory
 extern memory reference;
 
 extern gulong dialog_canceled,
-	   printer_added,
-	   printer_modified,
-	   drv_dwn_checked;
+			  printer_added,
+			  printer_modified,
+			  drv_dwn_checked;
+
+extern http_t *http_status;
 
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    const gchar *name, 
-	                    gchar *path);
+	                    gchar *path,
+	                    http_t *status);
 
 /* Methods */
 
@@ -77,11 +95,7 @@ gboolean on_driver_download_checked(NPDinterface *interface,
 						            GDBusMethodInvocation *invocation,
 						            gpointer user_data);
 
-/* Internal Functions */
 
-void change_ppd_got_ppd(const char *name, FILE *ppd);
-void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
-void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
 
 #endif
 

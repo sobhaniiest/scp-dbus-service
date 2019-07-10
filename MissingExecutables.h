@@ -2,18 +2,37 @@
 #define MISSINGEXECUTABLES_H
 
 #define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <libgen.h>
-#include <unistd.h>
-#include <ctype.h>
 #include <fcntl.h> 
+#include <unistd.h>
 #include <sys/types.h>
+/*dup access unlink lseek*/
+#include <stdio.h> 
+/*fdopen fopen fgets rewind feof getline snprintf fprintf fclose fputs*/
+#include <stdlib.h> 
+/*malloc calloc free exit mkstemp */
+#include <string.h> 
+/*strncpy strcmp strchr strstr strlen strcpy strcat*/
+#include <libgen.h> /*basename*/
+#include <ctype.h> /*isspace*/
+
+
 #include <cups/cups.h>
 #include <cups/ppd.h>
-#include <iconv.h>
+/*
+    ppdFindMarkedChoice
+    ppdFindAttr
+*/
 #include <stdbool.h>
+#include "nstring.h"
+/* 
+    count_tokens
+    split
+    replace
+    strstrip
+    rstrstrip
+    startswith
+    slice
+*/
 #include "MissingExecutables.h"
 
 extern int exes_index;

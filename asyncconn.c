@@ -1,21 +1,26 @@
 #include "asyncconn.h"
 
-printer_uri *Async_Connection(void(*reply_handler)(), 
-							  void(*error_handler)(), 
-							  void(*auth_handler)(), 
-							  const char *host, 
-							  int port, 
-							  http_encryption_t encryption, 
-							  bool try_as_root, 
-							  bool prompt_allowed,
-							  char *result)
+static void subset_reply_handler();
+
+static void subset_error_handler();
+
+static void subset_auth_handler();
+
+http_t *Async_Connection(void(*reply_handler)(), 
+						 void(*error_handler)(), 
+						 void(*auth_handler)(), 
+						 const char *host, 
+						 int port, 
+						 http_encryption_t encryption, 
+						 bool try_as_root, 
+						 bool prompt_allowed)
 {
 	bool use_pk;
-    printer_uri *status;
+    http_t *status;
 
 	/* Decide whether to use direct IPP or PolicyKit. */
 
-	if(!(strcmp(host,"\0")))
+	if(!host)
 		host = cupsServer();
 	if(port == 0)
 		port = ippPort();
@@ -24,15 +29,13 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 
 	use_pk = (((host[0] == '/') | !(strcmp(host,"localhost"))) & (getuid() != 0));
 	
-
 	if(use_pk && try_as_root)
 	{
 		status = PK1Connection(subset_reply_handler,
 							   subset_error_handler,
 							   host,
 							   port,
-							   encryption,
-							   result);
+							   encryption);
 		if(status != NULL)
 			subset_reply_handler();
 		else
@@ -49,8 +52,7 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 								   port,
 								   encryption,
 								   try_as_root,
-								   prompt_allowed,
-								   result);
+								   prompt_allowed);
 		if(status != NULL)
 			subset_reply_handler();
 		else
@@ -60,17 +62,17 @@ printer_uri *Async_Connection(void(*reply_handler)(),
 	}
 }
 
-void subset_reply_handler()
+static void subset_reply_handler()
 {
 
 }
 
-void subset_error_handler()
+static void subset_error_handler()
 {
 
 }
 
-void subset_auth_handler()
+static void subset_auth_handler()
 {
 	
 }

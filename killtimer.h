@@ -1,12 +1,18 @@
 #ifndef KILLTIMER_H
 #define KILLTIMER_H
 
-/* General Header file - fprintf() : debuging purpose */
-#include <stdio.h>
-/* GLib methods and data types */
+#include <stdio.h> /*fprintf*/
 #include <glib.h>
-/* Thread mutex lock and unlock : to avoid critical section problem */
+/*
+    g_timeout_add_seconds
+    g_source_remove
+*/
 #include <pthread.h>
+/*
+    pthread_mutex_init
+    pthread_mutex_lock
+    pthread_mutex_unlock
+*/
 
 void(*killfunc)();
 void(*kill_func)();

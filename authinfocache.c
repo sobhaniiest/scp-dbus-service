@@ -6,7 +6,11 @@ dict *creds = NULL;
 /* Function Definations */
 
 /* Internal Functions */
-void insert(dict **head, const char *host, int port, const char *user, char *password)
+static void insert(dict **head, const char *host, int port, const char *user, char *password);
+static dict *find(dict **head, const char *host, int port);
+static void del(dict **head, const char *host, int port);
+
+static void insert(dict **head, const char *host, int port, const char *user, char *password)
 {
     dict *c = (*head);
   
@@ -32,7 +36,7 @@ void insert(dict **head, const char *host, int port, const char *user, char *pas
     }
 }
 
-dict *find(dict **head, const char *host, int port)
+static dict *find(dict **head, const char *host, int port)
 {
     bool found = false;
     dict *c = (*head);
@@ -51,7 +55,7 @@ dict *find(dict **head, const char *host, int port)
         return NULL;
 }
 
-void del(dict **head, const char *host, int port)
+static void del(dict **head, const char *host, int port)
 {
     dict *c,*p;
     c = (*head);

@@ -2,10 +2,9 @@
 #define AUTHINFOCACHE_H
 
 /* Header Files */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+#include <stdlib.h> /*malloc*/
+#include <string.h> /*strcmp*/
+#include <stdbool.h> /*bool*/
 #include "authinfocache.h"
 
 /* Structure contains host, port, user and password */ 
@@ -22,12 +21,6 @@ typedef struct _dict
 extern dict *creds;
 
 /* Function Declarations */
-
-/* Internal Functions */
-
-void insert(dict **head, const char *host, int port, const char *user, char *password);
-dict *find(dict **head, const char *host, int port);
-void del(dict **head, const char *host, int port);
 
 /* External Functions */
 

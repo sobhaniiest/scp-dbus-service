@@ -7,16 +7,23 @@ gulong dialog_canceled = 0,
 	   printer_modified = 0,
 	   drv_dwn_checked = 0;
 
+http_t *http_status;
+
+static void change_ppd_got_ppd(const char *name, FILE *ppd);
+static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
+static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
+
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    const gchar *name, 
-	                    gchar *path)
+	                    gchar *path,
+                        http_t *status)
 {
 	NPDinterface *interface;
 	GError *error;
 
 	/* main initialization */
 
-
+    http_status = status;
     
 	/**********************/
 
@@ -70,20 +77,15 @@ gboolean NewPrinterFromDevice(NPDinterface *interface,
 {
 
 	add_hold();
-	/*
-	self.dialog.init ('printer_with_uri', device_uri=device_uri,
-                          devid=device_id, xid=xid)
-	*/
     
     init("printer_with_uri", 
          device_uri, 
-         "\0", 
+         NULL, 
          NULL, 
          device_id, 
-         "\0", 
+         NULL, 
          0, 
          0);
-
 
 	scp_interface_new_printer_dialog_complete_new_printer_from_device(interface, invocation);
 	return TRUE;
@@ -96,16 +98,13 @@ gboolean DownloadDriverForDeviceID(NPDinterface *interface,
                                    gpointer user_data)
 {
 	add_hold();
-	/*
-	self.dialog.init ('download_driver', devid=device_id, xid=xid)
-	*/
 
     init("download_driver", 
-         "\0", 
-         "\0", 
+         NULL, 
+         NULL, 
          NULL, 
          device_id, 
-         "\0", 
+         NULL, 
          0, 
          0);
 
@@ -124,7 +123,7 @@ gboolean ChangePPD(NPDinterface *interface,
 	reference.mxid = xid;
     reference.mname = name;
     reference.mdevice_id = device_id;
-	fetch_ppd(name, change_ppd_got_ppd, true, "\0", 0, 0);
+	fetch_ppd(name, change_ppd_got_ppd, true, NULL, 0, 0);
 	scp_interface_new_printer_dialog_complete_change_ppd(interface, invocation);
 
 	return TRUE;
@@ -132,25 +131,18 @@ gboolean ChangePPD(NPDinterface *interface,
 
 /* Internal Functions */
 
-void change_ppd_got_ppd(const char *name, FILE *ppd)
+static void change_ppd_got_ppd(const char *name, FILE *ppd)
 {
-    printer_uri *status = Async_Connection(change_ppd_with_dev,
-                                           do_change_ppd,
-                                           NULL,
-                                           "\0",
-                                           0,
-                                           0,
-                                           true,
-                                           true,
-                                           "getURI");
-    if(!status)
-      do_change_ppd("\0", name, ppd);
+    printer_uri *result = getURI(http_status);
+
+    if(!result || !http_status)
+      do_change_ppd(NULL, name, ppd);
     else
-      change_ppd_with_dev(&status, name, ppd);
+      change_ppd_with_dev(&result, name, ppd);
 }
 
 
-void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
+static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
 {
     bool found = false;
     printer_uri *c = (*head);
@@ -166,10 +158,10 @@ void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd)
     if(found)
         do_change_ppd(c->uri, name, ppd);
     else
-        do_change_ppd("\0", name, ppd);
+        do_change_ppd(NULL, name, ppd);
 }
 
-void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
+static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
 {  
     //char *device_id = "MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;";
     init("ppd",
@@ -177,13 +169,12 @@ void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
          name,
          ppd,
          reference.mdevice_id,
-         "\0",
+         NULL,
          0,
          reference.mxid);
 }
 
 /* Signals */
-
 
 gboolean on_dialog_canceled(NPDinterface *interface,
                             GDBusMethodInvocation *invocation,

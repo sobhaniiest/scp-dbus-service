@@ -1,17 +1,36 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <glib.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include "killtimer.h"
-#include "ConfigPrintingNewPrinterDialog.h"
-#include "MissingExecutables.h"
+#include <stdio.h> /*snprintf*/
+#include <locale.h> /*setlocale*/
+#include <glib.h> 
+/*
+ g_main_loop_new 
+ g_bus_own_name 
+ g_main_loop_run 
+ g_signal_connect
+ g_dbus_interface_skeleton_export
+*/
+#include <gtk/gtk.h> /*gtk_main_quit*/
+#include <stdbool.h>
+#include "killtimer.h" /*KillTimer alive*/
+#include "asyncconn.h" /*Async_Connection*/
+#include "ConfigPrintingNewPrinterDialog.h" /*CPNewPrinterDialog*/
+#include "MissingExecutables.h" /*missingexecutables*/
 #include "scp_interface.h"
+/*
+ scp_interface__skeleton_new 
+ scp_interface__complete_new_printer_dialog
+ scp_interface__complete_printer_properties_dialog
+ scp_interface__complete_job_applet
+ scp_interface__complete_get_best_drivers
+ scp_interface__complete_missing_executables
+ scp_interface__complete_group_physical_devices
+*/
 
 GDBusConnection *conn;
 const gchar *name = "org.fedoraproject.Config.Printing";
 char path[1024];
 gint pathn = 0;
+//char *language;
+http_t *http;
 
 static void name_acquired_handler(GDBusConnection *connection, 
 	                              const gchar *name, 
@@ -73,7 +92,15 @@ static void name_acquired_handler(GDBusConnection *connection,
 	GError *error;
 
 	/* main initialization */
+
+	//language = setlocale(LC_ALL, "");
 	KillTimer(gtk_main_quit);
+	http = Async_Connection(NULL, NULL, NULL, NULL, 0, 0, true, true);
+
+    if(http)
+        fprintf(stderr, "Connected to cups server\n");
+    else
+    	fprintf(stderr, "Connection error\n");
     
 	/**********************/
 
@@ -122,7 +149,7 @@ static gboolean NewPrinterDialog(scpinterface *interface,
 {
 	pathn += 1;
 	snprintf(path, 1024, "/org/fedoraproject/Config/Printing/NewPrinterDialog/%d", pathn);
-	CPNewPrinterDialog(conn, name, path);
+	CPNewPrinterDialog(conn, name, path, http);
 	alive();
 	scp_interface__complete_new_printer_dialog(interface, invocation, path);
 	return TRUE;
@@ -138,7 +165,7 @@ static gboolean PrinterPropertiesDialog(scpinterface *interface,
 	snprintf(path, 1024, "/org/fedoraproject/Config/Printing/PrinterPropertiesDialog/%d", pathn);
 	CPPrinterPropertiesDialog(conn, path, xid, name);
 	alive();
-	scp_interface_org_fedoraproject_config_printing_complete_printer_properties_dialog(interface, invocation, path);
+	scp_interface__complete_printer_properties_dialog(interface, invocation, path);
 	return TRUE;
 }
 
@@ -150,7 +177,7 @@ static gboolean JobApplet(scpinterface *interface,
 	snprintf(path, 1024, "/org/fedoraproject/Config/Printing/JobApplet/%d", pathn);
 	CPJobApplet(conn, path);
 	alive();
-	scp_interface_org_fedoraproject_config_printing_complete_job_applet(interface, invocation, path);
+	scp_interface__complete_job_applet(interface, invocation, path);
 	return TRUE;
 }
 
@@ -161,8 +188,8 @@ static gboolean GetBestDrivers(scpinterface *interface,
 							   const gchar *device_uri,
 							   gpointer user_data)
 {
-	GVariant *drivers = GetBestDriversRequest(device_id, device_make_and_model, device_uri);
-	scp_interface_org_fedoraproject_config_printing_complete_get_best_drivers(interface, invocation, drivers);
+	GVariant *drivers = GetBestDriversRequest(device_id, device_make_and_model, device_uri, language);
+	scp_interface__complete_get_best_drivers(interface, invocation, drivers);
 	return TRUE;
 }
 */
@@ -181,7 +208,7 @@ static gboolean GroupPhysicalDevices(scpinterface *interface,
 								     gpointer user_data)
 {
 	GVariant *grouped_devices = GroupPhysicalDevicesRequest();
-	scp_interface_org_fedoraproject_config_printing_complete_group_physical_devices(interface, invocation, grouped_devices);
+	scp_interface__complete_group_physical_devices(interface, invocation, grouped_devices);
 	return TRUE;
 }
 */

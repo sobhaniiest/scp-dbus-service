@@ -1,16 +1,32 @@
 #ifndef NEWPRINTER_H
 #define NEWPRINTER_H
 
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h> /*popen snprintf*/
+#include <string.h> /*strcmp*/
+#include <glib.h> 
+/*
+    g_signal_connect
+    g_application_run
+    g_object_unref
+*/
 #include <stdbool.h>
-#include <cups/cups.h>
+#include <cups/cups.h> /*cupsServer cupsEncryption*/
 #include <gtk/gtk.h>
+/*
+    gtk_application_window_new
+    gtk_window_set_title
+    gtk_container_set_border_width
+    gtk_grid_new
+    gtk_container_add
+    gtk_label_new
+    gtk_grid_attach
+    gtk_button_new_with_label
+    g_signal_connect_swapped
+    gtk_widget_show_all
+    gtk_application_new
+*/
 #include "newprinter.h"
 
-
-void NewPrinter();
-void s_c_p(GtkWidget *widget, gpointer data);
 bool init(char *dialog_mode,
 		  const char *device_uri,
 		  const char *name,
@@ -19,15 +35,5 @@ bool init(char *dialog_mode,
 		  const char *host,
 		  http_encryption_t encryption,
 		  unsigned int xid);
-
-void activate(GtkApplication *app, 
-                     char *user_data);
-int activate_NewPrinterFromDevice(const char *dev_uri, 
-                                         const char *devid);
-int activate_DownloadDriverForDeviceID(const char *devid);
-int activate_ChangePPD(const char *dev_uri, 
-                              const char *devid, 
-                              const char *name, 
-                              FILE *ppd);
 
 #endif
