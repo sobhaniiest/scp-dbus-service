@@ -30,8 +30,9 @@ AC_TYPE_SIZE_T
  
 # Checks for library functions.
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([getline strstr])
+AC_CHECK_FUNCS([getline strstr dup])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+                 dbus/Makefile])
 
 AC_OUTPUT
