@@ -15,10 +15,10 @@ To prevent the functionality of the old scp-dbus-service.py, cd to the directory
 
 
 # Steps ::
-1. $autoreconf -fi
-2. $./configure
-3. $make
-5. $./scp
+1. $ autoreconf -fi
+2. $ ./configure
+3. $ make
+5. cd to the directory 'dbus' and run ./scp
 
 # Testing the interfaces using dbus-send :
 -Open a new terminal window
