@@ -1,22 +1,22 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 
 memory reference;
-
+/*
 gulong *NPDSignal_id = NULL;
 int NPDSignal_index = 0;
-
+*/
 http_t *http_status;
 
 static void change_ppd_got_ppd(const char *name, FILE *ppd);
 static void change_ppd_with_dev(printer_uri **head, const char *name, FILE *ppd);
 static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
-
+/*
 static void DialogCanceled();
 static void PrinterAdded(const gchar *name);
 static void PrinterModifed(const gchar *name, gboolean ppd_has_changed);
 static void DriverDownloadChecked(const gchar *installed_files);
 static void remove_handles(NPDinterface *interface);
-
+*/
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    const gchar *name, 
 	                    gchar *path,
@@ -47,24 +47,24 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 		              G_CALLBACK(ChangePPD), 
 		              NULL);
 	/* Signals */
-    
+    /*
 	NPDSignal_id[NPDSignal_index++] = g_signal_connect(interface, 
-                		             	 			   "DialogCanceled", 
+                		             	 			   "dialog-canceled", 
                 		              	 			   G_CALLBACK(on_dialog_canceled), 
                 		                               NULL);
 	NPDSignal_id[NPDSignal_index++] = g_signal_connect(interface, 
-                		                               "PrinterAdded", 
+                		                               "printer-added", 
                 		                                G_CALLBACK(on_printer_added), 
                 		                                NULL);
 	NPDSignal_id[NPDSignal_index++] = g_signal_connect(interface, 
-                		                               "PrinterModified", 
+                		                               "printer-modified", 
                 		                                G_CALLBACK(on_printer_modified), 
                 		                                NULL);
 	NPDSignal_id[NPDSignal_index++] = g_signal_connect(interface, 
-                		                			  "DriverDownloadChecked", 
+                		                			  "driver-download-checked", 
                 		                 			   G_CALLBACK(on_driver_download_checked), 
                 		                               NULL);
-    
+    */
 	error = NULL;
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(interface), 
 									 connection, 
@@ -181,7 +181,7 @@ static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
 }
 
 /* Signals */
-
+/*
 static void DialogCanceled()
 {
 
@@ -248,3 +248,4 @@ static void remove_handles(NPDinterface *interface)
     for(i=0;i<NPDSignal_index;i++)
         g_signal_handler_disconnect(interface, NPDSignal_id[i]);
 }
+*/
