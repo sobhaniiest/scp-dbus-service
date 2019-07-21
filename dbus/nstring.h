@@ -20,10 +20,11 @@ int count_tokens(char *str, char ch);
 char *strstrip(char *s);
 char *rstrstrip(char *s, char r);
 bool startswith(const char *pre, const char *str);
-//bool endswith(const char *post, const char *str)
+bool endswith(const char *post, const char *str);
 void slice(char *str, char *buffer, int len);
-//char *reverse(char *str);
-//int find(char *str, char *substr);
-//int rfind(char *str, char *substr);
+char *reverse(const char *str);
+int find(char *str, char *substr);
+int rfind(char *str, char *substr);
+char *strlwr(char *s);
 
 #endif

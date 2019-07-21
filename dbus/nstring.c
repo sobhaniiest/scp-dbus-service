@@ -1,9 +1,9 @@
 #include "nstring.h"
 
-/*
 static void computeLPSArray(char* pat, int M, int* lps);
 static int KMPSearch(char* pat, char* txt);
-*/
+
+/* returns a copy of the string where all occurrences of a substring is replaced with another substring */
 char *replace(char *str, char *old, char *new)
 {
     char *result;
@@ -38,6 +38,7 @@ char *replace(char *str, char *old, char *new)
     return result;
 }
 
+/* split a string into tokens by the given "delim" */
 char **split(char *str, char *delim, int count)
 {
     int i = 0;
@@ -51,6 +52,7 @@ char **split(char *str, char *delim, int count)
     return tokens;
 }
 
+/* count no. of tokens can be obtained from the strings */
 int count_tokens(char *str, char ch)
 {
     int i, count = 0;
@@ -62,6 +64,7 @@ int count_tokens(char *str, char ch)
     return count;
 }
 
+/* remove white space from the both end of a string */
 char *strstrip(char *s)
 {
     size_t size;
@@ -83,6 +86,7 @@ char *strstrip(char *s)
     return s;
 }
 
+/* remove white space and specified char - 'r' from the end of a string */
 char *rstrstrip(char *s, char r)
 {
     size_t size;
@@ -104,18 +108,21 @@ char *rstrstrip(char *s, char r)
     return s;
 }
 
+/* check a string starts with a substring or not */
 bool startswith(const char *pre, const char *str)
 {
     size_t lenpre = strlen(pre),
            lenstr = strlen(str);
     return lenstr < lenpre ? false : strncmp(pre, str, lenpre) == 0;
 }
-/*
+
+/* check a string ends with a substring or not */
 bool endswith(const char *post, const char *str)
 {
     return startswith(reverse(post), reverse(str));
 }
-*/
+
+/* slice a string from the given index - len */
 void slice(char *str, char *buffer, int len)
 {
     size_t i,j;
@@ -127,7 +134,8 @@ void slice(char *str, char *buffer, int len)
     }
     buffer[j] = '\0';
 }
-/*
+
+/* KMP algorithm for searching a "substring - pat" in a "string - txt" */
 static void computeLPSArray(char* pat, int M, int* lps) 
 { 
     int len = 0; 
@@ -154,6 +162,7 @@ static void computeLPSArray(char* pat, int M, int* lps)
     } 
 }
 
+/* KMP algorithm for searching a "substring - pat" in a "string - txt" */
 static int KMPSearch(char* pat, char* txt) 
 { 
     int M = strlen(pat); 
@@ -186,8 +195,9 @@ static int KMPSearch(char* pat, char* txt)
         } 
     } 
 } 
-  
-char *reverse(char *str)
+
+/* reverse a string */
+char *reverse(const char *str)
 {
     int i;
     char temp;
@@ -203,6 +213,7 @@ char *reverse(char *str)
     return new;
 } 
 
+/* This function returns the lowest index in the string "str" where substring "substr" is found else return -1 */
 int find(char *str, char *substr)
 {
     if(!strstr(str, substr))
@@ -211,6 +222,7 @@ int find(char *str, char *substr)
         KMPSearch(substr, str);
 }
 
+/* This function returns the highest index in the string "str" where substring "substr" is found else return -1 */
 int rfind(char *str, char *substr)
 {
     if(!strstr(str, substr))
@@ -221,4 +233,18 @@ int rfind(char *str, char *substr)
         return(strlen(str) - (t+strlen(substr)));
     }
 }
-*/
+
+/* Convert an uppercase string to a lowercase string */
+char *strlwr(char *s)
+{
+    char *t = s;
+    if (!s)
+        return NULL;
+    int i = 0;
+    for(i=0;i<strlen(t);i++)
+    {
+        if(isupper(t[i]))
+            t[i] = tolower(t[i]);
+    }
+    return t;
+}
