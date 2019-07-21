@@ -34,14 +34,9 @@ typedef struct _memory
 }memory;
 
 extern memory reference;
-/*
-extern gulong *NPDSignal_id;
-extern int NPDSignal_index;
-*/
 extern http_t *http_status;
 
-void CPNewPrinterDialog(GDBusConnection *connection, 
-	                    const gchar *name, 
+void CPNewPrinterDialog(GDBusConnection *connection,  
 	                    gchar *path,
 	                    http_t *status);
 
@@ -68,7 +63,7 @@ gboolean ChangePPD(NPDinterface *interface,
 				   gpointer user_data);
 
 /* signals */
-/*
+
 void on_dialog_canceled(NPDinterface *interface);
 
 void on_printer_added(NPDinterface *interface,
@@ -81,6 +76,6 @@ void on_printer_modified(NPDinterface *interface,
 void on_driver_download_checked(NPDinterface *interface,
                                 const gchar *installed_files);
 
-*/
+
 #endif
 
