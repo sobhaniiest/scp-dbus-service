@@ -40,8 +40,11 @@ static void WriteFd(FILE *file, ppd_file_t *ppd, int fd)
             strncpy(keyword, start, end - start);
             choice = ppdFindMarkedChoice (ppd, keyword);
 
-            // Treat PageRegion, PaperDimension and ImageableArea specially:
-            // if not marked, use PageSize option.
+            /*
+            **  Treat PageRegion, PaperDimension and ImageableArea specially:
+            **  if not marked, use PageSize option.
+            */
+
             if (!choice && (!strcmp (keyword, "PageRegion") || !strcmp (keyword, "PaperDimension") || !strcmp (keyword, "ImageableArea")))
                 choice = ppdFindMarkedChoice (ppd, "PageSize");
 
@@ -135,7 +138,7 @@ char **missingexecutables(const char *ppd_filename)
         fprintf(stderr, "fopen failed\n");
         exit(-1);
     }
-    // Read a PPD file into memory and return PPD file record
+    /* Read a PPD file into memory and return PPD file record */
     ppd_file_t *ppd = ppdOpenFile(ppd_filename);
     if(!ppd)
     {
@@ -143,29 +146,32 @@ char **missingexecutables(const char *ppd_filename)
         exit(-1);
     }
 
-    // Find the first matching attribute and return Attribute or NULL if not found
-    // Find a 'FoomaticRIPCommandLine' attribute.
+    /*
+    **  Find the first matching attribute and return Attribute or NULL if not found
+    **  Find a 'FoomaticRIPCommandLine' attribute.
+    */
+
     ppd_attr_t *attr = ppdFindAttr(ppd, "FoomaticRIPCommandLine", NULL);
 
     int i, j, k, count_pipes, count_cmds, count_args, count_lines;
-    char *cmd, *arg, *exe, *exepath, *search, *buffer, *lline; // *mimetype, *cost;
+    char *cmd, *arg, *exe, *exepath, *search, *buffer, *lline; /* *mimetype, *cost; */
     char **pipes, **cmds, **args, **lines;
     
     if(attr)
     {
         char *cmdline = attr->value;
 
-        // Foomatic RIP command line to check.
+        /* Foomatic RIP command line to check. */
         cmdline = replace(cmdline, "&&\n", "");
         cmdline = replace(cmdline, "&qout", "\"");
         cmdline = replace(cmdline, "&lt", "<");
         cmdline = replace(cmdline, "&gt", ">");
 
-        // Don't try to handle sub-shells or unreplaced HTML entities.
+        /* Don't try to handle sub-shells or unreplaced HTML entities. */
         if((strstr(cmdline, "(")) || (strstr(cmdline, "&")))
             cmdline = "";
 
-        // Strip out foomatic '%'-style place-holders
+        /* Strip out foomatic '%'-style place-holders */
         count_pipes = count_tokens(cmdline, ';');
         pipes = split(cmdline, ";", count_pipes);
 
@@ -187,9 +193,12 @@ char **missingexecutables(const char *ppd_filename)
                     continue;
                 }
 
-                // Main executable found.  But if it's 'gs',
-                // perhaps there is an IJS server we also need
-                // to check.
+                /*
+                **  Main executable found.  But if it's 'gs',
+                **  perhaps there is an IJS server we also need
+                **  to check.
+                */
+
                 if(!(strcmp(basename(exepath), "gs")))
                 {
                     search = "-sIjsServer=";
@@ -209,7 +218,7 @@ char **missingexecutables(const char *ppd_filename)
                     }
                 }
             }
-            // Next pipe.
+            /* Next pipe. */
             if(!exepath)
                 break;
         }
@@ -239,8 +248,10 @@ char **missingexecutables(const char *ppd_filename)
                 if(count_lines == 2)
                 {
                     lines = split(lline, " ", count_lines);
-                    //mimetype = lines[0];
-                    //cost = lines[1];
+                    /*
+                        mimetype = lines[0];
+                        cost = lines[1];
+                    */
                     exe = lines[2];
                 }
                 else
