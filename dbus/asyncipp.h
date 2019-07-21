@@ -23,12 +23,13 @@
   ippGetInteger
 */
 #include <stdbool.h>
+#include <glib.h> 
+#include <gio/gio.h>
 #include "authinfocache.h" /*lookup_auth_info*/
 #include "asyncipp.h"
 
 typedef struct _ppds_attributes
 {
-    const char *ppdname;
     char *ppd_natural_language;
     char *ppd_device_id;
     char *ppd_make;
@@ -37,18 +38,10 @@ typedef struct _ppds_attributes
     char *ppd_product;
     char *ppd_psversion;
     char *ppd_type;
-    struct _ppds_attributes *next;
 }ppds_attr;
 
-typedef struct _printer_uri
-{
-  	const char *name;
-  	const char *uri;
-  	struct _printer_uri *next;
-}printer_uri;
-
-printer_uri *getURI(http_t *new);
-ppds_attr *getPPDs(http_t *new, int all_lists);
+GHashTable *getURI(http_t *new);
+GHashTable *getPPDs(http_t *new, int all_lists);
 
 http_t *IPPAuthConnection(void(*reply_handler)(), 
                           void(*error_handler)(), 
