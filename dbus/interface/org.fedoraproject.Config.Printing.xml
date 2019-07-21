@@ -43,6 +43,15 @@
                     </doc:para>
                 </doc:description>
             </doc:doc>
+            <arg name="xid" direction="in" type="u">
+            <doc:doc>
+                <doc:summary>
+                    <doc:para>
+                        The window X ID of the parent.
+                    </doc:para>
+                </doc:summary>
+            </doc:doc>
+            </arg>
             <arg name="name" type="s" direction="in">
                 <doc:doc>
                     <doc:summary>
