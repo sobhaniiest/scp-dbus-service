@@ -2,24 +2,72 @@
 
 gulong ppd_finished_id = 0;
 
+static int activate_PPDialog(const char *name);
+static int activate_error(const char *name);
+
+static int activate_PPDialog(const char *name)
+{
+    GtkApplication *app;
+    int status;
+    char buffer[1024];
+    snprintf(buffer, 1024, "\tPrinter Properties - '%s' on localhost\t\n\n\tGoto 'system-config-printer' and Click on '%s' and select 'Print Test Page'\t\n",name, name);
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
+    status = g_application_run (G_APPLICATION (app), 0, NULL);
+    g_object_unref (app);
+    return status;
+}
+
+static int activate_error(const char *name)
+{
+    GtkApplication *app;
+    int status;
+    char buffer[1024];
+    snprintf(buffer, 1024, "\tPrinter Properties - '%s' Printer not found on localhost\t\n",name);
+    app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+    g_signal_connect (app, "activate", G_CALLBACK (activate), (gchar *)buffer);
+    status = g_application_run (G_APPLICATION (app), 0, NULL);
+    g_object_unref (app);
+    return status;
+}
+
 void CPPrinterPropertiesDialog(GDBusConnection *connection,
                                gchar *path,
                                guint xid,
-                               const gchar *name)
+                               const gchar *name,
+                               GHashTable *uri)
 {
     PPDinterface *interface;
     GError *error;
 
+    /********************* main initialization ************************/
+
+    PPDialog_printer *data = (PPDialog_printer *)malloc(sizeof(PPDialog_printer));
+    
+    if(g_hash_table_contains(uri, name))
+    {
+        data->status = true;
+        data->name = g_locale_to_utf8 (name,-1,0,0,0);
+    }
+    else
+    {
+        data->status = false;
+        data->name = g_locale_to_utf8 (name,-1,0,0,0);
+        fprintf(stderr, "Printer not found\n");
+        activate_error(name);
+    }
     add_hold ();
+
+    /*****************************************************************/
 
     interface = scp_interface_printer_properties_dialog_skeleton_new();
 
-    /* Methods */
+    /* Method */
     g_signal_connect(interface, 
                      "handle-print-test-page", 
                      G_CALLBACK(PrintTestPage), 
-                     NULL);
-    /* Signals */
+                     data);
+    /* Signal */
     ppd_finished_id = g_signal_connect(interface, 
                                        "finished", 
                                        G_CALLBACK(on_dialog_closed), 
@@ -33,10 +81,20 @@ void CPPrinterPropertiesDialog(GDBusConnection *connection,
 
 gboolean PrintTestPage(PPDinterface *interface,
                        GDBusMethodInvocation *invocation,
-                       gpointer user_data)
+                       PPDialog_printer *data)
 {
-    
+    if(data->status)
+    {
+        fprintf(stderr, "Printing test page\n");
+        activate_PPDialog(data->name);
+    }
+    else
+    {
+        fprintf(stderr, "Printer not found\n");
+        activate_error(data->name);
+    }
     scp_interface_printer_properties_dialog_complete_print_test_page(interface, invocation);
+    return true;
 }
 
 void Finished()
@@ -53,4 +111,5 @@ gboolean on_dialog_closed(PPDinterface *interface,
     if(ppd_finished_id != 0)
         g_signal_handler_disconnect(interface, ppd_finished_id);
     //remove_from_connection();
+    return true;
 }
