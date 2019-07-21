@@ -36,4 +36,7 @@ bool init(char *dialog_mode,
 		  http_encryption_t encryption,
 		  unsigned int xid);
 
+void s_c_p(GtkWidget *widget, gpointer data);
+void activate(GtkApplication *app, char *user_data);
+
 #endif
