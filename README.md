@@ -21,7 +21,7 @@ To prevent the functionality of the old scp-dbus-service.py, cd to the directory
 5. cd to the directory 'dbus' and run ./scp
 
 # Testing the interfaces using dbus-send :
--Open a new terminal window
+- Open a new terminal window
 
 # ConfigPrinting :
 
@@ -73,4 +73,24 @@ dbus-send --session \
           string:'test' \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' 
 
+# ConfigPrintingPrinterPropertiesDialog
 
+- method : PrinterPropertiesDialog(xid, name)
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.PrinterPropertiesDialog \
+          uint32:1 \
+          string:'test'
+
+- method : PrintTestPage
+
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1 \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.PrinterPropertiesDialog.PrintTestPage

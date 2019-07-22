@@ -11,7 +11,8 @@ scp_SOURCES = ConfigPrinting.c ConfigPrinting.h \
 	newprinter.c newprinter.h \
 	authinfocache.c authinfocache.h \
 	nstring.c nstring.h \
-	MissingExecutables.c MissingExecutables.h 
+	MissingExecutables.c MissingExecutables.h \
+	PPDialog.c PPDialog.h 
 
 scp_CPPFLAGS  = $(GLIB_CFLAGS)
 scp_CPPFLAGS += $(GIO_CFLAGS)
