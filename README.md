@@ -75,7 +75,7 @@ dbus-send --session \
 
 # ConfigPrintingPrinterPropertiesDialog
 
-- method : PrinterPropertiesDialog(xid, name)
+- method : PrinterPropertiesDialog(xid, name)                                                                                 
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -85,7 +85,7 @@ dbus-send --session \
           uint32:1 \
           string:'test'
 
-- method : PrintTestPage
+- method : PrintTestPage                                                                                                     
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
