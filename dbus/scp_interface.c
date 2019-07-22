@@ -194,6 +194,17 @@ static const _ExtendedGDBusMethodInfo _scp_interface__method_info_new_printer_di
   FALSE
 };
 
+static const _ExtendedGDBusArgInfo _scp_interface__method_info_printer_properties_dialog_IN_ARG_xid =
+{
+  {
+    -1,
+    (gchar *) "xid",
+    (gchar *) "u",
+    NULL
+  },
+  FALSE
+};
+
 static const _ExtendedGDBusArgInfo _scp_interface__method_info_printer_properties_dialog_IN_ARG_name =
 {
   {
@@ -207,6 +218,7 @@ static const _ExtendedGDBusArgInfo _scp_interface__method_info_printer_propertie
 
 static const _ExtendedGDBusArgInfo * const _scp_interface__method_info_printer_properties_dialog_IN_ARG_pointers[] =
 {
+  &_scp_interface__method_info_printer_properties_dialog_IN_ARG_xid,
   &_scp_interface__method_info_printer_properties_dialog_IN_ARG_name,
   NULL
 };
@@ -575,6 +587,7 @@ scp_interface__default_init (scpinterfaceIface *iface)
    * scpinterface::handle-printer-properties-dialog:
    * @object: A #scpinterface.
    * @invocation: A #GDBusMethodInvocation.
+   * @arg_xid: Argument passed by remote caller.
    * @arg_name: Argument passed by remote caller.
    *
    * Signal emitted when a remote caller is invoking the <link linkend="gdbus-method-org-fedoraproject-Config-Printing.PrinterPropertiesDialog">PrinterPropertiesDialog()</link> D-Bus method.
@@ -591,8 +604,8 @@ scp_interface__default_init (scpinterfaceIface *iface)
     NULL,
     g_cclosure_marshal_generic,
     G_TYPE_BOOLEAN,
-    2,
-    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_STRING);
+    3,
+    G_TYPE_DBUS_METHOD_INVOCATION, G_TYPE_UINT, G_TYPE_STRING);
 
   /**
    * scpinterface::handle-job-applet:
@@ -853,6 +866,7 @@ _out:
 /**
  * scp_interface__call_printer_properties_dialog:
  * @proxy: A #scpinterfaceProxy.
+ * @arg_xid: Argument to pass with the method invocation.
  * @arg_name: Argument to pass with the method invocation.
  * @cancellable: (nullable): A #GCancellable or %NULL.
  * @callback: A #GAsyncReadyCallback to call when the request is satisfied or %NULL.
@@ -867,6 +881,7 @@ _out:
 void
 scp_interface__call_printer_properties_dialog (
     scpinterface *proxy,
+    guint arg_xid,
     const gchar *arg_name,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
@@ -874,7 +889,8 @@ scp_interface__call_printer_properties_dialog (
 {
   g_dbus_proxy_call (G_DBUS_PROXY (proxy),
     "PrinterPropertiesDialog",
-    g_variant_new ("(s)",
+    g_variant_new ("(us)",
+                   arg_xid,
                    arg_name),
     G_DBUS_CALL_FLAGS_NONE,
     -1,
@@ -916,6 +932,7 @@ _out:
 /**
  * scp_interface__call_printer_properties_dialog_sync:
  * @proxy: A #scpinterfaceProxy.
+ * @arg_xid: Argument to pass with the method invocation.
  * @arg_name: Argument to pass with the method invocation.
  * @out_path: (out): Return location for return parameter or %NULL to ignore.
  * @cancellable: (nullable): A #GCancellable or %NULL.
@@ -930,6 +947,7 @@ _out:
 gboolean
 scp_interface__call_printer_properties_dialog_sync (
     scpinterface *proxy,
+    guint arg_xid,
     const gchar *arg_name,
     gchar **out_path,
     GCancellable *cancellable,
@@ -938,7 +956,8 @@ scp_interface__call_printer_properties_dialog_sync (
   GVariant *_ret;
   _ret = g_dbus_proxy_call_sync (G_DBUS_PROXY (proxy),
     "PrinterPropertiesDialog",
-    g_variant_new ("(s)",
+    g_variant_new ("(us)",
+                   arg_xid,
                    arg_name),
     G_DBUS_CALL_FLAGS_NONE,
     -1,

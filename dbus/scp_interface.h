@@ -58,6 +58,7 @@ struct _scpinterfaceIface
   gboolean (*handle_printer_properties_dialog) (
     scpinterface *object,
     GDBusMethodInvocation *invocation,
+    guint arg_xid,
     const gchar *arg_name);
 
   void (*error) (
@@ -137,6 +138,7 @@ gboolean scp_interface__call_new_printer_dialog_sync (
 
 void scp_interface__call_printer_properties_dialog (
     scpinterface *proxy,
+    guint arg_xid,
     const gchar *arg_name,
     GCancellable *cancellable,
     GAsyncReadyCallback callback,
@@ -150,6 +152,7 @@ gboolean scp_interface__call_printer_properties_dialog_finish (
 
 gboolean scp_interface__call_printer_properties_dialog_sync (
     scpinterface *proxy,
+    guint arg_xid,
     const gchar *arg_name,
     gchar **out_path,
     GCancellable *cancellable,
