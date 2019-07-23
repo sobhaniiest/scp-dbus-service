@@ -1,32 +1,10 @@
 #include "GetBestDriversRequest.h"
 
-//g_signal_handler_disconnect(interface, id);
-
 bool g_ppds = false;
-gulong *id = NULL;
-int id_index = 0;
+GPtrArray *GBDRSignal_id = NULL;
 
-static void insert_id(device_id_dict **head, char *name, char *value)
-{
-    device_id_dict *c = (*head);
-  
-    if(*head == NULL)
-    {
-        (*head) = (device_id_dict *)malloc(sizeof(device_id_dict));
-        (*head)->name = name;
-        (*head)->value = value;
-        (*head)->next = NULL;
-    }
-    else
-    {
-        while(c->next != NULL)
-            c = c->next;
-        c->next = (device_id_dict *)malloc(sizeof(device_id_dict));
-        c->next->name = name;
-        c->next->value = value;
-        c->next->next = NULL;
-    }
-}
+static gboolean ppds_error(scpinterface *interface);
+static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data);
 
 void GBDRequest(scpinterface *interface,
                 const gchar *device_id,
@@ -36,25 +14,41 @@ void GBDRequest(scpinterface *interface,
                 http_t *status)
 {
     bool download_tried = false;
-    ppds_attr *ppdnames;
+    GHashTable *ppdnames;
+    GBDRSignal_id = g_ptr_array_new ();
+    gulong index;
+
     add_hold();
+
+    data_ppds_ready *data = (data_ppds_ready *)malloc(sizeof(data_ppds_ready));
 
     if(!g_ppds)
     {
         fprintf(stderr, "GetBestDrivers request: need to fetch PPDs\n");
         g_ppds = true;
         ppdnames = NULL;
-        id[id_index++] = g_signal_connect(interface, 
-                                          "ready", 
-                                          G_CALLBACK(ppds_ready), 
-                                          NULL);
-        id[id_index++] = g_signal_connect(interface, 
-                                          "error", 
-                                          G_CALLBACK(ppds_error), 
-                                          NULL);
-        fprintf(stderr, "FetchPPDs: running\n");
 
+        data->ppdnames = ppdnames;
+        data->device_id = device_id;
+        data->device_make_and_model = device_make_and_model;
+        data->device_uri = device_uri;
+        data->dwn_tried = download_tried;
+
+        index = g_signal_connect(interface, 
+                                 "ready", 
+                                 G_CALLBACK(ppds_ready), 
+                                 data);
+        g_ptr_array_add (GBDRSignal_id, (gpointer) index);
+
+        index = g_signal_connect(interface, 
+                                 "error", 
+                                 G_CALLBACK(ppds_error), 
+                                 NULL);
+        g_ptr_array_add (GBDRSignal_id, (gpointer) index);
+
+        fprintf(stderr, "FetchPPDs: running\n");
         ppdnames = getPPDs(status, 1);
+
         if(!ppdnames || !status)
         {
             fprintf(stderr, "FetchPPDs: error\n");
@@ -63,59 +57,65 @@ void GBDRequest(scpinterface *interface,
         else
         {
             fprintf(stderr, "FetchPPDs: success\n");
-            PPDs(&ppdnames, language, NULL);
+            PPDs(ppdnames, language, NULL);
             scp_interface__emit_ready(interface);
-        }
+        }  
     }
     else
     {
         if(!ppdnames)
         {
             fprintf(stderr, "GetBestDrivers request: PPDs already fetched\n");
-            ppds_ready();
+            ppds_ready(interface, data);
         }
         else
         {
             fprintf(stderr, "GetBestDrivers request: waiting for PPDs\n");
-            id[id_index++] = g_signal_connect(interface, 
-                                              "ready", 
-                                              G_CALLBACK(ppds_ready), 
-                                              NULL);
-            id[id_index++] = g_signal_connect(interface, 
-                                              "error", 
-                                              G_CALLBACK(ppds_error), 
-                                              NULL);
+            index = g_signal_connect(interface, 
+                                 "ready", 
+                                 G_CALLBACK(ppds_ready), 
+                                 data);
+            g_ptr_array_add (GBDRSignal_id, (gpointer) index);
+
+            index = g_signal_connect(interface, 
+                                     "error", 
+                                     G_CALLBACK(ppds_error), 
+                                     NULL);
+            g_ptr_array_add (GBDRSignal_id, (gpointer) index);
         }
     }
+}
+
+
+static gboolean ppds_error(scpinterface *interface)
+{
     
-}
-
-
-void ppds_error(scpinterface *interface)
-{
     int i;
-    for(i=0;i<id_index;i++)
-        g_signal_handler_disconnect(interface, id[i]);
+    for(i=0;i<GBDRSignal_id->len;i++)
+        g_signal_handler_disconnect(interface, (gulong)g_ptr_array_index ((GPtrArray *)GBDRSignal_id, i));
+    return true;
 }
 
-void ppds_ready()
+static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
 {
-    if(ppdnames)
+    GPtrArray *installed_files = g_ptr_array_new ();
+    if((data->ppdnames) == NULL)
     {
         fprintf(stderr, "PPDs being reloaded. Wait for next 'ready' signal\n");
-        return;
+        return true;
     }
 
-    ppds_error();
+    ppds_error(interface);
+    
+    char *mfg, *mdl, *des, *cmd;
+    
+    GHashTable *id_dict;
 
-    device_id_dict *id_dict = NULL;
-
-    if(device_id)
-        id_dict = parseDeviceID(device_id);
+    if(data->device_id)
+        id_dict = parseDeviceID(data->device_id);  
     else
     {
-        char *mfg_mdl = ppdMakeModelSplit(device_make_and_model);
-        char *mfg, *mdl;
+        char *mfg_mdl = ppdMakeModelSplit(data->device_make_and_model);
         mfg = strtok(mfg_mdl, ":");
         mdl = strtok(NULL, ":");
         insert_id(&id_dict, "MFG", mfg);
@@ -123,121 +123,95 @@ void ppds_ready()
         insert_id(&id_dict, "DES", "");
         insert_id(&id_dict, "CMD", "");
         size_t len = trlen(mfg)+strlen(mdl)+11;
-        device_id = (char *)malloc(len);
-        snprintf(device_id, len, "MFG:%s;MDL:%s;", mfg, mdl);
-    }
-    
-    /*
-    fit = getPPDNamesFromDeviceID();
-
-    ppdnamelist = orderPPDNamesByPreference();
-
-    ppdname = ppdnamelist[0];
-    status = fit[ppdname];
-    */
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-device_id_dict *parseDeviceID(char *id)
-{
-    /*
-
-        Parse an IEEE 1284 Device ID, so that it may be indexed by field name.
-
-        @param id: IEEE 1284 Device ID, without the two leading length bytes
-        @type id: string
-        @returns: dict indexed by field name
-
-    */
-
-    device_id_dict *id_dict = NULL;
-    int count_id, i, j;
-    char **pieces;
-    char *name, *value;
-    char *device_name[9] = {"MFG", "MDL", "CMD", "CLS", "DES", "SN", "S", "P", "J"};
-    char *id = (char *)malloc(strlen(device_id));
-    strcpy(id,device_id);
-
-    count_id = count_tokens(id, ';');
-    pieces = split(id, ";", count_id);
-
-    for(i=0;i<count_id;i++)
-    {
-        if(!(strstr(pieces[i], ":")))
-            continue;
-
-        name = strtok(pieces[i], ":");
-        value = strtok(NULL, ":");
-        insert_id(&id_dict, strstrip(name), strstrip(value));
+        char *device_id = (char *)malloc(len);
+        snprintf(device_id, len, "MFG:%s;MDL:%s;", mfg, mdl); 
     }
 
-    device_id_dict *c = id_dict;
-    bool found_mfg = false,
-         found_mdl = false,
-         found_cmd = false,
-         found_name;
+    GHashTable *fit = getPPDNamesFromDeviceID(data->ppdnames,
+                                              g_hash_table_lookup(id_dict, "MFG"),
+                                              g_hash_table_lookup(id_dict, "MDL"),
+                                              g_hash_table_lookup(id_dict, "DES"),
+                                              g_hash_table_lookup(id_dict, "CMD"),
+                                              data->device_uri, 
+                                              data->device_make_and_model);
 
-    while(c != NULL)
-    {
-        if(!strcmp(c->name, "MFG"))
-            found_mfg = true;
-        if(!strcmp(c->name, "MDL"))
-            found_mdl = true;
-        if(!strcmp(c->name, "CMD"))
-            found_cmd = true;
-        c = c->next;
-    }
+    GPtrArray *ppdnamelist = orderPPDNamesByPreference(fit, installed_files, id_dict);
 
-    c = id_dict;
-    while(c != NULL)
-    {
-        if(!strcmp(c->name, "MANUFACTURER") && !found_mfg)
-            insert_id(&id_dict, "MFG", c->value);
-        if(!strcmp(c->name, "MODEL") && !found_mdl)
-            insert_id(&id_dict, "MDL", c->value);
-        if(!strcmp(c->name, "COMMAND SET") && !found_cmd)
-            insert_id(&id_dict, "CMD", c->value);
-        c = c->next;
-    }
+    char *ppdname = (char *)g_ptr_array_index ((GPtrArray *)ppdnamelist, 0);
+    char *status = g_hash_table_lookup(fit, ppdname);
 
-    for(i=0;i<9;i++)
+    if((!(strcmp(status, "exact"))) && (!(data->download_tried)))
     {
-        c = id_dict;
-        found_name = false;
-        while(c != NULL)
+        data->download_tried = true;
+        g_signal_connect(interface, 
+                        "dialog-canceled", 
+                         G_CALLBACK(on_dialog_canceled), 
+                         user_data);
+        g_signal_connect(interface, 
+                        "driver-download-checked", 
+                         G_CALLBACK(on_driver_download_checked), 
+                         uesr_data);
+        //self.reply_if_fail = [(x, fit[x]) for x in ppdnamelist]
+
+        if(!init("download_driver", NULL, NULL, NULL, device_id, NULL, 0, 0))
         {
-            if(!(strcmp(c->name, device_name[i])))
-                found_name = true;
-            c = c->next;
+            remove_hold();
+            return;
         }
-        if(!found_name)
-            insert_id(&id_dict, device_name[i], "");
     }
 
-    /*
-    if id_dict["CMD"] == '':
-        id_dict["CMD"] = []
-    else:
-        id_dict["CMD"] = id_dict["CMD"].split(',') 
-    */
-    return id_dict;
+    remove_hold();
+    return true;
 }
+
+gboolean on_driver_download_checked(scpinterface *interface,
+                                    GDBusMethodInvocation *invocation,
+                                    gpointer user_data)
+{
+    if(installed_files->len)
+    {
+        gulong index;
+        fprintf(stderr, "GetBestDrivers request: Re-fetch PPDs after driver download\n");
+        index = g_signal_connect(interface, 
+                                 "ready", 
+                                 G_CALLBACK(ppds_ready), 
+                                 data);
+        g_ptr_array_add (GBDRSignal_id, (gpointer) index);
+
+        index = g_signal_connect(interface, 
+                                 "error", 
+                                 G_CALLBACK(ppds_error), 
+                                 NULL);
+        g_ptr_array_add (GBDRSignal_id, (gpointer) index);
+
+        return true;
+    }
+    remove_hold();
+    destroy();
+}
+
+gboolean on_dialog_canceled(scpinterface *interface,
+                            GDBusMethodInvocation *invocation,
+                            gpointer user_data)
+{
+    remove_hold();
+    destroy();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
