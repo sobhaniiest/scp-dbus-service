@@ -6,11 +6,25 @@ dict *creds = NULL;
 /* Function Definations */
 
 /* Internal Functions */
-static void insert(dict **head, const char *host, int port, const char *user, char *password);
-static dict *find(dict **head, const char *host, int port);
-static void del(dict **head, const char *host, int port);
+static void insert(dict **head, 
+                   const char *host, 
+                   int port, 
+                   const char *user, 
+                   char *password);
 
-static void insert(dict **head, const char *host, int port, const char *user, char *password)
+static dict *find(dict **head, 
+                  const char *host, 
+                  int port);
+
+static void del(dict **head, 
+                const char *host, 
+                int port);
+
+static void insert(dict **head, 
+                   const char *host, 
+                   int port, 
+                   const char *user, 
+                   char *password)
 {
     dict *c = (*head);
   
@@ -36,7 +50,9 @@ static void insert(dict **head, const char *host, int port, const char *user, ch
     }
 }
 
-static dict *find(dict **head, const char *host, int port)
+static dict *find(dict **head, 
+                  const char *host, 
+                  int port)
 {
     bool found = false;
     dict *c = (*head);
@@ -55,7 +71,9 @@ static dict *find(dict **head, const char *host, int port)
         return NULL;
 }
 
-static void del(dict **head, const char *host, int port)
+static void del(dict **head, 
+                const char *host, 
+                int port)
 {
     dict *c,*p;
     c = (*head);
@@ -74,7 +92,10 @@ static void del(dict **head, const char *host, int port)
 
 /* External Functions */
 
-void cache_auth_info(const char *user, char *password, const char *host, int port)
+void cache_auth_info(const char *user, 
+                     char *password, 
+                     const char *host, 
+                     int port)
 {
 	if(port == 0)
 		port = 631;

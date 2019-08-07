@@ -24,7 +24,10 @@ extern dict *creds;
 
 /* External Functions */
 
-void cache_auth_info(const char *user, char *password, const char *host, int port);
+void cache_auth_info(const char *user, 
+                     char *password, 
+                     const char *host, 
+                     int port);
 dict *lookup_auth_info(const char *host, int port);
 void remove_auth_info(const char *host, int port);
 
