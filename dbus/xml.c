@@ -1,40 +1,20 @@
 #include "xml.h"
 
-/*
-void
-parseStory (xmlDocPtr doc, xmlNodePtr cur) {
-
-    xmlChar *key;
-    cur = cur->xmlChildrenNode;
-    while (cur != NULL) {
-        if ((!xmlStrcmp(cur->name, (const xmlChar *)"keyword"))) {
-            key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-            printf("keyword: %s\n", key);
-            xmlFree(key);
-        }
-    cur = cur->next;
-    }
-    return;
-}
-*/
-
 char packagehint[1024];
 
-void add_field(GHashTable *re, char *field, char *pattern)
-{
-     g_hash_table_insert(re, strupr(field), pattern);
-}
+static char *add_ppd_name(char *pattern);
 
-void add_ppd_name(char *pattern)
+static char *add_ppd_name(char *pattern)
 {
     if(packagehint)
-        return;
+        return NULL;
 
     int reti, f;
     regex_t regex;
-    reti = regcomp(&regex, (char *)pattern, REG_EXTENDED);
+    reti = regcomp(&regex, (char *)pattern, REG_ICASE);
     char *scheme = NULL,
-         *rest = NULL;
+         *rest = NULL, 
+         *drv = NULL;
     scheme = strtok(pattern, ":");
     rest = strtok(NULL, ":");
 
@@ -44,6 +24,7 @@ void add_ppd_name(char *pattern)
         {
             if(startswith("///", rest))
             {
+                drv = (char *)malloc(strlen(rest) - 3);
                 slice(rest, drv, 3);
                 f = rfind(drv, "/");
                 if(f != -1)
@@ -57,103 +38,124 @@ void add_ppd_name(char *pattern)
         else
             snprintf(packagehint, 1024, "/usr/lib/cups/driver/%s", scheme); 
     }
-
-}
-
-void add_fit(char *text)
-{
-    GHashTable *fit = g_hash_table_new(g_str_hash, g_str_equal);
-
+    return packagehint;
 }
 
 void DriverTypes_load(xmlNodePtr drivertypes)
 {
     /* Load the list of driver types from an XML file. */
+    // GPtrArray *drivertypes = g_ptr_array_new ();
     GPtrArray *types = g_ptr_array_new ();
+    char *name;
+    int count_type;
+    char *phint, *buffer;
+    char **fittype;
     xmlNodePtr drivertype = drivertypes->xmlChildrenNode;
     xmlNodePtr child, field;
     while (drivertype != NULL) 
     {
-        char *name = xmlGetProp(drivertype, "name");
-        GPtrArray *attributes = g_ptr_array_new ();
+        name = xmlGetProp(drivertype, "name");
+        GHashTable *attributes = g_hash_table_new(g_str_hash, g_str_equal);
         GPtrArray *deviceid = g_ptr_array_new ();
+        GHashTable *fit = g_hash_table_new(g_str_hash, g_str_equal);
 
         child = drivertype->xmlChildrenNode;
         while (child != NULL) 
         {
             if ((!xmlStrcmp(child->name, (const xmlChar *)"ppdname")))
-                add_ppd_name(xmlGetProp(child, "match"));
+                phint = add_ppd_name(xmlGetProp(child, "match"));
             else if ((!xmlStrcmp(child->name, (const xmlChar *)"attribute")))
-                add_attribute(xmlGetProp(child, "name"), xmlGetProp(child, "match"));
+                g_hash_table_insert(attributes, xmlGetProp(child, "name"), xmlGetProp(child, "match"));
             else if ((!xmlStrcmp(child->name, (const xmlChar *)"deviceid")))
             {
                 GHashTable *re = g_hash_table_new(g_str_hash, g_str_equal);
                 field = child->xmlChildrenNode;
                 while (field != NULL)
                 {
-                    if ((!xmlStrcmp(filed->name, (const xmlChar *)"filed")))
-                        add_field(re, xmlGetProp(field, "name"), xmlGetProp(field, "match"));
+                    if ((!xmlStrcmp(field->name, (const xmlChar *)"filed")))
+                        g_hash_table_insert(re, strupr(xmlGetProp(field, "name")), xmlGetProp(field, "match"));
                     field = field->next;
                 }
-                add_deviceid_match (deviceid_match);
+                g_ptr_array_add (deviceid, (gpointer) re);
             }
             else if ((!xmlStrcmp(child->name, (const xmlChar *)"fit")))
-                add_fit(xmlNodeGetContent(child));  
+            {
+                buffer = (char *)malloc(strlen(xmlNodeGetContent(child)));
+                strcpy(buffer, xmlNodeGetContent(child));
+                count_type = count_tokens(buffer, '\n');
+                fittype = split(buffer, "\n", count_type);
+
+                for(int i = 0; i < count_type; i++)
+                {
+                     g_hash_table_insert(fit, strstrip(fittype[i]), "true");
+                     if(!strcmp(strstrip(fittype[i]), FIT_EXACT))
+                        g_hash_table_insert(fit, FIT_EXACT_CMD, "true");
+                }
+            } 
             child = child->next;
         }
 
+        dtype *t = (dtype *)malloc(sizeof(dtype));
+        t->name = name;
+        t->phint = phint;
+        t->attributes = attributes;
+        t->deviceid = deviceid;
+        t->fit = fit;
         g_ptr_array_add (types, (gpointer) t);
-
         drivertype = drivertype->next;
     }
 }
 
-
-
-PrinterType()
-{
-
-}
+/* A policy for choosing the preference order for drivers. */
+/* Load the policy from an XML file. */
 
 void PreferenceOrder_load(xmlNodePtr preferreddrivers)
 {
-    /* A policy for choosing the preference order for drivers. */
+    int reti;
+    regex_t regex;
     GPtrArray *ptypes = g_ptr_array_new ();
-    /* Load the policy from an XML file. */
     xmlNodePtr printer = preferreddrivers->xmlChildrenNode;
     xmlNodePtr child, field, drivertype;
     while (printer != NULL) 
     {
-        // ptype = PrinterType();
-        char *make_and_model = NULL;
+        /* 
+            A make-and-model pattern and/or set of IEEE 1284 Device ID
+            patterns for matching a set of printers, together with an ordered
+            list of driver type names.
+        */
+        GPtrArray *make_and_model = g_ptr_array_new ();
         GPtrArray *deviceid = g_ptr_array_new ();
         GPtrArray *drivertype_patterns = g_ptr_array_new ();
-
-
+        GPtrArray *avoid = g_ptr_array_new ();
+        GPtrArray *blacklist = g_ptr_array_new ();
 
         child = printer->xmlChildrenNode;
         while (child != NULL) 
         {
             if ((!xmlStrcmp(child->name, (const xmlChar *)"make-and-model")))
-                add_make_and_model(xmlGetProp(child, "match"));
+            {
+                reti = regcomp(&regex, (char *)(xmlGetProp(child, "match")), REG_ICASE);
+                g_ptr_array_add (make_and_model, (gpointer) (xmlGetProp(child, "match")));
+                // add_make_and_model(xmlGetProp(child, "match"));
+            }
             else if ((!xmlStrcmp(child->name, (const xmlChar *)"deviceid")))
             {
-                deviceid_match = DeviceIDMatch ();
+                GHashTable *re = g_hash_table_new(g_str_hash, g_str_equal);
                 field = child->xmlChildrenNode;
                 while (field != NULL)
                 {
-                    if ((!xmlStrcmp(filed->name, (const xmlChar *)"filed")))
-                        add_field(xmlGetProp(field, "name"), xmlGetProp(field, "match"));
+                    if ((!xmlStrcmp(field->name, (const xmlChar *)"filed")))
+                        g_hash_table_insert(re, strupr(xmlGetProp(field, "name")), xmlGetProp(field, "match"));
                     field = field->next;
                 }
-                add_deviceid_match (deviceid_match);
+                g_ptr_array_add (deviceid, (gpointer) re);
             }
             else if ((!xmlStrcmp(child->name, (const xmlChar *)"drivers")))
             {
                 drivertype = child->xmlChildrenNode;
                 while (drivertype != NULL)
                 {
-                    add_drivertype_pattern(xmlNodeGetContent(drivertype))
+                    g_ptr_array_add (drivertype_patterns, (gpointer) (xmlNodeGetContent(drivertype)));
                     drivertype = drivertype->next;
                 }
             }
@@ -162,7 +164,7 @@ void PreferenceOrder_load(xmlNodePtr preferreddrivers)
                 drivertype = child->xmlChildrenNode;
                 while (drivertype != NULL)
                 {
-                    add_avoidtype_pattern(xmlNodeGetContent(drivertype))
+                    g_ptr_array_add (avoid, (gpointer) (xmlNodeGetContent(drivertype)));
                     drivertype = drivertype->next;
                 }
             }
@@ -171,17 +173,22 @@ void PreferenceOrder_load(xmlNodePtr preferreddrivers)
                 drivertype = child->xmlChildrenNode;
                 while (drivertype != NULL)
                 {
-                    add_blacklisted(xmlNodeGetContent(drivertype))
+                    g_ptr_array_add (blacklist, (gpointer) (xmlNodeGetContent(drivertype)));
                     drivertype = drivertype->next;
                 }
             }  
             child = child->next;
         }
-        g_ptr_array_add (ptypes, (gpointer) ptype);
+        ptype *pt = (ptype *)malloc(sizeof(ptype));
+        pt->make_and_model = make_and_model;
+        pt->deviceid = deviceid;
+        pt->drivertype_patterns = drivertype_patterns;
+        pt->avoid = avoid;
+        pt->blacklist = blacklist;
+        g_ptr_array_add (ptypes, (gpointer) pt);
         printer = printer->next;
     }
 }
-
 
 GPtrArray *PreferredDrivers(char *docname)
 {
@@ -191,35 +198,38 @@ GPtrArray *PreferredDrivers(char *docname)
 
     doc = xmlParseFile(docname);
     
-    if (doc == NULL ) {
+    if (doc == NULL ) 
+    {
         fprintf(stderr,"Document not parsed successfully. \n");
         return NULL;
     }
     g_ptr_array_add (array, (gpointer) doc);
     cur = xmlDocGetRootElement(doc);
     
-    if (cur == NULL) {
+    if (cur == NULL) 
+    {
         fprintf(stderr,"empty document\n");
         xmlFreeDoc(doc);
         return NULL;
     }
     
-    if (xmlStrcmp(cur->name, (const xmlChar *) "preferreddrivers")) {
+    if (xmlStrcmp(cur->name, (const xmlChar *) "preferreddrivers")) 
+    {
         fprintf(stderr,"document of the wrong type, root node != preferreddrivers");
         xmlFreeDoc(doc);
         return NULL;
     }
     
     cur = cur->xmlChildrenNode;
-    while (cur != NULL) {
-        if ((!xmlStrcmp(cur->name, (const xmlChar *)"drivertypes"))){
+    while (cur != NULL) 
+    {
+        if ((!xmlStrcmp(cur->name, (const xmlChar *)"drivertypes")))
             g_ptr_array_add (array, (gpointer) ((xmlNodePtr)cur));
-        }
-        if ((!xmlStrcmp(cur->name, (const xmlChar *)"preferenceorder"))){
+        
+        if ((!xmlStrcmp(cur->name, (const xmlChar *)"preferenceorder")))
             g_ptr_array_add (array, (gpointer) ((xmlNodePtr)cur));
-        }
          
-    cur = cur->next;
+        cur = cur->next;
     }
     //xmlFreeDoc(doc);
     return array;

@@ -6,6 +6,8 @@
 #include <string.h>
 #include <glib.h> 
 #include <gio/gio.h>
+#include <regex.h>
+#include <ctype.h>
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include "nstring.h"
@@ -16,5 +18,27 @@
 #define FIT_CLOSE "close"
 #define FIT_GENERIC "generic"
 #define FIT_NONE "none"
+
+typedef struct _dtype
+{
+    char *name;
+    char *phint;
+    GHashTable *attributes;
+    GPtrArray *deviceid;
+    GHashTable *fit;
+}dtype;
+
+typedef struct _ptype
+{
+    GPtrArray *make_and_model;
+    GPtrArray *deviceid;
+    GPtrArray *drivertype_patterns;
+    GPtrArray *avoid;
+    GPtrArray *blacklist;
+}ptype;
+
+GPtrArray *PreferredDrivers(char *docname);
+void DriverTypes_load(xmlNodePtr drivertypes);
+void PreferenceOrder_load(xmlNodePtr preferreddrivers);
 
 #endif 
