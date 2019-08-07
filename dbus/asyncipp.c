@@ -19,15 +19,15 @@ static void set_ipp_error (ipp_status_t status, const char *message)
 GHashTable *getURI(http_t *new)
 {
     GHashTable *result = g_hash_table_new(g_str_hash, g_str_equal);
-	  ipp_t *request = ippNewRequest(CUPS_GET_PRINTERS), *answer;
+	ipp_t *request = ippNewRequest(CUPS_GET_PRINTERS), *answer;
   	ipp_attribute_t *attr;
     const char *printer = NULL;
     const char *uri = NULL;
     const char *attributes[] = { "printer-name", "device-uri" };
 
   	ippAddStrings(request, 
-  		            IPP_TAG_OPERATION, 
-  		            IPP_TAG_KEYWORD,
+  		          IPP_TAG_OPERATION, 
+  		          IPP_TAG_KEYWORD,
                   "requested-attributes",
                   sizeof (attributes) / sizeof (attributes[0]),
                   NULL, 
@@ -54,7 +54,7 @@ GHashTable *getURI(http_t *new)
     for(ippFirstAttribute (answer); attr; attr = ippNextAttribute (answer))
     {
       	while (attr && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
-        		attr = ippNextAttribute (answer);
+        	   attr = ippNextAttribute (answer);
 
       	if(!attr)
         		break;
@@ -90,14 +90,24 @@ GHashTable *getPPDs(http_t *new, int all_lists)
     ipp_attribute_t *attr;
 
     const char *ppdname = NULL;
-    char *ppd_natural_language = NULL;
-    char *ppd_device_id = NULL;
-    char *ppd_make = NULL;
-    char *ppd_make_and_model = NULL;
     int ppd_model_number = -1;
-    char *ppd_product = NULL;
-    char *ppd_psversion = NULL;
-    char *ppd_type = NULL;
+    char *ppd_natural_language = NULL,
+         *ppd_device_id = NULL,
+         *ppd_make = NULL,
+         *ppd_make_and_model = NULL,
+         *ppd_product = NULL,
+         *ppd_psversion = NULL,
+         *ppd_type = NULL;
+
+    bool flag_natural_language = false,
+         flag_device_id = false,
+         flag_make = false,
+         flag_make_and_model = false,
+         flag_product = false,
+         flag_psversion = false,
+         flag_type = false,
+         flag_ppdname = false,
+         flag_model_number = false;
 
     request = ippNewRequest(CUPS_GET_PPDS); 
 
@@ -124,27 +134,54 @@ GHashTable *getPPDs(http_t *new, int all_lists)
         for (; attr && ippGetGroupTag (attr) == IPP_TAG_PRINTER; attr = ippNextAttribute (answer)) 
         {
             if (!strcmp (ippGetName (attr), "ppd-name") && ippGetValueTag (attr) == IPP_TAG_NAME)
+            {
                 ppdname = (char *) ippGetString (attr, 0, NULL);
+                flag_ppdname = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-natural-language") && ippGetValueTag (attr) == IPP_TAG_LANGUAGE)
+            {
                 ppd_natural_language = (char *) ippGetString (attr, 0, NULL);
+                flag_natural_language = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-device-id") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 ppd_device_id = (char *) ippGetString (attr, 0, NULL);
+                flag_device_id = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-make") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 ppd_make = (char *) ippGetString (attr, 0, NULL);
+                flag_make = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-make-and-model") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 ppd_make_and_model = (char *) ippGetString (attr, 0, NULL);
+                flag_make_and_model = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-product") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 ppd_product = (char *) ippGetString (attr, 0, NULL);
+                flag_product = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-psversion") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 ppd_psversion = (char *) ippGetString (attr, 0, NULL);
+                flag_psversion = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-type") && ippGetValueTag (attr) == IPP_TAG_KEYWORD)
+            {
                 ppd_type = (char *) ippGetString (attr, 0, NULL);
+                flag_type = true;
+            }
             else if (!strcmp (ippGetName (attr), "ppd-model-number") && ippGetValueTag (attr) == IPP_TAG_INTEGER)
+            {
                 ppd_model_number = ippGetInteger (attr, 0);
+                flag_model_number = true;
+            }
 
-            if(ppdname != NULL && ppd_natural_language != NULL && ppd_device_id != NULL 
-              && ppd_make != NULL && ppd_make_and_model != NULL && ppd_product != NULL 
-              && ppd_psversion != NULL && ppd_type != NULL && ppd_model_number != -1)
+            if(flag_ppdname && flag_natural_language && flag_device_id 
+               && flag_make && flag_make_and_model && flag_product
+               && flag_psversion && flag_type && flag_model_number)
             {
                 list = (ppds_attr *)malloc(sizeof(ppds_attr));
                 list->ppd_natural_language = ppd_natural_language;
@@ -157,21 +194,22 @@ GHashTable *getPPDs(http_t *new, int all_lists)
                 list->ppd_type = ppd_type;
                 g_hash_table_insert(result, (char *)ppdname, list);
 
-                ppdname = NULL;
-                ppd_natural_language = NULL;
-                ppd_device_id = NULL;
-                ppd_make = NULL;
-                ppd_make_and_model = NULL;
-                ppd_product = NULL;
-                ppd_psversion = NULL;
-                ppd_type = NULL;
-                ppd_model_number = -1;
+                flag_ppdname = false;
+                flag_natural_language = false;
+                flag_device_id = false;
+                flag_make = false;
+                flag_make_and_model = false;
+                flag_product = false;
+                flag_psversion = false;
+                flag_type = false;
+                flag_model_number = false;
             }
         }
 
         if (!attr)
             break;
     }
+    /*
     free(ppd_natural_language);
     free(ppd_device_id);
     free(ppd_make);
@@ -179,6 +217,8 @@ GHashTable *getPPDs(http_t *new, int all_lists)
     free(ppd_product);
     free(ppd_psversion);
     free(ppd_type);
+    */
+    fprintf(stderr, "size : %d\n", g_hash_table_size(result));
     //ippDelete (answer);
     return result;
 }
@@ -210,7 +250,7 @@ GHashTable *getDevices(http_t *new)
         if (answer)
             ippDelete (answer);
         fprintf(stderr, "getDevices(): error\n");
-        return;
+        return NULL;
     }
 
     for (attr = ippFirstAttribute (answer); attr; attr = ippNextAttribute (answer)) 
@@ -254,10 +294,12 @@ GHashTable *getDevices(http_t *new)
         if (!attr)
             break;
     }
+    /*
     free(device_make_and_model);
     free(device_id);
     free(device_info);
     free(device_location);
+    */
     //ippDelete (answer);
     return result;
 }
