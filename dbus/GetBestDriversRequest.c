@@ -28,6 +28,9 @@ void GBDRequest(scpinterface *interface,
         g_ppds = true;
         ppdnames = NULL;
 
+        fprintf(stderr, "FetchPPDs: running\n");
+        ppdnames = getPPDs(status, 1);
+        fprintf(stderr, "size : %d\n", g_hash_table_size(ppdnames));
         data->ppdnames = ppdnames;
         data->device_id = device_id;
         data->device_make_and_model = device_make_and_model;
@@ -45,9 +48,6 @@ void GBDRequest(scpinterface *interface,
                                  G_CALLBACK(ppds_error), 
                                  NULL);
         g_ptr_array_add (GBDRSignal_id, (gpointer) index);
-
-        fprintf(stderr, "FetchPPDs: running\n");
-        ppdnames = getPPDs(status, 1);
 
         if(!ppdnames || !status)
         {
@@ -72,9 +72,9 @@ void GBDRequest(scpinterface *interface,
         {
             fprintf(stderr, "GetBestDrivers request: waiting for PPDs\n");
             index = g_signal_connect(interface, 
-                                 "ready", 
-                                 G_CALLBACK(ppds_ready), 
-                                 data);
+                                     "ready", 
+                                     G_CALLBACK(ppds_ready), 
+                                     data);
             g_ptr_array_add (GBDRSignal_id, (gpointer) index);
 
             index = g_signal_connect(interface, 
@@ -89,9 +89,8 @@ void GBDRequest(scpinterface *interface,
 
 static gboolean ppds_error(scpinterface *interface)
 {
-    
-    int i;
-    for(i=0;i<GBDRSignal_id->len;i++)
+
+    for(int i = 0; i < GBDRSignal_id->len; i++)
         g_signal_handler_disconnect(interface, (gulong)g_ptr_array_index ((GPtrArray *)GBDRSignal_id, i));
     return true;
 }
@@ -106,7 +105,7 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
     }
 
     ppds_error(interface);
-    
+   
     char *mfg, *mdl, *des, *cmd;
     
     GHashTable *id_dict;
@@ -115,26 +114,38 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
         id_dict = parseDeviceID(data->device_id);  
     else
     {
+        GPtrArray *array = g_ptr_array_new ();
         char *mfg_mdl = ppdMakeModelSplit(data->device_make_and_model);
         mfg = strtok(mfg_mdl, ":");
         mdl = strtok(NULL, ":");
-        insert_id(&id_dict, "MFG", mfg);
-        insert_id(&id_dict, "MDL", mdl);
-        insert_id(&id_dict, "DES", "");
-        insert_id(&id_dict, "CMD", "");
-        size_t len = trlen(mfg)+strlen(mdl)+11;
+        g_hash_table_insert(id_dict, "MFG", mfg);
+        g_hash_table_insert(id_dict, "MDL", mdl);
+        g_hash_table_insert(id_dict, "DES", "");
+        g_hash_table_insert(id_dict, "CMD", array);
+        size_t len = strlen(mfg)+strlen(mdl)+11;
         char *device_id = (char *)malloc(len);
         snprintf(device_id, len, "MFG:%s;MDL:%s;", mfg, mdl); 
     }
+    
+    ///////////////////////////////////////////////////////////////////
+    GPtrArray *arr = (GPtrArray *)(g_hash_table_lookup(id_dict, "CMD"));
+    fprintf(stderr, "1 %s\n",(char *)g_hash_table_lookup(id_dict, "MFG"));
+    fprintf(stderr, "2 %s\n",(char *)g_hash_table_lookup(id_dict, "MDL"));
+    fprintf(stderr, "3 %s\n",(char *)g_hash_table_lookup(id_dict, "DES"));
+
+    fprintf(stderr, "4 %s %s\n",(char *)g_ptr_array_index ((GPtrArray*)arr, 0), (char *)g_ptr_array_index ((GPtrArray*)arr, 1));
+    fprintf(stderr, "5 %s\n",data->device_uri);
+    fprintf(stderr, "6 %s\n",data->device_make_and_model);
+    ///////////////////////////////////////////////////////////////////
 
     GHashTable *fit = getPPDNamesFromDeviceID(data->ppdnames,
-                                              g_hash_table_lookup(id_dict, "MFG"),
-                                              g_hash_table_lookup(id_dict, "MDL"),
-                                              g_hash_table_lookup(id_dict, "DES"),
-                                              g_hash_table_lookup(id_dict, "CMD"),
+                                              (char *)g_hash_table_lookup(id_dict, "MFG"),
+                                              (char *)g_hash_table_lookup(id_dict, "MDL"),
+                                              (char *)g_hash_table_lookup(id_dict, "DES"),
+                                              (GPtrArray*)g_hash_table_lookup(id_dict, "CMD"),
                                               data->device_uri, 
                                               data->device_make_and_model);
-
+    /*
     GPtrArray *ppdnamelist = orderPPDNamesByPreference(fit, installed_files, id_dict);
 
     char *ppdname = (char *)g_ptr_array_index ((GPtrArray *)ppdnamelist, 0);
@@ -159,11 +170,11 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
             return;
         }
     }
-
+    */
     remove_hold();
     return true;
 }
-
+/*
 gboolean on_driver_download_checked(scpinterface *interface,
                                     GDBusMethodInvocation *invocation,
                                     gpointer user_data)
@@ -198,7 +209,7 @@ gboolean on_dialog_canceled(scpinterface *interface,
     destroy();
 }
 
-
+*/
 
 
 
