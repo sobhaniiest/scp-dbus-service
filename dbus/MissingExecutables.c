@@ -1,15 +1,18 @@
 #include "MissingExecutables.h"
 
-#define PATH_MAX 4096 
-
-char *exes_to_install[1024];
+char *exes_to_install[MAX_SIZE];
 int exes_index;
 
-static void WriteFd(FILE *file, ppd_file_t *ppd, int fd);
+static void WriteFd(FILE *file, 
+                    ppd_file_t *ppd, 
+                    int fd);
+
 static char *pathcheck(char *name, char *path);
 static void add_missing(char *exe);
 
-static void WriteFd(FILE *file, ppd_file_t *ppd, int fd)
+static void WriteFd(FILE *file, 
+                    ppd_file_t *ppd, 
+                    int fd)
 {
     char *line = NULL;
     size_t linelen = 0;
@@ -85,15 +88,15 @@ static char *pathcheck(char *name, char *path)
     }
     if(strstr(name, "="))
         return "builtin";
-    char *arraystr[39] = {":", ".", "[", "alias", "bind", "break", "cd",
-                         "continue", "declare", "echo", "else", "eval",
-                         "exec", "exit", "export", "fi", "if", "kill", "let",
-                         "local", "popd", "printf", "pushd", "pwd", "read",
-                         "readonly", "set", "shift", "shopt", "source",
-                         "test", "then", "trap", "type", "ulimit", "umask",
-                         "unalias", "unset", "wait"};
-    int i;
-    for(i=0;i<39;i++)
+    char *arraystr[ARRAY_STR_LEN] = {":", ".", "[", "alias", "bind", "break", "cd",
+                                     "continue", "declare", "echo", "else", "eval",
+                                     "exec", "exit", "export", "fi", "if", "kill", "let",
+                                     "local", "popd", "printf", "pushd", "pwd", "read",
+                                     "readonly", "set", "shift", "shopt", "source",
+                                     "test", "then", "trap", "type", "ulimit", "umask",
+                                     "unalias", "unset", "wait"};
+
+    for(int i = 0; i < ARRAY_STR_LEN; i++)
     {
         if(!(strcmp(name, arraystr[i])))
             return "builtin";
@@ -106,7 +109,7 @@ static char *pathcheck(char *name, char *path)
     count_paths = count_tokens(new_path, ':');
     components = split(new_path, ":", count_paths);
 
-    for(i=0;i<=count_paths;i++)
+    for(int i = 0; i <= count_paths; i++)
     {
         file = (char *)malloc(strlen(components[i])+1+strlen(name));
         strcpy(file, rstrstrip(components[i], '/'));
@@ -153,7 +156,7 @@ char **missingexecutables(const char *ppd_filename)
 
     ppd_attr_t *attr = ppdFindAttr(ppd, "FoomaticRIPCommandLine", NULL);
 
-    int i, j, k, count_pipes, count_cmds, count_args, count_lines;
+    int count_pipes, count_cmds, count_args, count_lines;
     char *cmd, *arg, *exe, *exepath, *search, *buffer, *lline; /* *mimetype, *cost; */
     char **pipes, **cmds, **args, **lines;
     
@@ -175,12 +178,12 @@ char **missingexecutables(const char *ppd_filename)
         count_pipes = count_tokens(cmdline, ';');
         pipes = split(cmdline, ";", count_pipes);
 
-        for(i=0;i<=count_pipes;i++)
+        for(int i = 0; i <= count_pipes; i++)
         {
             cmd = strstrip(pipes[i]);
             count_cmds = count_tokens(cmd, '|');
             cmds = split(cmd, "|", count_cmds);
-            for(j=0;j<=count_cmds;j++)
+            for(int j = 0; j <= count_cmds; j++)
             {
                 arg = strstrip(cmds[j]);
                 count_args = count_tokens(arg, ' ');
@@ -202,7 +205,7 @@ char **missingexecutables(const char *ppd_filename)
                 if(!(strcmp(basename(exepath), "gs")))
                 {
                     search = "-sIjsServer=";
-                    for(k=1;k<count_args;k++)
+                    for(int k = 1; k < count_args; k++)
                     {
                         if(startswith(search, args[k]))
                         {
@@ -228,7 +231,7 @@ char **missingexecutables(const char *ppd_filename)
     if(exepath || !(exe))
     {
         char template[PATH_MAX];
-        char line[1024];
+        char line[MAX_SIZE];
         int tmpfd;
         snprintf(template, sizeof (template), "XXXXXX");
         tmpfd = mkstemp (template);
@@ -241,7 +244,7 @@ char **missingexecutables(const char *ppd_filename)
         {
             if(startswith(search, line))
             {
-                buffer = (char *)malloc(strlen(line)-strlen(search)+1);
+                buffer = (char *)malloc(strlen(line) - strlen(search) + 1);
                 slice(line, buffer, strlen(search));
                 lline = strstrip(buffer);
                 count_lines = count_tokens(lline, ' ');
@@ -260,9 +263,9 @@ char **missingexecutables(const char *ppd_filename)
                 char *new_exe = rstrstrip(exe, '"');
 
                 exepath = pathcheck(new_exe, "/usr/lib/cups/filter:/usr/lib64/cups/filter");
-                if(!exepath)
+                if (!exepath)
                 {
-                    char *parameter = (char *)malloc(21+strlen(new_exe));
+                    char *parameter = (char *)malloc(21 + strlen(new_exe));
                     strcpy(parameter, "/usr/lib/cups/filter/");
                     strcat(parameter, new_exe);
                     add_missing(parameter);

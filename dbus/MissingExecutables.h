@@ -35,6 +35,10 @@
 */
 #include "MissingExecutables.h"
 
+#define ARRAY_STR_LEN 39
+#define MAX_SIZE 1024
+#define PATH_MAX 4096 
+
 extern int exes_index;
 extern char *exes_to_install[1024];
 char **missingexecutables(const char *ppd_filename);

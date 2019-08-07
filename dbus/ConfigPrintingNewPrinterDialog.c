@@ -1,12 +1,20 @@
 #include "ConfigPrintingNewPrinterDialog.h"
 
-memory reference;
+memory ref_data;
 GPtrArray *NPDSignal_id = NULL;
 http_t *http_status;
 
-static void change_ppd_got_ppd(const char *name, FILE *ppd);
-static void change_ppd_with_dev(GHashTable *result, const char *name, FILE *ppd);
-static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd);
+static void change_ppd_got_ppd(const char *name, 
+                               FILE *ppd);
+
+static void change_ppd_with_dev(GHashTable *result, 
+                                const char *name, 
+                                FILE *ppd);
+
+static void do_change_ppd(const char *device_uri, 
+                          const char *name, 
+                          FILE *ppd);
+
 static void remove_handles(NPDinterface *interface);
 /*
 static void DialogCanceled();
@@ -17,7 +25,7 @@ static void remove_handles(NPDinterface *interface);
 */
 void CPNewPrinterDialog(GDBusConnection *connection, 
 	                    gchar *path,
-                      http_t *status)
+                        http_t *status)
 {
 	NPDinterface *interface;
 	GError *error;
@@ -44,32 +52,32 @@ void CPNewPrinterDialog(GDBusConnection *connection,
 
 	/* Signals */
 
-  NPDSignal_id = g_ptr_array_new ();
-  gulong index;
+    NPDSignal_id = g_ptr_array_new ();
+    gulong index;
 
 	index = g_signal_connect(interface, 
-                		       "dialog-canceled", 
-                		       G_CALLBACK(on_dialog_canceled), 
-                		       NULL);
-  g_ptr_array_add (NPDSignal_id, (gpointer) index);
+                		     "dialog-canceled", 
+                		     G_CALLBACK(on_dialog_canceled), 
+                		     NULL);
+    g_ptr_array_add (NPDSignal_id, (gpointer) index);
 
 	index = g_signal_connect(interface, 
-                		       "printer-added", 
-                		        G_CALLBACK(on_printer_added), 
-                		        NULL);
-  g_ptr_array_add (NPDSignal_id, (gpointer) index);
+                		     "printer-added", 
+                		      G_CALLBACK(on_printer_added), 
+                		      NULL);
+    g_ptr_array_add (NPDSignal_id, (gpointer) index);
 
 	index = g_signal_connect(interface, 
-                		       "printer-modified", 
-                		        G_CALLBACK(on_printer_modified), 
-                		        NULL);
-  g_ptr_array_add (NPDSignal_id, (gpointer) index);
+                		     "printer-modified", 
+                		      G_CALLBACK(on_printer_modified), 
+                		      NULL);
+    g_ptr_array_add (NPDSignal_id, (gpointer) index);
 
 	index = g_signal_connect(interface, 
-                		       "driver-download-checked", 
-                		       G_CALLBACK(on_driver_download_checked), 
-                		       NULL);
-  g_ptr_array_add (NPDSignal_id, (gpointer) index);
+                		     "driver-download-checked", 
+                		     G_CALLBACK(on_driver_download_checked), 
+                		     NULL);
+    g_ptr_array_add (NPDSignal_id, (gpointer) index);
     
 	error = NULL;
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(interface), 
@@ -87,7 +95,6 @@ gboolean NewPrinterFromDevice(NPDinterface *interface,
                               const gchar *device_id,
                               gpointer user_data)
 {
-
 	add_hold();
     
     init("printer_with_uri", 
@@ -133,9 +140,9 @@ gboolean ChangePPD(NPDinterface *interface,
 {
   	add_hold();
 
-  	reference.mxid = xid;
-    reference.mname = name;
-    reference.mdevice_id = device_id;
+  	ref_data.mxid = xid;
+    ref_data.mname = name;
+    ref_data.mdevice_id = device_id;
   	fetch_ppd(name, change_ppd_got_ppd, true, NULL, 0, 0);
   	scp_interface_new_printer_dialog_complete_change_ppd(interface, invocation);
 
@@ -155,7 +162,9 @@ static void change_ppd_got_ppd(const char *name, FILE *ppd)
 }
 
 
-static void change_ppd_with_dev(GHashTable *result, const char *name, FILE *ppd)
+static void change_ppd_with_dev(GHashTable *result, 
+                                const char *name, 
+                                FILE *ppd)
 {
     if(g_hash_table_contains(result, name))
         do_change_ppd(g_hash_table_lookup(result, name), name, ppd);
@@ -163,16 +172,18 @@ static void change_ppd_with_dev(GHashTable *result, const char *name, FILE *ppd)
         do_change_ppd(NULL, name, ppd);
 }
 
-static void do_change_ppd(const char *device_uri, const char *name, FILE *ppd)
+static void do_change_ppd(const char *device_uri, 
+                          const char *name, 
+                          FILE *ppd)
 {  
     init("ppd",
          device_uri,
          name,
          ppd,
-         reference.mdevice_id,
+         ref_data.mdevice_id,
          NULL,
          0,
-         reference.mxid);
+         ref_data.mxid);
 }
 
 /* Signals */
@@ -239,7 +250,6 @@ void on_driver_download_checked(NPDinterface *interface,
 
 static void remove_handles(NPDinterface *interface)
 {
-    int i;
-    for(i=0;i<NPDSignal_id->len;i++)
+    for(int i = 0; i < NPDSignal_id->len; i++)
         g_signal_handler_disconnect(interface, (gulong)g_ptr_array_index ((GPtrArray *)NPDSignal_id, i));
 }

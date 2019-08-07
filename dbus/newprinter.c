@@ -1,8 +1,14 @@
 #include "newprinter.h"
 
-static int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid);
+static int activate_NewPrinterFromDevice(const char *dev_uri, 
+                                         const char *devid);
+
 static int activate_DownloadDriverForDeviceID(const char *devid);
-static int activate_ChangePPD(const char *dev_uri, const char *devid, const char *name, FILE *ppd);
+
+static int activate_ChangePPD(const char *dev_uri, 
+                              const char *devid, 
+                              const char *name, 
+                              FILE *ppd);
 
 void s_c_p(GtkWidget *widget, gpointer data)
 {
@@ -11,12 +17,12 @@ void s_c_p(GtkWidget *widget, gpointer data)
 
 void activate(GtkApplication *app, char *user_data)
 {
-	  GtkWidget *window,
-	            *grid,
-	            *label,
-	            *button;
+	GtkWidget *window,
+	          *grid,
+	          *label,
+	          *button;
 
-	  window = gtk_application_window_new (app);
+	window = gtk_application_window_new (app);
   	gtk_window_set_title (GTK_WINDOW (window), "Message");
   	gtk_container_set_border_width (GTK_CONTAINER (window), 10);
 
@@ -39,13 +45,13 @@ void activate(GtkApplication *app, char *user_data)
 
 
 bool init(char *dialog_mode,
-    		  const char *device_uri,
-    		  const char *name,
-    		  FILE *ppd,
-    		  const char *device_id,
-    		  const char *host,
-    		  http_encryption_t encryption,
-    		  unsigned int xid)
+    	  const char *device_uri,
+    	  const char *name,
+    	  FILE *ppd,
+    	  const char *device_id,
+    	  const char *host,
+    	  http_encryption_t encryption,
+    	  unsigned int xid)
 {
   	if(!host)
   		  host = cupsServer();
@@ -65,7 +71,8 @@ bool init(char *dialog_mode,
   	return true;
 }
 
-static int activate_NewPrinterFromDevice(const char *dev_uri, const char *devid)
+static int activate_NewPrinterFromDevice(const char *dev_uri, 
+                                         const char *devid)
 {
   	GtkApplication *app;
   	int status;
@@ -91,7 +98,10 @@ static int activate_DownloadDriverForDeviceID(const char *devid)
   	return status;
 }
 
-static int activate_ChangePPD(const char *dev_uri, const char *devid, const char *name, FILE *ppd)
+static int activate_ChangePPD(const char *dev_uri, 
+                              const char *devid, 
+                              const char *name, 
+                              FILE *ppd)
 {
     GtkApplication *app;
     int status;

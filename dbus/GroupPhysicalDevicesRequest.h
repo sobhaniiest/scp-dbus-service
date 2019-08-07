@@ -3,21 +3,23 @@
 
 #include <stdio.h>
 
-#include "newprinterdialog_dbus.h"
+
 #include "GroupPhysicalDevicesRequest.h"
 
-typedef struct _attributes
+typedef struct _device_obj
 {
-    char *device_id;
-    char *device_make_and_model;
-    char *device_class;
-}atr;
+    bool is_class;
+    char *type;
+    char *uri;
+    char *id;
+    char *info;
+}device_obj;
 
-typedef struct _devices
-{
-    char *device_uri;
-    atr *ippatrs;
-    struct _devices *next;
-}dict_devices;
+
+
+void GPDRequest(GDBusConnection *connection,
+                GHashTable *devices,
+                void(*reply_handler)(), 
+                void(*error_handler)());
 
 #endif

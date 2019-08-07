@@ -33,7 +33,7 @@ typedef struct _memory
     const gchar *mdevice_id;
 }memory;
 
-extern memory reference;
+extern memory ref_data;
 extern http_t *http_status;
 
 void CPNewPrinterDialog(GDBusConnection *connection,  

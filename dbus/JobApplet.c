@@ -41,6 +41,7 @@ gboolean Quit(JAinterface *interface,
 {
     
     scp_interface_job_applet_complete_quit(interface, invocation);
+    return true;
 }
 
 void Finished()
@@ -56,4 +57,5 @@ void on_dialog_closed(JAinterface *interface)
         g_signal_handler_disconnect(interface, finished_id);
     has_finished = true;
     //remove_from_connection();
+    return true;
 }
