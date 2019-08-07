@@ -16,7 +16,7 @@
 #include "asyncipp.h" /* getURI */
 #include "ConfigPrintingNewPrinterDialog.h" /*CPNewPrinterDialog*/
 #include "MissingExecutables.h" /*missingexecutables*/
-//#include "GetBestDriversRequest.h"
+#include "GetBestDriversRequest.h"
 //#include "JobApplet.h"
 #include "PPDialog.h" /* CPPrinterPropertiesDialog */
 //#include "GroupPhysicalDevicesRequest.h"
@@ -59,14 +59,14 @@ static gboolean PrinterPropertiesDialog(scpinterface *interface,
 static gboolean JobApplet(scpinterface *interface,
 						  GDBusMethodInvocation *invocation,
 						  ConfigPrinting_data *user_data);
-
+*/
 static gboolean GetBestDrivers(scpinterface *interface,
 							   GDBusMethodInvocation *invocation,
 							   const gchar *device_id,
 							   const gchar *device_make_and_model,
 							   const gchar *device_uri,
 							   ConfigPrinting_data *user_data);
-*/
+
 static gboolean MissingExecutables(scpinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   const gchar *ppd_filename,
@@ -104,7 +104,14 @@ static void name_acquired_handler(GDBusConnection *connection,
 
 	char *language = setlocale(LC_ALL, "");
 	KillTimer(gtk_main_quit);
-	http_t *http = Async_Connection(NULL, NULL, NULL, NULL, 0, 0, true, true);
+	http_t *http = Async_Connection(NULL, 
+		  							NULL, 
+		  							NULL, 
+		  							NULL, 
+		  							0, 
+		  							0, 
+		  							true, 
+		  							true);
 
     if(http)
         fprintf(stderr, "Connected to cups server\n");
@@ -135,12 +142,12 @@ static void name_acquired_handler(GDBusConnection *connection,
 					 "handle-job-applet", 
 					 G_CALLBACK(JobApplet), 
 					 CP_data);
-	
+	*/
 	g_signal_connect(interface, 
 					 "handle-get-best-drivers", 
 					 G_CALLBACK(GetBestDrivers), 
 					 CP_data);
-	*/
+
 	g_signal_connect(interface, 
 					 "handle-missing-executables", 
 					 G_CALLBACK(MissingExecutables), 
@@ -198,7 +205,7 @@ static gboolean JobApplet(scpinterface *interface,
 	scp_interface__complete_job_applet(interface, invocation, path);
 	return TRUE;
 }
-
+*/
 static gboolean GetBestDrivers(scpinterface *interface,
 							   GDBusMethodInvocation *invocation,
 							   const gchar *device_id,
@@ -211,7 +218,7 @@ static gboolean GetBestDrivers(scpinterface *interface,
 	scp_interface__complete_get_best_drivers(interface, invocation, drivers);
 	return TRUE;
 }
-*/
+
 static gboolean MissingExecutables(scpinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   const gchar *ppd_filename,
