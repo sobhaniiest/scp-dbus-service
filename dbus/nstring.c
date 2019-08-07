@@ -3,7 +3,11 @@
 static void computeLPSArray(char* pat, int M, int* lps);
 static int KMPSearch(char* pat, char* txt);
 
-/* returns a copy of the string where all occurrences of a substring is replaced with another substring */
+/* 
+    returns a copy of the string where all occurrences 
+    of a substring is replaced with another substring 
+*/
+
 char *replace(char *str, char *old, char *new)
 {
     char *result;
@@ -38,7 +42,10 @@ char *replace(char *str, char *old, char *new)
     return result;
 }
 
-/* split a string into tokens by the given "delim" */
+/* 
+    split a string into tokens by the given "delim" 
+*/
+
 char **split(char *str, char *delim, int count)
 {
     int i = 0;
@@ -52,7 +59,10 @@ char **split(char *str, char *delim, int count)
     return tokens;
 }
 
-/* count no. of tokens can be obtained from the strings */
+/* 
+    count no. of tokens can be obtained from the strings 
+*/
+
 int count_tokens(char *str, char ch)
 {
     int i, count = 0;
@@ -64,7 +74,10 @@ int count_tokens(char *str, char ch)
     return count;
 }
 
-/* remove white space from the both end of a string */
+/* 
+    remove white space from the both end of a string 
+*/
+
 char *strstrip(char *s)
 {
     size_t size;
@@ -86,7 +99,10 @@ char *strstrip(char *s)
     return s;
 }
 
-/* remove white space and specified char - 'r' from the end of a string */
+/* 
+    remove white space and specified char - 
+    'r' from the end of a string. 
+*/
 char *rstrstrip(char *s, char r)
 {
     size_t size;
@@ -108,7 +124,10 @@ char *rstrstrip(char *s, char r)
     return s;
 }
 
-/* check a string starts with a substring or not */
+/* 
+    check a string starts with a substring or not 
+*/
+
 bool startswith(const char *pre, const char *str)
 {
     size_t lenpre = strlen(pre),
@@ -116,13 +135,19 @@ bool startswith(const char *pre, const char *str)
     return lenstr < lenpre ? false : strncmp(pre, str, lenpre) == 0;
 }
 
-/* check a string ends with a substring or not */
+/* 
+    check a string ends with a substring or not 
+*/
+
 bool endswith(const char *post, const char *str)
 {
     return startswith(reverse(post), reverse(str));
 }
 
-/* slice a string from the given index - len */
+/* 
+    slice a string from the given index - len 
+*/
+
 void slice(char *str, char *buffer, int len)
 {
     size_t i,j;
@@ -136,6 +161,7 @@ void slice(char *str, char *buffer, int len)
 }
 
 /* KMP algorithm for searching a "substring - pat" in a "string - txt" */
+
 static void computeLPSArray(char* pat, int M, int* lps) 
 { 
     int len = 0; 
@@ -163,6 +189,7 @@ static void computeLPSArray(char* pat, int M, int* lps)
 }
 
 /* KMP algorithm for searching a "substring - pat" in a "string - txt" */
+
 static int KMPSearch(char* pat, char* txt) 
 { 
     int M = strlen(pat); 
@@ -196,7 +223,10 @@ static int KMPSearch(char* pat, char* txt)
     } 
 } 
 
-/* reverse a string */
+/* 
+    reverse a string 
+*/
+
 char *reverse(const char *str)
 {
     int i;
@@ -213,7 +243,11 @@ char *reverse(const char *str)
     return new;
 } 
 
-/* This function returns the lowest index in the string "str" where substring "substr" is found else return -1 */
+/* 
+    This function returns the lowest index in the string 
+    "str" where substring "substr" is found else return -1 
+*/
+
 int find(char *str, char *substr)
 {
     if(!strstr(str, substr))
@@ -222,7 +256,10 @@ int find(char *str, char *substr)
         KMPSearch(substr, str);
 }
 
-/* This function returns the highest index in the string "str" where substring "substr" is found else return -1 */
+/* 
+    This function returns the highest index in the string 
+    "str" where substring "substr" is found else return -1 
+*/
 int rfind(char *str, char *substr)
 {
     if(!strstr(str, substr))
@@ -234,7 +271,10 @@ int rfind(char *str, char *substr)
     }
 }
 
-/* Convert an uppercase string to a lowercase string */
+/* 
+    Convert an uppercase string to a lowercase string 
+*/
+
 char *strlwr(char *s)
 {
     char *t = s;
@@ -247,4 +287,60 @@ char *strlwr(char *s)
             t[i] = tolower(t[i]);
     }
     return t;
+}
+
+/* 
+    Convert an lowercase string to a uppercase string 
+*/
+
+char *strupr(char *s)
+{
+    char *t = s;
+    if (!s)
+        return NULL;
+    int i = 0;
+    for(i=0;i<strlen(t);i++)
+    {
+        if(islower(t[i]))
+            t[i] = toupper(t[i]);
+    }
+    return t;
+}
+
+/* 
+    return common prefix of two given string if exist
+    else return NULL
+*/
+char *commonprefix(char *s1, char *s2)
+{
+    if((!s1) || (!s2))
+        return NULL;
+    char *s;
+    int i;
+    if(strlen(s1) < strlen(s2))
+    {
+        s = (char *)malloc(strlen(s1) + 1);
+        for(i = 0; i < strlen(s1); i++)
+        {
+            if(s1[i] == s2[i])
+                s[i] = s1[i];
+            else
+                break;
+        }
+        s[i] = '\0';
+        return s;
+    }
+    else
+    {
+        s = (char *)malloc(strlen(s2) + 1);
+        for(i = 0; i < strlen(s2); i++)
+        {
+            if(s1[i] == s2[i])
+                s[i] = s2[i];
+            else
+                break;
+        }
+        s[i] = '\0';
+        return s;
+    }
 }
