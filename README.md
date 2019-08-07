@@ -3,6 +3,9 @@ This repository is created for my Google Summer of Code'19 project with The Linu
 The project title is - Turn the scp-dbus-service of system-config-printer into C. 
 (https://wiki.linuxfoundation.org/gsoc/google-summer-code-2019-openprinting-projects)
 
+# scp-service (C libraries with API) 
+This component can be found here - https://github.com/sobhaniiest/SCP_Libraries
+
 # GDBus Interface :
 Here I have used the D-Bus Introspection XML to autogenerate the the entire DBus interfaces in C - I have simply define the interface details (methods and signals) in an xml file and the gdbus-codegen (D-Bus code and documentation generator for DBus interface) is used to generate the .c and .h files for the DBus interface.
 
@@ -41,7 +44,18 @@ dbus-send --session \
           --type=method_call \
           org.fedoraproject.Config.Printing.MissingExecutables \
           string:'Generic-PDF_Printer-PDF.ppd'
-
+                                                                                                                             
+- method : GetBestDrivers(device_id, device_make_and_model, device_uri)                                                                                                   
+dbus-send --session \                                                                                                       
+          --dest=org.fedoraproject.Config.Printing \                                                                         
+          --print-reply=literal \                                                                                           
+          /org/fedoraproject/Config/Printing \                                                                               
+          --type=method_call \                                                                                               
+          org.fedoraproject.Config.Printing.GetBestDrivers \                                                                 
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' \             
+          string:'Generic PDF Printer' \                                                                                     
+          string:'file:/tmp/printout'                                                                                       
+          
 # NewPrinterDialog
 
 - method : NewPrinterFromDevice (xid, device_uri, device_id)      
