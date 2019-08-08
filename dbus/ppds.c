@@ -1,8 +1,33 @@
 #include "ppds.h"
 
+/*
+    @type ids: dict
+    key: lfmg(string)
+    value: dict(lmfg_dict) - key: lmdl(string)
+                             value: array of string of ppdname 
+*/
 GHashTable *ids = NULL;
+/*
+    @type makes: dict
+    key: make(string)
+    value: dict - key: model(string)
+                  value: dict - key: ppdname(string)
+                                value: ppddictm(struct type ppds_attr)
+                                       look in asyncipp.h   
+*/
 GHashTable *makes = NULL;
+/*
+    @type lmakes: dict
+    key: lmake(string)
+    value: make(string)
+*/
 GHashTable *lmakes = NULL;
+/*
+    @type lmodels: dict
+    key: lmake(string)
+    value: dict - key: lmodel(string)
+                  value: model(string)
+*/
 GHashTable *lmodels = NULL;
 char *device_name[9] = {"MFG", "MDL", "CMD", "CLS", "DES", "SN", "S", "P", "J"};
 
@@ -606,7 +631,11 @@ static void init_ids(GHashTable *ppds)
             bad = true;
         if(bad)
             continue;
-
+        /*
+            @type lmfg_dict: dict
+            key: lmdl(string)
+            value: array of string
+        */
         GHashTable *lmfg_dict = NULL;
         GPtrArray *array = NULL;
 
@@ -645,6 +674,12 @@ static void init_makes(GHashTable *ppds)
     GHashTable *lmakes = g_hash_table_new(g_str_hash, g_str_equal);
     GHashTable *lmodels = g_hash_table_new(g_str_hash, g_str_equal);
     // Generic model name: set(specific model names)
+    /*
+        @type aliases: dict
+        key: make(string)
+        value: dict - key: model(string)
+                      value: array of string
+    */
     GHashTable *aliases = g_hash_table_new(g_str_hash, g_str_equal);
     GPtrArray *ppd_makes_and_models = g_ptr_array_new ();
     GPtrArray *models = NULL;
@@ -896,7 +931,19 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
     */
 
     fprintf(stderr, "Trying make/model names\n");
+    /*
+        @type mdls: dict
+        key: model(string)
+        value: dict - key: ppdname(string)
+                      value: ppddictm(struct type ppds_attr)
+                             look in asyncipp.h 
+    */
     GHashTable *mdls = NULL;
+    /*
+        @type mdlsl: dict
+        key: lmodel(string)
+        value: model(string)
+    */
     GHashTable *mdlsl = NULL;
     init_makes(ppds);
     char *make = NULL;
@@ -1293,6 +1340,11 @@ fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
     }
 
     int index;
+    /*
+        @type candidates: dict
+        key: mdl(string)
+        value: mdll(string)
+    */
     GHashTable *candidates = g_hash_table_new(g_str_hash, g_str_equal);
     for(int i = 0; i < mdlnamesl->len; i++)
     {
@@ -1387,7 +1439,12 @@ fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
                 }
             }
         }
-
+        /*
+            @type mdlitems: dict
+            key: mdll(string)
+            value: dict - key: ppdname(string)
+                          value: ppddict (struct type of ppds_attr) 
+        */
         GHashTable *mdlitems = g_hash_table_new(g_str_hash, g_str_equal);
         for(int i = 0; i < mdlnames->len; i++)
         {
@@ -1553,6 +1610,12 @@ GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *ppds)
         commandsets = g_ptr_array_new();
 
     init_makes(ppds);
+    /*
+        @type models: dict
+        key: model(string)
+        value: dict - key: ppdname(string)
+                      value: ppddict (struct type of ppds_attr) 
+    */
     GHashTable *models;
 
     if(g_hash_table_contains(makes, "Generic"))
@@ -1562,6 +1625,11 @@ GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *ppds)
 
     char *buffer;
     GPtrArray *return_list;
+    /*
+        @type cmdsets: dict
+        key: string
+        value: string - true/false
+    */
     GHashTable *cmdsets = g_hash_table_new(g_str_hash, g_str_equal);
     for(int i = 0; i < commandsets->len; i++)
     {
@@ -1664,8 +1732,3 @@ GPtrArray *orderPPDNamesByPreference(GPtrArray *ppdnamelist,
 
 }
 */
-
-
-
-
-
