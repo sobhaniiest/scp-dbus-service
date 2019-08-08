@@ -19,14 +19,13 @@ To prevent the functionality of the old scp-dbus-service.py, cd to the directory
 
 # Build ::
 
-$ autoreconf -fi                                                                                                             
-$ ./configure                                                                                                               
+$ autoreconf -fi                                                                     
+$ ./configure                                                                        
 $ make                                                                                                                       
-
 # Testing the interfaces using dbus-send :
 
-$ cd dbus                                                                                                                   
-$ ./scp                                                                                                                     
+$ cd dbus                                                                            
+$ ./scp                                                                              
 
 - Open a new terminal window and run the following dbus-send commands to test the methods and interfaces                     
 
@@ -50,14 +49,14 @@ dbus-send --session \
           string:'Generic-PDF_Printer-PDF.ppd'
                                                                                                                              
 - method : GetBestDrivers(device_id, device_make_and_model, device_uri)                                              
-dbus-send --session \                                                                                                       
-          --dest=org.fedoraproject.Config.Printing \                                                                         
-          --print-reply=literal \                                                                                           
-          /org/fedoraproject/Config/Printing \                                                                               
-          --type=method_call \                                                                                               
-          org.fedoraproject.Config.Printing.GetBestDrivers \                                                                 
+dbus-send --session \                                                                
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \                                                    
+          /org/fedoraproject/Config/Printing \                                       
+          --type=method_call \                                                       
+          org.fedoraproject.Config.Printing.GetBestDrivers \
           string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' \             
-          string:'Generic PDF Printer' \                                                                                     
+          string:'Generic PDF Printer' \                                             
           string:'file:/tmp/printout'                                                                                       
           
 # NewPrinterDialog
@@ -93,7 +92,7 @@ dbus-send --session \
 
 # ConfigPrintingPrinterPropertiesDialog
 
-- method : PrinterPropertiesDialog(xid, name)                                                                              
+- method : PrinterPropertiesDialog(xid, name)
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
@@ -103,7 +102,7 @@ dbus-send --session \
           uint32:1 \
           string:'test'
 
-- method : PrintTestPage                                                                                                     
+- method : PrintTestPage
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
