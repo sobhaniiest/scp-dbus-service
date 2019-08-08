@@ -17,14 +17,18 @@ Here the generated .c and .h files are
 To prevent the functionality of the old scp-dbus-service.py, cd to the directory "/usr/bin/" and open the bash file "scp-dbus-service", comment on the lines and restart the system.
 
 
-# Steps ::
-1. $ autoreconf -fi
-2. $ ./configure
-3. $ make
-5. cd to the directory 'dbus' and run ./scp
+# Build ::
+
+$ autoreconf -fi                                                                                                             
+$ ./configure                                                                                                               
+$ make                                                                                                                       
 
 # Testing the interfaces using dbus-send :
-- Open a new terminal window
+
+$ cd dbus                                                                                                                   
+$ ./scp                                                                                                                     
+
+- Open a new terminal window and run the following dbus-send commands to test the methods and interfaces                     
 
 # ConfigPrinting :
 
@@ -37,7 +41,7 @@ dbus-send --session \
           org.fedoraproject.Config.Printing.NewPrinterDialog
 
 - method : MissingExecutables(ppd_filename)                       
-dbus-send --session \
+dbus-send --session \                      
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
           /org/fedoraproject/Config/Printing \
@@ -45,7 +49,7 @@ dbus-send --session \
           org.fedoraproject.Config.Printing.MissingExecutables \
           string:'Generic-PDF_Printer-PDF.ppd'
                                                                                                                              
-- method : GetBestDrivers(device_id, device_make_and_model, device_uri)                                                                                                   
+- method : GetBestDrivers(device_id, device_make_and_model, device_uri)                                              
 dbus-send --session \                                                                                                       
           --dest=org.fedoraproject.Config.Printing \                                                                         
           --print-reply=literal \                                                                                           
@@ -89,7 +93,7 @@ dbus-send --session \
 
 # ConfigPrintingPrinterPropertiesDialog
 
-- method : PrinterPropertiesDialog(xid, name)                                                                                 
+- method : PrinterPropertiesDialog(xid, name)                                                                              
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
