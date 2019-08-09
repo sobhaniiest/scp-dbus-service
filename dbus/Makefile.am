@@ -21,6 +21,7 @@ scp_CPPFLAGS  = $(GLIB_CFLAGS)
 scp_CPPFLAGS += $(GIO_CFLAGS)
 scp_CPPFLAGS += $(GIOUNIX_CFLAGS)
 scp_CPPFLAGS += $(GTK_CFLAGS)
+scp_CPPFLAGS += $(XML_CFLAGS)
 
 scp_LDADD  = -lcups -lxml2 -lz -lpthread -lm
 scp_LDADD += $(GLIB_LIBS)
@@ -29,8 +30,9 @@ scp_LDADD += $(GIOUNIX_LIBS)
 scp_LDADD += $(GTK_LIBS)
 scp_LDADD += $(CUPS_LIBS)
 scp_LDADD += $(CUPS_TEMP)
-scp_LDFLAGS = -I/usr/include/libxml2 -L/usr/lib
 
+scp_LDFLAGS = -I/usr/include/libxml2 -L/usr/lib
+scp_LDFLAGS += $(XML_LIBS)
 
 scp_interface.c scp_interface.h: interface/org.fedoraproject.Config.Printing.xml
 	$(AM_V_GEN)gdbus-codegen --generate-c-code scp_interface \
