@@ -24,7 +24,9 @@ PKG_CHECK_MODULES([GTK],[gtk+-3.0])
 AC_CHECK_HEADERS([stdio.h stdlib.h string.h unistd.h fcntl.h])
 AC_CHECK_HEADERS([cups/cups.h stdbool.h cups/ppd.h ctype.h])
 AC_CHECK_HEADERS([pthread.h sys/types.h libgen.h locale.h])
- 
+AC_CHECK_HEADERS([libxml/parser.h libxml/xmlmemory.h regex.h])
+AC_CHECK_HEADERS([gio/gio.h glib.h math.h gtk/gtk.h])
+
 # Checks for typedefs, structures, and compiler characteristics. 
 AC_TYPE_SIZE_T 
  
