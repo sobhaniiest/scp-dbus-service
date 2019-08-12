@@ -50,7 +50,7 @@ dbus-send --session \
 ```
 - method : MissingExecutables(ppd_filename)  
 ```
-dbus-send --session \                      
+dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
           /org/fedoraproject/Config/Printing \
@@ -60,15 +60,15 @@ dbus-send --session \
 ```  
 - method : GetBestDrivers(device_id, device_make_and_model, device_uri) 
 ```
-dbus-send --session \                                                                
+dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
-          --print-reply=literal \                                                    
-          /org/fedoraproject/Config/Printing \                                       
-          --type=method_call \                                                       
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
           org.fedoraproject.Config.Printing.GetBestDrivers \
-          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' \             
-          string:'Generic PDF Printer' \                                             
-          string:'file:/tmp/printout'                                                                                       
+          string:'MFG:Generic;CMD:PJL,PDF;MDL:PDF Printer;CLS:PRINTER;DES:Generic PDF Printer;DRV:DPDF,R1,M0;' \
+          string:'Generic PDF Printer' \
+          string:'file:/tmp/printout'
 ```          
 # NewPrinterDialog
 
