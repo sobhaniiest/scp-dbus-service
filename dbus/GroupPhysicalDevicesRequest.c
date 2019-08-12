@@ -1,13 +1,24 @@
 #include "GroupPhysicalDevicesRequest.h"
 
-void GPDRequest(GDBusConnection *connection,
+static AvahiSimplePoll *simple_poll = NULL;
+
+void GPDRequest(scpinterface *interface,
                 GHashTable *devices,
                 void(*reply_handler)(), 
                 void(*error_handler)())
 {
     add_hold();
-
+    /*
+        @type need_resolving: dict
+        key: device_uri(string)
+        value: device_obj(struct - GroupPhysicalDevicesRequest.h) 
+    */
     GHashTable *need_resolving = g_hash_table_new(g_str_hash, g_str_equal);
+    /*
+        @type deviceobjs: dict
+        key: device_uri(string)
+        value: device_obj(struct - GroupPhysicalDevicesRequest.h) 
+    */
     GHashTable *deviceobjs = g_hash_table_new(g_str_hash, g_str_equal);
 
     GHashTableIter iter;
@@ -18,11 +29,11 @@ void GPDRequest(GDBusConnection *connection,
         device_obj *devobj = Device((char *)device_uri, (devices_attr *)device_dict);
         g_hash_table_insert(deviceobjs, (char *)device_uri, devobj);
 
-        if(startswith("dnssd://", (char *)device_uri))
-            g_hash_table_insert(need_resolving, (char *)device_uri, devobj);        
+        if (startswith("dnssd://", (char *)device_uri))
+            g_hash_table_insert(need_resolving, (char *)device_uri, devobj); 
     }
 
-    if(g_hash_table_size(need_resolving) > 0)
+    if (g_hash_table_size(need_resolving) > 0)
         DNSSDHostNamesResolver(need_resolving, group);
     else
         group(deviceobjs);
@@ -60,8 +71,8 @@ device_obj *Device(char *uri, devices_attr *dict)
     /*
         @param uri: device URI
         @type uri: string
-        @param kw: device attributes
-        @type kw: dict
+        @param dict: device attributes
+        @type dict: struct type of devices_attr in asyncipp.h
     */
 
     char *dev_make_and_model = dict->device_make_and_model;
@@ -77,7 +88,7 @@ device_obj *Device(char *uri, devices_attr *dict)
 
     char *type = uri_pieces[0];
     bool is_class;
-    if(count_pieces == 1)
+    if (count_pieces == 1)
         is_class = true;
     else
         is_class = false;
@@ -85,7 +96,7 @@ device_obj *Device(char *uri, devices_attr *dict)
     GHashTable *id_dict = parseDeviceID(dev_id);
 
     int s = find(uri, "serial=");
-    if((s != -1) && (strcmp(g_hash_table_lookup(id_dict, (char *)"SN"), "")))
+    if ((s != -1) && (strcmp(g_hash_table_lookup(id_dict, (char *)"SN"), "")))
     {
         char *buffer = (char *)malloc(strlen(uri)-(s+6));
         slice(uri, buffer, (s+7));
@@ -117,6 +128,11 @@ bool dev_compare(device_obj *devobj)
 void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
 {
     guint unresolved = g_hash_table_size (devices);
+    /*
+        @type device_uri_by_name: dict
+        key: uri_by_name(struct - GroupPhysicalDevicesRequest.h)
+        value: uri(string) 
+    */
     GHashTable *device_uri_by_name = g_hash_table_new(g_str_hash, g_str_equal);
 
     // g_bus_get(G_BUS_TYPE_SYSTEM, NULL, NULL, NULL);
@@ -126,7 +142,7 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
     g_hash_table_iter_init(&iter, devices);
     while (g_hash_table_iter_next(&iter, &uri, &device))
     {
-        if(!startswith("dnssd://", (char *)uri))
+        if (!startswith("dnssd://", (char *)uri))
         {
             unresolved--;
             continue;
@@ -140,13 +156,13 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
 
         char *netlock = (char *)malloc(strlen(result));
         int k,i;
-        if(result[0] == '/')
+        if (result[0] == '/')
         {
-            if(result[1] == '/')
+            if (result[1] == '/')
             {
                 k = 2;
                 i = 0;
-                while(result[k] != '/')
+                while (result[k] != '/')
                 {
                     netlock[i] = result[k];
                     i++;
@@ -159,7 +175,7 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
         int count = count_tokens(netlock, '.');
         char **elements = split(netlock, ".", count);
 
-        if(count != 4)
+        if (count != 4)
         {
             resolved();
             continue;
@@ -169,7 +185,7 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
              *stype = NULL, 
              *protocal = NULL, 
              *domain = NULL;
-        if(elements[4])
+        if (elements[4])
         {
             domain = (char *)malloc(strlen(elements[4]));
             strcpy(domain, elements[4]);
@@ -187,9 +203,9 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
 
         char *buffer = (char *)malloc(strlen(name));
         int b = 0;
-        for(i=0;i<strlen(name);i++)
+        for (int i = 0; i < strlen(name); i++)
         {
-            if(name[i] == '%')
+            if (name[i] == '%')
             {
                 buffer[b] = ' ';
                 i += 3;
@@ -202,6 +218,136 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
         strcat(stype, ".");
         strcat(stype, protocal);
 
-        ResolveService(name, stype, domain);
+        uri_by_name *data = (uri_by_name *)malloc(sizeof(uri_by_name));
+        data->name = name;
+        data->stype = stype;
+        data->domain = domain;
+        g_hash_table_insert(device_uri_by_name, data, uri);
+
+        if (ResolveService(name, stype, domain, device_uri_by_name) == 1)
+            error();
     }
+}
+
+static void resolve_callback(AvahiServiceResolver *r,
+                             AVAHI_GCC_UNUSED AvahiIfIndex interface,
+                             AVAHI_GCC_UNUSED AvahiProtocol protocol,
+                             AvahiResolverEvent event,
+                             const char *name,
+                             const char *type,
+                             const char *domain,
+                             const char *host_name,
+                             const AvahiAddress *address,
+                             uint16_t port,
+                             AvahiStringList *txt,
+                             AvahiLookupResultFlags flags,
+                             AVAHI_GCC_UNUSED void* userdata) 
+{
+    assert(r);
+    /* Called whenever a service has been resolved successfully or timed out */
+    switch (event) 
+    {
+        case AVAHI_RESOLVER_FAILURE:
+            fprintf(stderr, 
+                    "(Resolver) Failed to resolve service"
+                    " '%s' of type '%s' in domain '%s': %s\n", 
+                    name, 
+                    type, 
+                    domain, 
+                    avahi_strerror(avahi_client_errno(avahi_service_resolver_get_client(r))));
+            break;
+        case AVAHI_RESOLVER_FOUND: 
+        {
+            char a[AVAHI_ADDRESS_STR_MAX], *t;
+            fprintf(stderr, "Service '%s' of type '%s' in domain '%s':\n", name, type, domain);
+            avahi_address_snprint(a, sizeof(a), address);
+            t = avahi_string_list_to_string(txt);
+            fprintf(stderr,
+                    "\t%s:%u (%s)\n"
+                    "\tTXT=%s\n"
+                    "\tcookie is %u\n"
+                    "\tis_local: %i\n"
+                    "\tour_own: %i\n"
+                    "\twide_area: %i\n"
+                    "\tmulticast: %i\n"
+                    "\tcached: %i\n",
+                    host_name, port, a,
+                    t,
+                    avahi_string_list_get_service_cookie(txt),
+                    !!(flags & AVAHI_LOOKUP_RESULT_LOCAL),
+                    !!(flags & AVAHI_LOOKUP_RESULT_OUR_OWN),
+                    !!(flags & AVAHI_LOOKUP_RESULT_WIDE_AREA),
+                    !!(flags & AVAHI_LOOKUP_RESULT_MULTICAST),
+                    !!(flags & AVAHI_LOOKUP_RESULT_CACHED));
+            avahi_free(t);
+        }
+    }
+    avahi_service_resolver_free(r);
+}
+
+static void client_callback(AvahiClient *c, 
+                            AvahiClientState state, 
+                            AVAHI_GCC_UNUSED void * userdata) 
+{
+    assert(c);
+    /* Called whenever the client or server state changes */
+    if (state == AVAHI_CLIENT_FAILURE) 
+    {
+        fprintf(stderr, "Server connection failure: %s\n", avahi_strerror(avahi_client_errno(c)));
+        avahi_simple_poll_quit(simple_poll);
+    }
+}
+
+int ResolveService(char *name,
+                   char *type,
+                   char *domain,
+                   GHashTable *dev_uri_by_name)
+{
+    AvahiClient *client = NULL;
+    AvahiServiceBrowser *sb = NULL;
+    int error;
+    int ret = 1;
+    /* Allocate main loop object */
+    if (!(simple_poll = avahi_simple_poll_new())) 
+    {
+        fprintf(stderr, "Failed to create simple poll object.\n");
+        goto fail;
+    }
+    /* Allocate a new client */
+    client = avahi_client_new(avahi_simple_poll_get(simple_poll), 
+                              0, 
+                              client_callback, 
+                              NULL, 
+                              &error);
+    /* Check wether creating the client object succeeded */
+    if (!client) 
+    {
+        fprintf(stderr, "Failed to create client: %s\n", avahi_strerror(error));
+        goto fail;
+    }
+    
+    if (!(avahi_service_resolver_new(client, 
+                                     AVAHI_IF_UNSPEC, 
+                                     AVAHI_PROTO_UNSPEC, 
+                                     name,
+                                     type,
+                                     domain,
+                                     AVAHI_PROTO_UNSPEC, 
+                                     0, 
+                                     resolve_callback, 
+                                     dev_uri_by_name)))///
+        fprintf(stderr, "Failed to resolve service '': %s\n", avahi_strerror(avahi_client_errno(client)));
+
+    /* Run the main loop */
+    avahi_simple_poll_loop(simple_poll);
+    ret = 0;
+fail:
+    /* Cleanup things */
+    if (sb)
+        avahi_service_browser_free(sb);
+    if (client)
+        avahi_client_free(client);
+    if (simple_poll)
+        avahi_simple_poll_free(simple_poll);
+    return ret;
 }
