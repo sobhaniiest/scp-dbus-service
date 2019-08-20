@@ -42,19 +42,16 @@ static char *normalize (char *strin);
     @type device_id: string
     @returns: dict indexed by field name
 */
-GHashTable *parseDeviceID(const char *device_id)
+GHashTable *parseDeviceID(char *device_id)
 {
-    GHashTable *id_dict = g_hash_table_new(g_str_hash, g_str_equal);
-
     int count_id, count_cmd;
     char **pieces, **cmds;
     char *name, *val, *key, *value;
+   
+    GHashTable *id_dict = g_hash_table_new(g_str_hash, g_str_equal);
 
-    char *id = (char *)malloc(strlen(device_id));
-    strcpy(id, device_id);
-
-    count_id = count_tokens(id, ';');
-    pieces = split(id, ";", count_id);
+    count_id = count_tokens(device_id, ';');
+    pieces = split(device_id, ";", count_id);
 
     for(int i = 0; i < count_id; i++)
     {
@@ -64,45 +61,81 @@ GHashTable *parseDeviceID(const char *device_id)
         name = strtok(pieces[i], ":");
         val = strtok(NULL, ":");
 
-        key = (char *)malloc(strlen(name));
+        key = (char *)malloc(sizeof(char) * strlen(name) + 1);
         strcpy(key, strstrip(name));
 
-        value = (char *)malloc(strlen(val));
+        value = (char *)malloc(sizeof(char) * strlen(val) + 1);
         strcpy(value, strstrip(val));
         g_hash_table_insert(id_dict, key, value);
-        //free(key);
-        //free(value);
     }
-
-    //free(id);
-    //free(pieces);
+    //fprintf(stderr, "%p\n",device_id);
     
-    if(g_hash_table_contains(id_dict, "MANUFACTURER"))
-        g_hash_table_insert(id_dict, "MFG", g_hash_table_lookup(id_dict, "MANUFACTURER"));
-    if(g_hash_table_contains(id_dict, "MODEL"))
-        g_hash_table_insert(id_dict, "MDL", g_hash_table_lookup(id_dict, "MODEL"));
-    if(g_hash_table_contains(id_dict, "COMMAND SET"))
-        g_hash_table_insert(id_dict, "CMD", g_hash_table_lookup(id_dict, "COMMAND SET"));
+    free(pieces);
 
+    if(g_hash_table_contains(id_dict, "MANUFACTURER"))
+    {
+        key = (char *)malloc(sizeof(char) * strlen("MFG") + 1);
+        strcpy(key, "MFG");
+
+        value = (char *)malloc(sizeof(char) * strlen(g_hash_table_lookup(id_dict, "MANUFACTURER")) + 1);
+        strcpy(value, g_hash_table_lookup(id_dict, "MANUFACTURER"));
+
+        g_hash_table_insert(id_dict, key, value);
+    }
+    if(g_hash_table_contains(id_dict, "MODEL"))
+    {
+        key = (char *)malloc(sizeof(char) * strlen("MDL") + 1);
+        strcpy(key, "MDL");
+
+        value = (char *)malloc(sizeof(char) * strlen(g_hash_table_lookup(id_dict, "MODEL")) + 1);
+        strcpy(value, g_hash_table_lookup(id_dict, "MODEL"));
+
+        g_hash_table_insert(id_dict, key, value);
+    }
+    if(g_hash_table_contains(id_dict, "COMMAND SET"))
+    {
+        key = (char *)malloc(sizeof(char) * strlen("CMD") + 1);
+        strcpy(key, "CMD");
+
+        value = (char *)malloc(sizeof(char) * strlen(g_hash_table_lookup(id_dict, "COMMAND SET")) + 1);
+        strcpy(value, g_hash_table_lookup(id_dict, "COMMAND SET"));
+
+        g_hash_table_insert(id_dict, key, value);
+    }
+    
     for(int i = 0; i < 9; i++)
     {
         if(!(g_hash_table_contains(id_dict, device_name[i])))
-            g_hash_table_insert(id_dict, device_name[i], "");
-    }
+        {
+            key = (char *)malloc(sizeof(char) * strlen(device_name[i]) + 1);
+            strcpy(key, device_name[i]);
 
+            value = (char *)malloc(sizeof(char) * strlen("") + 1);
+            strcpy(value, "");   
+            g_hash_table_insert(id_dict, key, value);
+        }
+    }
+    
     GPtrArray *array = g_ptr_array_new ();
 
     if(!(strcmp(g_hash_table_lookup(id_dict, "CMD"), "")))
-        g_hash_table_insert(id_dict, "CMD", array);
+    {
+        key = (char *)malloc(sizeof(char) * strlen("CMD") + 1);
+        strcpy(key, "CMD");
+ 
+        g_hash_table_insert(id_dict, key, array);
+    }
     else
     {
         count_cmd = count_tokens(g_hash_table_lookup(id_dict, "CMD"), ',');
         cmds = split(g_hash_table_lookup(id_dict, "CMD"), ",", count_cmd);
         for(int i = 0; i <= count_cmd; i++)
             g_ptr_array_add (array, (gpointer)cmds[i]);
-        g_hash_table_insert(id_dict, "CMD", array);
+        key = (char *)malloc(sizeof(char) * strlen("CMD") + 1);
+        strcpy(key, "CMD");
+        g_hash_table_insert(id_dict, key, array);
     }
-    
+
     return id_dict;
 }
 
@@ -606,18 +639,26 @@ static void init_ids(GHashTable *ppds)
     if(ids)
         return;
 
+    char *arg;
     ids = g_hash_table_new(g_str_hash, g_str_equal);
     char *lmfg, *lmdl;
     fprintf(stderr, "size : %d\n",g_hash_table_size(ppds) );
-    GHashTableIter iter;
+    GHashTableIter iter, it;
     gpointer ppdname, ppddict;
+    gpointer key, value;
     g_hash_table_iter_init(&iter, ppds);
     while (g_hash_table_iter_next(&iter, &ppdname, &ppddict))
     {
         if(!strcmp((((ppds_attr *)ppddict)->ppd_device_id), ""))
             continue;
 
-        GHashTable *id_dict = parseDeviceID(((ppds_attr *)ppddict)->ppd_device_id);
+        arg = (char *)malloc(sizeof(char) * strlen(((ppds_attr *)ppddict)->ppd_device_id) + 1);
+        strcpy(arg, (((ppds_attr *)ppddict)->ppd_device_id));
+        //fprintf(stderr, "%s\n",arg);
+        GHashTable *id_dict = parseDeviceID(arg);
+
+        //g_hash_table_destroy (id_dict);
+        
         
         lmfg = strlwr(g_hash_table_lookup(id_dict, "MFG"));
         lmdl = strlwr(g_hash_table_lookup(id_dict, "MDL"));
@@ -659,8 +700,24 @@ static void init_ids(GHashTable *ppds)
             if(g_hash_table_contains(lmfg_dict, lmdl))
                 g_ptr_array_add ((GPtrArray *)g_hash_table_lookup(lmfg_dict, lmdl), (gpointer)((char *)ppdname));
         } 
-        g_hash_table_unref (id_dict);
-        //g_hash_table_destroy(id_dict);
+        //g_hash_table_unref (id_dict);
+        g_hash_table_iter_init(&it, id_dict);
+        while (g_hash_table_iter_next(&it, &key, &value))
+        {
+            if(!(strcmp((char *)key, "CMD")))
+            {
+                g_free(key);
+                g_ptr_array_free((GPtrArray *)value, true);
+            }
+            else
+            {
+                g_free(key);
+                g_free(value);
+            }
+        }
+        
+        free(arg);
+        g_hash_table_destroy(id_dict);
                           
     }
 }
@@ -961,6 +1018,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
     fprintf(stderr, "mfgl: %s\n",mfgl);
     fprintf(stderr, "mdll: %s\n",mdll);
 
+    
 
     GHashTable *mfgrepl = g_hash_table_new(g_str_hash, g_str_equal);
     g_hash_table_insert(mfgrepl, "hewlett-packard", "hp");
@@ -1132,6 +1190,8 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
 
     GPtrArray *ppd_cmd_field;
     bool usable;
+    char *arg;
+    gpointer k, v;
 
     if(id_matched && (commandsets->len > 0))
     {
@@ -1146,7 +1206,12 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             if(list->ppd_device_id)
             {   
                 ppd_cmd_field = g_ptr_array_new ();
+                arg = (char *)malloc(sizeof(char) * strlen(list->ppd_device_id) + 1);
+                strcpy(arg, list->ppd_device_id);
                 id_dict = parseDeviceID(list->ppd_device_id);
+
+                //g_hash_table_destroy (id_dict);
+
                 g_ptr_array_add (ppd_cmd_field, (gpointer) g_hash_table_lookup(id_dict, "CMD"));
             }
 
@@ -1270,7 +1335,23 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             _debugprint ("No ID match for device %s:" % sanitised_uri)
             _debugprint (id)
     */
-
+    g_hash_table_iter_init(&iter, id_dict);
+    while (g_hash_table_iter_next(&iter, &k, &v))
+    {
+        if(!(strcmp((char *)k, "CMD")))
+        {
+            g_free(k);
+            g_ptr_array_free((GPtrArray *)v, true);
+        }
+        else
+        {
+            g_free(k);
+            g_free(v);
+        }
+    }
+                
+    free(arg);
+    g_hash_table_destroy (id_dict);
     return fit;
     
 }

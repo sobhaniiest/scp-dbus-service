@@ -109,9 +109,18 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
     char *mfg, *mdl, *des, *cmd;
     
     GHashTable *id_dict;
+    char *arg;
+    GHashTableIter iter;
+    gpointer key, value;
 
     if(data->device_id)
-        id_dict = parseDeviceID(data->device_id);  
+    {
+        fprintf(stderr, "hello hello hello!!!!\n" );
+        arg = (char *)malloc(sizeof(char) * strlen(data->device_id) + 1);
+        strcpy(arg, data->device_id);
+        id_dict = parseDeviceID(arg);
+        free(arg);  
+    }
     else
     {
         GPtrArray *array = g_ptr_array_new ();
@@ -145,6 +154,24 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
                                               (GPtrArray*)g_hash_table_lookup(id_dict, "CMD"),
                                               data->device_uri, 
                                               data->device_make_and_model);
+
+
+    g_hash_table_iter_init(&iter, id_dict);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        if(!(strcmp((char *)key, "CMD")))
+        {
+            g_free(key);
+            g_ptr_array_free((GPtrArray *)value, true);
+        }
+        else
+        {
+            g_free(key);
+            g_free(value);
+        }
+    }
+
+
     /*
     GPtrArray *ppdnamelist = orderPPDNamesByPreference(fit, installed_files, id_dict);
 

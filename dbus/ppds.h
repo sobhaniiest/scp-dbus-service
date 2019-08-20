@@ -35,7 +35,7 @@ void PPDs(GHashTable *ppds,
           char *language, 
           const char *xml_dir);
 
-GHashTable *parseDeviceID(const char *device_id);
+GHashTable *parseDeviceID(char *device_id);
 char *ppdMakeModelSplit(const char *ppd_make_and_model);
 
 
