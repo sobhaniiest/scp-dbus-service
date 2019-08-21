@@ -124,9 +124,9 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
     else
     {
         GPtrArray *array = g_ptr_array_new ();
-        char *mfg_mdl = ppdMakeModelSplit(data->device_make_and_model);
-        mfg = strtok(mfg_mdl, ":");
-        mdl = strtok(NULL, ":");
+        make_model_data *mfg_mdl = ppdMakeModelSplit(data->device_make_and_model);
+        mfg = mfg_mdl->make;
+        mdl = mfg_mdl->model;
         g_hash_table_insert(id_dict, "MFG", mfg);
         g_hash_table_insert(id_dict, "MDL", mdl);
         g_hash_table_insert(id_dict, "DES", "");

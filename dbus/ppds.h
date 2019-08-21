@@ -31,12 +31,44 @@ typedef struct _findBestMatchPPDs_data
     GPtrArray *ppdnamelist;
 }fBMP_data;
 
+typedef struct _make_model_data
+{
+    char *make;
+    char *model;
+}make_model_data;
+
+typedef struct _ppds_dict_obj
+{
+    /*
+    @type makes: dict
+    key: make(string)
+    value: dict - key: model(string)
+                  value: dict - key: ppdname(string)
+                                value: ppddict(struct type ppds_attr)
+                                       look in asyncipp.h   
+    */
+    GHashTable *makes;
+    /*
+        @type lmakes: dict
+        key: lmake(string)
+        value: make(string)
+    */
+    GHashTable *lmakes;
+    /*
+        @type lmodels: dict
+        key: lmake(string)
+        value: dict - key: lmodel(string)
+                      value: model(string)
+    */
+    GHashTable *lmodels;
+}ppds_dict_obj;
+
 void PPDs(GHashTable *ppds, 
           char *language, 
           const char *xml_dir);
 
 GHashTable *parseDeviceID(char *device_id);
-char *ppdMakeModelSplit(const char *ppd_make_and_model);
+make_model_data *ppdMakeModelSplit(const char *ppd_make_and_model);
 
 
 GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,

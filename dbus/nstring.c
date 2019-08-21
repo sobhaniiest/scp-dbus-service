@@ -49,7 +49,7 @@ char *replace(char *str, char *old, char *new)
 char **split(char *str, char *delim, int count)
 {
     int i = 0;
-    char **tokens = malloc(count * sizeof(char *));
+    char **tokens = malloc(count * sizeof(char *) + 2);
     char *token = strtok(str, delim);
     while(token != NULL)
     {
@@ -280,14 +280,15 @@ char *strlwr(char *s)
     char *t = s;
     if (!s)
         return NULL;
-    int i = 0;
-    for(i=0;i<strlen(t);i++)
+
+    for(int i = 0; i < strlen(t); i++)
     {
-        if(isupper(t[i]))
+        if (isupper(t[i]))
             t[i] = tolower(t[i]);
     }
     return t;
 }
+
 
 /* 
     Convert an lowercase string to a uppercase string 
@@ -298,10 +299,10 @@ char *strupr(char *s)
     char *t = s;
     if (!s)
         return NULL;
-    int i = 0;
-    for(i=0;i<strlen(t);i++)
+
+    for(int i = 0; i < strlen(t); i++)
     {
-        if(islower(t[i]))
+        if (islower(t[i]))
             t[i] = toupper(t[i]);
     }
     return t;

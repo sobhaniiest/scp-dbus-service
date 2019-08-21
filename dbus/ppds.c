@@ -6,13 +6,13 @@
     value: dict(lmfg_dict) - key: lmdl(string)
                              value: array of string of ppdname 
 */
-GHashTable *ids = NULL;
+GHashTable *ids;
 /*
     @type makes: dict
     key: make(string)
     value: dict - key: model(string)
                   value: dict - key: ppdname(string)
-                                value: ppddictm(struct type ppds_attr)
+                                value: ppddict(struct type ppds_attr)
                                        look in asyncipp.h   
 */
 GHashTable *makes = NULL;
@@ -21,14 +21,14 @@ GHashTable *makes = NULL;
     key: lmake(string)
     value: make(string)
 */
-GHashTable *lmakes = NULL;
+GHashTable *lmakes;
 /*
     @type lmodels: dict
     key: lmake(string)
     value: dict - key: lmodel(string)
                   value: model(string)
 */
-GHashTable *lmodels = NULL;
+GHashTable *lmodels;
 char *device_name[9] = {"MFG", "MDL", "CMD", "CLS", "DES", "SN", "S", "P", "J"};
 
 static void init_ids(GHashTable *ppds);
@@ -139,7 +139,7 @@ GHashTable *parseDeviceID(char *device_id)
     return id_dict;
 }
 
-char *ppdMakeModelSplit(const char *ppd_make_and_model)
+make_model_data *ppdMakeModelSplit(const char *ppd_make_and_model)
 {
     /*  
         Split a ppd-make-and-model string into a canonical make and model pair.
@@ -179,14 +179,14 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
     char *model = NULL;
     bool cleanup_make = false,
          found_mfr = false;
-    char *l = (char *)malloc(strlen(make_and_model));
+    char *l = (char *)malloc(sizeof(char) * strlen(make_and_model) + 1);
     strcpy(l, make_and_model);
-    l = strlwr(l);
+    strlwr(l);
     int reti, j;
     regex_t regex;
     char msgbuf[100];
 
-    for(int i = 0; i < MFR_BY_RANGE_LEN/2 ; i++)
+    for(int i = 0; i < MFR_BY_RANGE_LEN/2; i++)
     {
         /* Compile regular expression */
         reti = regcomp(&regex, MFR_BY_RANGE[2*i+1], REG_EXTENDED);
@@ -199,7 +199,8 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
         {
             //fprintf(stderr, "Match\n");
             make = MFR_BY_RANGE[2*i];
-            model = make_and_model;
+            model = (char *)malloc(sizeof(char) * strlen(make_and_model) + 1);
+            strcpy(model, make_and_model);
             break;
         }
         else if( reti == REG_NOMATCH )
@@ -212,7 +213,7 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
             fprintf(stderr, "Regex match failed: %s\n", msgbuf);
             exit(1);
         }
-        //regfree(&regex);
+        regfree(&regex);
     }
 
     /* Handle PPDs provided by Turboprint */
@@ -221,7 +222,7 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
     reti = regcomp(&regex, RE_turboprint, REG_EXTENDED);
     reti = regexec(&regex, l, 0, NULL, 0);
 
-    if((!reti) && (!make))
+    if((!reti) && (!make)) // Have to check!!!
     {
         fprintf(stderr, "Match\n");
         int t1, t2;
@@ -249,13 +250,19 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
             }
 
             make = strtok(make_and_model, "_");
-            model = strtok(NULL, "_");
+            buffer = strtok(NULL, "_");
+            model = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
+            strcpy(model, buffer);
+
             if((!make) || (!model))
             {
                 make = make_and_model;
-                model = "";
+                buffer = "";
+                model = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
+                strcpy(model, buffer);
             }
         }
+        
         /*
             make = re.sub (r"(?<=[a-z])(?=[0-9])", " ", make)
             make = re.sub (r"(?<=[a-z])(?=[A-Z])", " ", make)
@@ -270,76 +277,72 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
     else if(startswith("konica minolta ", l))
     {
         make = "KONICA MINOLTA";
-        buffer = (char *)malloc(strlen(make_and_model)-14);
-        slice(make_and_model, buffer, 15);
-        strcpy(model, buffer);
-        free(buffer);
+        model = (char *)malloc(strlen(make_and_model) - 14);
+        slice(make_and_model, model, 15);
     }
     else if(startswith("lexmark international ", l))
     {
         make = "Lexmark";
-        buffer = (char *)malloc(strlen(make_and_model) - 21);
-        slice(make_and_model, buffer, 22);
-        strcpy(model, buffer);
-        free(buffer);
+        model = (char *)malloc(strlen(make_and_model) - 21);
+        slice(make_and_model, model, 22);
     }
     else if(startswith("kyocera mita ", l))
     {
         make = "Kyocera";
-        buffer = (char *)malloc(strlen(make_and_model) - 12);
-        slice(make_and_model, buffer, 13);
-        strcpy(model, buffer);
-        free(buffer);
+        model = (char *)malloc(strlen(make_and_model) - 12);
+        slice(make_and_model, model, 13);
     }
     else if(startswith("kyocera ", l))
     {
         make = "Kyocera";
-        buffer = (char *)malloc(strlen(make_and_model) - 7);
-        slice(make_and_model, buffer, 8);
-        strcpy(model, buffer);
-        free(buffer);
+        model = (char *)malloc(strlen(make_and_model) - 7);
+        slice(make_and_model, model, 8);
     }
     else if(startswith("fuji xerox ", l))
     {
         make = "Fuji Xerox";
-        buffer = (char *)malloc(strlen(make_and_model) - 10);
-        slice(make_and_model, buffer, 11);
-        strcpy(model, buffer);
-        free(buffer);
+        model = (char *)malloc(strlen(make_and_model) - 10);
+        slice(make_and_model, model, 11);
     }
     else
     {
         /* Finally, take the first word as the name of the manufacturer. */
         cleanup_make = true;
         make = strtok(make_and_model, " ");
-        model = strtok(NULL, " ");
-        if((!make) || (!model))
+        buffer = strtok(NULL, " ");
+        model = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
+        strcpy(model, buffer);
+
+        if ((!make) || (strlen(model) == 0))
         {
             make = make_and_model;
-            model = "";
+            model = (char *)malloc(sizeof(char) * 1);
+            strcpy(model, "");
         }
     }
 
+    regfree(&regex);
+
     /* Standardised names for manufacturers. */
-    char *makel = (char *)malloc(strlen(make));
+    char *makel = (char *)malloc(sizeof(char) * strlen(make) + 1);
     strcpy(makel, make);
-    makel = strlwr(makel);
+    strlwr(makel);
     char *mfr_by_range;
     
-    if(cleanup_make)
+    if (cleanup_make)
     {
-        if(startswith("hewlett", makel) && endswith("packard", makel))
+        if (startswith("hewlett", makel) && endswith("packard", makel))
         {
             make = "HP";
             free(makel);
-            makel = (char *)malloc(strlen("hp"));
+            makel = (char *)malloc(sizeof(char) * strlen("hp") + 1);
             strcpy(makel, "hp");
         }
-        else if(startswith("konica", makel) && endswith("minolta", makel))
+        else if (startswith("konica", makel) && endswith("minolta", makel))
         {
             make = "KONICA MINOLTA";
             free(makel);
-            makel = (char *)malloc(strlen("konica minolta"));
+            makel = (char *)malloc(sizeof(char) * strlen("konica minolta") + 1);
             strcpy(makel, "konica minolta");
         }
         else
@@ -347,7 +350,7 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
             /* Fix case errors. */
             for(int i = 0; i < MFR_BY_RANGE_LEN/2; i++)
             {
-                mfr_by_range = (char *)malloc(strlen(MFR_BY_RANGE[2*i]));
+                mfr_by_range = (char *)malloc(sizeof(char) * strlen(MFR_BY_RANGE[2*i]) + 1);
                 strcpy(mfr_by_range, MFR_BY_RANGE[2*i]);
                 if(!(strcmp(strlwr(mfr_by_range), makel)))
                 {
@@ -389,9 +392,13 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
             modell = modell[:suffixstart]
             model = model[:suffixstart]
     */
-    char *modell = (char *)malloc(strlen(model));
-    strcpy(modell, model);
-    modell = strlwr(modell);
+    char *modell;
+    if(model != NULL)
+    {
+        modell = (char *)malloc(sizeof(char) * strlen(model) + 1);
+        strcpy(modell, model);
+        strlwr(modell);
+    }
     /*
         if(strstr(modell, " v"))
         {
@@ -418,8 +425,8 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
         if n:
             modell = model.lower ()
     */
-
-    if(!(strcmp(makel, "hp")))
+    
+    if (!(strcmp(makel, "hp")))
     {
         GHashTableIter iter;
         gpointer name, fullname;
@@ -428,27 +435,31 @@ char *ppdMakeModelSplit(const char *ppd_make_and_model)
         {
             if(startswith(name, modell))
             {
-                buffer = (char *)malloc(strlen(model) - strlen((char *)name));
+                buffer = (char *)malloc(sizeof(char) * (strlen(model) - strlen((char *)name)) + 1);
                 slice(model, buffer, strlen((char *)name));
-                model = (char *)malloc(strlen((char *)fullname) + strlen(buffer));
+                model = (char *)malloc(sizeof(char) * (strlen((char *)fullname) + strlen(buffer)) + 1);
                 strcpy(model, fullname);
                 strcat(model, buffer);
-                modell = (char *)malloc(strlen(model));
+                modell = (char *)malloc(sizeof(char) * strlen(model) + 1);
                 strcpy(modell, model);
-                modell = strlwr(modell);
+                strlwr(modell);
                 free(buffer);
                 break;
             }
         }
     }
 
-    model = strstrip(model);
-    char *mfg_mdl = (char *)malloc(strlen(make) + strlen(model) + 1);
-    strcpy(mfg_mdl, make);
-    strcat(mfg_mdl, ":");
-    strcat(mfg_mdl, model);
-    
-    return mfg_mdl;
+    if(model != NULL)
+    {
+        make_model_data *data = (make_model_data *)malloc(sizeof(make_model_data));
+        data->make = make;
+        data->model = model;
+
+        free(l);
+        free(makel);
+        free(modell);
+        return data;
+    }
 }
 
 static char *normalize (char *strin)
@@ -483,7 +494,7 @@ static char *normalize (char *strin)
         lastchar = BLANK;
 
     size_t len = 0;
-    char *normalized = (char *)malloc(strlen(lstrin));
+    char *normalized = (char *)malloc(sizeof(char) * strlen(lstrin) + 1);
     bool alnumfound = false;
 
     for(int i = 0; i < strlen(lstrin); i++)
@@ -728,8 +739,8 @@ static void init_makes(GHashTable *ppds)
         return;
     //tstart = time.time ()
     makes = g_hash_table_new(g_str_hash, g_str_equal);
-    GHashTable *lmakes = g_hash_table_new(g_str_hash, g_str_equal);
-    GHashTable *lmodels = g_hash_table_new(g_str_hash, g_str_equal);
+    lmakes = g_hash_table_new(g_str_hash, g_str_equal);
+    lmodels = g_hash_table_new(g_str_hash, g_str_equal);
     // Generic model name: set(specific model names)
     /*
         @type aliases: dict
@@ -740,24 +751,30 @@ static void init_makes(GHashTable *ppds)
     GHashTable *aliases = g_hash_table_new(g_str_hash, g_str_equal);
     GPtrArray *ppd_makes_and_models = g_ptr_array_new ();
     GPtrArray *models = NULL;
+    make_model_data *ppd_mm_split, *make_model;
 
     char *ppd_make_and_model;
     char *ppd_products, *ppd_product, *product;
-    char *ppd_mm_split;
     char *make, *lmake;
     char *model, *lmodel;
-    char *make_model;
     char *lprod;
+    char *buffer;
 
     GHashTableIter iter;
     gpointer ppdname, ppddict;
     g_hash_table_iter_init(&iter, ppds);
+    
     while (g_hash_table_iter_next(&iter, &ppdname, &ppddict))
     {
         // One entry for ppd-make-and-model
         ppd_make_and_model = ((ppds_attr *)ppddict)->ppd_make_and_model;
-        ppd_mm_split = ppdMakeModelSplit (ppd_make_and_model);
+        buffer = (char *)malloc(sizeof(char) * strlen(ppd_make_and_model) + 1);
+        strcpy(buffer, ppd_make_and_model);
+    
+        ppd_mm_split = ppdMakeModelSplit (buffer);
         g_ptr_array_add (ppd_makes_and_models, (gpointer) ppd_mm_split);
+
+        free(buffer);
 
         /* 
             # The ppd-product IPP attribute contains values from each
@@ -773,32 +790,38 @@ static void init_makes(GHashTable *ppds)
         /*
         *   check this part : incomplete!!!
         */
+        
         ppd_products = ((ppds_attr *)ppddict)->ppd_product;
         /*
             if not isinstance (ppd_products, list):
                     ppd_products = [ppd_products]
             ppd_products = set ([x for x in ppd_products if x.startswith ("(")])
         */
-        if(ppd_products)
+
+        
+        if(strlen(ppd_products))
         {
             /*
                 # If there is only one ppd-product value it is
                 # unlikely to be useful.
             */
             make = ((ppds_attr *)ppddict)->ppd_make;
+            fprintf(stderr, "I am here\n");
             
-            if(make)
+            if(strlen(make))
             {
-                lmake = (char *)malloc(strlen(make)+1);
+                lmake = (char *)malloc(sizeof(char) * strlen(make) + 1);
                 strcpy(lmake, normalize(rstrstrip(make, ' ')));
             }
+            fprintf(stderr, "I am here\n");
             // *Product: attribute is "(text)"
             if(startswith(ppd_products, "(") && endswith(ppd_products, ")"))
             {
-                ppd_product = (char *)malloc(strlen(ppd_products)-2);
+                ppd_product = (char *)malloc(sizeof(char) * strlen(ppd_products) - 1);
                 slice(ppd_products, ppd_product, 1);
                 ppd_product[strlen(ppd_product)-1] = '\0';
             }
+            fprintf(stderr, "I am here\n");
             // If manufacturer name missing, take it from ppd-make
             lprod = normalize(ppd_product);
             if(!startswith(lprod, lmake))
@@ -807,14 +830,17 @@ static void init_makes(GHashTable *ppds)
                 strcpy(product, make);
                 strcat(product, ppd_product);
             }
+            fprintf(stderr, "I am here\n");
+            fprintf(stderr, "%s\n",product);
             g_ptr_array_add (ppd_makes_and_models, (gpointer) (ppdMakeModelSplit (product)));
         }
         //  Add the entries to our dictionary
+        /*
         for(int i = 0; i < ppd_makes_and_models->len; i++)
         {
-            make_model = (char *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i);
-            make = strtok(make_model, ":");
-            model = strtok(NULL, ":");
+            make_model = (make_model_data *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i);
+            make = make_model->make;
+            model = make_model->model;
 
             lmake = normalize(make);
             lmodel = normalize(model);
@@ -844,14 +870,17 @@ static void init_makes(GHashTable *ppds)
         // Build list of model aliases
         for(int i = 0; i < ppd_makes_and_models->len; i++)
         {
-            if(!strcmp((char *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i), ppd_mm_split))
+            make_model = (make_model_data *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i);
+            make = make_model->make;
+            model = make_model->model;
+            if(!strcmp(make, ppd_mm_split->make) && !strcmp(model, ppd_mm_split->model))
                 g_ptr_array_remove(ppd_makes_and_models, (gpointer)ppd_mm_split);
         }
 
         if(ppd_makes_and_models->len)
         {
-            make = strtok(ppd_mm_split, ":");
-            model = strtok(NULL, ":");   
+            make = ppd_mm_split->make;
+            model = ppd_mm_split->model; 
             if(g_hash_table_contains(aliases, make))
             {
                 models = g_hash_table_lookup(g_hash_table_lookup(aliases, make), model);
@@ -868,8 +897,13 @@ static void init_makes(GHashTable *ppds)
                 models = models.union ([x[1] for x in ppd_makes_and_models])
                 aliases[make][model] = models
             */
-        }
+        //}
+
+        free(ppd_mm_split->model);
+        free(ppd_mm_split);
+        
     }
+    
     /*
         # Now, for each set of model aliases, add all drivers from the
         # "main" (generic) model name to each of the specific models.
@@ -1018,7 +1052,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
     fprintf(stderr, "mfgl: %s\n",mfgl);
     fprintf(stderr, "mdll: %s\n",mdll);
 
-    
+
 
     GHashTable *mfgrepl = g_hash_table_new(g_str_hash, g_str_equal);
     g_hash_table_insert(mfgrepl, "hewlett-packard", "hp");
@@ -1393,7 +1427,7 @@ fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
         buffer = (char *)malloc(strlen((char *)key));
         strcpy(buffer, (char *)key);
         g_ptr_array_add (mdlnamesl, (gpointer) (strlwr(buffer)));
-        free(buffer);
+        //free(buffer);
     }
     g_ptr_array_add (mdlnames, (gpointer) mdl);
     g_ptr_array_add (mdlnamesl, (gpointer) mdll);
