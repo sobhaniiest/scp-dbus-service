@@ -275,6 +275,8 @@ char **missingexecutables(const char *ppd_filename)
 
     }
     
+    exes_to_install[exes_index] = (char *)malloc(strlen("\0"));
+    strcpy(exes_to_install[exes_index], "\0");
     return exes_to_install;
 }
 

@@ -141,7 +141,12 @@ bool startswith(const char *pre, const char *str)
 
 bool endswith(const char *post, const char *str)
 {
-    return startswith(reverse(post), reverse(str));
+    char *pre = reverse(post);
+    char *s = reverse(str);
+    bool r = startswith(pre, s);
+    free(pre);
+    free(s);
+    return r;
 }
 
 /* 

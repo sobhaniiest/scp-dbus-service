@@ -187,7 +187,9 @@ static gboolean PrinterPropertiesDialog(scpinterface *interface,
 {
 	(user_data->pathn) += 1;
 	snprintf(path, 1024, "/org/fedoraproject/Config/Printing/PrinterPropertiesDialog/%d", user_data->pathn);
+	fprintf(stderr, "Collecting all printer and corresponding uri...\n");
 	GHashTable *result = getURI(user_data->http);
+	
 	CPPrinterPropertiesDialog(user_data->conn, path, xid, name, result);
 	alive();
 	scp_interface__complete_printer_properties_dialog(interface, invocation, path);
@@ -233,7 +235,7 @@ static gboolean GroupPhysicalDevices(scpinterface *interface,
 								 	 GDBusMethodInvocation *invocation,
 								     ConfigPrinting_data *user_data)
 {
-	GVariant *grouped_devices = GroupPhysicalDevicesRequest();
+	GVariant *grouped_devices = GPDRequest(interface, devices);
 	scp_interface__complete_group_physical_devices(interface, invocation, grouped_devices);
 	return TRUE;
 }

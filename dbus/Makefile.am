@@ -44,7 +44,17 @@ scp_interface.c scp_interface.h: interface/org.fedoraproject.Config.Printing.xml
     interface/org.fedoraproject.Config.Printing.xml
 
 libSCPService_la_SOURCES = nstring.c \
-                           MissingExecutables.c
+                           MissingExecutables.c \
+                           asyncconn.c \
+                           asyncipp.c \
+                           killtimer.c \
+                           newprinter.c \
+                           scp_interface.c \
+                           PPDialog.c \
+                           authinfocache.c \
+                           asyncpk1.c \
+                           ConfigPrintingNewPrinterDialog.c \
+                           ppdcache.c
 
 libSCPService_la_CPPFLAGS  = $(GLIB_CFLAGS)
 libSCPService_la_CPPFLAGS += $(GIO_CFLAGS)
@@ -64,6 +74,16 @@ libSCPService_la_LIBADD += $(CUPS_TEMP)
 ##INSTALL HEADERS
 scp_service_headersdir = $(includedir)/scp-services-headers
 scp_service_headers_HEADERS = nstring.h \
-                              MissingExecutables.h
+                              MissingExecutables.h \
+                              asyncconn.h \
+                              asyncipp.h \
+                              killtimer.h \
+                              newprinter.h \
+                              scp_interface.h \
+                              PPDialog.h \
+                              authinfocache.h \
+                              asyncpk1.h \
+                              ConfigPrintingNewPrinterDialog.h \
+                              ppdcache.h
                               
 include_HEADERS = SCPService.h

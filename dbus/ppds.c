@@ -486,7 +486,7 @@ static char *normalize (char *strin)
     */
 
     char *lstrin = strstrip(strin);
-    lstrin = strlwr(lstrin);
+    strlwr(lstrin);
 
     int BLANK = 0,
         ALPHA = 1,
@@ -494,7 +494,7 @@ static char *normalize (char *strin)
         lastchar = BLANK;
 
     size_t len = 0;
-    char *normalized = (char *)malloc(sizeof(char) * strlen(lstrin) + 1);
+    char *normalized = (char *)malloc(sizeof(char) * strlen(lstrin) + 10);
     bool alnumfound = false;
 
     for(int i = 0; i < strlen(lstrin); i++)
@@ -618,7 +618,7 @@ void PPDs(GHashTable *ppds,
     }
     for(int i = 0; i < to_remove->len; i++)
         g_hash_table_remove(ppds, (char *)g_ptr_array_index ((GPtrArray *)to_remove, i));
-    g_ptr_array_free(to_remove, false);
+    g_ptr_array_free(to_remove, true);
 
     /*
         CUPS sets the 'raw' model's ppd-make-and-model to 'Raw Queue'
@@ -754,11 +754,13 @@ static void init_makes(GHashTable *ppds)
     make_model_data *ppd_mm_split, *make_model;
 
     char *ppd_make_and_model;
-    char *ppd_products, *ppd_product, *product;
-    char *make, *lmake;
+    char *ppd_products, *ppd_product = NULL, *product = NULL;
+    char *make = NULL, *lmake = NULL;
     char *model, *lmodel;
     char *lprod;
     char *buffer;
+
+    FILE *fp = fopen("new.txt", "w");
 
     GHashTableIter iter;
     gpointer ppdname, ppddict;
@@ -805,37 +807,61 @@ static void init_makes(GHashTable *ppds)
                 # If there is only one ppd-product value it is
                 # unlikely to be useful.
             */
-            make = ((ppds_attr *)ppddict)->ppd_make;
-            fprintf(stderr, "I am here\n");
+            buffer = ((ppds_attr *)ppddict)->ppd_make;
             
-            if(strlen(make))
+            if(strlen(buffer))
             {
+                make = (char *)malloc(sizeof(char) * strlen(buffer) + 2);
+                strcpy(make, buffer);
+                strcat(make, " ");
                 lmake = (char *)malloc(sizeof(char) * strlen(make) + 1);
-                strcpy(lmake, normalize(rstrstrip(make, ' ')));
+                strcpy(lmake, normalize(make));
             }
-            fprintf(stderr, "I am here\n");
             // *Product: attribute is "(text)"
-            if(startswith(ppd_products, "(") && endswith(ppd_products, ")"))
+            
+            if(startswith("(", ppd_products))
             {
-                ppd_product = (char *)malloc(sizeof(char) * strlen(ppd_products) - 1);
+                ppd_product = (char *)malloc(sizeof(char) * strlen(ppd_products) + 1);
                 slice(ppd_products, ppd_product, 1);
                 ppd_product[strlen(ppd_product)-1] = '\0';
             }
-            fprintf(stderr, "I am here\n");
-            // If manufacturer name missing, take it from ppd-make
-            lprod = normalize(ppd_product);
-            if(!startswith(lprod, lmake))
+            if(ppd_product != NULL)
             {
-                product = (char *)malloc(strlen(make) + strlen(ppd_product));
-                strcpy(product, make);
-                strcat(product, ppd_product);
+                lprod = normalize(ppd_product);
+                // If manufacturer name missing, take it from ppd-make
+                //
+                
+                if(!startswith(lmake, lprod))
+                {
+                    product = (char *)malloc(strlen(make) + strlen(ppd_product) + 1);
+                    strcpy(product, make);
+                    strcat(product, ppd_product);
+                }
+
+                if(product != NULL)
+                {
+                    g_ptr_array_add (ppd_makes_and_models, (gpointer) (ppdMakeModelSplit (product)));
+                    free(product);
+                    product = NULL;
+                }
+                else
+                    g_ptr_array_add (ppd_makes_and_models, (gpointer) (ppdMakeModelSplit (ppd_product)));
+                
+                free(lprod);
+                free(ppd_product);
+                ppd_product = NULL;
             }
-            fprintf(stderr, "I am here\n");
-            fprintf(stderr, "%s\n",product);
-            g_ptr_array_add (ppd_makes_and_models, (gpointer) (ppdMakeModelSplit (product)));
+            if(make != NULL)
+            {
+                free(make);
+                free(lmake);
+                make = NULL;
+                lmake = NULL;
+            }
         }
+
         //  Add the entries to our dictionary
-        /*
+        
         for(int i = 0; i < ppd_makes_and_models->len; i++)
         {
             make_model = (make_model_data *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i);
@@ -897,7 +923,7 @@ static void init_makes(GHashTable *ppds)
                 models = models.union ([x[1] for x in ppd_makes_and_models])
                 aliases[make][model] = models
             */
-        //}
+        }
 
         free(ppd_mm_split->model);
         free(ppd_mm_split);
@@ -1193,7 +1219,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             }
             fprintf(stderr, "due to non-IPP connection\n");
         }
-        failed = g_ptr_array_free(failed, false);
+        g_ptr_array_free(failed, true);
     }
 
 
@@ -1645,7 +1671,7 @@ fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
 
             fprintf(stderr, "Searching for model ID '%s', '%s' %% %d\n", modelid, modelpattern, modelnumber);
             ignore_digits = 0;
-            best_mdl = g_ptr_array_free(best_mdl, false);
+            g_ptr_array_free(best_mdl, true);
             found = false;
             while(ignore_digits < digits)
             {

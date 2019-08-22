@@ -35,6 +35,7 @@ typedef struct _memory
 
 extern memory ref_data;
 extern http_t *http_status;
+extern bool changeppd_flag;
 
 void CPNewPrinterDialog(GDBusConnection *connection,  
 	                    gchar *path,
@@ -47,20 +48,20 @@ gboolean NewPrinterFromDevice(NPDinterface *interface,
 							  guint xid, 
 							  const gchar *device_uri,
 							  const gchar *device_id,
-							  gpointer user_data);
+							  int *dbus_flag);
 
 gboolean DownloadDriverForDeviceID(NPDinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   guint xid, 
 								   const gchar *device_id,
-								   gpointer user_data);
+								   int *dbus_flag);
 
 gboolean ChangePPD(NPDinterface *interface,
 				   GDBusMethodInvocation *invocation,
 				   guint xid, 
 				   const gchar *name,
 				   const gchar *device_id,
-				   gpointer user_data);
+				   int *dbus_flag);
 
 /* signals */
 

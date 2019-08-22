@@ -6,6 +6,8 @@
 #include <gtk/gtk.h> 
 #include <stdbool.h>
 #include <cups/cups.h>
+#include "asyncconn.h"
+#include "asyncipp.h"
 #include "killtimer.h"
 #include "newprinter.h"
 #include "scp_interface.h"
@@ -19,6 +21,7 @@ typedef struct _PPDialog_printer
 {
     bool status;
     const char *name;
+    bool dbus_flag;
 }PPDialog_printer;
 
 void CPPrinterPropertiesDialog(GDBusConnection *connection,

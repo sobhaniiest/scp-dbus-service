@@ -82,7 +82,7 @@ dbus-send --session \
           /org/fedoraproject/Config/Printing \
           --type=method_call \
           org.fedoraproject.Config.Printing.PrinterPropertiesDialog \
-          int32:1 \
+          uint32:1 \
           string:'test'
 
 Output : /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1

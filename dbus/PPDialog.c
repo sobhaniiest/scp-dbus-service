@@ -48,11 +48,13 @@ void CPPrinterPropertiesDialog(GDBusConnection *connection,
     {
         data->status = true;
         data->name = g_locale_to_utf8 (name,-1,0,0,0);
+        data->dbus_flag = true;
     }
     else
     {
         data->status = false;
         data->name = g_locale_to_utf8 (name,-1,0,0,0);
+        data->dbus_flag = true;
         fprintf(stderr, "Printer not found\n");
         activate_error(name);
     }
@@ -83,18 +85,54 @@ gboolean PrintTestPage(PPDinterface *interface,
                        GDBusMethodInvocation *invocation,
                        PPDialog_printer *data)
 {
-    if(data->status)
+    
+    if(data->dbus_flag == true)
     {
-        fprintf(stderr, "Printing test page\n");
-        activate_PPDialog(data->name);
+        if(data->status)
+        {
+            fprintf(stderr, "Printing test page\n");
+            activate_PPDialog(data->name);
+        }
+        else
+        {
+            fprintf(stderr, "Printer not found\n");
+            activate_error(data->name);
+        }
+        scp_interface_printer_properties_dialog_complete_print_test_page(interface, invocation);
+        return true;
     }
-    else
+    else if (data->dbus_flag == false)
     {
-        fprintf(stderr, "Printer not found\n");
-        activate_error(data->name);
+        http_t *http = Async_Connection(NULL, 
+                                        NULL, 
+                                        NULL, 
+                                        NULL, 
+                                        0, 
+                                        0, 
+                                        true, 
+                                        true);
+        if(http)
+            fprintf(stderr, "Connected to cups server\n");
+        else
+            fprintf(stderr, "Connection error\n");
+
+        GHashTable *result = getURI(http);
+
+        if(g_hash_table_contains(result, data->name))
+        {
+            fprintf(stderr, "Printing test page\n");
+            activate_PPDialog(g_locale_to_utf8 (data->name, -1, 0, 0, 0));
+        }
+        else
+        {
+            fprintf(stderr, "Printer not found\n");
+            activate_error(g_locale_to_utf8 (data->name, -1, 0, 0, 0));
+        }
+        httpClose(http);
+        fprintf(stderr, "Disconnected ...\n");
+        return true;
     }
-    scp_interface_printer_properties_dialog_complete_print_test_page(interface, invocation);
-    return true;
+    return false;
 }
 
 void Finished()
