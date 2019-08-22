@@ -3,9 +3,6 @@ This repository is created for my Google Summer of Code'19 project with The Linu
 The project title is - Turn the scp-dbus-service of system-config-printer into C. 
 (https://wiki.linuxfoundation.org/gsoc/google-summer-code-2019-openprinting-projects)
 
-# scp-service (C libraries with API) 
-This component can be found here - https://github.com/sobhaniiest/SCP_Libraries
-
 # GDBus Interface :
 Here I have used the D-Bus Introspection XML to autogenerate the the entire DBus interfaces in C - I have simply define the interface details (methods and signals) in an xml file and the gdbus-codegen (D-Bus code and documentation generator for DBus interface) is used to generate the .c and .h files for the DBus interface.
 
@@ -16,20 +13,35 @@ Here the generated .c and .h files are
 # Dependencies :
 
 - [CUPS] (https://github.com/apple/cups/releases) version >= 2.2.7
-- GLIB 2.0
+- GLIB-2.0
 - libxml2
 - regex
+- GTK+-3.0
 
 # Testing : 
 To prevent the functionality of the old scp-dbus-service.py, cd to the directory "/usr/bin/" and open the bash file "scp-dbus-service", comment on the lines and restart the system.
 
+# Build and Installation  
 
-# Build ::
 ```
-$ autoreconf -fi                                                                     
-$ ./configure                                                                        
-$ make  
+$ autoreconf -fi                                                                                                       
+$ ./configure                                                                                                         
+$ make                                                                                                              
+$ sudo make install                                                                                                   
+$ sudo ldconfig 
 ```
+
+# scp-service (C libraries with API) 
+# Testing the libraries
+
+```
+$ cd demo/                                                                                                             
+$ make                                                                                                                 
+$ ./test 'xid' 'device_uri' 'device_id' 'printer_name' 'ppd_file_name' 
+e.g : ./test 0 'file:/tmp/printout' 'MFG:HP;MDL:hp 910;DES:hp 910;' 'test' 'Generic-PDF_Printer-PDF.ppd'
+```
+
+# scp-dbus-service (exporting methods and signals using dbus)
 # Testing the interfaces using dbus-send :
 ```
 $ cd dbus                                                                            
