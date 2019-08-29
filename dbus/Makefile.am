@@ -13,18 +13,19 @@ scp_SOURCES = ConfigPrinting.c ConfigPrinting.h \
 	authinfocache.c authinfocache.h \
 	nstring.c nstring.h \
 	MissingExecutables.c MissingExecutables.h \
-	PPDialog.c PPDialog.h \
-	GetBestDriversRequest.c GetBestDriversRequest.h \
-	ppds.c ppds.h \
-	xml.c xml.h
+	PPDialog.c PPDialog.h 
+#	GetBestDriversRequest.c GetBestDriversRequest.h \
+#	ppds.c ppds.h \
+#	xml.c xml.h
 
 scp_CPPFLAGS  = $(GLIB_CFLAGS)
 scp_CPPFLAGS += $(GIO_CFLAGS)
 scp_CPPFLAGS += $(GIOUNIX_CFLAGS)
 scp_CPPFLAGS += $(GTK_CFLAGS)
-scp_CPPFLAGS += $(XML_CFLAGS)
+#scp_CPPFLAGS += $(XML_CFLAGS)
 
-scp_LDADD  = -lcups -lxml2 -lz -lpthread -lm
+#scp_LDADD  = -lcups -lxml2 -lz -lpthread -lm
+scp_LDADD  = -lcups -lz -lpthread -lm
 scp_LDADD += $(GLIB_LIBS)
 scp_LDADD += $(GIO_LIBS)
 scp_LDADD += $(GIOUNIX_LIBS)
@@ -33,8 +34,9 @@ scp_LDADD += $(CUPS_LIBS)
 scp_LDADD += $(CUPS_TEMP)
 #scp_LDADD += $(LIB_AVAHI)
 
-scp_LDFLAGS = -I/usr/include/libxml2 -L/usr/lib
-scp_LDFLAGS += $(XML_LIBS)
+#scp_LDFLAGS = -I/usr/include/libxml2 -L/usr/lib
+scp_LDFLAGS = -L/usr/lib
+#scp_LDFLAGS += $(XML_LIBS)
 scp_LDFLAGS += $(CUPS_CFLAGS)
 
 scp_interface.c scp_interface.h: interface/org.fedoraproject.Config.Printing.xml
@@ -61,7 +63,7 @@ libSCPService_la_CPPFLAGS += $(GIO_CFLAGS)
 libSCPService_la_CPPFLAGS += $(GIOUNIX_CFLAGS)
 libSCPService_la_CPPFLAGS += $(GTK_CFLAGS)
 
-libSCPService_la_LIBADD = -lcups -lxml2 -lz -lpthread -lm
+libSCPService_la_LIBADD = -lcups -lz -lpthread -lm
 libSCPService_la_LIBADD += $(GLIB_LIBS)
 libSCPService_la_LIBADD += $(GIO_LIBS)
 libSCPService_la_LIBADD += $(GIOUNIX_LIBS)
