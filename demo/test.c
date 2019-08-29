@@ -56,7 +56,10 @@ int main(int argc, char *argv[])
         i++;
     }
 
-    g_main_loop_run(loop);
+    //g_main_loop_run(loop);
+    fprintf(stderr, "\nDone!!!\n");
+    //g_main_loop_quit(loop);
+    return 0;
 }
 
 // 0 'file:/tmp/printout' 'MFG:HP;MDL:hp 910;DES:hp 910;' 'test' 'Generic-PDF_Printer-PDF.ppd' 
