@@ -15,6 +15,7 @@ Here the generated .c and .h files are
 - [CUPS] (https://github.com/apple/cups/releases) version >= 2.2.7
 - GLIB-2.0
 - libxml2
+- libtool
 - regex
 - GTK+-3.0
 
