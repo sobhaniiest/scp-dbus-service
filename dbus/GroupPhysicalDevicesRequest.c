@@ -3,11 +3,33 @@
 static AvahiSimplePoll *simple_poll = NULL;
 guint unresolved;
 
-device_obj *Device(char *uri, devices_attr *dict);
-void group(GHashTable *deviceobjs);
-void DNSSDHostNamesResolver(GHashTable *devices, void(*group)());
+static device_obj *Device(char *uri, devices_attr *dict);
+static void group(GHashTable *deviceobjs);
+static void DNSSDHostNamesResolver(GHashTable *devices, GHashTable *deviceobjs);
+static bool dev_compare(device_obj *devobj);
+static void resolve_callback(AvahiServiceResolver *r,
+                             AVAHI_GCC_UNUSED AvahiIfIndex interface,
+                             AVAHI_GCC_UNUSED AvahiProtocol protocol,
+                             AvahiResolverEvent event,
+                             const char *name,
+                             const char *type,
+                             const char *domain,
+                             const char *host_name,
+                             const AvahiAddress *address,
+                             uint16_t port,
+                             AvahiStringList *txt,
+                             AvahiLookupResultFlags flags,
+                             AVAHI_GCC_UNUSED void * userdata);
+static void client_callback(AvahiClient *c, 
+                            AvahiClientState state, 
+                            AVAHI_GCC_UNUSED void * userdata);
+static int ResolveService(char *name,
+                   char *type,
+                   char *domain,
+                   GHashTable *dev_uri_by_name);
 
-GVariant *GPDRequest(scpinterface *interface,
+
+void GPDRequest(scpinterface *interface,
                      GHashTable *devices,
                      void(*reply_handler)(), 
                      void(*error_handler)())
@@ -31,7 +53,7 @@ GVariant *GPDRequest(scpinterface *interface,
     g_hash_table_iter_init(&iter, devices);
     while (g_hash_table_iter_next(&iter, &device_uri, &device_dict))
     {
-        device_obj *devobj = Device((char *)device_uri, (devices_attr *)device_dict);
+        device_obj *devobj = Device((char *)device_uri, (devices_attr *)device_dict);////
         g_hash_table_insert(deviceobjs, (char *)device_uri, devobj);
 
         if (startswith("dnssd://", (char *)device_uri))
@@ -39,18 +61,25 @@ GVariant *GPDRequest(scpinterface *interface,
     }
 
     if (g_hash_table_size(need_resolving) > 0)
-        DNSSDHostNamesResolver(need_resolving, group);
+        DNSSDHostNamesResolver(need_resolving, deviceobjs);////
     else
-        group(deviceobjs);
+        group(deviceobjs);/////
+
+    /*
+        except Exception as e:
+            g_killtimer.remove_hold ()
+            self.error_handler (e)
+    */
     
 }
 
-void group(GHashTable *deviceobjs)
+static void group(GHashTable *deviceobjs)
 {
     /*
         We can ignore resolved_devices because the actual objects
         (in self.devices) have been modified.
     */
+    /*
     bool matched;
     GPtrArray *physdevs = g_ptr_array_new ();
     GHashTableIter iter;
@@ -58,20 +87,23 @@ void group(GHashTable *deviceobjs)
     g_hash_table_iter_init(&iter, deviceobjs);
     while (g_hash_table_iter_next(&iter, &device_uri, &deviceobj))
     {
-        PhysicalDevice ((device_obj *)deviceobj);
+        PhysicalDevice ((device_obj *)deviceobj);/////
 
         matched = false;
         
     }
+    */
 
+    fprintf(stderr, "Here!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 
-
-
-
-
+    /*
+        except Exception as e:
+            g_killtimer.remove_hold ()
+            self.error_handler (e)
+    */
 }
 
-device_obj *Device(char *uri, devices_attr *dict)
+static device_obj *Device(char *uri, devices_attr *dict)
 {
     /*
         @param uri: device URI
@@ -80,16 +112,17 @@ device_obj *Device(char *uri, devices_attr *dict)
         @type dict: struct type of devices_attr in asyncipp.h
     */
 
+    char *dev_uri = (char *)malloc(sizeof(char) * strlen(uri) + 1);
+    strcpy(dev_uri, uri);
     char *dev_make_and_model = dict->device_make_and_model;
     char *dev_id = dict->device_id;
-    char *dev_classes = dict->device_classes;
     char *info = dict->device_info;
     char *location = dict->device_location;
 
     int count_pieces;
     char **uri_pieces;
-    count_pieces = count_tokens(uri, ':');
-    uri_pieces = split(uri, ":", count_pieces);
+    count_pieces = count_tokens(dev_uri, ':');
+    uri_pieces = split(dev_uri, ":", count_pieces);
 
     char *type = uri_pieces[0];
     bool is_class;
@@ -118,7 +151,7 @@ device_obj *Device(char *uri, devices_attr *dict)
     return deviceobj;
 }
 
-bool dev_compare(device_obj *devobj)
+static bool dev_compare(device_obj *devobj)
 {
     /* Compare devices by order of preference. */
 
@@ -130,7 +163,7 @@ bool dev_compare(device_obj *devobj)
 
 
 
-void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
+static void DNSSDHostNamesResolver(GHashTable *devices, GHashTable *deviceobjs)
 {
     unresolved = g_hash_table_size (devices);
     /*
@@ -155,6 +188,10 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
             continue;
         }   
 
+        /*
+            # We need to resolve the DNS-SD hostname in order to
+            # compare with other network devices.
+        */
         char *result = (char *)malloc(sizeof(char) * strlen((char *)uri) + 1);
         strcpy(result, (char *)uri);
 
@@ -184,10 +221,14 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
 
         if (count != 4)
         {
-            resolved();
+            unresolved--;
+            if(unresolved == 0)
+                fprintf(stderr, "All addresses resolved\n");
             continue;
         }
         
+        fprintf(stderr, "Resolving address %s\n", netlock);
+
         char *name = NULL, 
              *stype = NULL, 
              *protocal = NULL, 
@@ -222,7 +263,7 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
             b++;
         }
 
-        strcat(stype, ".");
+        strcat(stype, ".");   
         strcat(stype, protocal);
 
         uri_by_name *data = (uri_by_name *)malloc(sizeof(uri_by_name));
@@ -231,10 +272,17 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
         data->domain = domain;
         g_hash_table_insert(device_uri_by_name, uri, data);
 
-        fprintf(stderr, "Resolving address\n" );
-
         if (ResolveService(name, stype, domain, device_uri_by_name) == 1)////
-            error();
+        {
+            //error();///////////
+            fprintf(stderr, "Failed to resolve address\n");
+            unresolved--;
+            if(unresolved == 0)
+                fprintf(stderr, "All addresses resolved\n");
+
+        }
+        else
+            group(deviceobjs);   
     }
 }
 
@@ -288,11 +336,22 @@ static void resolve_callback(AvahiServiceResolver *r,
                     !!(flags & AVAHI_LOOKUP_RESULT_WIDE_AREA),
                     !!(flags & AVAHI_LOOKUP_RESULT_MULTICAST),
                     !!(flags & AVAHI_LOOKUP_RESULT_CACHED));
+
+            /*
+                uri = self._device_uri_by_name[(name, stype, domain)]
+                self._devices[uri].address = address
+                hostname = host
+                p = hostname.find(".")
+                if p != -1:
+                    hostname = hostname[:p]
+                debugprint ("%s is at %s (%s)" % (uri, address, hostname))
+                self._devices[uri].hostname = hostname
+            */
+
             unresolved--;
             if(unresolved == 0)
-            {
                 fprintf(stderr, "All addresses resolved\n");
-            }
+            
             avahi_free(t);
         }
     }
@@ -312,10 +371,10 @@ static void client_callback(AvahiClient *c,
     }
 }
 
-int ResolveService(char *name,
-                   char *type,
-                   char *domain,
-                   GHashTable *dev_uri_by_name)
+static int ResolveService(char *name,
+                          char *type,
+                          char *domain,
+                          GHashTable *dev_uri_by_name)
 {
     AvahiClient *client = NULL;
     AvahiServiceBrowser *sb = NULL;

@@ -8,8 +8,12 @@
 #include <scp-services-headers/killtimer.h>
 #include <scp-services-headers/scp_interface.h>
 #include <scp-services-headers/asyncpk1.h>
+#include <scp-services-headers/asyncipp.h>
+#include <scp-services-headers/asyncconn.h>
 #include <scp-services-headers/authinfocache.h>
 #include <scp-services-headers/ppdcache.h>
+#include <scp-services-headers/ppds.h>
 #include <scp-services-headers/ConfigPrintingNewPrinterDialog.h>
+#include <scp-services-headers/GroupPhysicalDevicesRequest.h>
 
 #endif

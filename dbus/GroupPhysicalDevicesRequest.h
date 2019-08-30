@@ -17,6 +17,7 @@
 #include "killtimer.h"
 #include "scp_interface.h"
 #include "asyncipp.h"
+#include "ppds.h"
 #include "GroupPhysicalDevicesRequest.h"
 
 typedef struct _device_obj
@@ -37,7 +38,7 @@ typedef struct _uri_by_name
 
 extern guint unresolved;
 
-GVariant *GPDRequest(scpinterface *interface,
+void GPDRequest(scpinterface *interface,
                      GHashTable *devices,
                      void(*reply_handler)(), 
                      void(*error_handler)());

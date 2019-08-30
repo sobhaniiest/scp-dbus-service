@@ -19,7 +19,7 @@
 #include "GetBestDriversRequest.h"
 #include "JobApplet.h"
 #include "PPDialog.h" /* CPPrinterPropertiesDialog */
-//#include "GroupPhysicalDevicesRequest.h"
+#include "GroupPhysicalDevicesRequest.h"
 #include "scp_interface.h"
 /*
  scp_interface__skeleton_new 
@@ -71,12 +71,12 @@ static gboolean MissingExecutables(scpinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   const gchar *ppd_filename,
 								   ConfigPrinting_data *user_data);
-/*
+
 static gboolean GroupPhysicalDevices(scpinterface *interface,
 								     GDBusMethodInvocation *invocation,
 								     GVariant *devices,
 								     ConfigPrinting_data *user_data);
-*/
+
 int main()
 {
 	GMainLoop *loop;
@@ -153,12 +153,12 @@ static void name_acquired_handler(GDBusConnection *connection,
 					 "handle-missing-executables", 
 					 G_CALLBACK(MissingExecutables), 
 					 CP_data);
-	/*
+	
 	g_signal_connect(interface, 
 					 "handle-group-physical-devices", 
 					 G_CALLBACK(GroupPhysicalDevices), 
 					 CP_data);
-	*/
+	
 	error = NULL;
 	g_dbus_interface_skeleton_export(G_DBUS_INTERFACE_SKELETON(interface), 
 									 connection, 
@@ -228,6 +228,7 @@ static gboolean GetBestDrivers(scpinterface *interface,
         fprintf(stderr, "%s: %s\n", (char *)key, (char *)value);
         g_variant_builder_add(builder, "(ss)", (char *)value, (char *)key);
     }
+    exit(0);
     drivers = g_variant_new("a(ss)", builder);
 	scp_interface__complete_get_best_drivers(interface, invocation, drivers);
 
@@ -243,14 +244,14 @@ static gboolean MissingExecutables(scpinterface *interface,
 	scp_interface__complete_missing_executables(interface, invocation, missing_executables);
 	return TRUE;
 }
-/*
+
 static gboolean GroupPhysicalDevices(scpinterface *interface,
 								 	 GDBusMethodInvocation *invocation,
 								 	 GVariant *devices,
 								     ConfigPrinting_data *user_data)
 {
-	GVariant *grouped_devices = GPDRequest(interface, devices, NULL, NULL);
+	GVariant *grouped_devices = NULL;
+	GPDRequest(interface, devices, NULL, NULL);
 	scp_interface__complete_group_physical_devices(interface, invocation, grouped_devices);
 	return TRUE;
 }
-*/

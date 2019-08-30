@@ -225,6 +225,29 @@ static void change_ppd_got_ppd(const char *name, FILE *ppd)
 
         GHashTable *result = getURI(http);
 
+        ////////////////////////////////////////
+        /*
+        fprintf(stderr, "get_Devices\n");
+        GHashTable *res = getDevices(http);
+
+        FILE *fp = fopen("device.txt", "w");
+
+        GHashTableIter iter;
+        gpointer key, value;
+        g_hash_table_iter_init(&iter, res);
+        while (g_hash_table_iter_next(&iter, &key, &value))
+        {
+            fprintf(fp, "device_uri : %s\n", (char *)key);
+            fprintf(fp, "device_make_and_model : %s\n", ((devices_attr *)value)->device_make_and_model);
+            fprintf(fp, "device_id : %s\n", ((devices_attr *)value)->device_id);
+            fprintf(fp, "device_info : %s\n", ((devices_attr *)value)->device_info);
+            fprintf(fp, "device_location : %s\n", ((devices_attr *)value)->device_location);
+        }
+    
+        fclose(fp);
+        */
+        ///////////////////////////////////////
+
         if(!result || !http)
           do_change_ppd(NULL, name, ppd);
         else
