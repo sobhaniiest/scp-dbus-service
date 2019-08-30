@@ -1,6 +1,6 @@
 SCP_SERVICE_FLAGS=$(shell pkg-config --cflags --libs SCPService)
 GLIB_FLAGS=$(shell pkg-config --cflags --libs gio-2.0 gio-unix-2.0 glib-2.0 gtk+-3.0)
-LIBS = -lcups -lpthread -lm -lSCPService
+LIBS = -lcups -lpthread -lm -lSCPService -I/usr/include/libxml2 -L/usr/lib -lxml2
 .PHONY = all 
 
 all:test

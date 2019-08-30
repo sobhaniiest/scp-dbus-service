@@ -56,6 +56,29 @@ int main(int argc, char *argv[])
         i++;
     }
 
+    char *make_and_model = (char *)malloc(sizeof(char) * strlen("Virtual Braille BRF Printer") + 1);
+    strcpy(make_and_model, "Virtual Braille BRF Printer");
+    char *dev_id = (char *)malloc(sizeof(char) * strlen("MFG:Generic;MDL:CUPS-BRF Printer;DES:Generic CUPS-BRF Printer;CLS:PRINTER;CMD:BRF;") + 1);
+    strcpy(dev_id, "MFG:Generic;MDL:CUPS-BRF Printer;DES:Generic CUPS-BRF Printer;CLS:PRINTER;CMD:BRF;");
+    char *dev_info = (char *)malloc(sizeof(char) * strlen("CUPS-BRF") + 1);
+    strcpy(dev_info, "CUPS-BRF");
+    char *dev_location = (char *)malloc(sizeof(char) * strlen("") + 1);
+    strcpy(dev_location, "");
+
+
+    printf("Calling - GroupPhysicalDevicesRequest(devices) \n");
+    GHashTable *device = g_hash_table_new(g_str_hash, g_str_equal);
+    char *uri = (char *)malloc(sizeof(char) * strlen("dnssd://foo._printer._tcp.local/") + 1);
+    strcpy(uri, "dnssd://foo._printer._tcp.local/");
+    devices_attr *dev_data = (devices_attr *)malloc(sizeof(devices_attr));
+    dev_data->device_make_and_model = make_and_model;
+    dev_data->device_id = dev_id;
+    dev_data->device_info = dev_info;
+    dev_data->device_location = dev_location;
+    
+    g_hash_table_insert(device, uri, dev_data);
+    GPDRequest(NULL, device, NULL, NULL);
+
     //g_main_loop_run(loop);
     fprintf(stderr, "\nDone!!!\n");
     //g_main_loop_quit(loop);
