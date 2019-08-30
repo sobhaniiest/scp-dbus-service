@@ -101,7 +101,7 @@ dbus-send --session \
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
-          /org/fedoraproject/Config/Printing/NewPrinterDialog/3 \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.DownloadDriverForDeviceID \
           uint32:1 \
           string:'MFG:HP;MDL:hp 910;DES:hp 910;'
