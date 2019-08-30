@@ -101,7 +101,7 @@ dbus-send --session \
 dbus-send --session \
           --dest=org.fedoraproject.Config.Printing \
           --print-reply=literal \
-          /org/fedoraproject/Config/Printing/NewPrinterDialog/1 \
+          /org/fedoraproject/Config/Printing/NewPrinterDialog/3 \
           --type=method_call org.fedoraproject.Config.Printing.NewPrinterDialog.DownloadDriverForDeviceID \
           uint32:1 \
           string:'MFG:HP;MDL:hp 910;DES:hp 910;'
@@ -138,4 +138,26 @@ dbus-send --session \
           /org/fedoraproject/Config/Printing/PrinterPropertiesDialog/1 \
           --type=method_call \
           org.fedoraproject.Config.Printing.PrinterPropertiesDialog.PrintTestPage
+```
+
+# ConfigPrintingJobapplet
+
+- method : JobApplet
+```
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.JobApplet
+```
+
+- method : Quit
+```
+dbus-send --session \
+          --dest=org.fedoraproject.Config.Printing \
+          --print-reply=literal \
+          /org/fedoraproject/Config/Printing/JobApplet/1 \
+          --type=method_call \
+          org.fedoraproject.Config.Printing.JobApplet.Quit
 ```
