@@ -1,11 +1,16 @@
 #include "GroupPhysicalDevicesRequest.h"
 
 static AvahiSimplePoll *simple_poll = NULL;
+guint unresolved;
 
-void GPDRequest(scpinterface *interface,
-                GHashTable *devices,
-                void(*reply_handler)(), 
-                void(*error_handler)())
+device_obj *Device(char *uri, devices_attr *dict);
+void group(GHashTable *deviceobjs);
+void DNSSDHostNamesResolver(GHashTable *devices, void(*group)());
+
+GVariant *GPDRequest(scpinterface *interface,
+                     GHashTable *devices,
+                     void(*reply_handler)(), 
+                     void(*error_handler)())
 {
     add_hold();
     /*
@@ -77,9 +82,9 @@ device_obj *Device(char *uri, devices_attr *dict)
 
     char *dev_make_and_model = dict->device_make_and_model;
     char *dev_id = dict->device_id;
-    //char *dev_classes = dict->device_classes;
-    //char *info = dict->device_info;
-    //char *location = dict->device_location;
+    char *dev_classes = dict->device_classes;
+    char *info = dict->device_info;
+    char *location = dict->device_location;
 
     int count_pieces;
     char **uri_pieces;
@@ -127,7 +132,7 @@ bool dev_compare(device_obj *devobj)
 
 void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
 {
-    guint unresolved = g_hash_table_size (devices);
+    unresolved = g_hash_table_size (devices);
     /*
         @type device_uri_by_name: dict
         key: uri_by_name(struct - GroupPhysicalDevicesRequest.h)
@@ -136,6 +141,8 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
     GHashTable *device_uri_by_name = g_hash_table_new(g_str_hash, g_str_equal);
 
     // g_bus_get(G_BUS_TYPE_SYSTEM, NULL, NULL, NULL);
+
+    /* resolve */
 
     GHashTableIter iter;
     gpointer uri, device;
@@ -148,13 +155,13 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
             continue;
         }   
 
-        char *result = (char *)malloc(strlen((char *)uri));
+        char *result = (char *)malloc(sizeof(char) * strlen((char *)uri) + 1);
         strcpy(result, (char *)uri);
 
         char *scheme = strtok(result, ":");
         result = strtok(NULL, ":");
 
-        char *netlock = (char *)malloc(strlen(result));
+        char *netlock = (char *)malloc(sizeof(char) * strlen(result) + 1);
         int k,i;
         if (result[0] == '/')
         {
@@ -187,21 +194,21 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
              *domain = NULL;
         if (elements[4])
         {
-            domain = (char *)malloc(strlen(elements[4]));
+            domain = (char *)malloc(sizeof(char) * strlen(elements[4]) + 1);
             strcpy(domain, elements[4]);
         }
             
-        protocal = (char *)malloc(strlen(elements[3]));
+        protocal = (char *)malloc(sizeof(char) * strlen(elements[3]) + 1);
         strcpy(protocal, elements[3]);
 
-        stype = (char *)malloc(strlen(elements[2])+strlen(elements[3])+1);
+        stype = (char *)malloc(sizeof(char) * (strlen(elements[2])+strlen(elements[3])) + 1);
         strcpy(stype, elements[2]);
 
-        name = (char *)malloc(strlen(elements[1])+strlen(elements[0]));
+        name = (char *)malloc(sizeof(char) * (strlen(elements[1])+strlen(elements[0])) + 1);
         strcpy(name, elements[0]);
         strcat(name, elements[1]);
 
-        char *buffer = (char *)malloc(strlen(name));
+        char *buffer = (char *)malloc(sizeof(char) * strlen(name) + 1);
         int b = 0;
         for (int i = 0; i < strlen(name); i++)
         {
@@ -222,9 +229,11 @@ void DNSSDHostNamesResolver(GHashTable *devices, void(*group)())
         data->name = name;
         data->stype = stype;
         data->domain = domain;
-        g_hash_table_insert(device_uri_by_name, data, uri);
+        g_hash_table_insert(device_uri_by_name, uri, data);
 
-        if (ResolveService(name, stype, domain, device_uri_by_name) == 1)
+        fprintf(stderr, "Resolving address\n" );
+
+        if (ResolveService(name, stype, domain, device_uri_by_name) == 1)////
             error();
     }
 }
@@ -241,7 +250,7 @@ static void resolve_callback(AvahiServiceResolver *r,
                              uint16_t port,
                              AvahiStringList *txt,
                              AvahiLookupResultFlags flags,
-                             AVAHI_GCC_UNUSED void* userdata) 
+                             AVAHI_GCC_UNUSED void * userdata) 
 {
     assert(r);
     /* Called whenever a service has been resolved successfully or timed out */
@@ -279,6 +288,11 @@ static void resolve_callback(AvahiServiceResolver *r,
                     !!(flags & AVAHI_LOOKUP_RESULT_WIDE_AREA),
                     !!(flags & AVAHI_LOOKUP_RESULT_MULTICAST),
                     !!(flags & AVAHI_LOOKUP_RESULT_CACHED));
+            unresolved--;
+            if(unresolved == 0)
+            {
+                fprintf(stderr, "All addresses resolved\n");
+            }
             avahi_free(t);
         }
     }

@@ -253,7 +253,14 @@ GHashTable *getDevices(http_t *new)
     char *device_make_and_model = NULL;
     char *device_id = NULL;
     char *device_classes = NULL;
-    const char *atrb = NULL;
+    bool flag_uri = false,
+         flag_make_and_model = false,
+         flag_id = false,
+         flag_classes = false,
+         flag_info = false,
+         flag_loction = false;
+
+    //const char *atrb = NULL;
     
     request = ippNewRequest(CUPS_GET_DEVICES); 
 
@@ -279,31 +286,55 @@ GHashTable *getDevices(http_t *new)
 
         for (; attr && ippGetGroupTag (attr) == IPP_TAG_PRINTER; attr = ippNextAttribute (answer)) 
         {
-            atrb = ippGetName (attr);
+            //atrb = ippGetName (attr);
             if (!strcmp (ippGetName (attr), "device-uri") && ippGetValueTag (attr) == IPP_TAG_URI)
+            {
                 device_uri = (char *) ippGetString (attr, 0, NULL);
+                flag_uri = true;
+            }
             else if (!strcmp (ippGetName (attr), "device-id") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 device_id = (char *) ippGetString (attr, 0, NULL);
+                flag_id = true;
+            }
             else if (!strcmp (ippGetName (attr), "device-make-and-model") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 device_make_and_model = (char *) ippGetString (attr, 0, NULL);
+                flag_make_and_model = true;
+            }
             else if (!strcmp (ippGetName (attr), "device-classes") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 device_classes = (char *) ippGetString (attr, 0, NULL);
+                flag_classes = true;
+            }
             else if (!strcmp (ippGetName (attr), "device-info") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 device_info = (char *) ippGetString (attr, 0, NULL);
+                flag_info = true;
+            }
             else if (!strcmp (ippGetName (attr), "device-location") && ippGetValueTag (attr) == IPP_TAG_TEXT)
+            {
                 device_location = (char *) ippGetString (attr, 0, NULL);
+                flag_loction = true;
+            }
+            
 
-
-            if(device_uri != NULL && device_id != NULL && device_make_and_model != NULL)
+            if(flag_uri && flag_id && flag_make_and_model && flag_classes && flag_info && flag_loction)
             {
                 list = (devices_attr *)malloc(sizeof(devices_attr));
                 list->device_make_and_model = device_make_and_model;
                 list->device_id = device_id;
+                list->device_classes = device_classes;
+                list->device_info = device_info;
+                list->device_location = device_location;
                 g_hash_table_insert(result, (char *)device_uri, list);
 
-                device_uri = NULL;
-                device_make_and_model = NULL;
-                device_id = NULL;
+                flag_uri = false;
+                flag_id = false;
+                flag_make_and_model = false;
+                flag_classes = false;
+                flag_info = false;
+                flag_loction = false;
             }
         }
 
