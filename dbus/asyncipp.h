@@ -44,7 +44,6 @@ typedef struct _devices_attributes
 {
     char *device_make_and_model;
     char *device_id;
-    char *device_classes;
     char *device_info;
     char *device_location;
 }devices_attr;

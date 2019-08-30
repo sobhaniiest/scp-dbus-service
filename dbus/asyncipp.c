@@ -252,11 +252,9 @@ GHashTable *getDevices(http_t *new)
     char *device_location = NULL;
     char *device_make_and_model = NULL;
     char *device_id = NULL;
-    char *device_classes = NULL;
     bool flag_uri = false,
          flag_make_and_model = false,
          flag_id = false,
-         flag_classes = false,
          flag_info = false,
          flag_loction = false;
 
@@ -291,40 +289,38 @@ GHashTable *getDevices(http_t *new)
             {
                 device_uri = (char *) ippGetString (attr, 0, NULL);
                 flag_uri = true;
+                //fprintf(stderr, "device_uri  %s\n", device_uri);
             }
             else if (!strcmp (ippGetName (attr), "device-id") && ippGetValueTag (attr) == IPP_TAG_TEXT)
             {
                 device_id = (char *) ippGetString (attr, 0, NULL);
                 flag_id = true;
+                //fprintf(stderr, "device_id  %s\n", device_id);
             }
             else if (!strcmp (ippGetName (attr), "device-make-and-model") && ippGetValueTag (attr) == IPP_TAG_TEXT)
             {
                 device_make_and_model = (char *) ippGetString (attr, 0, NULL);
                 flag_make_and_model = true;
-            }
-            else if (!strcmp (ippGetName (attr), "device-classes") && ippGetValueTag (attr) == IPP_TAG_TEXT)
-            {
-                device_classes = (char *) ippGetString (attr, 0, NULL);
-                flag_classes = true;
+                //fprintf(stderr, "device_make_and_model  %s\n", device_make_and_model);
             }
             else if (!strcmp (ippGetName (attr), "device-info") && ippGetValueTag (attr) == IPP_TAG_TEXT)
             {
                 device_info = (char *) ippGetString (attr, 0, NULL);
                 flag_info = true;
+                //fprintf(stderr, "device_info  %s\n", device_info);
             }
             else if (!strcmp (ippGetName (attr), "device-location") && ippGetValueTag (attr) == IPP_TAG_TEXT)
             {
                 device_location = (char *) ippGetString (attr, 0, NULL);
                 flag_loction = true;
+                //fprintf(stderr, "device_location  %s\n", device_location);
             }
             
-
-            if(flag_uri && flag_id && flag_make_and_model && flag_classes && flag_info && flag_loction)
+            if(flag_uri && flag_id && flag_make_and_model && flag_info && flag_loction)
             {
                 list = (devices_attr *)malloc(sizeof(devices_attr));
                 list->device_make_and_model = device_make_and_model;
                 list->device_id = device_id;
-                list->device_classes = device_classes;
                 list->device_info = device_info;
                 list->device_location = device_location;
                 g_hash_table_insert(result, (char *)device_uri, list);
@@ -332,7 +328,6 @@ GHashTable *getDevices(http_t *new)
                 flag_uri = false;
                 flag_id = false;
                 flag_make_and_model = false;
-                flag_classes = false;
                 flag_info = false;
                 flag_loction = false;
             }
