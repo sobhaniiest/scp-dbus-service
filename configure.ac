@@ -15,9 +15,9 @@ AM_PROG_AR
 
 LT_INIT
 
-#LIBS="$LIBS -I/usr/include/libxml2 -L/usr/lib -lxml2 -lz -lcups"
-#AC_MSG_CHECKING(for libxml)
-#AC_TRY_LINK([#include <libxml/parser.h> #include <libxml/xmlmemory.h>], [xmlDocPtr doc; xmlNodePtr cur; xmlChar *key;], #AC_MSG_RESULT(OK), AC_MSG_ERROR([***** Libxml is required to build scp-dbus-service; Available at http://www.libxml.org/]))
+LIBS="$LIBS -I/usr/include/libxml2 -L/usr/lib -lxml2 -lz -lcups"
+AC_MSG_CHECKING(for libxml)
+AC_TRY_LINK([#include <libxml/parser.h> #include <libxml/xmlmemory.h>], [xmlDocPtr doc; xmlNodePtr cur; xmlChar *key;], AC_MSG_RESULT(OK), AC_MSG_ERROR([***** Libxml is required to build scp-dbus-service; Available at http://www.libxml.org/]))
 
 AC_ARG_WITH(gtk,
     AS_HELP_STRING([--with-gtk],
@@ -42,7 +42,7 @@ if test "$use_gtk" = "yes"; then
     fi
 fi
 
-#PKG_CHECK_MODULES(XML, libxml-2.0 >= 2.4, AC_MSG_RESULT(OK), AC_MSG_ERROR([***** Libxml is required to build #scp-dbus-service; Available at http://www.libxml.org/]))
+PKG_CHECK_MODULES(XML, libxml-2.0 >= 2.4, AC_MSG_RESULT(OK), AC_MSG_ERROR([***** Libxml is required to build scp-dbus-service; Available at http://www.libxml.org/]))
 
 PKG_CHECK_MODULES([GIO],[gio-2.0], AC_MSG_RESULT(OK), AC_MSG_ERROR([***** GIO-2.0 is required to build scp-dbus-service; Available at http:http://www.gtk.org/])) 
 
@@ -64,7 +64,7 @@ AC_TRY_LINK([#include <cups/cups.h> #include <cups/ppd.h>], [http_encryption_t e
 
 # Check for avahi
 #PKG_CHECK_MODULES([libavahi],[avahi-client],[have_avahi=1],[have_avahi=0])
-# echo "HAVE_AVAHI="$have_avahi
+#echo "HAVE_AVAHI="$have_avahi
 #if test x"$have_avahi" = x"1"; then
 #    AC_CHECK_HEADERS([avahi-client/client.h avahi-client/lookup.h avahi-common/simple-watch.h\
 #    avahi-common/malloc.h avahi-common/error.h],[],[have_avahi=0])
