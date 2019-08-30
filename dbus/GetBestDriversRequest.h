@@ -15,6 +15,7 @@
 #include "GetBestDriversRequest.h"
 
 extern bool g_ppds;
+extern GHashTable *fit;
 
 typedef struct _data_ppds_ready
 {
@@ -25,11 +26,11 @@ typedef struct _data_ppds_ready
     bool dwn_tried;
 }data_ppds_ready;
 
-void GBDRequest(scpinterface *interface,
-                const gchar *device_id,
-                const gchar *device_make_and_model,
-                const gchar *device_uri,
-                char *language,
-                http_t *status);
+GHashTable *GBDRequest(scpinterface *interface,
+                       const gchar *device_id,
+                       const gchar *device_make_and_model,
+                       const gchar *device_uri,
+                       char *language,
+                       http_t *status);
 
 #endif

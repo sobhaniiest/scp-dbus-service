@@ -34,7 +34,9 @@ char *device_name[9] = {"MFG", "MDL", "CMD", "CLS", "DES", "SN", "S", "P", "J"};
 static void init_ids(GHashTable *ppds);
 static void init_makes(GHashTable *ppds);
 static char *normalize (char *strin);
-
+static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *ppds);
+static GPtrArray *get(GHashTable *models, char *model);
+static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl);
 /*
     Parse an IEEE 1284 Device ID, so that it may be indexed by field name.
 
@@ -634,6 +636,7 @@ void PPDs(GHashTable *ppds,
     for(int i = 0; i < to_remove->len; i++)
         g_hash_table_remove(ppds, (char *)g_ptr_array_index ((GPtrArray *)to_remove, i));
     g_ptr_array_free(to_remove, true);
+    free(short_language);
 
     /*
         CUPS sets the 'raw' model's ppd-make-and-model to 'Raw Queue'
@@ -779,13 +782,13 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
                       value: ppddictm(struct type ppds_attr)
                              look in asyncipp.h 
     */
-    GHashTable *mdls = NULL;
+    GHashTable *mdls;
     /*
         @type mdlsl: dict
         key: lmodel(string)
         value: model(string)
     */
-    GHashTable *mdlsl = NULL;
+    GHashTable *mdlsl;
 
     init_makes(ppds);
 
@@ -870,7 +873,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
         if(g_hash_table_contains(g_hash_table_lookup(lmodels, mfgl), mdll))
         {
             model = g_hash_table_lookup(mdlsl, mdll);
-            g_hash_table_iter_init(&iter, g_hash_table_lookup(mdlsl, mdll));
+            g_hash_table_iter_init(&iter, g_hash_table_lookup(mdls, model));
             while (g_hash_table_iter_next(&iter, &key, &value))
             {
                 g_hash_table_insert(fit, (char *)key, FIT_EXACT);
@@ -897,24 +900,43 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             fprintf(stderr, "re-split mdll: %s\n", mdl2l);
             if(g_hash_table_contains(g_hash_table_lookup(lmodels, mfgl), mdl2l))
             {
+     
                 model = g_hash_table_lookup(mdlsl, mdl2l);
-                g_hash_table_iter_init(&iter, g_hash_table_lookup(mdlsl, mdll));
+                g_hash_table_iter_init(&iter, g_hash_table_lookup(mdls, model));
                 while (g_hash_table_iter_next(&iter, &key, &value))
                 {
-                    g_hash_table_insert(fit, (char *)key, FIT_EXACT);
+                    g_hash_table_insert(fit, (char *)key, (char *)FIT_EXACT);
                     fprintf(stderr, "%s: %s\n", FIT_EXACT, (char *)key);
                 }
             }
         }
     }
-    fprintf(stderr, "Here!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" );
-//////////////////////////////////////////////////////////////////////////
-    if((!fit) && mdls)
+
+    if(g_hash_table_size(fit) == 0 && g_hash_table_size(mdls) != 0)
     {
-
+        fBMP_data *data = findBestMatchPPDs(mdls, mdl);
+        if(strcmp(data->fit, FIT_NONE))
+        {
+            for (int i = 0; i < (data->ppdnamelist)->len; i++)
+            {
+                g_hash_table_insert(fit, (char *)g_ptr_array_index ((GPtrArray*)(data->ppdnamelist), i), (char *)data->fit);
+                fprintf(stderr, "%s: %s\n", data->fit, (char *)g_ptr_array_index ((GPtrArray*)(data->ppdnamelist), i));
+            }
+        }
     }
+    /*
+    fprintf(stderr, "Checking CMD field\n");
 
-/////////////////////////////////////////////////////////////////////////
+    GPtrArray *generic = getPPDNameFromCommandSet (commandsets, ppds);
+    if (generic->len)
+    {
+        for (int i = 0; i < generic->len; i++)
+        {
+            g_hash_table_insert(fit, (char *)g_ptr_array_index ((GPtrArray*)generic, i), (char *)FIT_GENERIC);
+            fprintf(stderr, "%s: %s\n", FIT_GENERIC, (char *)g_ptr_array_index ((GPtrArray*)generic, i));
+        }
+    }
+    */
     GPtrArray *failed = NULL,
               *exact_cmd = NULL;
 
@@ -1141,7 +1163,6 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
     free(arg);
     g_hash_table_destroy (id_dict);
     return fit;
-    
 }
 
 static void init_ids(GHashTable *ppds)
@@ -1150,7 +1171,7 @@ static void init_ids(GHashTable *ppds)
     if(ids)
         return;
 
-    char *arg;
+    char *arg, *buffer;
     ids = g_hash_table_new(g_str_hash, g_str_equal);
     char *lmfg, *lmdl;
     fprintf(stderr, "size : %d\n",g_hash_table_size(ppds) );
@@ -1171,8 +1192,14 @@ static void init_ids(GHashTable *ppds)
         //g_hash_table_destroy (id_dict);
         
         
-        lmfg = strlwr(g_hash_table_lookup(id_dict, "MFG"));
-        lmdl = strlwr(g_hash_table_lookup(id_dict, "MDL"));
+        buffer = g_hash_table_lookup(id_dict, "MFG");
+        lmfg = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
+        strcpy(lmfg, buffer);
+        strlwr(lmfg);
+        buffer = g_hash_table_lookup(id_dict, "MDL");
+        lmdl = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
+        strcpy(lmdl, buffer);
+        strlwr(lmdl);
 
         //fprintf(stderr, "MFG : %s  MDL : %s\n",lmfg, lmdl);
 
@@ -1194,6 +1221,7 @@ static void init_ids(GHashTable *ppds)
         if(!(g_hash_table_contains(ids, lmfg)))
         {
             lmfg_dict = g_hash_table_new(g_str_hash, g_str_equal);
+            //fprintf(stderr, "%s\n",lmfg);
             g_hash_table_insert(ids, lmfg, lmfg_dict);
         }
 
@@ -1250,7 +1278,8 @@ static void init_makes(GHashTable *ppds)
                       value: array of string
     */
     GHashTable *aliases = g_hash_table_new(g_str_hash, g_str_equal);
-    GPtrArray *ppd_makes_and_models = g_ptr_array_new ();
+    
+    GPtrArray *ppd_makes_and_models;
     GPtrArray *models = NULL;
     make_model_data *ppd_mm_split, *make_model;
 
@@ -1273,6 +1302,7 @@ static void init_makes(GHashTable *ppds)
         strcpy(buffer, ppd_make_and_model);
     
         ppd_mm_split = ppdMakeModelSplit (buffer);
+        ppd_makes_and_models = g_ptr_array_new ();
         g_ptr_array_add (ppd_makes_and_models, (gpointer) ppd_mm_split);
 
         free(buffer);
@@ -1363,6 +1393,8 @@ static void init_makes(GHashTable *ppds)
             }
         }
 
+
+
         //  Add the entries to our dictionary
 
         for(int i = 0; i < ppd_makes_and_models->len; i++)
@@ -1377,22 +1409,22 @@ static void init_makes(GHashTable *ppds)
             
             if(!g_hash_table_contains(lmakes, lmake))
             {
-                g_hash_table_insert(lmakes, lmake, make);
-                g_hash_table_insert(lmodels, lmake, g_hash_table_new(g_str_hash, g_str_equal));
-                g_hash_table_insert(makes, make, g_hash_table_new(g_str_hash, g_str_equal));
+                g_hash_table_insert(lmakes, strdup(lmake), strdup(make));
+                g_hash_table_insert(lmodels, strdup(lmake), g_hash_table_new(g_str_hash, g_str_equal));
+                g_hash_table_insert(makes, strdup(make), g_hash_table_new(g_str_hash, g_str_equal));
             }
             else
                 make = g_hash_table_lookup(lmakes, lmake);
 
             if(!g_hash_table_contains(g_hash_table_lookup(lmodels, lmake), lmodel))
             {
-                g_hash_table_insert(g_hash_table_lookup(lmodels, lmake), lmodel, model);
-                g_hash_table_insert(g_hash_table_lookup(makes, make), model, g_hash_table_new(g_str_hash, g_str_equal));
+                g_hash_table_insert(g_hash_table_lookup(lmodels, lmake), strdup(lmodel), strdup(model));
+                g_hash_table_insert(g_hash_table_lookup(makes, make), strdup(model), g_hash_table_new(g_str_hash, g_str_equal));
             }
             else
                 model = g_hash_table_lookup(g_hash_table_lookup(lmodels, lmake), lmodel);
 
-            g_hash_table_insert(g_hash_table_lookup(g_hash_table_lookup(makes, make), model),
+            g_hash_table_insert(g_hash_table_lookup(g_hash_table_lookup(makes, make), strdup(model)),
                                 (char *)ppdname, (ppds_attr *)ppddict);
                                    
             //free(lmake);
@@ -1421,7 +1453,7 @@ static void init_makes(GHashTable *ppds)
             }
             else
             {
-                g_hash_table_insert(aliases, make, g_hash_table_new(g_str_hash, g_str_equal));
+                g_hash_table_insert(aliases, strdup(make), g_hash_table_new(g_str_hash, g_str_equal));
                 models = g_ptr_array_new ();
             }
 
@@ -1430,6 +1462,15 @@ static void init_makes(GHashTable *ppds)
                 aliases[make][model] = models
             */
         }
+
+        for (int i = 0; i < ppd_makes_and_models->len; i++)
+        {
+            make_model = (make_model_data *)g_ptr_array_index ((GPtrArray*)ppd_makes_and_models, i);
+            free(make_model->make);
+            free(make_model->model);
+            free(make_model);
+        }
+        g_ptr_array_free(ppd_makes_and_models, true);
 
     } 
     free(ppd_mm_split->make);
@@ -1444,7 +1485,7 @@ static void init_makes(GHashTable *ppds)
     */
 }
 
-fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
+static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
 {
     /*
         Find the best-matching PPDs based on the MDL Device ID.
@@ -1772,7 +1813,7 @@ static GPtrArray *get(GHashTable *models, char *model)
     representing the command sets supported.
 */
 
-GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *ppds)
+static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *ppds)
 {
 
     if(!commandsets)

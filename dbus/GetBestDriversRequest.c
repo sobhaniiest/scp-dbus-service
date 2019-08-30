@@ -2,16 +2,17 @@
 
 bool g_ppds = false;
 GPtrArray *GBDRSignal_id = NULL;
+GHashTable *fit;
 
 static gboolean ppds_error(scpinterface *interface);
 static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data);
 
-void GBDRequest(scpinterface *interface,
-                const gchar *device_id,
-                const gchar *device_make_and_model,
-                const gchar *device_uri,
-                char *language,
-                http_t *status)
+GHashTable *GBDRequest(scpinterface *interface,
+                       const gchar *device_id,
+                       const gchar *device_make_and_model,
+                       const gchar *device_uri,
+                       char *language,
+                       http_t *status)
 {
     bool download_tried = false;
     GHashTable *ppdnames;
@@ -84,6 +85,7 @@ void GBDRequest(scpinterface *interface,
             g_ptr_array_add (GBDRSignal_id, (gpointer) index);
         }
     }
+    return fit;
 }
 
 
@@ -115,7 +117,6 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
 
     if(data->device_id)
     {
-        fprintf(stderr, "hello hello hello!!!!\n" );
         arg = (char *)malloc(sizeof(char) * strlen(data->device_id) + 1);
         strcpy(arg, data->device_id);
         id_dict = parseDeviceID(arg);
@@ -137,6 +138,7 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
     }
     
     ///////////////////////////////////////////////////////////////////
+    /*
     GPtrArray *arr = (GPtrArray *)(g_hash_table_lookup(id_dict, "CMD"));
     fprintf(stderr, "1 %s\n",(char *)g_hash_table_lookup(id_dict, "MFG"));
     fprintf(stderr, "2 %s\n",(char *)g_hash_table_lookup(id_dict, "MDL"));
@@ -145,15 +147,23 @@ static gboolean ppds_ready(scpinterface *interface, data_ppds_ready *data)
     fprintf(stderr, "4 %s %s\n",(char *)g_ptr_array_index ((GPtrArray*)arr, 0), (char *)g_ptr_array_index ((GPtrArray*)arr, 1));
     fprintf(stderr, "5 %s\n",data->device_uri);
     fprintf(stderr, "6 %s\n",data->device_make_and_model);
+    */
     ///////////////////////////////////////////////////////////////////
 
-    GHashTable *fit = getPPDNamesFromDeviceID(data->ppdnames,
-                                              (char *)g_hash_table_lookup(id_dict, "MFG"),
-                                              (char *)g_hash_table_lookup(id_dict, "MDL"),
-                                              (char *)g_hash_table_lookup(id_dict, "DES"),
-                                              (GPtrArray*)g_hash_table_lookup(id_dict, "CMD"),
-                                              data->device_uri, 
-                                              data->device_make_and_model);
+    fit = getPPDNamesFromDeviceID(data->ppdnames,
+                                  (char *)g_hash_table_lookup(id_dict, "MFG"),
+                                  (char *)g_hash_table_lookup(id_dict, "MDL"),
+                                  (char *)g_hash_table_lookup(id_dict, "DES"),
+                                  (GPtrArray*)g_hash_table_lookup(id_dict, "CMD"),
+                                  data->device_uri, 
+                                  data->device_make_and_model);
+
+    fprintf(stderr, "List of Drivers :\n" );
+    g_hash_table_iter_init(&iter, fit);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        fprintf(stderr, "%s: %s\n", (char *)key, (char *)value);
+    }
 
 
     g_hash_table_iter_init(&iter, id_dict);
