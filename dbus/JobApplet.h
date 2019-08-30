@@ -18,8 +18,8 @@ gboolean Quit(JAinterface *interface,
               GDBusMethodInvocation *invocation,
               gpointer user_data);
 
-void Finished();
+void Finished_Applet();
 
-void on_dialog_closed(JAinterface *interface);
+void on_dialog_closed_applet(JAinterface *interface);
 
 #endif

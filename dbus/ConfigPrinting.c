@@ -16,8 +16,8 @@
 #include "asyncipp.h" /* getURI */
 #include "ConfigPrintingNewPrinterDialog.h" /*CPNewPrinterDialog*/
 #include "MissingExecutables.h" /*missingexecutables*/
-//#include "GetBestDriversRequest.h"
-//#include "JobApplet.h"
+#include "GetBestDriversRequest.h"
+#include "JobApplet.h"
 #include "PPDialog.h" /* CPPrinterPropertiesDialog */
 //#include "GroupPhysicalDevicesRequest.h"
 #include "scp_interface.h"
@@ -55,7 +55,7 @@ static gboolean PrinterPropertiesDialog(scpinterface *interface,
 								        guint xid,
 								        const gchar *name,
 								        ConfigPrinting_data *user_data);
-/*
+
 static gboolean JobApplet(scpinterface *interface,
 						  GDBusMethodInvocation *invocation,
 						  ConfigPrinting_data *user_data);
@@ -66,7 +66,7 @@ static gboolean GetBestDrivers(scpinterface *interface,
 							   const gchar *device_make_and_model,
 							   const gchar *device_uri,
 							   ConfigPrinting_data *user_data);
-*/
+
 static gboolean MissingExecutables(scpinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   const gchar *ppd_filename,
@@ -74,6 +74,7 @@ static gboolean MissingExecutables(scpinterface *interface,
 /*
 static gboolean GroupPhysicalDevices(scpinterface *interface,
 								     GDBusMethodInvocation *invocation,
+								     GVariant *devices,
 								     ConfigPrinting_data *user_data);
 */
 int main()
@@ -137,7 +138,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 					 "handle-printer-properties-dialog", 
 					 G_CALLBACK(PrinterPropertiesDialog), 
 					 CP_data);
-	/*
+	
 	g_signal_connect(interface, 
 					 "handle-job-applet", 
 					 G_CALLBACK(JobApplet), 
@@ -147,7 +148,7 @@ static void name_acquired_handler(GDBusConnection *connection,
 					 "handle-get-best-drivers", 
 					 G_CALLBACK(GetBestDrivers), 
 					 CP_data);
-	*/
+	
 	g_signal_connect(interface, 
 					 "handle-missing-executables", 
 					 G_CALLBACK(MissingExecutables), 
@@ -195,7 +196,7 @@ static gboolean PrinterPropertiesDialog(scpinterface *interface,
 	scp_interface__complete_printer_properties_dialog(interface, invocation, path);
 	return TRUE;
 }
-/*
+
 static gboolean JobApplet(scpinterface *interface,
 						  GDBusMethodInvocation *invocation,
 						  ConfigPrinting_data *user_data)
@@ -215,12 +216,24 @@ static gboolean GetBestDrivers(scpinterface *interface,
 							   const gchar *device_uri,
 							   ConfigPrinting_data *user_data)
 {
-	GVariant *drivers = NULL;
-	GBDRequest(interface, device_id, device_make_and_model, device_uri, user_data->language, user_data->http);
+	GHashTable *fit = GBDRequest(interface, device_id, device_make_and_model, device_uri, user_data->language, user_data->http);
+	GHashTableIter iter;
+    gpointer key, value;
+    GVariantBuilder *builder;
+    GVariant *drivers;
+    builder = g_variant_builder_new(G_VARIANT_TYPE("a(ss)"));
+	g_hash_table_iter_init(&iter, fit);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        fprintf(stderr, "%s: %s\n", (char *)key, (char *)value);
+        g_variant_builder_add(builder, "(ss)", (char *)value, (char *)key);
+    }
+    drivers = g_variant_new("a(ss)", builder);
 	scp_interface__complete_get_best_drivers(interface, invocation, drivers);
+
 	return TRUE;
 }
-*/
+
 static gboolean MissingExecutables(scpinterface *interface,
 								   GDBusMethodInvocation *invocation,
 								   const gchar *ppd_filename,
@@ -233,9 +246,10 @@ static gboolean MissingExecutables(scpinterface *interface,
 /*
 static gboolean GroupPhysicalDevices(scpinterface *interface,
 								 	 GDBusMethodInvocation *invocation,
+								 	 GVariant *devices,
 								     ConfigPrinting_data *user_data)
 {
-	GVariant *grouped_devices = GPDRequest(interface, devices);
+	GVariant *grouped_devices = GPDRequest(interface, devices, NULL, NULL);
 	scp_interface__complete_group_physical_devices(interface, invocation, grouped_devices);
 	return TRUE;
 }

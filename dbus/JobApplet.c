@@ -25,7 +25,7 @@ void CPJobApplet(GDBusConnection *connection, gchar *path)
     /* Signals */
     finished_id = g_signal_connect(interface, 
                                    "finished", 
-                                   G_CALLBACK(on_dialog_closed), 
+                                   G_CALLBACK(on_dialog_closed_applet), 
                                    NULL);
 
     error = NULL;
@@ -44,14 +44,14 @@ gboolean Quit(JAinterface *interface,
     return true;
 }
 
-void Finished()
+void Finished_Applet()
 {
     
 }
 
-void on_dialog_closed(JAinterface *interface)
+void on_dialog_closed_applet(JAinterface *interface)
 {
-    Finished();
+    Finished_Applet();
     remove_hold();
     if(finished_id != 0)
         g_signal_handler_disconnect(interface, finished_id);
