@@ -15,5 +15,6 @@
 #include <scp-services-headers/ppds.h>
 #include <scp-services-headers/ConfigPrintingNewPrinterDialog.h>
 #include <scp-services-headers/GroupPhysicalDevicesRequest.h>
+#include <scp-services-headers/PhysicalDevice.h>
 
 #endif

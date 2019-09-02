@@ -18,7 +18,8 @@ scp_SOURCES = ConfigPrinting.c ConfigPrinting.h \
 	ppds.c ppds.h \
 	xml.c xml.h \
    JobApplet.c JobApplet.h \
-   GroupPhysicalDevicesRequest.c GroupPhysicalDevicesRequest.h 
+   GroupPhysicalDevicesRequest.c GroupPhysicalDevicesRequest.h \
+   PhysicalDevice.c PhysicalDevice.h
 
 
 scp_CPPFLAGS  = $(GLIB_CFLAGS)
@@ -63,7 +64,8 @@ libSCPService_la_SOURCES = nstring.c \
                            GroupPhysicalDevicesRequest.c \
                            ppds.c \
                            xml.c \
-                           JobApplet.c
+                           JobApplet.c \
+                           PhysicalDevice.c
 
 libSCPService_la_CPPFLAGS  = $(GLIB_CFLAGS)
 libSCPService_la_CPPFLAGS += $(GIO_CFLAGS)
@@ -99,6 +101,7 @@ scp_service_headers_HEADERS = nstring.h \
                               GroupPhysicalDevicesRequest.h \
                               ppds.h \
                               xml.h \
-                              JobApplet.h
+                              JobApplet.h \
+                              PhysicalDevice.h
                               
 include_HEADERS = SCPService.h

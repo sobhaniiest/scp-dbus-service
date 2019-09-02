@@ -3,10 +3,16 @@
 static AvahiSimplePoll *simple_poll = NULL;
 guint unresolved;
 
-static device_obj *Device(char *uri, devices_attr *dict);
+static device_obj *Device(char *uri, 
+                          devices_attr *dict);
+
 static void group(GHashTable *deviceobjs);
-static void DNSSDHostNamesResolver(GHashTable *devices, GHashTable *deviceobjs);
+
+static void DNSSDHostNamesResolver(GHashTable *devices, 
+                                   GHashTable *deviceobjs);
+
 static bool dev_compare(device_obj *devobj);
+
 static void resolve_callback(AvahiServiceResolver *r,
                              AVAHI_GCC_UNUSED AvahiIfIndex interface,
                              AVAHI_GCC_UNUSED AvahiProtocol protocol,
@@ -20,14 +26,15 @@ static void resolve_callback(AvahiServiceResolver *r,
                              AvahiStringList *txt,
                              AvahiLookupResultFlags flags,
                              AVAHI_GCC_UNUSED void * userdata);
+
 static void client_callback(AvahiClient *c, 
                             AvahiClientState state, 
                             AVAHI_GCC_UNUSED void * userdata);
+
 static int ResolveService(char *name,
                    char *type,
                    char *domain,
                    GHashTable *dev_uri_by_name);
-
 
 void GPDRequest(scpinterface *interface,
                      GHashTable *devices,
@@ -79,23 +86,20 @@ static void group(GHashTable *deviceobjs)
         We can ignore resolved_devices because the actual objects
         (in self.devices) have been modified.
     */
-    /*
+    
     bool matched;
     GPtrArray *physdevs = g_ptr_array_new ();
+
     GHashTableIter iter;
     gpointer device_uri, deviceobj;
     g_hash_table_iter_init(&iter, deviceobjs);
     while (g_hash_table_iter_next(&iter, &device_uri, &deviceobj))
     {
-        PhysicalDevice ((device_obj *)deviceobj);/////
-
+        PhysicalDevice_data *data = PhysicalDevice ((device_obj *)deviceobj);
         matched = false;
-        
+        add_device((device_obj *)deviceobj, data);
     }
-    */
-
-    fprintf(stderr, "Here!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-
+    
     /*
         except Exception as e:
             g_killtimer.remove_hold ()
@@ -134,7 +138,7 @@ static device_obj *Device(char *uri, devices_attr *dict)
     GHashTable *id_dict = parseDeviceID(dev_id);
 
     int s = find(uri, "serial=");
-    if ((s != -1) && (strcmp(g_hash_table_lookup(id_dict, (char *)"SN"), "")))
+    if ((s != -1) && (!strcmp(g_hash_table_lookup(id_dict, (char *)"SN"), "")))
     {
         char *buffer = (char *)malloc(strlen(uri)-(s+6));
         slice(uri, buffer, (s+7));
@@ -142,6 +146,8 @@ static device_obj *Device(char *uri, devices_attr *dict)
     }
 
     device_obj *deviceobj = (device_obj *)malloc(sizeof(device_obj));
+    deviceobj->id_dict = id_dict;
+    deviceobj->make_and_model = dict->device_make_and_model;;
     deviceobj->is_class = is_class;
     deviceobj->type = type;
     deviceobj->uri = uri;

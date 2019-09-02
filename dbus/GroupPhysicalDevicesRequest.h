@@ -18,16 +18,8 @@
 #include "scp_interface.h"
 #include "asyncipp.h"
 #include "ppds.h"
+#include "PhysicalDevice.h"
 #include "GroupPhysicalDevicesRequest.h"
-
-typedef struct _device_obj
-{
-    bool is_class;
-    char *type;
-    char *uri;
-    char *id;
-    char *info;
-}device_obj;
 
 typedef struct _uri_by_name
 {
