@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     strcpy(dev_location, "");
 
 
-    printf("Calling - GroupPhysicalDevicesRequest(devices) \n");
+    printf("Calling - GroupPhysicalDevicesRequest(devices) \n\n");
     GHashTable *device = g_hash_table_new(g_str_hash, g_str_equal);
     char *uri = (char *)malloc(sizeof(char) * strlen("dnssd://foo._printer._tcp.local/") + 1);
     strcpy(uri, "dnssd://foo._printer._tcp.local/");
