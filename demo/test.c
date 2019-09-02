@@ -5,6 +5,13 @@
 #include <gio/gio.h>
 #include <SCPService.h>
 
+/* Testing GroupPhysicalDeviceRequest */
+#define dev_uri "dnssd://foo._printer._tcp.local/"
+#define dev_make_and_model "Virtual Braille BRF Printer"
+#define dev_id "MFG:Generic;MDL:CUPS-BRF Printer;DES:Generic CUPS-BRF Printer;CLS:PRINTER;CMD:BRF;"
+#define dev_info "CUPS-BRF"
+#define dev_location ""
+
 int main(int argc, char *argv[])
 {
     if (argc != 6)
@@ -55,26 +62,27 @@ int main(int argc, char *argv[])
         fprintf(stderr, "%s ",result[i]);
         i++;
     }
+    
+    char *make_and_model = (char *)malloc(sizeof(char) * strlen(dev_make_and_model) + 1);
+    strcpy(make_and_model, dev_make_and_model);
+    char *id = (char *)malloc(sizeof(char) * strlen(dev_id) + 1);
+    strcpy(id, dev_id);
+    char *info = (char *)malloc(sizeof(char) * strlen(dev_info) + 1);
+    strcpy(info, dev_info);
+    char *location = (char *)malloc(sizeof(char) * strlen("") + 1);
+    strcpy(location, "");
+    
 
-    char *make_and_model = (char *)malloc(sizeof(char) * strlen("Virtual Braille BRF Printer") + 1);
-    strcpy(make_and_model, "Virtual Braille BRF Printer");
-    char *dev_id = (char *)malloc(sizeof(char) * strlen("MFG:Generic;MDL:CUPS-BRF Printer;DES:Generic CUPS-BRF Printer;CLS:PRINTER;CMD:BRF;") + 1);
-    strcpy(dev_id, "MFG:Generic;MDL:CUPS-BRF Printer;DES:Generic CUPS-BRF Printer;CLS:PRINTER;CMD:BRF;");
-    char *dev_info = (char *)malloc(sizeof(char) * strlen("CUPS-BRF") + 1);
-    strcpy(dev_info, "CUPS-BRF");
-    char *dev_location = (char *)malloc(sizeof(char) * strlen("") + 1);
-    strcpy(dev_location, "");
-
-
-    printf("Calling - GroupPhysicalDevicesRequest(devices) \n\n");
+    printf("\nCalling - GroupPhysicalDevicesRequest(devices) \n\n");
     GHashTable *device = g_hash_table_new(g_str_hash, g_str_equal);
-    char *uri = (char *)malloc(sizeof(char) * strlen("dnssd://foo._printer._tcp.local/") + 1);
-    strcpy(uri, "dnssd://foo._printer._tcp.local/");
+    char *uri = (char *)malloc(sizeof(char) * strlen(dev_uri) + 1);
+    strcpy(uri, dev_uri);
+
     devices_attr *dev_data = (devices_attr *)malloc(sizeof(devices_attr));
     dev_data->device_make_and_model = make_and_model;
-    dev_data->device_id = dev_id;
-    dev_data->device_info = dev_info;
-    dev_data->device_location = dev_location;
+    dev_data->device_id = id;
+    dev_data->device_info = info;
+    dev_data->device_location = location;
     
     g_hash_table_insert(device, uri, dev_data);
     GPDRequest(NULL, device, NULL, NULL);
