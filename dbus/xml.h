@@ -11,6 +11,7 @@
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include "nstring.h"
+#include "asyncipp.h"
 #include "xml.h"
 
 #define FIT_EXACT_CMD "exact-cmd"
@@ -22,7 +23,7 @@
 typedef struct _dtype
 {
     char *name;
-    char *phint;
+    char *pkghint;
     GHashTable *attributes;
     GPtrArray *deviceid;
     GHashTable *fit;
@@ -38,7 +39,18 @@ typedef struct _ptype
 }ptype;
 
 GPtrArray *PreferredDrivers(char *docname);
-void DriverTypes_load(xmlNodePtr drivertypes);
-void PreferenceOrder_load(xmlNodePtr preferreddrivers);
+
+GPtrArray *DriverTypes_load(xmlNodePtr drivertypes);
+
+GPtrArray *PreferenceOrder_load(xmlNodePtr preferreddrivers);
+
+GPtrArray *get_ordered_ppdnames(GPtrArray *drivertypes,
+                                GHashTable *ppds_dict,
+                                GHashTable *fit);
+
+GPtrArray *get_ordered_types(GPtrArray *drivertypes,
+                             GPtrArray *pordertypes,
+                             char *make_and_model,
+                             GHashTable *deviceid);
 
 #endif 

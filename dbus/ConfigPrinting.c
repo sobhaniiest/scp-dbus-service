@@ -217,6 +217,12 @@ static gboolean GetBestDrivers(scpinterface *interface,
 							   ConfigPrinting_data *user_data)
 {
 	GHashTable *fit = GBDRequest(interface, device_id, device_make_and_model, device_uri, user_data->language, user_data->http);
+	if(g_hash_table_size(fit) == 0)
+	{
+		fprintf(stderr, "failed to found...\n" );
+		scp_interface__complete_get_best_drivers(interface, invocation, NULL);
+		return TRUE;
+	}
 	GHashTableIter iter;
     gpointer key, value;
     GVariantBuilder *builder;
@@ -228,10 +234,8 @@ static gboolean GetBestDrivers(scpinterface *interface,
         fprintf(stderr, "%s: %s\n", (char *)key, (char *)value);
         g_variant_builder_add(builder, "(ss)", (char *)value, (char *)key);
     }
-    exit(0);
     drivers = g_variant_new("a(ss)", builder);
 	scp_interface__complete_get_best_drivers(interface, invocation, drivers);
-
 	return TRUE;
 }
 

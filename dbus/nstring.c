@@ -157,7 +157,7 @@ void slice(char *str, char *buffer, int len)
 {
     size_t i,j;
     j = 0;
-    for(i=len;i<strlen(str);i++)
+    for(i = len; i < strlen(str); i++)
     {
         buffer[j] = str[i];
         j++;

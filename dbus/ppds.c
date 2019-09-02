@@ -29,6 +29,13 @@ GHashTable *lmakes;
                   value: model(string)
 */
 GHashTable *lmodels;
+
+/* list of driver types from an XML file */
+GPtrArray *drvtypes = NULL;
+
+/* list of policies from an XML file. */
+GPtrArray *pordertypes = NULL;
+
 char *device_name[9] = {"MFG", "MDL", "CMD", "CLS", "DES", "SN", "S", "P", "J"};
 
 static void init_ids(GHashTable *ppds);
@@ -549,9 +556,9 @@ static char *normalize (char *strin)
     return normalized;
 }
 
-void PPDs(GHashTable *ppds, 
-          char *language, 
-          const char *xml_dir)
+void PPDs (GHashTable *ppds, 
+           char *language, 
+           const char *xml_dir)
 {
     /*
         This function is for handling the list of PPDs returned by CUPS.  It
@@ -566,43 +573,47 @@ void PPDs(GHashTable *ppds,
 
         @type language: string
         @param language: language name, as given by the setlocale()
+
+        @type xml_dir: string
+        @param xml_dir: path of the xml file - preferreddrivers.xml
+
     */
 
     //self.ppds = ppds.copy () ***
 
-    if(!xml_dir)
+    if (!xml_dir)
     {
         xml_dir = getenv("CUPSHELPERS_XMLDIR");
-        if(!xml_dir)
+        if (!xml_dir)
             xml_dir = "/etc/cupshelpers/";
     }
 
-    char *xmlfile = (char *)malloc(strlen(xml_dir)+strlen("preferreddrivers.xml"));
+    char *xmlfile = (char *)malloc(sizeof(char) * (strlen(xml_dir) + strlen("preferreddrivers.xml")) + 1);
     strcpy(xmlfile, xml_dir);
     strcat(xmlfile, "preferreddrivers.xml");
     
     GPtrArray *child = PreferredDrivers (xmlfile);
 
-    if(!child)
-       fprintf(stderr, "Error loading %s\n" ,xmlfile); 
+    if (!child)
+       fprintf(stderr, "Error loading %s\n", xmlfile); 
     else
     {
         xmlNodePtr drivertypes = (xmlNodePtr)g_ptr_array_index ((GPtrArray*)child, 1);
-        DriverTypes_load(drivertypes);
+        drvtypes = DriverTypes_load(drivertypes);
 
         xmlNodePtr preferenceorder = (xmlNodePtr)g_ptr_array_index ((GPtrArray*)child, 2);  
-        PreferenceOrder_load(preferenceorder);
+        pordertypes = PreferenceOrder_load(preferenceorder);
     }
     
-    if((!language) || (!(strcmp(language, "C"))) || (!(strcmp(language, "POSIX"))))
+    if ((!language) || (!(strcmp(language, "C"))) || (!(strcmp(language, "POSIX"))))
         language = "en_US"; //
 
     char *short_language = (char *)malloc(sizeof(char) * strlen(language) + 1);
     // use find !!!
-    if(strstr(language, "_"))
+    if (strstr(language, "_"))
     {
         int i = 0;
-        while(language[i] != '_')
+        while (language[i] != '_')
         {
             short_language[i] = language[i];
             i++;
@@ -612,15 +623,15 @@ void PPDs(GHashTable *ppds,
     else
         strcpy(short_language, language);
     
+    GPtrArray *to_remove = g_ptr_array_new ();
 
     GHashTableIter iter;
     gpointer ppdname, ppddict;
-
-    GPtrArray *to_remove = g_ptr_array_new ();
     g_hash_table_iter_init(&iter, ppds);
+
     while (g_hash_table_iter_next(&iter, &ppdname, &ppddict))
     {
-        if(((ppds_attr *)ppddict)->ppd_natural_language == NULL ||
+        if (((ppds_attr *)ppddict)->ppd_natural_language == NULL ||
            (!strcmp(((ppds_attr *)ppddict)->ppd_natural_language, "en")) || 
            (!strcmp(((ppds_attr *)ppddict)->ppd_natural_language, language)) ||
            (!strcmp(((ppds_attr *)ppddict)->ppd_natural_language, short_language)))
@@ -631,12 +642,14 @@ void PPDs(GHashTable *ppds,
             */
             continue;
         }
+
         g_ptr_array_add (to_remove, (gpointer)((char *)ppdname));
     }
-    for(int i = 0; i < to_remove->len; i++)
+    for (int i = 0; i < to_remove->len; i++)
         g_hash_table_remove(ppds, (char *)g_ptr_array_index ((GPtrArray *)to_remove, i));
-    g_ptr_array_free(to_remove, true);
+    g_ptr_array_free(to_remove, true);  ///g_ptr_array_unref ()
     free(short_language);
+    free(xmlfile);////////////////
 
     /*
         CUPS sets the 'raw' model's ppd-make-and-model to 'Raw Queue'
@@ -648,12 +661,12 @@ void PPDs(GHashTable *ppds,
     g_hash_table_iter_init(&iter, ppds);
     while (g_hash_table_iter_next(&iter, &ppdname, &ppddict))
     {
-        if((!strcmp((char *)ppdname, "raw")))
+        if ((!strcmp((char *)ppdname, "raw")))
         {
             makemodel = ((ppds_attr *)ppddict)->ppd_make_and_model;
-            if(!(startswith("Generic ", makemodel)))
+            if (!(startswith("Generic ", makemodel)))
             {
-                gmakemodel = (char *)malloc(strlen(makemodel) + strlen("Generic ") + 1);
+                gmakemodel = (char *)malloc(sizeof(char) * (strlen(makemodel) + strlen("Generic ")) + 1);
                 strcpy(gmakemodel, "Generic ");
                 strcat(gmakemodel, makemodel);
                 ((ppds_attr *)ppddict)->ppd_make_and_model = gmakemodel; //
@@ -709,6 +722,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
     */
 
     GHashTable *fit = g_hash_table_new(g_str_hash, g_str_equal);
+
     GHashTable *mfgl_dict = NULL,
                *lmfg_dict = NULL;
     GPtrArray *array = NULL;
@@ -891,7 +905,6 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             strcat(buffer, " ");
             strcat(buffer, mdl);
             mfg_mdl2 = ppdMakeModelSplit(buffer);
-            free(buffer);
 
             mfg2 = mfg_mdl2->make;
             mdl2 = mfg_mdl2->model;
@@ -924,11 +937,11 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             }
         }
     }
-    /*
+    
     fprintf(stderr, "Checking CMD field\n");
 
     GPtrArray *generic = getPPDNameFromCommandSet (commandsets, ppds);
-    if (generic->len)
+    if (generic != NULL)
     {
         for (int i = 0; i < generic->len; i++)
         {
@@ -936,7 +949,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             fprintf(stderr, "%s: %s\n", FIT_GENERIC, (char *)g_ptr_array_index ((GPtrArray*)generic, i));
         }
     }
-    */
+    
     GPtrArray *failed = NULL,
               *exact_cmd = NULL;
 
@@ -971,7 +984,6 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
         }
         g_ptr_array_free(failed, true);
     }
-
 
     /*
         # What about the CMD field of the Device ID?  Some devices
@@ -1091,8 +1103,10 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
         */
     }
 
-    if(!fit)
+
+    if(g_hash_table_size(fit) == 0)
     {
+        fprintf(stderr, "###I am here\n");
         char *fallback, *fallbackgz;
         GPtrArray *fallbacks = g_ptr_array_new ();
         g_ptr_array_add (fallbacks, (gpointer) "textonly.ppd");
@@ -1102,7 +1116,7 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
         {
             fallback = (char *)g_ptr_array_index ((GPtrArray*)fallbacks, i);
             fprintf(stderr, "'%s' fallback\n", fallback);
-            fallbackgz = (char *)malloc(strlen(fallback)+strlen(".gz"));
+            fallbackgz = (char *)malloc(sizeof(char) * (strlen(fallback)+strlen(".gz")) + 1);
             strcpy(fallbackgz, fallback);
             strcat(fallbackgz, ".gz");
             g_hash_table_iter_init(&iter, ppds);
@@ -1145,6 +1159,8 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
             _debugprint ("No ID match for device %s:" % sanitised_uri)
             _debugprint (id)
     */
+    /*
+
     g_hash_table_iter_init(&iter, id_dict);
     while (g_hash_table_iter_next(&iter, &k, &v))
     {
@@ -1162,19 +1178,20 @@ GHashTable *getPPDNamesFromDeviceID(GHashTable *ppds,
                 
     free(arg);
     g_hash_table_destroy (id_dict);
+    */
+
     return fit;
 }
 
 static void init_ids(GHashTable *ppds)
 {
-    
     if(ids)
         return;
 
     char *arg, *buffer;
     ids = g_hash_table_new(g_str_hash, g_str_equal);
     char *lmfg, *lmdl;
-    fprintf(stderr, "size : %d\n",g_hash_table_size(ppds) );
+    //fprintf(stderr, "size : %d\n",g_hash_table_size(ppds) );
     GHashTableIter iter, it;
     gpointer ppdname, ppddict;
     gpointer key, value;
@@ -1190,7 +1207,6 @@ static void init_ids(GHashTable *ppds)
         GHashTable *id_dict = parseDeviceID(arg);
 
         //g_hash_table_destroy (id_dict);
-        
         
         buffer = g_hash_table_lookup(id_dict, "MFG");
         lmfg = (char *)malloc(sizeof(char) * strlen(buffer) + 1);
@@ -1285,12 +1301,12 @@ static void init_makes(GHashTable *ppds)
 
     char *ppd_make_and_model;
     char *ppd_products, *ppd_product = NULL, *product = NULL;
-    char *make = NULL, *lmake = NULL;
-    char *model, *lmodel;
+    char *make = NULL, *lmake = NULL, *main_make;
+    char *model, *lmodel, *main_model, *this_model, *each_model;
     char *lprod;
     char *buffer;
 
-    GHashTableIter iter;
+    GHashTableIter iter, it;
     gpointer ppdname, ppddict;
     g_hash_table_iter_init(&iter, ppds);
     
@@ -1393,8 +1409,6 @@ static void init_makes(GHashTable *ppds)
             }
         }
 
-
-
         //  Add the entries to our dictionary
 
         for(int i = 0; i < ppd_makes_and_models->len; i++)
@@ -1457,6 +1471,7 @@ static void init_makes(GHashTable *ppds)
                 models = g_ptr_array_new ();
             }
 
+            g_hash_table_insert(g_hash_table_lookup(aliases, strdup(make)), strdup(model), models);
             /*
                 models = models.union ([x[1] for x in ppd_makes_and_models])
                 aliases[make][model] = models
@@ -1477,12 +1492,40 @@ static void init_makes(GHashTable *ppds)
     free(ppd_mm_split->model);
     free(ppd_mm_split);
 
-
-    
     /*
         # Now, for each set of model aliases, add all drivers from the
         # "main" (generic) model name to each of the specific models.
     */
+    
+    GHashTable *main_ppds;
+    gpointer pmake, pmodels, pmodel, modelnames;
+    g_hash_table_iter_init(&iter, aliases);
+    
+    while (g_hash_table_iter_next(&iter, &pmake, &pmodels))
+    {
+        lmake = normalize((char *)pmake);
+        main_make = g_hash_table_lookup(lmakes, lmake);
+
+        g_hash_table_iter_init(&it, (GHashTable *)pmodels);
+        while (g_hash_table_iter_next(&it, &pmodel, &modelnames))
+        {
+            main_model = g_hash_table_lookup(g_hash_table_lookup(lmodels, lmake), normalize((char *)pmodel));
+            if(strlen(main_model) == 0)
+                continue;
+
+            main_ppds = g_hash_table_lookup(g_hash_table_lookup(makes, main_make), main_model);
+
+            for (int i = 0; i < ((GPtrArray *)modelnames)->len; i++)
+            {
+                each_model = (char *)g_ptr_array_index ((GPtrArray*)modelnames, i);
+                this_model =  g_hash_table_lookup(g_hash_table_lookup(lmodels, lmake), normalize(each_model));
+
+                //ppds = makes[main_make][this_model]
+                //ppds.update (main_ppds)
+            }
+        }
+    }
+    
 }
 
 static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
@@ -1493,10 +1536,12 @@ static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
     */
 
     fprintf(stderr, "Trying best match\n");
-    char *mdll = (char *)malloc(strlen(mdl));
+
+    char *mdll = (char *)malloc(sizeof(char) * strlen(mdl) + 1);
     strcpy(mdll, mdl);
-    mdll = strlwr(mdll);
+    strlwr(mdll);
     int len;
+
     if(endswith(" series", mdll))
     {
         /* Strip " series" from the end of the MDL field. */
@@ -1519,10 +1564,9 @@ static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
         g_ptr_array_add (mdlnames, (gpointer) ((char *)key));
-        buffer = (char *)malloc(strlen((char *)key));
+        buffer = (char *)malloc(sizeof(char) * strlen((char *)key) + 1);
         strcpy(buffer, (char *)key);
         g_ptr_array_add (mdlnamesl, (gpointer) (strlwr(buffer)));
-        //free(buffer);
     }
     g_ptr_array_add (mdlnames, (gpointer) mdl);
     g_ptr_array_add (mdlnamesl, (gpointer) mdll);
@@ -1673,7 +1717,7 @@ static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
         {
             if(!modelid)
             {
-                modelid = (char *)malloc(strlen(words[i]));
+                modelid = (char *)malloc(sizeof(char) * strlen(words[i]) + 1);
                 strcpy(modelid, words[i]);
             }
             have_digits = false;
@@ -1691,7 +1735,7 @@ static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
             {
                 if(modelid)
                     free(modelid);
-                modelid = (char *)malloc(strlen(words[i]));
+                modelid = (char *)malloc(sizeof(char) * strlen(words[i]) + 1);
                 strcpy(modelid, words[i]);
                 break;
             }
@@ -1725,7 +1769,7 @@ static fBMP_data *findBestMatchPPDs(GHashTable *mdls, char *mdl)
             for(int i = digits_start; i < digits_end; i++)
                 modelnumber = (modelnumber * 10) + ((int)modelid[i] - 48);
 
-            modelpattern = (char *)malloc(strlen(modelid)+2);
+            modelpattern = (char *)malloc(sizeof(char) * strlen(modelid) + 3);
             int k = 0;
             for(int i = 0; i < digits_start; i++)
                 modelpattern[k++] = modelid[i];
@@ -1818,7 +1862,7 @@ static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *p
 
     if(!commandsets)
         commandsets = g_ptr_array_new();
-
+    fprintf(stderr, "1I am here\n");
     init_makes(ppds);
     /*
         @type models: dict
@@ -1827,9 +1871,12 @@ static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *p
                       value: ppddict (struct type of ppds_attr) 
     */
     GHashTable *models;
-
+    fprintf(stderr, "2I am here\n");
     if(g_hash_table_contains(makes, "Generic"))
+    {
         models = g_hash_table_lookup(makes, "Generic");
+        fprintf(stderr, "3I am here\n");
+    }
     else
         return NULL;
 
@@ -1841,17 +1888,17 @@ static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *p
         value: string - true/false
     */
     GHashTable *cmdsets = g_hash_table_new(g_str_hash, g_str_equal);
+    fprintf(stderr, "4I am here\n");
     for(int i = 0; i < commandsets->len; i++)
     {
-        buffer = (char *)malloc(strlen((char *)g_ptr_array_index ((GPtrArray*)commandsets, i)));
+        buffer = (char *)malloc(sizeof(char) * strlen((char *)g_ptr_array_index ((GPtrArray*)commandsets, i)) + 1);
         strcpy(buffer, (char *)g_ptr_array_index ((GPtrArray*)commandsets, i));
         g_hash_table_insert(cmdsets, strlwr(buffer), "true");
-        free(buffer);
     }
-
-    if(g_hash_table_contains(cmdsets,"postscript") ||
-       g_hash_table_contains(cmdsets,"postscript2") ||
-       g_hash_table_contains(cmdsets,"postscript level 2 emulation"))
+    fprintf(stderr, "5I am here\n");
+    if(g_hash_table_contains(cmdsets, "postscript") ||
+       g_hash_table_contains(cmdsets, "postscript2") ||
+       g_hash_table_contains(cmdsets, "postscript level 2 emulation"))
     {
         return get(models, "PostScript");
     }
@@ -1909,11 +1956,11 @@ static GPtrArray *getPPDNameFromCommandSet(GPtrArray *commandsets, GHashTable *p
     return NULL;
 }
 
-/*
 GPtrArray *orderPPDNamesByPreference(GPtrArray *ppdnamelist,
                                      GPtrArray *downloadedfiles,
                                      const char *make_and_model,
-                                     const char *devid,
+                                     GHashTable *devid,
+                                     GHashTable *ppds,
                                      GHashTable *fit)
 {
     /*
@@ -1921,25 +1968,46 @@ GPtrArray *orderPPDNamesByPreference(GPtrArray *ppdnamelist,
 
         @param ppdnamelist: PPD names
         @type ppdnamelist: string list
-            @param downloadedfiles: Filenames from packages downloaded
-            @type downloadedfiles: string list
-            @param make_and_model: device-make-and-model name
-            @type make_and_model: string
-            @param devid: Device ID dict
-            @type devid: dict indexed by Device ID field name, of strings;
-            except for CMD field which must be a string list
-            @param fit: Driver fit string for each PPD name
-            @type fit: dict of PPD name:fit
+        @param downloadedfiles: Filenames from packages downloaded
+        @type downloadedfiles: string list
+        @param make_and_model: device-make-and-model name
+        @type make_and_model: string
+        @param devid: Device ID dict
+        @type devid: dict indexed by Device ID field name, of strings;
+        except for CMD field which must be a string list
+        @param fit: Driver fit string for each PPD name
+        @type fit: dict of PPD name:fit status
         @returns: string list
     */
     /*
-    if(!ppdnamelist)
+    if (!ppdnamelist)
         ppdnamelist = g_ptr_array_new ();
-    if(!downloadedfiles)
+    if (!downloadedfiles)
         downloadedfiles = g_ptr_array_new ();
 
-    if(!fit)
+    if (!fit)
         fit = g_hash_table_new(g_str_hash, g_str_equal);
 
+    if (drivertypes != NULL && pordertypes != NULL)
+    {
+        GHashTable *ppds_dict = g_hash_table_new(g_str_hash, g_str_equal);
+        char *ppdname;
+
+        for (int i = 0; i < ppdnamelist->len; i++)
+        {
+            ppdname = (char *)g_ptr_array_index ((GPtrArray*)ppdnamelist, i);
+            g_hash_table_insert(ppds_dict, (char *)ppdname, (ppds_attr *)(g_hash_table_lookup(ppds, (char *)ppdname)));
+        }
+
+        GPtrArray *ordertypes = get_order_types (drivertypes, 
+                                                 make_and_model, 
+                                                 devid);
+
+        GPtrArray *orderedppds = get_ordered_ppdnames (ordertypes,
+                                                       ppds_dict,
+                                                       fit);
+    }
+    */
+
 }
-*/
+
