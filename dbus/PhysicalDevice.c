@@ -208,7 +208,7 @@ PhysicalDevice_data *PhysicalDevice()
     return data;
 }
 
-void add_device(device_obj *device, PhysicalDevice_data *pdata)
+PhysicalDevice_data *add_device(device_obj *device, PhysicalDevice_data *pdata)
 {
     char *mfg, *mdl, *mfg_lower, *mdl_lower, *sn, *host, *dnssdhost, *buffer;
 
@@ -250,7 +250,7 @@ void add_device(device_obj *device, PhysicalDevice_data *pdata)
             strlwr(mdl_lower);
 
             sn = (char *)g_hash_table_lookup(device->id_dict, "SN");
-            pdata->devices = g_ptr_array_new ();
+            //pdata->devices = g_ptr_array_new ();
         }
         else
         {
@@ -272,7 +272,7 @@ void add_device(device_obj *device, PhysicalDevice_data *pdata)
             pdata->cupsserver = true;
         }
         else if (pdata->cupsserver)
-            return;
+            return pdata;
         /*
         for (int i = 0; i < (pdata->devices)->len; i++)
         {
@@ -283,7 +283,7 @@ void add_device(device_obj *device, PhysicalDevice_data *pdata)
         if(pdata->firsturi == NULL)
             pdata->firsturi = device->uri;
 
-        g_ptr_array_add ((GPtrArray*)pdata->devices, (gpointer) device);
+        pdata->devices = device;
 
         //sort()
 
@@ -317,5 +317,7 @@ void add_device(device_obj *device, PhysicalDevice_data *pdata)
                        (device.uri, repr(self)))
         */
     }
+
+    return pdata;
 }
 

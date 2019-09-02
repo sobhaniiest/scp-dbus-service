@@ -26,7 +26,7 @@ typedef struct _device_obj
 
 typedef struct _PhysicalDevice_data
 {
-    GPtrArray *devices;
+    device_obj *devices;
     char *network_host;
     char *dnssd_hostname;
     bool cupsserver;
@@ -42,6 +42,6 @@ typedef struct _host_data
 
 PhysicalDevice_data *PhysicalDevice();
 
-void add_device(device_obj *device, PhysicalDevice_data *pdata);
+PhysicalDevice_data *add_device(device_obj *device, PhysicalDevice_data *pdata);
 
 #endif

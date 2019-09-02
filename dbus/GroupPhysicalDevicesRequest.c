@@ -76,8 +76,7 @@ void GPDRequest(scpinterface *interface,
         except Exception as e:
             g_killtimer.remove_hold ()
             self.error_handler (e)
-    */
-    
+    */   
 }
 
 static void group(GHashTable *deviceobjs)
@@ -88,7 +87,9 @@ static void group(GHashTable *deviceobjs)
     */
     
     bool matched;
+    PhysicalDevice_data *each;
     GPtrArray *physdevs = g_ptr_array_new ();
+    GPtrArray *uris_by_phys = g_ptr_array_new ();
 
     GHashTableIter iter;
     gpointer device_uri, deviceobj;
@@ -97,9 +98,21 @@ static void group(GHashTable *deviceobjs)
     {
         PhysicalDevice_data *data = PhysicalDevice ((device_obj *)deviceobj);
         matched = false;
-        add_device((device_obj *)deviceobj, data);
+        PhysicalDevice_data *fdata = add_device((device_obj *)deviceobj, data);
+
+        g_ptr_array_add ((GPtrArray*)physdevs, (gpointer) fdata);
     }
-    
+
+    fprintf(stderr, "Device uris : \n");
+    for (int i = 0; i < physdevs->len; i++)
+    {
+        each = (PhysicalDevice_data *)g_ptr_array_index ((GPtrArray*)physdevs, i);
+
+        g_ptr_array_add ((GPtrArray*)uris_by_phys, (gpointer) (each->devices)->uri);
+
+        fprintf(stderr, "%s\n",(each->devices)->uri);
+    }
+    remove_hold ();
     /*
         except Exception as e:
             g_killtimer.remove_hold ()
@@ -163,11 +176,7 @@ static bool dev_compare(device_obj *devobj)
 
     if(!devobj)
         return true;
-
-
 }
-
-
 
 static void DNSSDHostNamesResolver(GHashTable *devices, GHashTable *deviceobjs)
 {
