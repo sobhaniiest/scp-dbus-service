@@ -4,7 +4,7 @@ The project title is - Turn the scp-dbus-service of system-config-printer into C
 (https://wiki.linuxfoundation.org/gsoc/google-summer-code-2019-openprinting-projects)
 
 # GDBus Interface :
-Here I have used the D-Bus Introspection XML to autogenerate the the entire DBus interfaces in C - I have simply define the interface details (methods and signals) in an xml file and the gdbus-codegen (D-Bus code and documentation generator for DBus interface) is used to generate the .c and .h files for the DBus interface.
+Here I have used the D-Bus Introspection XML to autogenerate the the entire DBus interfaces in C - I have simply defined the interface details (methods and signals) in an xml file and the gdbus-codegen (D-Bus code and documentation generator for DBus interface) is used to generate the .c and .h files for the DBus interface.
 
 Here the generated .c and .h files are 
 - scp_interface.c 
@@ -48,7 +48,7 @@ e.g : ./test 0 'file:/tmp/printout' 'MFG:HP;MDL:hp 910;DES:hp 910;' 'test' 'Gene
 $ cd dbus                                                                            
 $ ./scp                                                                              
 ```
-- Open a new terminal window and run the following dbus-send commands to test the methods and interfaces                     
+- Open a new terminal window and run the following dbus-send commands to test the methods and interfaces.                     
 
 # ConfigPrinting :
 
