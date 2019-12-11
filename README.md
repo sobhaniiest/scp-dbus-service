@@ -1,8 +1,3 @@
-# scp-dbus-service
-This repository is created for my Google Summer of Code'19 project with The Linux Foundation. 
-The project title is - Turn the scp-dbus-service of system-config-printer into C. 
-(https://wiki.linuxfoundation.org/gsoc/google-summer-code-2019-openprinting-projects)
-
 # GDBus Interface :
 Here I have used the D-Bus Introspection XML to autogenerate the the entire DBus interfaces in C - I have simply defined the interface details (methods and signals) in an xml file and the gdbus-codegen (D-Bus code and documentation generator for DBus interface) is used to generate the .c and .h files for the DBus interface.
 
